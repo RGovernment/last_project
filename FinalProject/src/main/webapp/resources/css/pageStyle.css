@@ -1,0 +1,178 @@
+@charset "utf-8";
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Dongle:wght@400&display=swap')
+	;
+
+* {
+	font-family: 'Dongle', sans-serif;
+}
+
+.row {
+	width: 100%;
+}
+
+#hd-1 {
+	margin: auto;
+	font-weight: 500;
+	color: #ddffff;
+}
+
+@media screen and (max-width: 767px) {
+	#hder-home {
+		padding: 5px;
+		font-size: 30px;
+	}
+	.col-md-3 {
+		display: none;
+	}
+	.col-3 {
+		height: 60px;
+		overflow: hidden;
+		font-size: 35px;
+		color: #ddffff;
+		text-align: center;
+		padding-top: 0px;
+		background: #483d8b;
+	}
+	#widget {
+		display: none;
+	}
+	#title {
+		text-align: center;
+		padding-top: 300px;
+		padding-bottom: 0px;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	#hder-home {
+		padding: 5px;
+		font-size: 60px;
+	}
+	.col-3 {
+		display: none;
+	}
+	.col-md-12 {
+		display: none;
+	}
+	#title {
+		width: 50.5%;
+		float: right;
+		text-align: center;
+		padding-top: 300px;
+		padding-bottom: 0px;
+	}
+}
+
+.col-md-12 {
+	height: 100px;
+	color: #ddffff;
+	background: #483d8b;
+}
+
+.col-md-3 {
+	height: 100px;
+	overflow: hidden;
+	font-size: 60px;
+	color: #ddffff;
+	text-align: center;
+	padding-top: 0px;
+	background: #483d8b;
+}
+
+input {
+	text-align: center;
+	font-size: 400%;
+}
+
+#textinput {
+	align-content: center;
+	border: 3px solid black;
+}
+
+.col-md-3:hover {
+	color: #002200;
+	background: #dddddd;
+}
+
+#imsi {
+	width: 50px;
+	height: 50px;
+}
+
+#imsi2 {
+	position: relative;
+	width: 120px;
+	height: 120px;
+}
+
+#tasic {
+	background: #483d8b;
+	justify-content: center;
+}
+
+#t-f {
+	display: flex;
+}
+
+#vs {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	font-size: 250%;
+}
+
+#kimtasic {
+	/* text-align: center;
+	margin: auto;
+	height: 450px;
+	margin: auto; */
+	background-image: url(resources/img/imsi.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	height: 360px;
+}
+
+#widget {
+	/* position: relative;
+	left: 65%;
+	bottom: 500px;
+	width: 360px;*/
+	margin-right: 5%;
+	width: 20%;
+	float: right;
+	width: 20%;
+}
+
+.form-control:focus {
+	border-color: #FF0000;
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px
+		rgba(72, 61, 139, 8);
+}
+
+#textform {
+	margin: auto;
+}
+
+#sch-button {
+	size: 40px;
+	font-size: 30px;
+	box-shadow: 2px 3px 4px -3px rgba(72, 61, 139, 5);
+}
+
+#muner-button {
+	float: right;
+	margin-right: 3%;
+	margin-bottom: 5px;
+	width: 50px;
+	height: 50px;
+	box-shadow: 1px 7px 13px -5px rgba(0, 0, 0, 1);
+	border-radius: 50%;
+	text-align: center;
+	vertical-align: middle;
+	overflow: hidden;
+	border-radius: 50%;
+	width: 50px;
+	width: 50px
+}
