@@ -50,7 +50,7 @@
 		padding: 5px;
 		font-size: 60px;
 	}
-	.col-3 {
+	#index-1 {
 		display: none;
 	}
 	.col-md-12 {
@@ -71,7 +71,7 @@
 	background: #483d8b;
 }
 
-.col-md-3 {
+#index-1 {
 	height: 100px;
 	overflow: hidden;
 	font-size: 60px;
@@ -91,7 +91,7 @@ input {
 	border: 3px solid black;
 }
 
-.col-md-3:hover {
+#index-1:hover {
 	color: #002200;
 	background: #dddddd;
 }
