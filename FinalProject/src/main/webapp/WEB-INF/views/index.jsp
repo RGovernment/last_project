@@ -39,7 +39,7 @@
 				</a>
 				<div class="row">
 					<div class="col-md-3" onclick="location.href='item'" id="index-1">사이트이름</div>
-					<div class="col-md-1" id="index-1"></div>
+					<div class="col-md-1"></div>
 					<div class="col-md-2" id="index-1">예약</div>
 					<div class="col-md-2" id="index-1">리뷰</div>
 					<div class="col-md-2" id="index-1">인기장소</div>
@@ -47,13 +47,13 @@
 					<div class="col-md-1" id="index-1">로그인</div>
 				</div>
 				<div class="row">
-					<div class="col-md-3" onclick="location.href='item'" id="index-2">사이트이름</div>
-					<div class="col-md-1" id="index-1"></div>
-					<div class="col-md-2" id="index-1">예약</div>
-					<div class="col-md-2" id="index-1">리뷰</div>
-					<div class="col-md-2" id="index-1">인기장소</div>
-					<div class="col-md-1" id="index-1">장소등록</div>
-					<div class="col-md-1" id="index-1">로그인</div>
+					<div class="col-3" onclick="location.href='item'" id="index-2">사이트이름</div>
+					<div class="col-1"></div>
+					<div class="col-2" id="index-2">예약</div>
+					<div class="col-2" id="index-2">리뷰</div>
+					<div class="col-2" id="index-2">인기장소</div>
+					<div class="col-1" id="index-2">장소등록</div>
+					<div class="col-1" id="index-2">로그인</div>
 				</div>
 			</header>
 		</div>
