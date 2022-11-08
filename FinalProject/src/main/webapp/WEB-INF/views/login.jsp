@@ -65,7 +65,7 @@ body {
 <body class="text-center">
 
 	<main class="form-signin w-100 m-auto">
-		<form>
+		<form action="login">
 			<img class="mb-4" src="resources/img/imsi.png" alt="" width="72"
 				height="57">
 			<h1 class="h3 mb-3 fw-normal" id="login-text2">로그인</h1>
@@ -87,13 +87,13 @@ body {
 				</label>
 			</div>
 			<button class="w-100 btn btn-lg btn-primary" type="submit" id="login-text">로그인</button>
-			<button class="btn btn-primary mr-2 mt-2 mb-1" id="login-text">회원가입</button>
+			<button class="btn btn-primary mr-2 mt-2 mb-1" id="login-text" onclick="location.href='sign'">회원가입</button>
 			<hr>
 			<div class="txt1 text-center p-t-54 p-b-20">
 				<span id="login-text"> 혹은 SNS 로그인 </span>
 			</div>
 			<div>
-				<button class="social-login"></button>
+				<button class="social-login" onclick="location.href=''"></button>
 				<button class="social-login"></button>
 				<button class="social-login"></button>
 			
