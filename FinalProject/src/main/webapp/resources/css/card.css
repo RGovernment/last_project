@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+a {
+	text-decoration: none;
+}
+
+label {
+	display: inline-block;
+	width: 60px;
+}
+
+form {
+	font-size: 25px;
+}
+
+#nav {
+	font-size: 32px;
+}
+
+#navlogo {
+	font-size: 36px;
+}
+
+#desc {
+	font-size: 12px;
+	font-weight: bold;
+	color: #a6a6a6;
+}
+
+#title {
+	font-size: 16px;
+	font-weight: bold;
+	color: #000000;
+}
+
+#address {
+	font-size: 12px;
+	font-weight: bold;
+	color: #d0d0d0;
+}
+
+#price {
+	font-size: 20px;
+	font-weight: bold;
+	color: #000000;
+	font-weight: bold;
+}
+
+#time {
+	font-size: 15px;
+	background-color: #d0d0d0;
+	color: #35529a;
+	background-color: #d0d0d0;
+}
+
+@media screen and (max-width: 767px) {
+	#nav {
+		display: none;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	#toggle {
+		display: none;
+	}
+}

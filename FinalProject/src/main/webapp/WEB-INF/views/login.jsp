@@ -19,51 +19,39 @@
 <meta name="generator" content="Hugo 0.104.2">
 <title>로그인 페이지</title>
 <style type="text/css">
-html, body {
-	height: 100%;
-}
-
-body {
-	display: flex;
-	align-items: center;
-	padding-top: 40px;
-	padding-bottom: 40px;
-	background-color: #f5f5f5;
-}
-
-.form-signin {
-	max-width: 330px;
-	padding: 15px;
-}
-
-#login-text{
-	font-size: 140%;
-}
-#login-text2{
-	font-size: 250%;
-}
-
-.form-signin .form-floating:focus-within {
-	z-index: 2;
-}
-
-.form-signin input[type="email"] {
-	margin-bottom: -1px;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-	margin-bottom: 10px;
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
-}
 </style>
+<link href="resources/css/loginPage.css" rel="stylesheet">
 <link href="resources/css/pageStyle.css" rel="stylesheet">
 <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="text-center">
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+Kakao.init('8890a67c089173194979845f9389950d');
+console.log(Kakao.isInitialized());
+</script>
+<script>
+        function kakaoLogin() {
+            window.Kakao.Auth.login({
+                scope: 'profile, gender, age_range', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
+                success: function(response) {
+                    console.log(response) // 로그인 성공하면 받아오는 데이터
+                    window.Kakao.API.request({ // 사용자 정보 가져오기 
+                        url: '/v2/user/me',
+                        success: (res) => {
+                            const kakao_account = res.kakao_account;
+                            console.log(kakao_account)
+                        }
+                    });
+                    // window.location.href='/ex/kakao_login.html' //리다이렉트 되는 코드
+                },
+                fail: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+</script>
 
+<body class="text-center">
 	<main class="form-signin w-100 m-auto">
 		<form action="login">
 			<img class="mb-4" src="resources/img/imsi.png" alt="" width="72"
@@ -72,31 +60,33 @@ body {
 
 			<div class="form-floating">
 				<input type="email" class="form-control" id="floatingInput"
-					placeholder="name@example.com"> <label for="floatingInput" id="login-text">이메일을
-					입력해주세요.</label>
+					placeholder="name@example.com"> <label for="floatingInput"
+					id="login-text">이메일을 입력해주세요.</label>
 			</div>
 			<div class="form-floating">
 				<input type="password" class="form-control" id="floatingPassword"
-					placeholder="Password"> <label for="floatingPassword" id="login-text">비밀번호를
-					입력해주세요.</label>
+					placeholder="Password"> <label for="floatingPassword"
+					id="login-text">비밀번호를 입력해주세요.</label>
 			</div>
 
 			<div class="checkbox mb-3">
-				<label> <input type="checkbox" value="remember-me" id="login-text">
-					아이디 기억
+				<label> <input type="checkbox" value="remember-me"
+					id="login-text"> 아이디 기억
 				</label>
 			</div>
-			<button class="w-100 btn btn-lg btn-primary" type="submit" id="login-text">로그인</button>
-			<button class="btn btn-primary mr-2 mt-2 mb-1" id="login-text" onclick="location.href='sign'">회원가입</button>
+			<button class="w-100 btn btn-lg btn-primary" type="submit"
+				id="login-text">로그인</button>
+			<button class="btn btn-primary mr-2 mt-2 mb-1" id="login-text"
+				onclick="location.href='sign'">회원가입</button>
 			<hr>
 			<div class="txt1 text-center p-t-54 p-b-20">
 				<span id="login-text"> 혹은 SNS 로그인 </span>
 			</div>
 			<div>
-				<button class="social-login" onclick="location.href=''"></button>
-				<button class="social-login"></button>
-				<button class="social-login"></button>
-			
+				<a href="javascript:kakaoLogin();"><img src="./kakao_login.png"
+					alt="카카오계정 로그인" style="height: 100px;" /></a>
+
+
 			</div>
 		</form>
 		<div class="container-fluid">
