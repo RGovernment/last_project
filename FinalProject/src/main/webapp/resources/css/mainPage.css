@@ -35,7 +35,7 @@ p {
 
 @media screen and (min-width: 1300px) {
 	.main-section .main-slidelist {
-	margin:0;
+		margin:0;
 		font-size: 30px;
 	}
 	.main-section .main-slidelist .left {
@@ -62,9 +62,9 @@ p {
 	}
 }
 
-@media screen and (min-width: 400px) and (max-width: 991px) {
+@media screen and (min-width: 768px) and (max-width: 991px) {
 	.main-section .main-slidelist {
-		font-size: 16px;
+		font-size: 15px;
 	}
 	.main-section .main-slidelist .left {
 		left: 5px;
@@ -76,9 +76,9 @@ p {
 	}
 }
 
-@media screen and (max-width: 699px) {
+@media screen and (max-width: 767px) {
 	.main-section .main-slidelist {
-		font-size: 15px;
+		font-size: 12px;
 	}
 	.main-section .main-slidelist .left {
 		left: 3px;
@@ -129,7 +129,8 @@ p {
 }
 
 .main-section .main-slidelist>li>a img {
-	
+	margin:0;
+	padding:0;
 	z-index: 99;
 	width: 100%;
 	opacity: 60%;

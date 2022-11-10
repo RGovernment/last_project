@@ -17,46 +17,50 @@
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Hugo 0.104.2">
-<title></title>
+<title>Memory Gift</title>
 
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/5.2/examples/headers/">
 <script type="text/javascript"
 	src="https://ssl.gstatic.com/trends_nrtr/3140_RC01/embed_loader.js"></script>
 <style type="text/css">
-
 </style>
 <link href="resources/css/pageStyle.css" rel="stylesheet">
 <link href="resources/css/card.css" rel="stylesheet">
 </head>
 <body>
 
-<div class="container">
-			<header class="d-flex flex-wrap justify-content-center py-3 mb-4 "
-				id="tasic">
-				<a href="index"
-					class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none"
-					id="hd-1"> <img id="imsi" src="resources/img/imsi.png"><span
-					id="hder-home">Memory Gift</span>
-				</a>
-				<div class="row">
-					<div class="col-md-2 align-self-center" id="index-1">회사소개</div>
-					<div class="col-md-2 align-self-center" id="index-1" onclick="location.href='res'">대관</div>
-					<div class="col-md-2 align-self-center" id="index-1" onclick="location.href='card'">리뷰</div>
-					<div class="col-md-2"></div>
-					<div class="col-md-2 align-self-center" id="index-1">옵션</div>
-					<div class="col-md-2 align-self-center" id="index-1">로그인</div>
+	<div class="container-fluid mb-0" id="nav-bg">
+		<header class="d-flex flex-wrap justify-content-center py-0 mb-0">
+			<div class="row">
+				<div class="col-md-4 align-self-center" id="index-1-title">
+					<a href="index"
+						class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none"
+						id="hd-1"> <img id="imsi" src="resources/img/imsi.png"><span
+						id="title-span">Memory Gift</span></a>
 				</div>
-				<div class="row">
-					<div class="col-2 align-self-center" id="index-2">소개</div>
-					<div class="col-2 align-self-center" id="index-2" onclick="location.href='res'">대관</div>
-					<div class="col-2 align-self-center" id="index-2" onclick="location.href='card'">리뷰</div>
-					<div class="col-2"></div>
-					<div class="col-2 align-self-center" id="index-2">옵션</div>
-					<div class="col-2 align-self-center" id="index-2">로그인</div>
+				<div class="col-md-2"></div>
+				<div class="col-md-1" id="index-1" onclick="">소개</div>
+				<div class="col-md-1" id="index-1" onclick="location.href='card'">대관</div>
+				<div class="col-md-1" id="index-1" onclick="location.href='res'">후기</div>
+				<div class="col-md-1" id="index-1" onclick="">가격</div>
+				<div class="col-md-1" id="index-1">옵션</div>
+				<div class="col-md-1" id="index-1">접속</div>
+			</div>
+			<div class="row">
+				<div class="col-2 align-self-center" id="index-2-title">
+					<a href="index"
+						class="d-flex align-items-center text-decoration-none" id="hd-1"><img
+						id="imsi" src="resources/img/imsi.png"></a>
 				</div>
-			</header>
-		</div>
+				<div class="col-2 " id="index-2">소개</div>
+				<div class="col-2" id="index-2" onclick="location.href='card'">대관</div>
+				<div class="col-2" id="index-2" onclick="location.href='res'">후기</div>
+				<div class="col-2 align-self-center" id="index-2">옵션</div>
+				<div class="col-2 align-self-center" id="index-2">접속</div>
+			</div>
+		</header>
+	</div>
 
 	<main role="main">
 		<div class="container">
@@ -129,21 +133,20 @@
 
 	</main>
 
-	<div class="container-fluid">
-			<footer class="py-3 my-4" style="font-size: 100%;">
-				<ul class="nav justify-content-center border-bottom pb-3 mb-3">
-					<li class="nav-item"><a href="#"
-						class="nav-link px-2 text-muted">사이트 소개</a></li>
-					<li class="nav-item"><a href="#"
-						class="nav-link px-2 text-muted">이용 약관</a></li>
-					<li class="nav-item"><a href="#"
-						class="nav-link px-2 text-muted">개인정보 처리방침</a></li>
-					<li class="nav-item"><a href="#"
-						class="nav-link px-2 text-muted">고객지원</a></li>
-				</ul>
-				<p class="text-center text-muted">&copy; 2022 Revrin</p>
-			</footer>
-		</div>
+	<div class="container-fluid  mt-3" id="ft-bg">
+		<footer class="pb-3 mb-0">
+			<ul class="nav justify-content-center pb-2 mb-0">
+				<li class="nav-item"><a href="terms"
+					class="nav-link px-2 text-muted">이용 약관</a></li>
+				<li class="nav-item"><a href="#"
+					class="nav-link px-2 text-muted">개인정보 처리방침</a></li>
+				<li class="nav-item"><a href="#"
+					class="nav-link px-2 text-muted">고객지원</a></li>
+			</ul>
+			<p class="text-center text-muted">&copy; 2022 Memory gift</p>
+		</footer>
+	</div>
+
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->

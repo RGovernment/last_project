@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+.text-center {
+	
+	margin: 0 auto;
+	width: 900px;
+	line-height: 1.7;
+	white-space: pre-line;
+}
+.text-left {
+	margin: 0 auto;
+	width: 900px;
+	line-height: 1.7;
+	white-space: pre-line;
+}
+
+.container>p:first-line {
+	color: #32a7a1;
+	font-weight: 600;
+}
+
+#terms-list {
+	line-height: 1.7;
+	margin: 0 auto;
+	width: 900px;
+	list-style: none;
+	padding-left: 0px;
+	margin: 0 auto;
+}
+
+#term-list>li>a{
+	text-decoration: none;
+	font-size:15px;
+	color: #32a7a1;
+}

@@ -89,17 +89,20 @@ console.log(Kakao.isInitialized());
 
 			</div>
 		</form>
-		<div class="container-fluid">
-			<footer class="py-3 my-4" style="font-size: 160%;">
-				<ul class="nav justify-content-center border-bottom pb-3 mb-3">
-					<li class="nav-item"><a href="#"
+		<div class="container-fluid  mt-3" id="ft-bg">
+			<footer class="pb-3 mb-0">
+				<ul class="nav justify-content-center pb-2 mb-0">
+					<li class="nav-item"><a href="terms"
 						class="nav-link px-2 text-muted">이용 약관</a></li>
 					<li class="nav-item"><a href="#"
 						class="nav-link px-2 text-muted">개인정보 처리방침</a></li>
+					<li class="nav-item"><a href="#"
+						class="nav-link px-2 text-muted">고객지원</a></li>
 				</ul>
-				<p class="text-center text-muted">&copy; 2022 Revrin</p>
+				<p class="text-center text-muted">&copy; 2022 Memory gift</p>
 			</footer>
 		</div>
+
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"

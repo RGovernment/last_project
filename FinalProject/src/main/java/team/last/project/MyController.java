@@ -21,16 +21,22 @@ public class MyController {
 
 		return "login";
 	}
-	
+
 	@RequestMapping("/card")
 	public String login() {
-		
-		return "index2";
+
+		return "review";
 	}
-	
+
 	@RequestMapping("/res")
 	public String Reservation() {
 		return "Reservation";
+	}
+
+	@RequestMapping("/terms")
+	public String termsConditions() {
+		return "terms";
+
 	}
 
 };
