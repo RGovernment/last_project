@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<!--footerFragment 선언-->
+<th:block th:fragment="footerFragment">
+	<div class="container-fluid mt-3" id="ft-bg">
+		<footer class="pb-3 mb-0">
+			<ul class="nav justify-content-center pb-2 mb-0">
+				<li class="nav-item"><a th:href="@{/terms}"
+					class="nav-link px-2 text-muted">이용 약관</a></li>
+				<li class="nav-item"><a href="#"
+					class="nav-link px-2 text-muted">개인정보 처리방침</a></li>
+				<li class="nav-item"><a href="#"
+					class="nav-link px-2 text-muted">고객지원</a></li>
+			</ul>
+			<p class="text-center text-muted">&copy; 2022 Memory gift</p>
+		</footer>
+	</div>
+</th:block>
+</html>

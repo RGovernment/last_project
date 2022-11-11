@@ -1,0 +1,11 @@
+@charset "utf-8";
+
+.card-img-top {
+	height: 300px;
+	object-fit: cover;
+	align: center;/*  개 화나게 하지 마세요 뭐 언제적 align이야 ㅡㅡ */
+}
+
+.card-body {
+	align: center;
+}
