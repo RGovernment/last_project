@@ -1,9 +1,11 @@
 package team.last.project;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import team.last.project.dto.MemberDto;
 
 @Controller
 public class MyController {
@@ -40,8 +42,20 @@ public class MyController {
 		return "terms";
 	}
 
+	@RequestMapping("/intro")
+	public String introPage(){
+		return "intro";
+		
+	}
+	
+	@RequestMapping("/signup")
+	public String sign_up(Model model) {
+		model.addAttribute("memberDto",new MemberDto());
+		return "signup";
+	}
+
 	@RequestMapping("/room")
-	public String layout(@RequestParam(value="roomType") String roomType) {
+	public String layout(@RequestParam(value = "roomType") String roomType) {
 		String type = "ARoom";
 		if (roomType.equals("A")) {
 		} else if (roomType.equals("B")) {

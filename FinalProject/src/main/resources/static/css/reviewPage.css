@@ -1,8 +1,25 @@
 @charset "utf-8";
 
 #review-text1{
-	
+	font-weight:700;
+	font-family: 'Dancing Script', cursive;
 	font-size: 60px;
 	color:#483d8b;
+}
+
+#review-card{
+	max-width: 970px;
+	
+}
+
+#title{
+	font-weight:bold;
+	font-size: 30px;
+	
+}
+
+#modal-image:hover{
+	
+	cursor: pointer;
 	
 }

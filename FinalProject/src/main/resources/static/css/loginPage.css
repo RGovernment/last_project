@@ -10,6 +10,9 @@ body {
 	padding-bottom: 40px;
 	background-color: #f5f5f5;
 }
+#prev-button:hover{
+	cursor: pointer;
+}
 
 .form-signin {
 	max-width: 330px;

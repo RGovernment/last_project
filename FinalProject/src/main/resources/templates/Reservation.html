@@ -3,46 +3,138 @@
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
 	layout:decorate="layouts/first_layout">
 <th:block layout:fragment="content">
-<link href="css/resPage.css" rel="stylesheet">
+<link th:href="@{css/resPage.css}" rel="stylesheet">
 	<main>
+		<div class="d-flex align-items-center justify-content-center mb-5 mt-5" id="rent-text1">Reservation</div>	
 		<div class="container mt-5">
-			<div class="row" id="room">
-				<div class="card col-md-6 mb-4 border-0 rounded-0" align="center">
-					<img src="img/A1.PNG" class="card-img-top rounded-0"
-						alt="...">
-					<div class="card-body" align="center">
-						<a th:onclick="|location.href='@{room?roomType=A}'|" class="btn btn-danger">미니룸
-							A</a>
-					</div>
-				</div>
-
-				<div class="card col-md-6 mb-4 border-0 rounded-0" align="center">
-					<img src="img/B1.PNG" class="card-img-top rounded-0"
-						alt="...">
-					<div class="card-body" align="center">
-						<a th:onclick="|location.href='@{room?roomType=B}'|" class="btn btn-danger">미니룸
-							B</a>
-					</div>
-				</div>
-				<div class="card col-md-6 mb-4 border-0 rounded-0" align="center">
-					<img src="img/C3.PNG" class="card-img-top rounded-0"
-						alt="...">
-					<div class="card-body  " align="center">
-						<a th:onclick="|location.href='@{room?roomType=C}'|"  class="btn btn-danger"> 파티룸
-							A</a>
-					</div>
-				</div>
-				<div class="card col-md-6 mb-4 border-0 rounded-0 " align="center">
-					<img src="img/D1.PNG" class="card-img-top rounded-0 "
-						alt="...">
-					<div class="card-body" align="center">
-						<a th:onclick="|location.href='@{room?roomType=D}'|"  class="btn btn-danger"> 파티룸
-							B</a>
-					</div>
-				</div>
+		<div class="card mb-0" id="card-main">
+			<div class="row g-0" id="web-pool">
+			<div class="col-md-4"><img src="img/A1.PNG" class="img-fluid rounded-start" alt="미니룸A">
+			</div>	
+			<div class="col-md-8 pt-3">
+			<div class="card-title" align="center" id="card-title">미니룸 A
 			</div>
-		</div>
-
+			<div class="card-body" align="center">[미니룸 A]는 최소한의 가격으로 여러분에게 최선의 장소를 제공해드립니다.
+			<br>
+			 값싼 가격으로 친구와 작은 파티를 열고 싶다면 문의해보세요!
+			 <br>
+			 <br>
+				<a th:onclick="|location.href='@{room?roomType=A}'|" class="btn btn-danger">예약하기</a>
+			</div>
+			</div>
+			</div>
+			<div class="row g-0" id="mobile-pool">
+			<div class="col-4"><img src="img/A1.PNG" class="img-fluid rounded-start" alt="미니룸A">
+			</div>	
+			<div class="col-8 pt-1">
+			<div class="card-title" align="center" id="card-title-2">미니룸 A
+			</div>
+			<div class="card-body" align="center">작은 파티를 열고 싶다면.
+			 <br>
+				<a th:onclick="|location.href='@{room?roomType=A}'|" class="btn btn-danger">예약</a>
+			</div>
+			</div>
+			</div>
+			</div>
+			<br>
+			<br>
+			<br>
+			<div class="card mb-0"  id="card-main">
+			<div class="row g-0" id="web-pool">
+			<div class="col-md-4"><img src="img/B1.PNG" class="img-fluid rounded-start" alt="미니룸A">
+			</div>	
+			<div class="col-md-8 pt-3">
+			<div class="card-title" align="center" id="card-title">미니룸 B
+			</div>
+			<div class="card-body" align="center">[미니룸 B]는 조금 더 높은 가격으로 더 넓은 장소를 제공합니다.
+			<br>
+			 [미니룸 A]로는 조금 모자라다면, 미니룸 B를 선택해보세요!
+			 <br>
+			 <br>
+				<a th:onclick="|location.href='@{room?roomType=B}'|" class="btn btn-danger">예약하기</a>
+			</div>
+			</div>
+			</div>
+			<div class="row g-0" id="mobile-pool">
+			<div class="col-4"><img src="img/B1.PNG" class="img-fluid rounded-start" alt="미니룸B">
+			</div>	
+			<div class="col-8 pt-1">
+			<div class="card-title" align="center" id="card-title-2">미니룸 B
+			</div>
+			<div class="card-body" align="center">미니룸 A으론 모자라다면.
+			 <br>
+				<a th:onclick="|location.href='@{room?roomType=B}'|" class="btn btn-danger btn-sm">예약</a>
+			</div>
+			</div>
+			</div>
+			</div>
+			<br>
+			<br>
+			<br>
+			<div class="card mb-0" id="card-main">
+			<div class="row g-0" id="web-pool">
+			<div class="col-md-4"><img src="img/C3.PNG" class="img-fluid rounded-start" alt="미니룸A">
+			</div>	
+			<div class="col-md-8 pt-3">
+			<div class="card-title" align="center" id="card-title">파티룸 A
+			</div>
+			<div class="card-body" align="center">[파티룸 A]는 여러분에게 본격적인 파티장소를 제공합니다! 
+			<br>
+			신나는 파티의 소음도 막을 수 있는 강력한 방음 설계가 적용되어있습니다.
+			<br>
+			<br>
+				<a th:onclick="|location.href='@{room?roomType=C}'|" class="btn btn-danger">예약하기</a>
+			</div>
+			</div>
+			</div>
+			<div class="row g-0" id="mobile-pool">
+			<div class="col-4"><img src="img/C3.PNG" class="img-fluid rounded-start" alt="미니룸A">
+			</div>	
+			<div class="col-8 pt-1">
+			<div class="card-title" align="center" id="card-title-2">파티룸 A
+			</div>
+			<div class="card-body" align="center">시끄럽게 떠들어도 좋을 곳을 원한다면.
+			 <br>
+				<a th:onclick="|location.href='@{room?roomType=C}'|" class="btn btn-danger btn-sm">예약</a>
+			</div>
+			</div>
+			</div>
+			</div>
+			<br>
+			<br>
+			<br>
+			<div class="card mb-0" id="card-main">
+			<div class="row g-0" id="web-pool">
+			<div class="col-md-4"><img src="img/D1.PNG" class="img-fluid rounded-start" alt="미니룸A">
+			</div>	
+			<div class="col-md-8 pt-3">
+			<div class="card-title" align="center" id="card-title">파티룸 B
+			</div>
+			<div class="card-body" align="center">[파티룸 B]는 저희가 자랑하는 최고 사양입니다.
+			<br>
+			 방음 설계는 기본, 추가적인 옵션이 제공됩니다.
+			 <br>
+			 <br>
+				<a th:onclick="|location.href='@{room?roomType=D}'|" class="btn btn-danger">예약하기</a>
+			</div>
+			</div>
+			</div>
+			<div class="row g-0" id="mobile-pool">
+			<div class="col-4"><img src="img/D1.PNG" class="img-fluid rounded-start" alt="미니룸A">
+			</div>	
+			<div class="col-8 pt-1">
+			<div class="card-title" align="center" id="card-title-2">파티룸 B
+			</div>
+			<div class="card-body" align="center">완벽한 파티를 원한다면.
+			 <br>
+				<a th:onclick="|location.href='@{room?roomType=D}'|" class="btn btn-danger btn-sm">예약</a>
+			</div>
+			</div>
+			</div>
+			</div>
+			<br>
+			<br>
+			</div>
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"

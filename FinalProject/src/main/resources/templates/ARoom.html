@@ -3,712 +3,307 @@
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
 	layout:decorate="layouts/first_layout">
 <th:block layout:fragment="content">
-<link href="css/room.css" rel="stylesheet">
-<body>
-	<main>
-		<div class="container">
-			<div class="row" id="room">
-				<div class="col-lg-8 mb-4 mt-4" align="center"
-					style="margin-top: 8px;">
-					<div id="carouselExampleIndicators" class="carousel slide"
-						data-bs-ride="carousel">
-						<div class="carousel-indicators">
-							<button type="button" data-bs-target="#carouselExampleIndicators"
-								data-bs-slide-to="0" class="active" aria-current="true"
-								aria-label="Slide 1"></button>
-							<button type="button" data-bs-target="#carouselExampleIndicators"
-								data-bs-slide-to="1" aria-label="Slide 2"></button>
-							<button type="button" data-bs-target="#carouselExampleIndicators"
-								data-bs-slide-to="2" aria-label="Slide 3"></button>
-							<button type="button" data-bs-target="#carouselExampleIndicators"
-								data-bs-slide-to="3" aria-label="Slide 4"></button>
-							<button type="button" data-bs-target="#carouselExampleIndicators"
-								data-bs-slide-to="4" aria-label="Slide 5"></button>
-							<button type="button" data-bs-target="#carouselExampleIndicators"
-								data-bs-slide-to="5" aria-label="Slide 6"></button>
-						</div>
-						<div class="carousel-inner">
-							<div class="carousel-item active">
-								<img src="img/A1.PNG" class="d-block w-100" alt="...">
+	<link href="css/room.css" rel="stylesheet">
+	<link th:href="@{css/sch.css}" rel="stylesheet">
+	<body>
+		<main>
+			<div class="container">
+				<div class="row" id="room">
+					<div class="col-lg-8 mb-4 mt-4" align="center"
+						style="margin-top: 8px;">
+						<div id="carouselExampleIndicators" class="carousel slide"
+							data-bs-ride="carousel">
+							<div class="carousel-indicators">
+								<button type="button"
+									data-bs-target="#carouselExampleIndicators"
+									data-bs-slide-to="0" class="active" aria-current="true"
+									aria-label="Slide 1"></button>
+								<button type="button"
+									data-bs-target="#carouselExampleIndicators"
+									data-bs-slide-to="1" aria-label="Slide 2"></button>
+								<button type="button"
+									data-bs-target="#carouselExampleIndicators"
+									data-bs-slide-to="2" aria-label="Slide 3"></button>
+								<button type="button"
+									data-bs-target="#carouselExampleIndicators"
+									data-bs-slide-to="3" aria-label="Slide 4"></button>
+								<button type="button"
+									data-bs-target="#carouselExampleIndicators"
+									data-bs-slide-to="4" aria-label="Slide 5"></button>
+								<button type="button"
+									data-bs-target="#carouselExampleIndicators"
+									data-bs-slide-to="5" aria-label="Slide 6"></button>
 							</div>
-							<div class="carousel-item">
-								<img src="img/A2.PNG" class="d-block w-100" alt="...">
+							<div class="carousel-inner">
+								<div class="carousel-item active">
+									<img src="img/A1.PNG" class="d-block w-100" alt="...">
+								</div>
+								<div class="carousel-item">
+									<img src="img/A2.PNG" class="d-block w-100" alt="...">
+								</div>
+								<div class="carousel-item">
+									<img src="img/A3.PNG" class="d-block w-100" alt="...">
+								</div>
+								<div class="carousel-item">
+									<img src="img/A4.PNG" class="d-block w-100" alt="...">
+								</div>
+								<div class="carousel-item">
+									<img src="img/A5.PNG" class="d-block w-100" alt="...">
+								</div>
+								<div class="carousel-item">
+									<img src="img/A6.PNG" class="d-block w-100" alt="...">
+								</div>
 							</div>
-							<div class="carousel-item">
-								<img src="img/A3.PNG" class="d-block w-100" alt="...">
-							</div>
-							<div class="carousel-item">
-								<img src="img/A4.PNG" class="d-block w-100" alt="...">
-							</div>
-							<div class="carousel-item">
-								<img src="img/A5.PNG" class="d-block w-100" alt="...">
-							</div>
-							<div class="carousel-item">
-								<img src="img/A6.PNG" class="d-block w-100" alt="...">
-							</div>
-						</div>
-						<button class="carousel-control-prev" type="button"
-							data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Previous</span>
-						</button>
-						<button class="carousel-control-next" type="button"
-							data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-							<span class="carousel-control-next-icon" aria-hidden="true"></span>
-							<span class="visually-hidden">Next</span>
-						</button>
-					</div>
-				</div>
-				<div class="col-lg-4 mb-4" align="left"
-					style="padding-top: 30px; padding-bottom: 30px;">
-					<div>
-						사용자 <br />별점 : 1점
-						<div class="star-ratings">
-							<div class="star-ratings-fill space-x-2 text-lg"
-								style="width: 21.5%">
-								<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-							</div>
-							<div class="star-ratings-base space-x-2 text-lg">
-								<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-							</div>
+							<button class="carousel-control-prev" type="button"
+								data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Previous</span>
+							</button>
+							<button class="carousel-control-next" type="button"
+								data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="visually-hidden">Next</span>
+							</button>
 						</div>
 					</div>
-					<div class="price">40,000원</div>
-					<div class="menu" style="font-size: 18px;">
-						<hr />
-						인원:&nbsp;<select name="인원" style="width: 40%;">
-							<option selected>4인(+8만원)</option>
-							<option>6인(+10만원)</option>
-						</select>
-						<hr />
-						<div class="date">
-							날짜 선택: <input type="date" value="2022-11-10"
-								style="width: 40%; height: 25px; font-size: 16px;">
-							&nbsp;
-							<!-- Button trigger modal -->
-							<button type="button" class="btn btn-secondary btn-sm rounded-0"
-								data-bs-toggle="modal" data-bs-target="#date"
-								style="height: 25px;">예약현황</button>
-							<!-- Modal -->
-							<div class="modal fade " id="date" data-bs-backdrop="static"
-								data-bs-keyboard="false" tabindex="-1"
-								aria-labelledby="staticBackdropLabel" aria-hidden="true">
-								<div class="modal-dialog modal-xl">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="staticBackdropLabel">예약현황</h5>
-											<button type="button" class="btn-close"
-												data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											달력나오는곳
-											<hr />
-											<div class="content-wrap">
-												<div class="content-left">
-													<div class="main-wrap">
-														<div id="main-day" class="main-day"></div>
-														<div id="main-date" class="main-date"></div>
-													</div>
-													<div class="todo-wrap">
-														<div class="todo-title">Todo List</div>
-														<div class="input-wrap">
-															<input type="text" placeholder="please write here!!"
-																id="input-box" class="input-box">
-															<button type="button" id="input-data" class="input-data">INPUT</button>
-															<div id="input-list" class="input-list"></div>
+					<div class="col-lg-4 mb-4" align="left"
+						style="padding-top: 30px; padding-bottom: 30px;">
+						<div>
+							사용자 <br />별점 : 1점
+							<div class="star-ratings">
+								<div class="star-ratings-fill space-x-2 text-lg"
+									style="width: 21.5%">
+									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+								</div>
+								<div class="star-ratings-base space-x-2 text-lg">
+									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+								</div>
+							</div>
+						</div>
+						<div class="price">40,000원</div>
+						<div class="menu" style="font-size: 18px;">
+							<hr />
+							인원:&nbsp;<select name="인원" style="width: 40%;">
+								<option selected>4인(+8만원)</option>
+								<option>6인(+10만원)</option>
+							</select>
+							<hr />
+							<div class="date">
+								날짜 선택: <input type="date" value="2022-11-14"
+									style="width: 40%; height: 25px; font-size: 16px;">
+								&nbsp;
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-secondary btn-sm rounded-0"
+									data-bs-toggle="modal" data-bs-target="#date"
+									style="height: 25px;">예약현황</button>
+								<!-- Modal -->
+								<div class="modal fade " id="date" data-bs-backdrop="static"
+									data-bs-keyboard="false" tabindex="-1"
+									aria-labelledby="staticBackdropLabel" aria-hidden="true">
+									<div class="modal-dialog modal-xl">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="staticBackdropLabel">예약현황</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												달력나오는곳
+												<hr />
+												<div class="content-wrap">
+													<div class="content-left">
+														<div class="main-wrap">
+															<div id="main-day" class="main-day"></div>
+															<div id="main-date" class="main-date"></div>
+														</div>
+														<div class="todo-wrap">
+															<div class="todo-title">Todo List</div>
+															<div class="input-wrap">
+																<input type="text" placeholder="please write here!!"
+																	id="input-box" class="input-box">
+																<button type="button" id="input-data" class="input-data">INPUT</button>
+																<div id="input-list" class="input-list"></div>
+															</div>
 														</div>
 													</div>
+													<div class="content-right">
+														<table id="calendar" align="center">
+															<thead>
+																<tr class="btn-wrap clearfix">
+																	<td><label id="prev"> &#60; </label></td>
+																	<td align="center" id="current-year-month" colspan="5"></td>
+																	<td><label id="next"> &#62; </label></td>
+																</tr>
+																<tr>
+																	<td class="sun" align="center">Sun</td>
+																	<td align="center">Mon</td>
+																	<td align="center">Tue</td>
+																	<td align="center">Wed</td>
+																	<td align="center">Thu</td>
+																	<td align="center">Fri</td>
+																	<td class="sat" align="center">Sat</td>
+																</tr>
+															</thead>
+															<tbody id="calendar-body" class="calendar-body"></tbody>
+														</table>
+													</div>
+													<script th:inline="javascript" type="text/javascript"
+														th:src="@{js/sch.js}"></script>
 												</div>
-												<div class="content-right">
-													<table id="calendar" align="center">
-														<thead>
-															<tr class="btn-wrap clearfix">
-																<td><label id="prev"> &#60; </label></td>
-																<td align="center" id="current-year-month" colspan="5"></td>
-																<td><label id="next"> &#62; </label></td>
-															</tr>
-															<tr>
-																<td class="sun" align="center">Sun</td>
-																<td align="center">Mon</td>
-																<td align="center">Tue</td>
-																<td align="center">Wed</td>
-																<td align="center">Thu</td>
-																<td align="center">Fri</td>
-																<td class="sat" align="center">Sat</td>
-															</tr>
-														</thead>
-														<tbody id="calendar-body" class="calendar-body"></tbody>
-													</table>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr />
+							</div>
+							<div class="option">
+								옵션: &nbsp;<select name="옵션" style="width: 40%; height: 28px;">
+									<option>선택안함</option>
+									<option>포토스냅A(+10만원)</option>
+									<option>포토스냅B(+12만원)</option>
+								</select> &nbsp;
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-secondary btn-sm rounded-0"
+									data-bs-toggle="modal" data-bs-target="#modaloption"
+									style="height: 25px;">옵션 예시</button>
+								<!-- Modal -->
+								<div class="modal fade " id="modaloption"
+									data-bs-backdrop="static" data-bs-keyboard="false"
+									tabindex="-1" aria-labelledby="staticBackdropLabel"
+									aria-hidden="true">
+									<div class="modal-dialog modal-xl modal-dialog-scrollable">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="staticBackdropLabel">옵션</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<div class="title" align="center">
+													옵션 예시 <br />제공하는 옵션들의 종류입니다.
+												</div>
+												<hr />
+												<div class="content">
+													<h3>초콜릿 케이크 |</h3>
+													<img src="img/chococake1.jpg"
+														style="width: 40%; height: 10%;"> <img
+														src="img/chococake2.jpg" style="width: 40%; height: 10%;"><br />
+													수제 초콜릿을 이용한 초콜릿 무스 케이크를 제공해드립니다.<br />(방문 3일전까지 문의를 통해 케이크
+													변경이 가능합니다.)
+												</div>
+												<br /> <br />
+												<div class="content">
+													<h3>생크림 케이크 |</h3>
+													<img src="img/creamcake1.PNG"
+														style="width: 40%; height: 10%;"> <img
+														src="img/creamcake2.PNG" style="width: 40%; height: 10%;"><br />
+													생크림을 이용한 달달한 케이크를 제공해드립니다.<br />(방문 3일전까지 문의를 통해 케이크 변경이
+													가능합니다.)
+												</div>
+												<br /> <br />
+												<div class="content">
+													<h3>페인팅 케이크 |</h3>
+													<img src="img/facecake1.jpg"
+														style="width: 40%; height: 10%;"> <img
+														src="img/facecake2.jpg" style="width: 40%; height: 10%;">
+													<img src="img/facecake3.jpg"
+														style="width: 40%; height: 10%;"> <br /> 고객님의 하나뿐인
+													얼굴이 그려진 특별한 케이크를 제공해드립니다.<br />(방문 3일전까지 문의를 통해 케이크 변경이
+													가능합니다.)
 												</div>
 											</div>
-											<script>
-												//1
-												var currentTitle = document
-														.getElementById('current-year-month');
-												var calendarBody = document
-														.getElementById('calendar-body');
-												var today = new Date();
-												var first = new Date(today
-														.getFullYear(), today
-														.getMonth(), 1);
-												var dayList = [ 'Sunday',
-														'Monday', 'Tuesday',
-														'Wednesday',
-														'Thursday', 'Friday',
-														'Saturday' ];
-												var monthList = [ 'January',
-														'February', 'March',
-														'April', 'May', 'June',
-														'July', 'August',
-														'September', 'October',
-														'November', 'December' ];
-												var leapYear = [ 31, 29, 31,
-														30, 31, 30, 31, 31, 30,
-														31, 30, 31 ];
-												var notLeapYear = [ 31, 28, 31,
-														30, 31, 30, 31, 31, 30,
-														31, 30, 31 ];
-												var pageFirst = first;
-												var pageYear;
-												if (first.getFullYear() % 4 === 0) {
-													pageYear = leapYear;
-												} else {
-													pageYear = notLeapYear;
-												}
-
-												function showCalendar() {
-													let monthCnt = 100;
-													let cnt = 1;
-													for (var i = 0; i < 6; i++) {
-														var $tr = document
-																.createElement('tr');
-														$tr.setAttribute('id',
-																monthCnt);
-														for (var j = 0; j < 7; j++) {
-															if ((i === 0 && j < first
-																	.getDay())
-																	|| cnt > pageYear[first
-																			.getMonth()]) {
-																var $td = document
-																		.createElement('td');
-																$tr
-																		.appendChild($td);
-															} else {
-																var $td = document
-																		.createElement('td');
-																$td.textContent = cnt;
-																$td
-																		.setAttribute(
-																				'id',
-																				cnt);
-																$tr
-																		.appendChild($td);
-																cnt++;
-															}
-														}
-														monthCnt++;
-														calendarBody
-																.appendChild($tr);
-													}
-												}
-												showCalendar();
-
-												function removeCalendar() {
-													let catchTr = 100;
-													for (var i = 100; i < 106; i++) {
-														var $tr = document
-																.getElementById(catchTr);
-														$tr.remove();
-														catchTr++;
-													}
-												}
-
-												//2
-												function prev() {
-													inputBox.value = "";
-													const $divs = document
-															.querySelectorAll('#input-list > div');
-													$divs.forEach(function(e) {
-														e.remove();
-													});
-													const $btns = document
-															.querySelectorAll('#input-list > button');
-													$btns.forEach(function(e1) {
-														e1.remove();
-													});
-													if (pageFirst.getMonth() === 1) {
-														pageFirst = new Date(
-																first
-																		.getFullYear() - 1,
-																12, 1);
-														first = pageFirst;
-														if (first.getFullYear() % 4 === 0) {
-															pageYear = leapYear;
-														} else {
-															pageYear = notLeapYear;
-														}
-													} else {
-														pageFirst = new Date(
-																first
-																		.getFullYear(),
-																first
-																		.getMonth() - 1,
-																1);
-														first = pageFirst;
-													}
-													today = new Date(
-															today.getFullYear(),
-															today.getMonth() - 1,
-															today.getDate());
-													currentTitle.innerHTML = monthList[first
-															.getMonth()]
-															+ '&nbsp;&nbsp;&nbsp;&nbsp;'
-															+ first
-																	.getFullYear();
-													removeCalendar();
-													showCalendar();
-													showMain();
-													clickedDate1 = document
-															.getElementById(today
-																	.getDate());
-													clickedDate1.classList
-															.add('active');
-													clickStart();
-													reshowingList();
-												}
-
-												function next() {
-													inputBox.value = "";
-													const $divs = document
-															.querySelectorAll('#input-list > div');
-													$divs.forEach(function(e) {
-														e.remove();
-													});
-													const $btns = document
-															.querySelectorAll('#input-list > button');
-													$btns.forEach(function(e1) {
-														e1.remove();
-													});
-													if (pageFirst.getMonth() === 12) {
-														pageFirst = new Date(
-																first
-																		.getFullYear() + 1,
-																1, 1);
-														first = pageFirst;
-														if (first.getFullYear() % 4 === 0) {
-															pageYear = leapYear;
-														} else {
-															pageYear = notLeapYear;
-														}
-													} else {
-														pageFirst = new Date(
-																first
-																		.getFullYear(),
-																first
-																		.getMonth() + 1,
-																1);
-														first = pageFirst;
-													}
-													today = new Date(
-															today.getFullYear(),
-															today.getMonth() + 1,
-															today.getDate());
-													currentTitle.innerHTML = monthList[first
-															.getMonth()]
-															+ '&nbsp;&nbsp;&nbsp;&nbsp;'
-															+ first
-																	.getFullYear();
-													removeCalendar();
-													showCalendar();
-													showMain();
-													clickedDate1 = document
-															.getElementById(today
-																	.getDate());
-													clickedDate1.classList
-															.add('active');
-													clickStart();
-													reshowingList();
-												}
-
-												//3
-
-												function showMain() {
-													var mainTodayDay = document
-															.getElementById('main-day');
-													var mainTodayDate = document
-															.getElementById('main-date');
-
-													mainTodayDay.innerHTML = dayList[today
-															.getDay()];
-													mainTodayDate.innerHTML = today
-															.getDate();
-												}
-												var clickedDate1 = document
-														.getElementById(today
-																.getDate());
-												clickedDate1.classList
-														.add('active');
-												var prevBtn = document
-														.getElementById('prev');
-												var nextBtn = document
-														.getElementById('next');
-												prevBtn.addEventListener(
-														'click', prev);
-												nextBtn.addEventListener(
-														'click', next);
-												var tdGroup = [];
-												function clickStart() {
-													for (let i = 1; i <= pageYear[first
-															.getMonth()]; i++) {
-														tdGroup[i] = document
-																.getElementById(i);
-														tdGroup[i]
-																.addEventListener(
-																		'click',
-																		changeToday);
-													}
-												}
-												function changeToday(e) {
-													for (let i = 1; i <= pageYear[first
-															.getMonth()]; i++) {
-														if (tdGroup[i].classList
-																.contains('active')) {
-															tdGroup[i].classList
-																	.remove('active');
-														}
-													}
-													clickedDate1 = e.currentTarget;
-													clickedDate1.classList
-															.add('active');
-													today = new Date(today
-															.getFullYear(),
-															today.getMonth(),
-															clickedDate1.id);
-													showMain();
-													keyValue = today
-															.getFullYear()
-															+ ''
-															+ today.getMonth()
-															+ ''
-															+ today.getDate();
-													reshowingList();
-												}
-
-												//4
-												function reshowingList() {
-													keyValue = today
-															.getFullYear()
-															+ ''
-															+ today.getMonth()
-															+ ''
-															+ today.getDate();
-													if (todoList[keyValue] === undefined) {
-														inputList.textContent = '';
-														todoList[keyValue] = [];
-														const $divs = document
-																.querySelectorAll('#input-list > div');
-														$divs.forEach(function(
-																e) {
-															e.remove();
-														});
-														const $btns = document
-																.querySelectorAll('#input-list > button');
-														$btns.forEach(function(
-																e1) {
-															e1.remove();
-														});
-													} else if (todoList[keyValue].length === 0) {
-														inputList.textContent = "";
-														const $divs = document
-																.querySelectorAll('#input-list > div');
-														$divs.forEach(function(
-																e) {
-															e.remove();
-														});
-														const $btns = document
-																.querySelectorAll('#input-list > button');
-														$btns.forEach(function(
-																e1) {
-															e1.remove();
-														});
-													} else {
-														const $divs = document
-																.querySelectorAll('#input-list > div');
-														$divs.forEach(function(
-																e) {
-															e.remove();
-														});
-														const $btns = document
-																.querySelectorAll('#input-list > button');
-														$btns.forEach(function(
-																e1) {
-															e1.remove();
-														});
-														var $div = document
-																.createElement('div');
-														for (var i = 0; i < todoList[keyValue].length; i++) {
-															var $div = document
-																	.createElement('div');
-															$div.textContent = '-'
-																	+ todoList[keyValue][i];
-															var $btn = document
-																	.createElement('button');
-															$btn.setAttribute(
-																	'type',
-																	'button');
-															$btn.setAttribute(
-																	'id',
-																	'del-ata');
-															$btn
-																	.setAttribute(
-																			'id',
-																			dataCnt
-																					+ keyValue);
-															$btn.setAttribute(
-																	'class',
-																	'del-data');
-															$btn.textContent = delText;
-															inputList
-																	.appendChild($div);
-															inputList
-																	.appendChild($btn);
-															$div
-																	.addEventListener(
-																			'click',
-																			checkList);
-															$btn
-																	.addEventListener(
-																			'click',
-																			deleteTodo);
-															inputBox.value = '';
-															function deleteTodo() {
-																$div.remove();
-																$btn.remove();
-															}
-														}
-													}
-
-												}
-												var inputBox = document
-														.getElementById('input-box');
-												var inputDate = document
-														.getElementById('input-data');
-												var inputList = document
-														.getElementById('input-list');
-												var delText = 'X';
-												inputDate.addEventListener(
-														'click', addTodoList);
-												var dataCnt = 1;
-												var keyValue = today
-														.getFullYear()
-														+ ''
-														+ today.getMonth()
-														+ '' + today.getDate();
-												let todoList = [];
-												todoList[keyValue] = [];
-												function addTodoList() {
-													var $div = document
-															.createElement('div');
-													$div.textContent = '-'
-															+ inputBox.value;
-													var $btn = document
-															.createElement('button');
-													$btn.setAttribute('type',
-															'button');
-													$btn.setAttribute('id',
-															'del-ata');
-													$btn.setAttribute('id',
-															dataCnt + keyValue);
-													$btn.setAttribute('class',
-															"del-data");
-													$btn.textContent = delText;
-													inputList.appendChild($div);
-													inputList.appendChild($btn);
-													todoList[keyValue]
-															.push(inputBox.value);
-													dataCnt++;
-													inputBox.value = '';
-													$div.addEventListener(
-															'click', checkList);
-													$btn
-															.addEventListener(
-																	'click',
-																	deleteTodo);
-													function deleteTodo() {
-														$div.remove();
-														$btn.remove();
-													}
-												}
-												console.log(keyValue);
-												function checkList(e) {
-													e.currentTarget.classList
-															.add('checked');
-												}
-
-												prev();
-												next();
-											</script>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"
-												data-bs-dismiss="modal">Close</button>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Close</button>
+											</div>
 										</div>
 									</div>
 								</div>
+								<hr />
 							</div>
-							<hr />
-						</div>
-						<div class="option">
-							옵션: &nbsp;<select name="옵션" style="width: 40%; height: 28px;">
-								<option>선택안함</option>
-								<option>포토스냅A(+10만원)</option>
-								<option>포토스냅B(+12만원)</option>
-							</select> &nbsp;
-							<!-- Button trigger modal -->
-							<button type="button" class="btn btn-secondary btn-sm rounded-0"
-								data-bs-toggle="modal" data-bs-target="#modaloption"
-								style="height: 25px;">옵션 예시</button>
-							<!-- Modal -->
-							<div class="modal fade " id="modaloption"
-								data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-								aria-labelledby="staticBackdropLabel" aria-hidden="true">
-								<div class="modal-dialog modal-xl modal-dialog-scrollable">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="staticBackdropLabel">옵션</h5>
-											<button type="button" class="btn-close"
-												data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<div class="title" align="center">
-												옵션 예시 <br />제공하는 옵션들의 종류입니다.
+							<div class="package">
+								패키지:&nbsp;<select name="패키지" style="width: 40%; height: 25px;">
+									<option>선택안함</option>
+									<option>올인원 패키지[Hot!](+23만원)</option>
+									<option>내맘쏙 패키지A(+18만원)</option>
+									<option>내맘쏙 패키지B(+16만원)</option>
+									<option>내맘쏙 패키지C(+11만원)</option>
+								</select> &nbsp;
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-secondary btn-sm rounded-0"
+									data-bs-toggle="modal" data-bs-target="#modalpackage"
+									style="height: 25px;">페키지 예시</button>
+
+
+								<!-- Modal -->
+								<div class="modal fade " id="modalpackage"
+									data-bs-backdrop="static" data-bs-keyboard="false"
+									tabindex="-1" aria-labelledby="staticBackdropLabel"
+									aria-hidden="true">
+									<div class="modal-dialog modal-xl">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="staticBackdropLabel">페키지</h5>
+												<button type="button" class="btn-close"
+													data-bs-dismiss="modal" aria-label="Close"></button>
 											</div>
-											<hr />
-											<div class="content">
-												<h3>수제 케이크 |</h3>
-												<img src="img/cake.jpg"
-													style="width: 40%; height: 10%;"> <img
-													src="img/cake.jpg"
-													style="width: 40%; height: 10%;"><br /> 고객님의 하나뿐인
-												생일을 위해 특별한 수제케이크를 제공해 드립니다<br />(방문 3일전까지 문의를 통해 사진케이크로 변경이
-												가능합니다.)
+											<div class="modal-body">
+												<div class="title" align="center">
+													페키지 예시 <br />제공하는 옵션들의 종류입니다.
+												</div>
+												<hr />
+												<div class="content">
+													<h3>수제 케이크 |</h3>
+													<img src="img/cake.jpg" style="width: 40%; height: 10%;">
+													<img src="img/cake.jpg" style="width: 40%; height: 10%;"><br />
+													고객님의 하나뿐인 생일을 위해 특별한 수제케이크를 제공해 드립니다<br />(방문 3일전까지 문의를 통해
+													사진케이크로 변경이 가능합니다.)
+												</div>
+												<br /> <br />
+												<div class="content">
+													<h3>수제 케이크 |</h3>
+													<img src="img/cake.jpg" style="width: 40%; height: 10%;">
+													<img src="img/cake.jpg" style="width: 40%; height: 10%;"><br />
+													고객님의 하나뿐인 생일을 위해 특별한 수제케이크를 제공해 드립니다<br />(방문 3일전까지 문의를 통해
+													사진케이크로 변경이 가능합니다.)
+												</div>
+												<br /> <br />
+												<div class="content">
+													<h3>수제 케이크 |</h3>
+													<img src="img/cake.jpg" style="width: 40%; height: 10%;">
+													<img src="img/cake.jpg" style="width: 40%; height: 10%;"><br />
+													고객님의 하나뿐인 생일을 위해 특별한 수제케이크를 제공해 드립니다<br />(방문 3일전까지 문의를 통해
+													사진케이크로 변경이 가능합니다.)
+												</div>
 											</div>
-											<br /> <br />
-											<div class="content">
-												<h3>수제 케이크 |</h3>
-												<img src="img/cake.jpg"
-													style="width: 40%; height: 10%;"> <img
-													src="img/cake.jpg"
-													style="width: 40%; height: 10%;"><br /> 고객님의 하나뿐인
-												생일을 위해 특별한 수제케이크를 제공해 드립니다<br />(방문 3일전까지 문의를 통해 사진케이크로 변경이
-												가능합니다.)
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Close</button>
 											</div>
-											<br /> <br />
-											<div class="content">
-												<h3>수제 케이크 |</h3>
-												<img src="img/cake.jpg"
-													style="width: 40%; height: 10%;"> <img
-													src="img/cake.jpg"
-													style="width: 40%; height: 10%;"><br /> 고객님의 하나뿐인
-												생일을 위해 특별한 수제케이크를 제공해 드립니다<br />(방문 3일전까지 문의를 통해 사진케이크로 변경이
-												가능합니다.)
-											</div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"
-												data-bs-dismiss="modal">Close</button>
 										</div>
 									</div>
 								</div>
+								<hr />
 							</div>
-							<hr />
-						</div>
-						<div class="package">
-							패키지:&nbsp;<select name="패키지" style="width: 40%; height: 25px;">
-								<option>선택안함</option>
-								<option>올인원 패키지[Hot!](+23만원)</option>
-								<option>내맘쏙 패키지A(+18만원)</option>
-								<option>내맘쏙 패키지B(+16만원)</option>
-								<option>내맘쏙 패키지C(+11만원)</option>
-							</select> &nbsp;
-							<!-- Button trigger modal -->
-							<button type="button" class="btn btn-secondary btn-sm rounded-0"
-								data-bs-toggle="modal" data-bs-target="#modalpackage"
-								style="height: 25px;">페키지 예시</button>
-
-
-							<!-- Modal -->
-							<div class="modal fade " id="modalpackage"
-								data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-								aria-labelledby="staticBackdropLabel" aria-hidden="true">
-								<div class="modal-dialog modal-xl">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h5 class="modal-title" id="staticBackdropLabel">페키지</h5>
-											<button type="button" class="btn-close"
-												data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-										<div class="modal-body">
-											<div class="title" align="center">
-												페키지 예시 <br />제공하는 옵션들의 종류입니다.
-											</div>
-											<hr />
-											<div class="content">
-												<h3>수제 케이크 |</h3>
-												<img src="img/cake.jpg"
-													style="width: 40%; height: 10%;"> <img
-													src="img/cake.jpg"
-													style="width: 40%; height: 10%;"><br /> 고객님의 하나뿐인
-												생일을 위해 특별한 수제케이크를 제공해 드립니다<br />(방문 3일전까지 문의를 통해 사진케이크로 변경이
-												가능합니다.)
-											</div>
-											<br /> <br />
-											<div class="content">
-												<h3>수제 케이크 |</h3>
-												<img src="img/cake.jpg"
-													style="width: 40%; height: 10%;"> <img
-													src="img/cake.jpg"
-													style="width: 40%; height: 10%;"><br /> 고객님의 하나뿐인
-												생일을 위해 특별한 수제케이크를 제공해 드립니다<br />(방문 3일전까지 문의를 통해 사진케이크로 변경이
-												가능합니다.)
-											</div>
-											<br /> <br />
-											<div class="content">
-												<h3>수제 케이크 |</h3>
-												<img src="img/cake.jpg"
-													style="width: 40%; height: 10%;"> <img
-													src="img/cake.jpg"
-													style="width: 40%; height: 10%;"><br /> 고객님의 하나뿐인
-												생일을 위해 특별한 수제케이크를 제공해 드립니다<br />(방문 3일전까지 문의를 통해 사진케이크로 변경이
-												가능합니다.)
-											</div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary"
-												data-bs-dismiss="modal">Close</button>
-										</div>
-									</div>
-								</div>
+							<div class="Reservation">
+								금액 : ???,???원
+								<button type="button" class="btn btn-outline-success"
+									style="float: right">예약하기</button>
 							</div>
-							<hr />
-						</div>
-						<div class="Reservation">
-							금액 : ???,???원
-							<button type="button" class="btn btn-outline-success"
-								style="float: right">예약하기</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			</div>
-			<br>
-			<br>
-			<br>
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-			crossorigin="anonymous"></script>
-	</main>
+			<br> <br> <br>
+			<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+			<script
+				src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+				integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+				crossorigin="anonymous"></script>
+		</main>
 </th:block>
 </html>

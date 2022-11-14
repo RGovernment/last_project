@@ -1,11 +1,40 @@
 @charset "utf-8";
 
+#rent-text1{
+	font-weight:700;
+	font-family: 'Dancing Script', cursive;
+	font-size: 60px;
+	color:#483d8b;
+}
+
 .card-img-top {
 	height: 300px;
 	object-fit: cover;
-	align: center;/*  개 화나게 하지 마세요 뭐 언제적 align이야 ㅡㅡ */
 }
 
-.card-body {
-	align: center;
+@media screen and (min-width:991px) {
+	#mobile-pool {
+		display: none;
+	}
+}
+
+@media screen and (max-width:992px) {
+	#web-pool {
+		display: none;
+	}
+
+}
+
+#card-main {
+	margin: 0 auto;
+	max-width: 850px;
+}
+
+#card-title {
+	font-size: 25px;
+	font-weight: 500;
+}
+	#card-title-2 {
+	font-size: 20px;
+	font-weight: 500;
 }

@@ -4,38 +4,34 @@
 	layout:decorate="layouts/first_layout">
 
 <th:block layout:fragment="content">
-<link href="css/reviewPage.css" rel="stylesheet">
+	<link th:href="@{css/reviewPage.css}" rel="stylesheet">
 	<main role="main">
-		<div class="album py-5">
-			<div class="container mt-5">
-			<div class="d-flex align-items-center justify-content-center mb-5" id="review-text1">리뷰</div>
-				<div class="row">
-					<th:block th:each="num:${#numbers.sequence(1,6)}">
-						<div class="col-md-3">
-							<div class="card mb-4 border-0">
-								<button type="button" class="btn m-0 p-0" data-bs-toggle="modal"
-									data-bs-target="#exampleModal">
-									<img class="card-img-top" src="img/picture.jpg"
-										alt="Card image cap">
-								</button>
-								<div class="card-body p-0">
-									<div id="desc">{무언가}</div>
-									<div id="title">{타이틀}</div>
-									<div id="address">{방번호}</div>
-									<div id="price">
-										{가격}
-										<mark id="time">{시간}</mark>
-									</div>
-									<div>★</div>
+		<div class="container mt-5">
+			<div class="d-flex align-items-center justify-content-center mb-5"
+				id="review-text1">Review</div>
+			<div class="row">
+				<th:block th:each="num:${#numbers.sequence(1,6)}">
+					<div class="col-md-6">
+						<div class="card mb-4 shadow-sm" id="review-card">
+							<a data-bs-toggle="modal" data-bs-target="#exampleModal"> <img
+								class="card-img-top" id="modal-image" src="img/picture.jpg"
+								alt="Card image cap"></a>
+							<div class="card-title pt-3" id="title"
+								style="text-align: center;">제목이 될겁니다.</div>
+							<div class="card-body ps-3 ms-0 me-0">
+								<div id="desc">회사이름</div>
+								<div id="address">방종류</div>
+								<div class="row justify-content-between">
+									<div class="col-4" id="price">30000원</div>
+									<div class="col-4" align="right">22-11-14</div>
 								</div>
+								<div>★★★★★</div>
 							</div>
 						</div>
-					</th:block>
-				</div>
+					</div>
+				</th:block>
 			</div>
 		</div>
-
-
 
 		<!-- Modal -->
 		<div class="modal fade" id="exampleModal" tabindex="-1"

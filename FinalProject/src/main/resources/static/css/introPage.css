@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+#intro-text {
+	height: 900px;
+	color: white;
+	font-size: 250%;
+	font-weight: 900;	
+}
+#intro-pic {
+	background: url("../img/intro_pic.jpg") center no-repeat;
+	background-size: cover;
+	height: 1080px;
+	opacity: 78%;
+}
