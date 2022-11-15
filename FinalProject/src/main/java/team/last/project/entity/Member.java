@@ -1,6 +1,8 @@
 package team.last.project.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,6 +11,7 @@ import javax.persistence.SequenceGenerator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.Data;
+import team.last.project.constant.Role;
 import team.last.project.dto.MemberDto;
 
 @Entity
@@ -23,6 +26,8 @@ public class Member {
 	private String password;
 	private String phone;
 	private int	gender;
+	@Enumerated(EnumType.ORDINAL)
+    private Role role;
 
 	public static Member createMember(MemberDto memberDto, PasswordEncoder passwordEncoder) {
 		Member member = new Member();
@@ -32,6 +37,7 @@ public class Member {
 		member.setGender(memberDto.getGender());
 		String password = passwordEncoder.encode(memberDto.getPassword());
 		member.setPassword(password);
+		member.setRole(Role.USER);
         return member;
 	}
 }

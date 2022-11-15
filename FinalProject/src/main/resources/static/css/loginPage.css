@@ -1,30 +1,33 @@
 @charset "utf-8";
+
 html, body {
 	height: 100%;
 }
 
 body {
-	display: flex;
 	align-items: center;
-	padding-top: 40px;
-	padding-bottom: 40px;
-	background-color: #f5f5f5;
 }
-#prev-button:hover{
+
+#prev-button-img {
+	width: 50px;
+	height: 50px;
+}
+
+#prev-button-img:hover {
 	cursor: pointer;
 }
 
 .form-signin {
-	max-width: 330px;
+	max-width: 450px;
 	padding: 15px;
 }
 
 #login-text {
-	font-size: 110%;
+	font-size: 100%;
 }
 
 #login-text2 {
-	font-size: 100%;
+	font-size: 250%;
 }
 
 .form-signin .form-floating:focus-within {

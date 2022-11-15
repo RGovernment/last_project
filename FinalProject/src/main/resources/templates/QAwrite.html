@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/first_layout">
+<th:block layout:fragment="content">
+	<link href="css/mypage.css" rel="stylesheet">
+	<main role="main">
+		<div class="album py-5">
+			<div class="container mt-5">
+				<div
+					class="d-flex align-items-center justify-content-center mb-5 fs-1"
+					id="review-text1">1:1문의</div>
+				<div class="row">
+					<div class="col-md-2">
+						<h4>
+							<a href="mypage" class="text-decoration-none text-dark">주문조회</a><br />
+							<br /> <a href="wishlist" class="text-decoration-none text-dark">위시리스트</a><br />
+							<br /> <a href="QAlist" class="text-decoration-none text-dark">1:1문의</a><br />
+							<br /> <a href="#" class="text-decoration-none text-dark">정보수정</a><br />
+							<br /> <a href="#" class="text-decoration-none text-dark">회원탈퇴</a><br />
+							<br />
+						</h4>
+					</div>
+					<div class="col-md-10">
+						<div id="content_title" class="fs-2">문의하기</div>
+						<hr />
+						<div id="content" class="fs-3">
+							<div class="mb-3">
+								<label for="exampleFormControlInput1" class="form-label">제목</label>
+								<input type="text" class="form-control"
+									id="exampleFormControlInput1" placeholder="제목">
+							</div>
+							<div class="mb-3">
+								<label for="exampleFormControlInput1" class="form-label">문의
+									종류</label> <select class="form-select"
+									aria-label="Default select example">
+									<option selected value="1">예약</option>
+									<option value="2">옵션</option>
+									<option value="3">환불</option>
+									<option value="4">기타</option>
+								</select>
+							</div>
+							<div class="mb-3">
+								<label for="exampleFormControlTextarea1" class="form-label">문의사항</label>
+								<textarea class="form-control" id="exampleFormControlTextarea1"
+									rows="3"></textarea>
+							</div>
+							<div class="text-center">
+								<a href="QAlist"><input class="btn btn-dark me-md-2"
+									type="submit" value="등록"></a> <a href="QAlist"><input
+									class="btn btn-dark" type="reset" value="취소"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</th:block>
+</html>

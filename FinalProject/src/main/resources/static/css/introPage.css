@@ -2,7 +2,7 @@
 
 @media screen and (min-width:1560px) {
 	#intro-text {
-		height: 1200px;
+		height: 100%;
 		color: white;
 		font-size: 250%;
 		font-weight: 900;
@@ -11,7 +11,7 @@
 
 @media screen and (max-width:1559px) {
 	#intro-text {
-		height: 1200px;
+		height: 100%;
 		color: white;
 		font-size: 200%;
 		font-weight: 900;
@@ -21,6 +21,6 @@
 #intro-pic {
 	background: url("../img/intro_pic.jpg") center no-repeat;
 	background-size: cover;
-	height: 1080px;
+	height: 100%;
 	opacity: 78%;
 }

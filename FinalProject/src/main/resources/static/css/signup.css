@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+#prev-button-img{
+	width:50x; 
+	height:50px;
+	
+}
+#prev-button-img:hover{
+	cursor: pointer;
+}
+
+#form-size{
+	width: 450px;
+	
+}
+
+#pass {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+#pass2{
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}

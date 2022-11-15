@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/first_layout">
+<th:block layout:fragment="content">
+	<link href="css/mypage.css" rel="stylesheet">
+	<main role="main">
+		<div class="album py-5">
+			<div class="container mt-5">
+				<div
+					class="d-flex align-items-center justify-content-center mb-5 fs-1"
+					id="review-text1">마이 페이지</div>
+				<div class="row">
+					<div class="col-md-2">
+						<h4>
+							<a href="mypage" class="text-decoration-none text-dark">주문조회</a><br />
+							<br /> <a href="wishlist" class="text-decoration-none text-dark">위시리스트</a><br />
+							<br /> <a href="QAlist" class="text-decoration-none text-dark">1:1문의</a><br />
+							<br /> <a href="#" class="text-decoration-none text-dark">정보수정</a><br />
+							<br /> <a href="#" class="text-decoration-none text-dark">로그아웃</a><br />
+							<br /> <a href="acc_del" class="text-decoration-none text-dark"
+								role="button">회원탈퇴</a><br /> <br />
+						</h4>
+					</div>
+					<div class="col-md-10">
+						<div id="profile">
+							<img src="img/cake.jpg" id="profile_img"> OOO님 안녕하세요.
+						</div>
+						<div id="content_title">
+							<h2>주문조회</h2>
+						</div>
+						<hr />
+						<div id="content">
+							<table class="table table-striped table-bordered fs-5">
+								<thead>
+									<tr>
+										<th scope="col"></th>
+										<th scope="col">상품명</th>
+										<th scope="col">예약일자</th>
+										<th scope="col">가격</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row">1</th>
+										<td>미니룸A</td>
+										<td>2022-11-18</td>
+										<td>220,000원</td>
+									</tr>
+									<tr>
+										<th scope="row">2</th>
+										<td>파티룸A</td>
+										<td>2022-11-28</td>
+										<td>240,000원</td>
+									</tr>
+									<tr>
+										<th scope="row">3</th>
+										<td>파티룸B</td>
+										<td>2022-12-08</td>
+										<td>260,000원</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</th:block>
+</html>
