@@ -6,8 +6,6 @@
 <th:block layout:fragment="content">
 <link href="css/pricePage.css" rel="stylesheet">
 
-
-
 <div class="container ms-2 ms-md-auto me-0 me-md-auto">
 		<div class="row" id="txt">
 			<div class="col-md-12 align-self-center">
@@ -16,13 +14,12 @@
 			</div>
 			<br>
 		</div>
+		
 		<div id="room-font">미니룸 평일 <span id=allnight-font>(올나잇 오후 6시 ~ 다음날 오전 9시)</span></div>
 		
 		<div class="row" id="table-hd">
-			<div class="col-md-3 align-self-center" >룸 종류</div>
-			<h1 sec:authorize="hasRole('ADMIN')">Has admin Role</h1>
-			<div class="col-md-3 align-self-center" id="room-edit"></div>
-			<div class="col-md-3 align-self-center" id="room-edit" contenteditable="false">3H(2인기준)</div>
+			<div class="col-md-3 align-self-center">룸 종류</div>
+			<div class="col-md-3 align-self-center">3H(2인기준)</div>
 			<div class="col-md-3 align-self-center">6H(2인기준)</div>
 			<div class="col-md-3 align-self-center">올나잇(2인기준)</div>
 		</div>
@@ -219,7 +216,7 @@
 	</div>
 	<br>
 	<br>
-	<br>	
+	<br>
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 			crossorigin="anonymous"></script>

@@ -1,10 +1,17 @@
 package team.last.project.controller;
 
+import java.nio.file.AccessDeniedException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.security.authentication.AuthenticationTrustResolver;
+import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +32,7 @@ public class MyController {
 	private final PasswordEncoder passwordEncoder;
 
 	@RequestMapping("/")
-	public String root(){
+	public String root() {
 		return "redirect:/index";
 	}
 
@@ -34,15 +41,28 @@ public class MyController {
 		return "index";
 	}
 
+	@RequestMapping(value="/errorDenied")
+	public String showAccessDeniedPage() {
+
+		return "login";
+	}
+
+	@RequestMapping(value = "/errortest")
+	public String error() {
+		return "login";
+	}
+
 	@GetMapping(value = "/login")
 	public String loginForm(HttpServletRequest req) {
 		String referer = req.getHeader("Referer");
 		req.getSession().setAttribute("prevPage", referer);
-		return "login";
-	}
-	@RequestMapping(value = "/errortest")
-	public String error() {
-		return "login";
+		AuthenticationTrustResolver trustResolver = new AuthenticationTrustResolverImpl();
+		if (trustResolver.isAnonymous(SecurityContextHolder.getContext().getAuthentication())) {
+			return "login";
+		} else {
+			return "index";
+		}
+
 	}
 
 	@RequestMapping("/card")
@@ -57,7 +77,9 @@ public class MyController {
 	}
 
 	@RequestMapping(value = "/mypage")
-	public String mypage(@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : member")Member member, Model model) {
+	public String mypage(
+			@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : member") Member member,
+			Model model) {
 		model.addAttribute("member", member);
 		return "mypage";
 	}
@@ -91,6 +113,23 @@ public class MyController {
 			return "signup";
 		}
 		return "redirect:/index";
+	}
+
+	@RequestMapping("/price")
+	public String price() {
+
+		return "price";
+	}
+
+	@RequestMapping("/wishlist")
+	public String wish() {
+
+		return "wishlist";
+	}
+
+	@RequestMapping("/QAlist")
+	public String qaList() {
+		return "QAlist";
 	}
 
 	@RequestMapping("/room")

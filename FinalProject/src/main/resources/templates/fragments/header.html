@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <!--headerFragment 선언-->
 <th:block th:fragment="headerFragment">
 	<div class="container-fluid mb-0" id="nav-bg">
@@ -11,13 +11,14 @@
 						id="hd-1"> <img id="imsi" src="img/imsi.png"><span
 						id="title-span">Memory Gift</span></a>
 				</div>
-				<div class="col-md-3"></div>
+				<div class="col-md-4"></div>
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/intro}'|">소개</div>
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/res}'|">대관</div>
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/card}'|">후기</div>
-				<div class="col-md-1" id="index-1" onclick="">가격</div>
-				<div class="col-md-1" id="index-1">옵션</div>
-				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/login}'|">접속</div>
+				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/price}'|">가격</div>
+				
+				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/login}'|" sec:authorize ="isAnonymous()">접속</div>
+				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/logout}'|" sec:authorize="isAuthenticated()">해제</div>
 			</div>
 			<div class="row">
 				<div class="col-2 align-self-center" id="index-2-title">
@@ -25,13 +26,18 @@
 						class="d-flex align-items-center text-decoration-none" id="hd-1"><img
 						id="imsi" src="img/imsi.png"></a>
 				</div>
-				<div class="col-2 " id="index-2" th:onclick="|location.href='@{/intro}'|">소개</div>
+				<div class="col-2" id="index-2" th:onclick="|location.href='@{/intro}'|">소개</div>
 				<div class="col-2" id="index-2" th:onclick="|location.href='@{/res}'|">대관</div>
 				<div class="col-2" id="index-2" th:onclick="|location.href='@{/card}'|">후기</div>
-				<div class="col-2 align-self-center" id="index-2">옵션</div>
-				<div class="col-2 align-self-center" id="index-2" th:onclick="|location.href='@{/login}'|">접속</div>
+				<div class="col-2" id="index-2" th:onclick="|location.href='@{/price}'|">가격</div>
+				<div class="col-2" id="index-2" th:onclick="|location.href='@{/login}'|" sec:authorize ="isAnonymous()">접속</div>
+				<div class="col-2" id="index-2" th:onclick="|location.href='@{/login}'|" sec:authorize="isAuthenticated()">접속</div>
 			</div>
 		</header>
+	</div>
+	<div class="floating">
+		<button type="button" class="btn" id="my-button" th:onclick="|location.href='@{/mypage}'|">
+		<div id="my-button2"><img src="img/mypageicon.png" class="img-fluid" id="my-icon"> My 페이지</div></button>
 	</div>
 </th:block>
 </html>

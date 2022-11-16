@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
-	layout:decorate="layouts/first_layout">
+	layout:decorate="layouts/first_layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block layout:fragment="content">
+
+<http auto-config="true" use-expressions="true">
+	<access-denied-handler error-page="/index"/>
+</http>
+
 	<link href="css/mypage.css" rel="stylesheet">
 	<main role="main">
 		<div class="album py-5">
@@ -24,13 +29,15 @@
 					</div>
 					<div class="col-md-10">
 						<div id="profile">
-							<img src="img/cake.jpg" id="profile_img"> OOO님 안녕하세요.
+							<br> <br> <img src="img/cake.jpg" id="profile_img">
+
+							<br> <br> OOO님 안녕하세요.
 						</div>
 						<div id="content_title">
 							<h2>주문조회</h2>
 						</div>
 						<hr />
-						<div id="content">
+						<div id="content" align="center">
 							<table class="table table-striped table-bordered fs-5">
 								<thead>
 									<tr>

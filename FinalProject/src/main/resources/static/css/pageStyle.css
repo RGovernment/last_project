@@ -43,6 +43,48 @@ body {
 	font-size: 200%;
 }
 
+.floating {
+	top: 10%;
+	right: 5%;
+	z-index: 1;
+	position: fixed;
+	text-align: center;
+	width: 100px;
+}
+
+#my-button {
+	padding:0;
+	height:32px;
+	width: 150px;
+	background-color: #e3e3e3;
+	color: #444444;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	box-shadow: 3px 3px 10px -3px rgba(75, 75, 75, 0.6)
+}
+
+#my-button2 {
+	left:1%;
+	position:relative;
+	height:28px;
+	width: 145px;
+	border:2.0px solid #777777;
+	border-bottom-left-radius: 18px;
+	border-bottom-right-radius: 18px;
+	border-top-left-radius: 18px;
+	border-top-right-radius: 18px;
+	
+}
+
+#my-icon {
+	width: 16px;
+	height: 16px;
+	margin:0;
+	padding: 0;
+}
+
 @media screen and (max-width: 782px) {
 	#table-hd, #table-con {
 		display: none;
