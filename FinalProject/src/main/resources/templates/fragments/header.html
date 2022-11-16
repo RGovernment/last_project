@@ -31,7 +31,7 @@
 				<div class="col-2" id="index-2" th:onclick="|location.href='@{/card}'|">후기</div>
 				<div class="col-2" id="index-2" th:onclick="|location.href='@{/price}'|">가격</div>
 				<div class="col-2" id="index-2" th:onclick="|location.href='@{/login}'|" sec:authorize ="isAnonymous()">접속</div>
-				<div class="col-2" id="index-2" th:onclick="|location.href='@{/login}'|" sec:authorize="isAuthenticated()">접속</div>
+				<div class="col-2" id="index-2" th:onclick="|location.href='@{/logout}'|" sec:authorize="isAuthenticated()">해제</div>
 			</div>
 		</header>
 	</div>
