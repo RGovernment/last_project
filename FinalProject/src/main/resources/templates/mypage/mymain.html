@@ -3,35 +3,27 @@
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
 	layout:decorate="layouts/first_layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block layout:fragment="content">
-
-<http auto-config="true" use-expressions="true">
-	<access-denied-handler error-page="/index"/>
-</http>
-
-	<link href="css/mypage.css" rel="stylesheet">
+	<link href="/css/mypage.css" rel="stylesheet">
 	<main role="main">
 		<div class="album py-5">
 			<div class="container mt-5">
 				<div
-					class="d-flex align-items-center justify-content-center mb-5 fs-1"
-					id="review-text1">마이 페이지</div>
+					class="d-flex align-items-center justify-content-center mb-5"
+					id="my-text1">My Page</div>
 				<div class="row">
 					<div class="col-md-2">
 						<h4>
-							<a href="mypage" class="text-decoration-none text-dark">주문조회</a><br />
-							<br /> <a href="wishlist" class="text-decoration-none text-dark">위시리스트</a><br />
-							<br /> <a href="QAlist" class="text-decoration-none text-dark">1:1문의</a><br />
+							<a th:href="@{/mypage}" class="text-decoration-none text-dark">주문조회</a><br />
+							<br /> <a th:href="@{/mypage/wishlist}" class="text-decoration-none text-dark">위시리스트</a><br />
+							<br /> <a th:href="@{/mypage/QAlist}" class="text-decoration-none text-dark">1:1문의</a><br />
 							<br /> <a href="#" class="text-decoration-none text-dark">정보수정</a><br />
-							<br /> <a href="#" class="text-decoration-none text-dark">로그아웃</a><br />
-							<br /> <a href="acc_del" class="text-decoration-none text-dark"
-								role="button">회원탈퇴</a><br /> <br />
+							<br /> <a th:href="@{/mypage/acc_del}" class="text-decoration-none text-dark">회원탈퇴</a><br />
 						</h4>
 					</div>
 					<div class="col-md-10">
 						<div id="profile">
-							<br> <br> <img src="img/cake.jpg" id="profile_img">
-
-							<br> <br> OOO님 안녕하세요.
+						<img src="/img/cake.jpg" class="img-pluid" id="profile_img"> <div id="loginid" th:inline="text">[[${member.name}]]님 
+						안녕하세요 이곳은 마이페이지 입니다.</div>
 						</div>
 						<div id="content_title">
 							<h2>주문조회</h2>

@@ -17,7 +17,7 @@ public class AnonymousDeniedHandler implements AccessDeniedHandler {
 			AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		request.setAttribute("loginFailMsg", "접근할 수 없는 페이지입니다.");
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/errorDenied");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/member/errorDenied");
 		dispatcher.forward(request, response);
 		
 	}

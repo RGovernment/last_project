@@ -4,7 +4,7 @@
 	layout:decorate="layouts/first_layout">
 
 <th:block layout:fragment="content">
-	<link th:href="@{css/reviewPage.css}" rel="stylesheet">
+	<link th:href="@{/css/reviewPage.css}" rel="stylesheet">
 	<main role="main">
 		<div class="container mt-5">
 			<div class="d-flex align-items-center justify-content-center mb-5"
@@ -14,7 +14,7 @@
 					<div class="col-md-6">
 						<div class="card mb-4 shadow-sm" id="review-card">
 							<a data-bs-toggle="modal" data-bs-target="#exampleModal"> <img
-								class="card-img-top" id="modal-image" src="img/picture.jpg"
+								class="card-img-top" id="modal-image" src="/img/picture.jpg"
 								alt="Card image cap"></a>
 							<div class="card-title pt-3" id="title"
 								style="text-align: center;">제목이 될겁니다.</div>
@@ -46,7 +46,7 @@
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-md-8 border-end">
-								<img class="card-img-top" src="img/picture.jpg"
+								<img class="card-img-top" src="/img/picture.jpg"
 									alt="Card image cap">
 							</div>
 							<div class="col-md-4">

@@ -1,8 +1,15 @@
 @charset "UTF-8";
 
 #profile {
-	font-size: 40px;
+
 	margin-bottom: 30px;
+}
+
+#my-text1{
+	font-weight:700;
+	font-family: 'Dancing Script', cursive;
+	font-size: 60px;
+	color:#483d8b;
 }
 
 #profile_img {
@@ -17,4 +24,14 @@
 
 #content {
 	font-size: 30px;
+}
+#loginid{
+	font-size:20px;
+	white-space:pre-line;
+}
+
+#loginid:first-line {
+	font-weight:bold;
+	font-size:40px;
+	color:#483d8b;
 }

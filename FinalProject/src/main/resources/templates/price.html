@@ -4,9 +4,7 @@
 	layout:decorate="layouts/first_layout">
 
 <th:block layout:fragment="content">
-<link href="css/pricePage.css" rel="stylesheet">
-
-
+<link href="/css/pricePage.css" rel="stylesheet">
 
 <div class="container ms-2 ms-md-auto me-0 me-md-auto">
 		<div class="row" id="txt">
@@ -19,33 +17,31 @@
 		<div id="room-font">미니룸 평일 <span id=allnight-font>(올나잇 오후 6시 ~ 다음날 오전 9시)</span></div>
 		
 		<div class="row" id="table-hd">
-			<div class="col-md-3 align-self-center" >룸 종류</div>
-			<h1 sec:authorize="hasRole('ADMIN')">Has admin Role</h1>
-			<div class="col-md-3 align-self-center" id="room-edit"></div>
-			<div class="col-md-3 align-self-center" id="room-edit" contenteditable="false">3H(2인기준)</div>
-			<div class="col-md-3 align-self-center">6H(2인기준)</div>
-			<div class="col-md-3 align-self-center">올나잇(2인기준)</div>
-		</div>
-		
-		<div class="row" id="table-con">
-			<div class="col-md-3 align-self-center">미니룸 A/B (최대 4인)</div>
-			<div class="col-md-3 align-self-center">40,000원</div>
-			<div class="col-md-3 align-self-center">60,000원</div>
-			<div class="col-md-3 align-self-center">140,000원</div>
-		</div>
-		
-		<div id="room-font">미니룸 주말 <span id=allnight-font>(올나잇 오후 6시 ~ 다음날 오전 9시)</span></div>
-		<div class="row" id="table-hd">
 			<div class="col-md-3 align-self-center">룸 종류</div>
 			<div class="col-md-3 align-self-center">3H(2인기준)</div>
 			<div class="col-md-3 align-self-center">6H(2인기준)</div>
 			<div class="col-md-3 align-self-center">올나잇(2인기준)</div>
 		</div>
+		
 		<div class="row" id="table-con">
-			<div class="col-md-3 align-self-center">미니룸 A/B (최대 4인)</div>
-			<div class="col-md-3 align-self-center">50,000원</div>
-			<div class="col-md-3 align-self-center">85,000원</div>
-			<div class="col-md-3 align-self-center">170,000원</div>
+			<div class="col-md-3 align-self-center" id="content-edit">미니룸 A/B (최대 4인)</div>
+			<div class="col-md-3 align-self-center" id="content-edit">40,000원</div>
+			<div class="col-md-3 align-self-center" id="content-edit">60,000원</div>
+			<div class="col-md-3 align-self-center" id="content-edit">140,000원</div>
+		</div>
+		
+		<div id="room-font">미니룸 주말 <span id=allnight-font>(올나잇 오후 6시 ~ 다음날 오전 9시)</span></div>
+		<div class="row" id="table-hd">
+			<div class="col-md-3 align-self-center" id="content-edit">룸 종류</div>
+			<div class="col-md-3 align-self-center" id="content-edit">3H(2인기준)</div>
+			<div class="col-md-3 align-self-center" id="content-edit">6H(2인기준)</div>
+			<div class="col-md-3 align-self-center" id="content-edit">올나잇(2인기준)</div>
+		</div>
+		<div class="row" id="table-con">
+			<div class="col-md-3 align-self-center" id="content-edit">미니룸 A/B (최대 4인)</div>
+			<div class="col-md-3 align-self-center" id="content-edit">50,000원</div>
+			<div class="col-md-3 align-self-center" id="content-edit">85,000원</div>
+			<div class="col-md-3 align-self-center" id="content-edit">170,000원</div>
 		</div>
 		<div class="row" id="notice-font">**시간제 기준인원 2인 초과시 인당 5,000원 추가</div>
 		<div class="row" id="notice-font">**올나잇 기준인원 2인 초과시 인당10,000원 추가</div>
@@ -56,30 +52,30 @@
 		<div id="room-font">파티룸 평일 <span id=allnight-font>(올나잇 오후 6시 ~ 다음날 오전 9시)</span></div>
 		<div class="row" id="table-hd">
 			<div class="col-md-3 align-self-center">룸 종류</div>
-			<div class="col-md-3 align-self-center">3H(5인기준)</div>
-			<div class="col-md-3 align-self-center">6H(5인기준)</div>
-			<div class="col-md-3 align-self-center">올나잇(5인기준)</div>
+			<div class="col-md-3 align-self-center" id="content-edit">3H(5인기준)</div>
+			<div class="col-md-3 align-self-center" id="content-edit">6H(5인기준)</div>
+			<div class="col-md-3 align-self-center" id="content-edit">올나잇(5인기준)</div>
 		</div>
 		
 		<div class="row" id="table-con">
-			<div class="col-md-3 align-self-center">파티룸 A/B (최대 8인)</div>
-			<div class="col-md-3 align-self-center">90,000원</div>
-			<div class="col-md-3 align-self-center">120,000원</div>
-			<div class="col-md-3 align-self-center">200,000원</div>
+			<div class="col-md-3 align-self-center" id="content-edit">파티룸 A/B (최대 8인)</div>
+			<div class="col-md-3 align-self-center" id="content-edit">90,000원</div>
+			<div class="col-md-3 align-self-center" id="content-edit">120,000원</div>
+			<div class="col-md-3 align-self-center" id="content-edit">200,000원</div>
 		</div>
 		
 		<div id="room-font">파티룸 주말 <span id=allnight-font>(올나잇 오후 6시 ~ 다음날 오전 9시)</span></div>
 		<div class="row" id="table-hd">
-			<div class="col-md-3 align-self-center">룸 종류</div>
-			<div class="col-md-3 align-self-center">3H(5인기준)</div>
-			<div class="col-md-3 align-self-center">6H(5인기준)</div>
-			<div class="col-md-3 align-self-center">올나잇(5인기준)</div>
+			<div class="col-md-3 align-self-center" id="content-edit">룸 종류</div>
+			<div class="col-md-3 align-self-center" id="content-edit">3H(5인기준)</div>
+			<div class="col-md-3 align-self-center" id="content-edit">6H(5인기준)</div>
+			<div class="col-md-3 align-self-center" id="content-edit">올나잇(5인기준)</div>
 		</div>
 		<div class="row" id="table-con">
-			<div class="col-md-3 align-self-center">파티룸 A/B (최대 4인)</div>
-			<div class="col-md-3 align-self-center">110,000원</div>
-			<div class="col-md-3 align-self-center">140,000원</div>
-			<div class="col-md-3 align-self-center">220,000원</div>
+			<div class="col-md-3 align-self-center" id="content-edit">파티룸 A/B (최대 4인)</div>
+			<div class="col-md-3 align-self-center" id="content-edit">110,000원</div>
+			<div class="col-md-3 align-self-center" id="content-edit">140,000원</div>
+			<div class="col-md-3 align-self-center" id="content-edit">220,000원</div>
 		</div>
 		<div class="row" id="notice-font">**시간제 기준인원 2인 초과시 인당 7,500원 추가</div>
 		<div class="row" id="notice-font">**올나잇 기준인원 2인 초과시 인당15,000원 추가</div>
@@ -100,30 +96,30 @@
 			<div class="col-md-4 align-self-center">내용</div>
 		</div>
 		<div class="row" id="table-con">
-			<div class="col-md-4 align-self-center">포토스냅</div>
-			<div class="col-md-4 align-self-center">10만원/12만원</div>
-			<div class="col-md-4 align-self-center">스냅 A / 스냅 B</div>
+			<div class="col-md-4 align-self-center" id="content-edit">포토스냅</div>
+			<div class="col-md-4 align-self-center" id="content-edit">10만원/12만원</div>
+			<div class="col-md-4 align-self-center" id="content-edit">스냅 A / 스냅 B</div>
 		</div>
 		<div class="row" id="table-con">
-			<div class="col-md-4 align-self-center">파티룸 데코레이션</div>
-			<div class="col-md-4 align-self-center">풍선 및 룸 데코레이션 : 5만원 
+			<div class="col-md-4 align-self-center" id="content-edit">파티룸 데코레이션</div>
+			<div class="col-md-4 align-self-center" id="content-edit">풍선 및 룸 데코레이션 : 5만원 
 			플랜카드 제작 : 3만원 
 			세트 : 7만원</div>
-			<div class="col-md-4 align-self-center">풍선 및 데코레이션 스타일 A/B/C중 택1 
+			<div class="col-md-4 align-self-center" id="content-edit">풍선 및 데코레이션 스타일 A/B/C중 택1 
 			플랜카드 제작시 문구 및 사진인쇄 가능</div>
 		</div>
 		<div class="row" id="table-con">
-			<div class="col-md-4 align-self-center">케이크</div>
-			<div class="col-md-4 align-self-center">레터링 케이크 : 5만원 
+			<div class="col-md-4 align-self-center" id="content-edit">케이크</div>
+			<div class="col-md-4 align-self-center" id="content-edit">레터링 케이크 : 5만원 
 			얼굴 인화 케이크 : 7만원</div>
-			<div class="col-md-4 align-self-center">최고의 품질로 만든 수제 케이크 초코/생크림 택1</div>
+			<div class="col-md-4 align-self-center" id="content-edit">최고의 품질로 만든 수제 케이크 초코/생크림 택1</div>
 		</div>
 		<div class="row" id="table-con">
-			<div class="col-md-4 align-self-center">주류,얼음 및 아이스박스</div>
-			<div class="col-md-4 align-self-center">콜라/사이다/환타 : 1200원 
+			<div class="col-md-4 align-self-center" id="content-edit">주류,얼음 및 아이스박스</div>
+			<div class="col-md-4 align-self-center" id="content-edit">콜라/사이다/환타 : 1200원 
 			물 : 1000원 
 			소주 : 1600원 / 맥주 : 2000원 / 양주 : 문의</div>
-			<div class="col-md-4 align-self-center">파티 시작시 바로 시원하게 즐기실 수 있도록 미리 시원한 주류들을 냉장 보관 및 아이스박스 보관해드립니다!</div>
+			<div class="col-md-4 align-self-center" id="content-edit">파티 시작시 바로 시원하게 즐기실 수 있도록 미리 시원한 주류들을 냉장 보관 및 아이스박스 보관해드립니다!</div>
 		</div>
 		<div class="row" id="table2-hd">
 			<div class="col-4 align-self-center">서비스</div>
@@ -131,26 +127,26 @@
 			<div class="col-4 align-self-center">내용</div>
 		</div>
 		<div class="row" id="table2-con">
-			<div class="col-4 align-self-center">포토스냅</div>
-			<div class="col-4 align-self-center">10만원/12만원</div>
-			<div class="col-4 align-self-center">스냅 A / 스냅 B</div>
+			<div class="col-4 align-self-center" id="content-edit">포토스냅</div>
+			<div class="col-4 align-self-center" id="content-edit">10만원/12만원</div>
+			<div class="col-4 align-self-center" id="content-edit">스냅 A / 스냅 B</div>
 		</div>
 		<div class="row" id="table2-con">
-			<div class="col-4 align-self-center">파티룸 데코레이션</div>
-			<div class="col-4 align-self-center">풍선 및 룸 데코레이션 플랜카드 제작 세트</div>
-			<div class="col-4 align-self-center">풍선 데코 스타일 A/B/C 택1 플랜카드
+			<div class="col-4 align-self-center" id="content-edit">파티룸 데코레이션</div>
+			<div class="col-4 align-self-center" id="content-edit">풍선 및 룸 데코레이션 플랜카드 제작 세트</div>
+			<div class="col-4 align-self-center" id="content-edit">풍선 데코 스타일 A/B/C 택1 플랜카드
 				제작시 문구 +사진인쇄 O</div>
 		</div>
 		<div class="row" id="table2-con">
-			<div class="col-4 align-self-center">케이크</div>
-			<div class="col-4 align-self-center">레터링 케이크 얼굴 인화 케이크</div>
-			<div class="col-4 align-self-center">최고 품질 수제 케이크 초코/생크림 택1</div>
+			<div class="col-4 align-self-center" id="content-edit">케이크</div>
+			<div class="col-4 align-self-center" id="content-edit">레터링 케이크 얼굴 인화 케이크</div>
+			<div class="col-4 align-self-center" id="content-edit">최고 품질 수제 케이크 초코/생크림 택1</div>
 		</div>
 		<div class="row" id="table2-con">
-			<div class="col-4 align-self-center">주류,얼음 및 아이스박스</div>
-			<div class="col-4 align-self-center">콜라/사이다/환타 and 물 and 주류
+			<div class="col-4 align-self-center" id="content-edit">주류,얼음 및 아이스박스</div>
+			<div class="col-4 align-self-center" id="content-edit">콜라/사이다/환타 and 물 and 주류
 			(양주는	문의)</div>
-			<div class="col-4 align-self-center">예약시 냉장 보관 및 아이스박스 보관 서비스</div>
+			<div class="col-4 align-self-center" id="content-edit">예약시 냉장 보관 및 아이스박스 보관 서비스</div>
 		</div>
 	</div>
 	<br>
@@ -170,25 +166,25 @@
 			<div class="col-md-4 align-self-center">내용</div>
 		</div>
 		<div class="row" id="table-con">
-			<div class="col-md-4 align-self-center">올인원 패키지(Hot!)</div>
-			<div class="col-md-4 align-self-center">23만원</div>
-			<div class="col-md-4 align-self-center">포토스냅B + 파티룸 데코레이션 세트 +
+			<div class="col-md-4 align-self-center" id="content-edit">올인원 패키지(Hot!)</div>
+			<div class="col-md-4 align-self-center" id="content-edit">23만원</div>
+			<div class="col-md-4 align-self-center" id="content-edit">포토스냅B + 파티룸 데코레이션 세트 +
 				얼굴인화 케이크</div>
 		</div>
 		<div class="row" id="table-con">
-			<div class="col-md-4 align-self-center">내맘쏙 패키지 A</div>
-			<div class="col-md-4 align-self-center">18만원</div>
-			<div class="col-md-4 align-self-center">포토스냅B + 파티룸 데코레이션 세트</div>
+			<div class="col-md-4 align-self-center" id="content-edit">내맘쏙 패키지 A</div>
+			<div class="col-md-4 align-self-center" id="content-edit">18만원</div>
+			<div class="col-md-4 align-self-center" id="content-edit">포토스냅B + 파티룸 데코레이션 세트</div>
 		</div>
 		<div class="row" id="table-con">
-			<div class="col-md-4 align-self-center">내맘쏙 패키지 B</div>
-			<div class="col-md-4 align-self-center">16만원</div>
-			<div class="col-md-4 align-self-center">포토스냅A + 얼굴인화 케이크</div>
+			<div class="col-md-4 align-self-center" id="content-edit">내맘쏙 패키지 B</div>
+			<div class="col-md-4 align-self-center" id="content-edit">16만원</div>
+			<div class="col-md-4 align-self-center" id="content-edit">포토스냅A + 얼굴인화 케이크</div>
 		</div>
 		<div class="row" id="table-con">
-			<div class="col-md-4 align-self-center">내맘쏙 패키지 C</div>
-			<div class="col-md-4 align-self-center">11만원</div>
-			<div class="col-md-4 align-self-center">파티룸 데코레이션 세트 + 레터링 케이크</div>
+			<div class="col-md-4 align-self-center" id="content-edit">내맘쏙 패키지 C</div>
+			<div class="col-md-4 align-self-center" id="content-edit">11만원</div>
+			<div class="col-md-4 align-self-center" id="content-edit">파티룸 데코레이션 세트 + 레터링 케이크</div>
 		</div>
 		<div class="row" id="table2-hd">
 			<div class="col-4 align-self-center">서비스</div>
@@ -196,29 +192,29 @@
 			<div class="col-4 align-self-center">내용</div>
 		</div>
 		<div class="row" id="table2-con">
-			<div class="col-4 align-self-center">올인원 패키지(Hot!)</div>
-			<div class="col-4 align-self-center">23만원</div>
-			<div class="col-4 align-self-center">포토스냅B + 파티룸 데코레이션 세트 +
+			<div class="col-4 align-self-center" id="content-edit">올인원 패키지(Hot!)</div>
+			<div class="col-4 align-self-center" id="content-edit">23만원</div>
+			<div class="col-4 align-self-center" id="content-edit">포토스냅B + 파티룸 데코레이션 세트 +
 				얼굴인화 케이크</div>
 		</div>
 		<div class="row" id="table2-con">
-			<div class="col-4 align-self-center">내맘쏙 패키지 A</div>
-			<div class="col-4 align-self-center">18만원</div>
-			<div class="col-4 align-self-center">포토스냅B + 파티룸 데코레이션 세트</div>
+			<div class="col-4 align-self-center" id="content-edit">내맘쏙 패키지 A</div>
+			<div class="col-4 align-self-center" id="content-edit">18만원</div>
+			<div class="col-4 align-self-center" id="content-edit">포토스냅B + 파티룸 데코레이션 세트</div>
 		</div>
 		<div class="row" id="table2-con">
-			<div class="col-4 align-self-center">내맘쏙 패키지 B</div>
-			<div class="col-4 align-self-center">16만원</div>
-			<div class="col-4 align-self-center">포토스냅A + 얼굴인화 케이크</div>
+			<div class="col-4 align-self-center" id="content-edit">내맘쏙 패키지 B</div>
+			<div class="col-4 align-self-center" id="content-edit">16만원</div>
+			<div class="col-4 align-self-center" id="content-edit">포토스냅A + 얼굴인화 케이크</div>
 		</div>
 		<div class="row" id="table2-con">
-			<div class="col-4 align-self-center">내맘쏙 패키지 C</div>
-			<div class="col-4 align-self-center">11만원</div>
-			<div class="col-4 align-self-center">파티룸 데코레이션 세트 + 레터링 케이크</div>
+			<div class="col-4 align-self-center" id="content-edit">내맘쏙 패키지 C</div>
+			<div class="col-4 align-self-center" id="content-edit">11만원</div>
+			<div class="col-4 align-self-center" id="content-edit">파티룸 데코레이션 세트 + 레터링 케이크</div>
 		</div>
 	</div>
 	<br>
-	<br>
+	<br>	
 	<br>	
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

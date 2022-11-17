@@ -3,8 +3,7 @@
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
 	layout:decorate="layouts/first_layout">
 <th:block layout:fragment="content">
-	<link href="css/room.css" rel="stylesheet">
-	<link th:href="@{css/sch.css}" rel="stylesheet">
+	<link th:href="@{/css/sch.css}" rel="stylesheet">
 	<body>
 		<main>
 			<div class="container">
@@ -36,22 +35,22 @@
 							</div>
 							<div class="carousel-inner">
 								<div class="carousel-item active">
-									<img src="img/A1.PNG" class="d-block w-100" alt="...">
+									<img src="/img/A1.PNG" class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img src="img/A2.PNG" class="d-block w-100" alt="...">
+									<img src="/img/A2.PNG" class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img src="img/A3.PNG" class="d-block w-100" alt="...">
+									<img src="/img/A3.PNG" class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img src="img/A4.PNG" class="d-block w-100" alt="...">
+									<img src="/img/A4.PNG" class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img src="img/A5.PNG" class="d-block w-100" alt="...">
+									<img src="/img/A5.PNG" class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img src="img/A6.PNG" class="d-block w-100" alt="...">
+									<img src="/img/A6.PNG" class="d-block w-100" alt="...">
 								</div>
 							</div>
 							<button class="carousel-control-prev" type="button"
@@ -148,7 +147,7 @@
 														</table>
 													</div>
 													<script th:inline="javascript" type="text/javascript"
-														th:src="@{js/sch.js}"></script>
+														th:src="@{/js/sch.js}"></script>
 												</div>
 											</div>
 											<div class="modal-footer">

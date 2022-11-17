@@ -28,28 +28,22 @@ public class SecurityConfig {
 			.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
 			.permitAll()
 			.mvcMatchers("/admin").hasRole("ADMIN")
-			.antMatchers("/mypage").authenticated()
-			.antMatchers("/QAlist").authenticated()
-			.antMatchers("/wishlist").authenticated()
-			.antMatchers("/**").permitAll();
-		
-		
-		http.exceptionHandling().accessDeniedHandler(DeniedHandler());
-		
-		http.formLogin()
-        	.loginPage("/login")
+			.antMatchers("/mypage/**").authenticated()
+			.antMatchers("/**").permitAll()
+			.and()
+			.exceptionHandling().accessDeniedHandler(DeniedHandler()).and().formLogin()
+        	.loginPage("/member/login")
         	.usernameParameter("email")
         	.passwordParameter("password")
         	.defaultSuccessUrl("/")
-        	.loginProcessingUrl("/login").permitAll()
+        	.loginProcessingUrl("/member/login").permitAll()
         	.successHandler(successHandler())
         	.failureHandler(failureHandler())
         	.and()
         	.logout().permitAll()
         	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
         	.logoutSuccessUrl("/")
-        	.invalidateHttpSession(true)
-        	;
+        	.invalidateHttpSession(true);
 		
 		return http.build();
 	}
