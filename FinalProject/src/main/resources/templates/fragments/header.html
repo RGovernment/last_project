@@ -6,7 +6,7 @@
 		<header class="d-flex flex-wrap justify-content-center pb-0 mb-0">
 			<div class="row">
 				<div class="col-md-3 align-self-center" id="index-1-title">
-					<a href="index"
+					<a th:href="@{/index}"
 						class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none"
 						id="hd-1"> <img id="imsi" src="/img/imsi.png"><span
 						id="title-span">Memory Gift</span></a>
@@ -16,7 +16,6 @@
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/res}'|">대관</div>
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/card}'|">후기</div>
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/price}'|">가격</div>
-				
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/member/login}'|" sec:authorize ="isAnonymous()">접속</div>
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/logout}'|" sec:authorize="isAuthenticated()">해제</div>
 			</div>

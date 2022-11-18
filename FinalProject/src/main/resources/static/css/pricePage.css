@@ -1,26 +1,33 @@
 @charset "utf-8";
 
-#review-text1{
-	
+#price-text1 {
+	font-weight: 700;
+	font-family: 'Dancing Script', cursive;
 	font-size: 60px;
-	color:#483d8b;
-	
+	color: #483d8b;
 }
 
-#room-font{
+#room-font {
 	font-size: 30px;
 	font-weight: 900;
 	white-space: pre;
 }
 
-#allnight-font{
-	font-size: 20px;
+#title-text2:first-line {
 	font-weight: 700;
-	color:rgb(192, 57, 43);
+	font-family: 'Dancing Script', cursive;
+	font-size: 60px;
+	color: #483d8b;
 }
 
-#notice-font{
+#allnight-font {
+	font-size: 20px;
+	font-weight: 700;
+	color: rgb(192, 57, 43);
+}
+
+#notice-font {
 	font-size: 20px;
 	font-weight: 900;
-	color:rgb(230, 126, 34);
+	color: rgb(230, 126, 34);
 }

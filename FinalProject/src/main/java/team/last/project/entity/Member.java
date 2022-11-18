@@ -1,5 +1,6 @@
 package team.last.project.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -7,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.Valid;
 
+import org.hibernate.annotations.DynamicInsert;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import lombok.Data;
@@ -16,6 +19,7 @@ import team.last.project.dto.MemberDto;
 
 @Entity
 @Data
+@DynamicInsert
 public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQ")
@@ -26,6 +30,8 @@ public class Member {
 	private String password;
 	private String phone;
 	private int	gender;
+	@Column(columnDefinition = "number Default 0")
+	private int secession;
 	@Enumerated(EnumType.ORDINAL)
     private Role role;
 
@@ -39,5 +45,10 @@ public class Member {
 		member.setPassword(password);
 		member.setRole(Role.USER);
         return member;
+	}
+	
+
+	public void secessionMember() {
+		this.secession = 1;
 	}
 }

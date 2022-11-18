@@ -63,17 +63,17 @@
 				<p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"
 					class="fieldError">전화번호는 비워둘 수 없습니다.</p>
 			</div>
-
-			<!-- 			<button type="button" class="btn btn-primary" id="test">남자</button>
-			<button type="button" class="btn btn-primary"  id="test2">여자</button>			 -->
-			<div id="form-group">
-				<label th:for="gender" class="mb-2">성별</label> <br> <input
-					type="radio" th:field="*{gender}" value=1 class="form-check-input">
-				<label th:for="${#ids.prev('gender')}" th:text="남자"
-					class="form-check-label"></label> <br> <input type="radio"
-					th:field="*{gender}" value=2 class="form-check-input"> <label
-					th:for="${#ids.prev('gender')}" th:text="여자"
-					class="form-check-label"></label>
+			<label class="mb-2">성별</label><br>
+			<div class="btn-group" role="group" aria-label="..." style="border:1px solid #888888;">
+			<button type="button" class="btn btn-primary button-class1">남자</button>
+			<button type="button" class="btn btn-default button-class2">여자</button>
+			</div>
+			<div id="form-group" hidden="hidden">
+				<label th:for="gender" class="mb-2">성별</label> <br> 
+				<input type="radio" th:field="*{gender}" value=1 class="form-check-input">
+				<label th:for="${#ids.prev('gender')}" th:text="남자" class="form-check-label"></label> <br> 
+				<input type="radio" th:field="*{gender}" value=2 class="form-check-input"> 
+				<label th:for="${#ids.prev('gender')}" th:text="여자" class="form-check-label"></label>
 			</div>
 			<br> <input type="hidden"
 				th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
@@ -103,9 +103,7 @@
 						</div>
 						<div class="modal-footer justify-content-between">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">재입력</button>
-						<button type="submit" class="btn btn-primary" th:onclick=@{/signup}>확인</button>
-									
-							
+						<button type="submit" class="btn btn-primary" th:onclick=@{/signup}>확인</button>							
 							</div>
 						</div>
 					</div>

@@ -28,7 +28,7 @@ public class SecurityConfig {
 			.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
 			.permitAll()
 			.mvcMatchers("/admin").hasRole("ADMIN")
-			.antMatchers("/mypage/**").authenticated()
+			.antMatchers("/mypage/**").hasRole("USER")
 			.antMatchers("/**").permitAll()
 			.and()
 			.exceptionHandling().accessDeniedHandler(DeniedHandler()).and().formLogin()

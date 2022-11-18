@@ -35,7 +35,9 @@ public class UserLoginSuccessHandler extends SavedRequestAwareAuthenticationSucc
 		for (int i = 0; i < authList.size(); i++) {
 			System.out.print(authList.get(i).getAuthority() + " ");
 		}
-
+		
+		
+	
 		HttpSession session = request.getSession();
 		if (session != null) {
 			String redirectUrl = (String) session.getAttribute("prevPage");

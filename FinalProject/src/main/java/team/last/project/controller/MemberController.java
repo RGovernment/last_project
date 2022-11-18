@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,6 @@ public class MemberController {
 	private final MemberService memberService;
 	private final PasswordEncoder passwordEncoder;
 
-	
 	@GetMapping(value = "/login")
 	public String loginForm(HttpServletRequest req) {
 		String referer = req.getHeader("Referer");
@@ -37,7 +37,14 @@ public class MemberController {
 		} else {
 			return "redirect:/index";
 		}
+	}
 
+	@GetMapping("/secession")
+	public String secession(Model model,Authentication authentication) {
+		memberService.getbyEmail(authentication.getName());
+		model.addAttribute("secessionMsg","탈퇴가 완료되었습니다.");
+		
+		return "member/secession_msg";
 	}
 
 	@GetMapping("/signup")
@@ -45,7 +52,7 @@ public class MemberController {
 		model.addAttribute("memberDto", new MemberDto());
 		return "member/signup";
 	}
-	
+
 	@PostMapping(value = "/signup")
 	public String join(@Valid MemberDto memberDto, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
@@ -60,10 +67,10 @@ public class MemberController {
 		}
 		return "redirect:/index";
 	}
-	
+
 	@RequestMapping(value = "/errorDenied")
 	public String showAccessDeniedPage() {
 		return "member/login";
 	}
 
-};
+}

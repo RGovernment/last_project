@@ -1,29 +1,53 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
-	layout:decorate="layouts/first_layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	layout:decorate="layouts/first_layout"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block layout:fragment="content">
 	<link href="/css/mypage.css" rel="stylesheet">
 	<main role="main">
-		<div class="album py-5">
-			<div class="container mt-5">
-				<div
-					class="d-flex align-items-center justify-content-center mb-5"
-					id="my-text1">My Page</div>
+		<div class="album py-0">
+			<div class="container">
 				<div class="row">
-					<div class="col-md-2">
-						<h4>
-							<a th:href="@{/mypage}" class="text-decoration-none text-dark">주문조회</a><br />
-							<br /> <a th:href="@{/mypage/wishlist}" class="text-decoration-none text-dark">위시리스트</a><br />
-							<br /> <a th:href="@{/mypage/QAlist}" class="text-decoration-none text-dark">1:1문의</a><br />
-							<br /> <a href="#" class="text-decoration-none text-dark">정보수정</a><br />
-							<br /> <a th:href="@{/mypage/acc_del}" class="text-decoration-none text-dark">회원탈퇴</a><br />
-						</h4>
+					<div class="col-md-2" id="side-bar">
+						<div class="grid">
+							<div th:onclick="|location.href='@{/mypage}'|">주문조회</div>
+							<div th:onclick="|location.href='@{/mypage/wishlist}'|">찜목록</div>
+							<div th:onclick="|location.href='@{/mypage/QAlist}'|">1:1문의</div>
+							<div th:onclick="#">정보수정</div>
+							<div th:onclick="|location.href='@{/mypage/acc_del}'|">회원탈퇴</div>
+						</div>
 					</div>
-					<div class="col-md-10">
+
+					<nav class="navbar navbar-expand-lg mt-3" id="mb-bar">
+						<button class="navbar-toggler" type="button"
+							data-toggle="collapse" data-target="#navbarNavAltMarkup"
+							aria-controls="navbarNavAltMarkup" aria-expanded="false"
+							aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span> 페이지 메뉴
+						</button>
+						<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+							<div class="navbar-nav">
+								<div class="nav-item nav-link active" id="bar-menu"
+									th:onclick="|location.href='@{/mypage}'|">주문조회</div>
+								<div class="nav-item nav-link active" id="bar-menu"
+									th:onclick="|location.href='@{/mypage/wishlist}'|">찜목록</div>
+								<div class="nav-item nav-link active" id="bar-menu"
+									th:onclick="|location.href='@{/mypage/QAlist}'|">1:1문의</div>
+								<div class="nav-item nav-link active" id="bar-menu"
+									th:onclick="#">정보수정</div>
+								<div class="nav-item nav-link active" id="bar-menu"
+									th:onclick="|location.href='@{/mypage/acc_del}'|">회원탈퇴</div>
+							</div>
+						</div>
+					</nav>
+					<div class="col-md-10 ps-5 pt-5" id="main-con">
+						<div class="d-flex align-items-center justify-content-center mb-5"
+							id="my-text1">My Page</div>
 						<div id="profile">
-						<img src="/img/cake.jpg" class="img-pluid" id="profile_img"> <div id="loginid" th:inline="text">[[${member.name}]]님 
-						안녕하세요 이곳은 마이페이지 입니다.</div>
+							<img src="/img/cake.jpg" class="img-pluid" id="profile_img">
+							<div id="loginid" th:inline="text">[[${member.name}]]님
+								안녕하세요 이곳은 마이페이지 입니다.</div>
 						</div>
 						<div id="content_title">
 							<h2>주문조회</h2>

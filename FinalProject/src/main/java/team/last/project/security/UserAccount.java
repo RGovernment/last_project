@@ -16,4 +16,14 @@ public class UserAccount extends User {
 		super(member.getEmail(), member.getPassword(), List.of(new SimpleGrantedAuthority("ROLE_" + member.getRole())));
 		this.member = member;
 	}
+
+	@Override
+	public boolean isEnabled() {
+
+		if (member.getSecession() != 0) {
+			return false;
+		}
+		return true;
+	}
+
 }

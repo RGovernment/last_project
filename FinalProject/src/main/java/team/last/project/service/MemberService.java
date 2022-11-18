@@ -22,4 +22,11 @@ public class MemberService {
             throw new IllegalStateException("이미 가입된 회원입니다.");
         }
     }
+
+	public void getbyEmail(String email) {
+		Member member =  memberRepository.findByEmail(email).orElse(null);
+		
+		member.secessionMember();
+	}
+	
 }

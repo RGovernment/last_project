@@ -29,5 +29,7 @@ public class MemberDto {
 	@NotNull
 	@Pattern(regexp = "^010[.-]?(\\d{4})[.-]?(\\d{4})$", message = "전화번호의 형태가 아닙니다.")
 	private String phone;
+	@NotNull
+	private int secession;
 	private int gender;
 }

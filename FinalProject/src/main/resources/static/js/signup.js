@@ -1,4 +1,5 @@
 $(function() {
+	
 	$("#alert-success").hide();
 	$("#alert-danger").hide();
 	$("#pass2" || "#pass").keyup(function() {
@@ -13,16 +14,38 @@ $(function() {
 				$("#alert-success").hide();
 				$("#alert-danger").show();
 				$("#signup").attr("disabled", "disabled");
-
 			}
 		}
 	});
+});
+
+
+$(function() {
+	
+	$(":radio[class='form-check-input'][value=1]").attr('checked', true);
+
+  $('.button-class1').click(function(){
+	$(":radio[class='form-check-input'][value=2]").removeAttr('checked');
+	$(":radio[class='form-check-input'][value=1]").attr('checked', true);
+    if( $(this).hasClass('btn-default') ) $(this).removeClass('btn-default');
+    if( !$(this).hasClass('btn-primary') ) $(this).addClass('btn-primary');
+    if( $('.button-class2').hasClass('btn-primary') ) $('.button-class2').removeClass('btn-primary');
+    if( !$('.button-class2').hasClass('btn-default') ) $('.button-class2').addClass('btn-default');
+  });
+  
+  $('.button-class2').click(function(){
+	$(":radio[class='form-check-input'][value=1]").removeAttr('checked');
+	$(":radio[class='form-check-input'][value=2]").attr('checked', true);
+    if( $(this).hasClass('btn-default') ) $(this).removeClass('btn-default');
+    if( !$(this).hasClass('btn-primary') ) $(this).addClass('btn-primary');
+    if( $('.button-class1').hasClass('btn-primary') ) $('.button-class1').removeClass('btn-primary');
+    if( !$('.button-class1').hasClass('btn-default') ) $('.button-class1').addClass('btn-default');
+  });
 
 });
 
 
 let allck = () => {
-
 
 	var name = $("#name").val();
 	var email = $("#email").val();
@@ -55,7 +78,4 @@ let allck = () => {
 	} else {
 		$("#genderck").text("성별 : " + gen);
 	}
-
-
-
 };
