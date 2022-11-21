@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/first_layout">
+<th:block layout:fragment="content">
+	<link th:href="@{/css/editinfo.css}" rel="stylesheet">
+	<script th:inline="javascript" type="text/javascript"
+		th:src="@{/js/editinfo.js}"></script>
+	<script th:inline="javascript">
+		$(document).ready(function() {
+			var errorMessage = [[${ errorMessage }]];
+			console.log(errorMessage);
+			if (errorMessage != null) {
+				alert(errorMessage);
+			}
+		});</script>
+	<div class="container d-flex justify-content-center mt-5">
+		<form th:action="@{/mypage/editinfo}" method="post" th:object="${memberDto}">
+			<input th:field="*{password}">
+			<input th:field="*{secession}">
+			<div id="form-size">
+				<div id="form-group">
+					<label th:for="name" class="mb-2">이름</label> <br> <input
+						type="text" th:field="*{name}" name="pass"
+						class="form-control mb-4" th:errorclass="fieldError" id="name">
+						<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+						class="fieldError">이름은 비워둘 수 없습니다.</p>
+				</div>
+				<div id="form-group">
+					<label th:for="email" class="mb-2">이메일</label> <br> <input
+						type="email" th:field="*{email}" readonly="readonly" class="form-control mb-4"  id="email">
+				</div>
+			</div>
+			<div id="form-group">
+				<label th:for="phone" class="mb-2">전화번호</label> <br> <input
+					type="text" th:field="*{phone}" class="form-control mb-4" th:errorclass="fieldError" id="phone">
+				<p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"
+					class="fieldError">전화번호는 비워둘 수 없습니다.</p>
+			</div>
+			<br> <input type="hidden"
+				th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+			<div class="text-center">
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary m-5"
+					data-bs-toggle="modal" data-bs-target="#infock" onclick="allck()">회원가입</button>
+			</div>
+			<!-- Modal -->
+			<div class="modal fade" id="infock" data-bs-backdrop="static"
+				data-bs-keyboard="false" tabindex="-1"
+				aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">정보 입력 재확인</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<span id="nameck" class="chtext"></span> <br>
+							<br> <span id="pnumck" class="chtext"></span> <br> <span>[010-0000-0000
+								형식 확인]</span> <br>
+						</div>
+						<div class="modal-footer justify-content-between">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">재입력</button>
+						<button type="submit" class="btn btn-primary" th:onclick=@{/signup}>확인</button>							
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 모달 끝나는 부분 -->
+		</form>
+	</div>
+	<br>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
+</th:block>
+</html>

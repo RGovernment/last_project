@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/first_layout">
+
+<th:block layout:fragment="content">
+	<link th:href="@{/css/reviewPage.css}" rel="stylesheet">
+	<main role="main">
+		<form th:action="@{/admin/option/price/update/{id}(id=${optprice.id})}"
+			method="post">
+			<table border="1" th:object="${optprice}">
+				<tr>
+					<th>내용</th>
+					<th>가격</th>
+				</tr>
+				<tr>
+					<td><input type="text" th:field="*{content}"></td>
+					<td><input type="number" th:field="*{price}"></td>
+				</tr>
+
+			</table>
+			<button type="submit">수정</button>
+		</form>
+	</main>
+</th:block>
+</html>

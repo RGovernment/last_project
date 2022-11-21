@@ -3,7 +3,7 @@
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
 	layout:decorate="layouts/first_layout">
 <th:block layout:fragment="content">
-	<link href="/css/mypage.css" rel="stylesheet">
+	<link th:href="@{/css/mypage.css}" rel="stylesheet">
 	<main role="main">
 		<div class="album py-0">
 			<div class="container">
@@ -13,7 +13,7 @@
 							<div th:onclick="|location.href='@{/mypage}'|">주문조회</div>
 							<div th:onclick="|location.href='@{/mypage/wishlist}'|">찜목록</div>
 							<div th:onclick="|location.href='@{/mypage/QAlist}'|">1:1문의</div>
-							<div th:onclick="#">정보수정</div>
+							<div th:onclick="|location.href='@{/mypage/editinfo}'|">정보수정</div>
 							<div th:onclick="|location.href='@{/mypage/acc_del}'|">회원탈퇴</div>
 						</div>
 					</div>
@@ -34,7 +34,7 @@
 								<div class="nav-item nav-link active" id="bar-menu"
 									th:onclick="|location.href='@{/mypage/QAlist}'|">1:1문의</div>
 								<div class="nav-item nav-link active" id="bar-menu"
-									th:onclick="#">정보수정</div>
+									th:onclick="|location.href='@{/mypage/editinfo}'|">정보수정</div>
 								<div class="nav-item nav-link active" id="bar-menu"
 									th:onclick="|location.href='@{/mypage/acc_del}'|">회원탈퇴</div>
 							</div>
@@ -49,20 +49,20 @@
 						</div>
 						<div id="content_title" class="fs-3">
 							1:1문의
-							<a href="QAwrite" class="text-decoration-none text-dark float-end">문의하기</a>
+							<a th:href="@{/mypage/QAwrite}" class="text-decoration-none text-dark float-end">문의하기</a>
 						</div>
 						<hr />
 						<div id="content">
 							<table class="table table-border border-dark">
 								<thead class="fs-4">
 									<tr>
-										<th scope="col" class="fs-3">\</th>
+										<th scope="col" class="fs-3"></th>
 										<th scope="col">분류</th>
 										<th scope="col">제목</th>
 										<th scope="col">작성일</th>
 									</tr>
 								</thead>
-								<tbody class=" fs-5">
+								<tbody class="fs-5">
 									<tr>
 										<th scope="row">1</th>
 										<td>예약</td>

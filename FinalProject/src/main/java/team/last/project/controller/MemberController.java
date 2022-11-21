@@ -70,7 +70,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/errorDenied")
 	public String showAccessDeniedPage() {
-		return "member/login";
+		return "/er";
 	}
 
 }

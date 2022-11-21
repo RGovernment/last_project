@@ -32,4 +32,5 @@ public class MemberDto {
 	@NotNull
 	private int secession;
 	private int gender;
+	
 }

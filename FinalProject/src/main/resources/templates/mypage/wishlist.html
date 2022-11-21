@@ -3,7 +3,7 @@
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
 	layout:decorate="layouts/first_layout">
 <th:block layout:fragment="content">
-	<link href="/css/mypage.css" rel="stylesheet">
+	<link th:href="@{/css/mypage.css}" rel="stylesheet">
 	<main role="main">
 		<div class="album py-0">
 			<div class="container">
@@ -13,7 +13,7 @@
 							<div th:onclick="|location.href='@{/mypage}'|">주문조회</div>
 							<div th:onclick="|location.href='@{/mypage/wishlist}'|">찜목록</div>
 							<div th:onclick="|location.href='@{/mypage/QAlist}'|">1:1문의</div>
-							<div th:onclick="#">정보수정</div>
+							<div th:onclick="|location.href='@{/mypage/editinfo}'|">정보수정</div>
 							<div th:onclick="|location.href='@{/mypage/acc_del}'|">회원탈퇴</div>
 						</div>
 					</div>
@@ -33,7 +33,7 @@
 								<div class="nav-item nav-link active" id="bar-menu"
 									th:onclick="|location.href='@{/mypage/QAlist}'|">1:1문의</div>
 								<div class="nav-item nav-link active" id="bar-menu"
-									th:onclick="#">정보수정</div>
+									th:onclick="|location.href='@{/mypage/editinfo}'|">정보수정</div>
 								<div class="nav-item nav-link active" id="bar-menu"
 									th:onclick="|location.href='@{/mypage/acc_del}'|">회원탈퇴</div>
 							</div>

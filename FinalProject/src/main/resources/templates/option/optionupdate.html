@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/first_layout">
+
+<th:block layout:fragment="content">
+	<link th:href="@{/css/reviewPage.css}" rel="stylesheet">
+	<main role="main">
+		<form th:action="@{/option/update/{id}(id=${option.id})}"
+			method="post">
+			<table border="1" th:object="${option}">
+				<tr>
+					<th>이름</th>
+					<th>타입</th>
+					<th>내용</th>
+				</tr>
+				<tr>
+					<td><input type="text" th:field="*{name}"></td>
+					<td><input type="hidden" th:field="*{type}"> <span
+						th:text="*{type.description}"></span></td>
+					<td><textarea th:field="*{note}"></textarea></td>
+				</tr>
+
+			</table>
+			<button type="submit">수정</button>
+		</form>
+	</main>
+</th:block>
+</html>

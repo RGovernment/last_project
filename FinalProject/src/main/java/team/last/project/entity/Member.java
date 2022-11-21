@@ -47,8 +47,17 @@ public class Member {
         return member;
 	}
 	
+	public void modifyMember(String name,String phone,int gender) {
+		this.name =name;
+		this.phone = phone;
+		this.gender = gender;
+		// 비밀번호 맞는지 확인 [ passwordEncoder.matches(password, this.password); ] 다른 곳에 쓸때 쓰기 //
+	}
+	
 
 	public void secessionMember() {
 		this.secession = 1;
 	}
+
+
 }

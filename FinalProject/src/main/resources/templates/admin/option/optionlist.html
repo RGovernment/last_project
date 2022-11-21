@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/first_layout">
+
+<th:block layout:fragment="content">
+	<link th:href="@{/css/optionPage.css}" rel="stylesheet">
+	<main role="main">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2" id="side-bar">
+					<div class="grid">
+						<div th:onclick="|location.href='@{/admin}'|">회원관리</div>
+						<div th:onclick="|location.href='@{/admin/room}'|">대관관리</div>
+						<div th:onclick="|location.href='@{/admin/QAinfo}'|">문의관리</div>
+						<div th:onclick="|location.href='@{/admin/option/list}'|">상품관리</div>
+					</div>
+				</div>
+
+				<nav class="navbar navbar-expand-lg mt-3" id="mb-bar">
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarNavAltMarkup"
+						aria-controls="navbarNavAltMarkup" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span> 페이지 메뉴
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+						<div class="navbar-nav">
+							<div class="nav-item nav-link active" id="bar-menu"
+								th:onclick="|location.href='@{/admin}'|">회원관리</div>
+							<div class="nav-item nav-link active" id="bar-menu"
+								th:onclick="|location.href='@{/admin/room}'|">대관관리</div>
+							<div class="nav-item nav-link active" id="bar-menu"
+								th:onclick="|location.href='@{/admin/QAinfo}'|">문의관리</div>
+							<div class="nav-item nav-link active" id="bar-menu"
+								th:onclick="|location.href='@{/admin/option/list}'|">상품관리</div>
+						</div>
+					</div>
+				</nav>
+				<div class="col-md-10 ps-5 pt-5" id="main-con">
+					<div class="d-flex align-items-center justify-content-center mb-5"
+							id="my-text1">management</div>
+						<div id="profile">
+							<div id="loginid" th:inline="text">[[${member.name}]]님
+								관리자 페이지에 오신걸 환영합니다.</div>
+						</div>
+						<div id="content_title">
+							<h2>상품관리</h2>
+						</div>
+						<hr />
+
+					<h2>싱글</h2>
+					<table class="table">
+					<thead>
+						<tr>
+							<th>이름</th>
+							<th>비고</th>
+							<th>삭제</th>
+							<th>컨텐츠 리스트</th>
+						</tr>
+						</thead>
+						</tbody>
+						<tr th:each="opt : ${optionlist}"
+							th:if="${opt.type} == ${T(team.last.project.constant.Option_type).SINGLE}">
+							<td><a th:text="${opt.name}"
+								th:href="@{/admin/option/update/{id}(id=${opt.id})}"></a></td>
+							<td th:text="${opt.note}"></td>
+							<td><a th:href="@{/admin/option/delete(id=${opt.id})}">x</a></td>
+							<td><a
+								th:href="@{/admin/option/price/list/{id}(id=${opt.id})}">리스트</a></td>
+						</tr>
+					</tbody>
+					</table>
+					<h2>패키지</h2>
+					<table class="table">
+						<tr>
+							<th>이름</th>
+							<th>비고</th>
+							<th>삭제</th>
+							<th>컨텐츠 리스트</th>
+						</tr>
+						<tr th:each="opt : ${optionlist}"
+							th:if="${opt.type} == ${T(team.last.project.constant.Option_type).PACKAGE}">
+							<td><a th:text="${opt.name}"
+								th:href="@{/admin/option/update/{id}(id=${opt.id})}"></a></td>
+							<td th:text="${opt.note}"></td>
+							<td><a th:href="@{/admin/option/delete(id=${opt.id})}">x</a></td>
+							<td><a
+								th:href="@{/admin/option/price/list/{id}(id=${opt.id})}">리스트</a></td>
+						</tr>
+
+					</table>
+
+					<a href="/admin/option/add" class="text-decoration-none text-dark">옵션추가</a>
+				</div>
+			</div>
+		</div>
+	</main>
+</th:block>
+</html>

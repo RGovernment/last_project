@@ -7,14 +7,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import team.last.project.constant.Role;
 import team.last.project.security.AnonymousDeniedHandler;
+import team.last.project.security.AuthenticationEntryPointCustom;
 import team.last.project.security.UserLoginFailHandler;
 import team.last.project.security.UserLoginSuccessHandler;
 
@@ -27,11 +28,14 @@ public class SecurityConfig {
 		http.authorizeRequests()
 			.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
 			.permitAll()
-			.mvcMatchers("/admin").hasRole("ADMIN")
+			.mvcMatchers("/admin/**").hasRole("ADMIN")
 			.antMatchers("/mypage/**").hasRole("USER")
 			.antMatchers("/**").permitAll()
 			.and()
-			.exceptionHandling().accessDeniedHandler(DeniedHandler()).and().formLogin()
+			.exceptionHandling().accessDeniedHandler(DeniedHandler())
+			.authenticationEntryPoint(entryPoint())
+			.and()
+			.formLogin()
         	.loginPage("/member/login")
         	.usernameParameter("email")
         	.passwordParameter("password")
@@ -64,5 +68,10 @@ public class SecurityConfig {
 	@Bean
 	public AccessDeniedHandler DeniedHandler() {
 		return new AnonymousDeniedHandler();//default로 이동할 url
+	}
+	
+	@Bean
+	public AuthenticationEntryPoint entryPoint() {
+		return new AuthenticationEntryPointCustom();
 	}
 }

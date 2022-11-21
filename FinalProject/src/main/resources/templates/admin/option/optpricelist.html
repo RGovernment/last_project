@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/first_layout">
+
+<th:block layout:fragment="content">
+	<link th:href="@{/css/reviewPage.css}" rel="stylesheet">
+	<main role="main">
+	<table border="1" >
+				<tr>
+					<th>내용</th>
+					<th>가격</th>
+					<th>삭제</th>
+				</tr>
+				<tr th:each="optprice : ${option_prices}">
+					<td><a th:href="@{/admin/option/price/update/{id}(id=${optprice.id})}" type="text" th:text="${optprice.content}"></a></td>
+					<td><span th:text="${optprice.price}"></span></td>
+					<td><a th:href="@{/admin/option/price/delete/{id}(id=${optprice.id})}">x</a></td>
+				</tr>
+
+			</table>
+		<a th:href="@{/admin/option/price/add/{id}(id=${id})}" class="text-decoration-none text-dark">옵션추가</a>
+
+	</main>
+</th:block>
+</html>

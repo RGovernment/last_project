@@ -20,6 +20,7 @@ public class UserLoginSuccessHandler extends SavedRequestAwareAuthenticationSucc
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
+		//배포시 지워야할거 start
 		// IP, 세션 ID
 		WebAuthenticationDetails web = (WebAuthenticationDetails) authentication.getDetails();
 		System.out.println("IP : " + web.getRemoteAddress());
@@ -35,7 +36,7 @@ public class UserLoginSuccessHandler extends SavedRequestAwareAuthenticationSucc
 		for (int i = 0; i < authList.size(); i++) {
 			System.out.print(authList.get(i).getAuthority() + " ");
 		}
-		
+		//지워야할거 end
 		
 	
 		HttpSession session = request.getSession();

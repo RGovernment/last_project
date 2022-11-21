@@ -21,7 +21,7 @@ public class MyController {
 	}
 
 	@RequestMapping(value = "/errortest")
-	public String error() {
+	public String erpage() {
 		return "member/login";
 	}
 
@@ -29,6 +29,12 @@ public class MyController {
 	public String login() {
 
 		return "review";
+	}
+	
+	@RequestMapping("/er")
+	public String erpage2(){
+		
+		return "er";
 	}
 
 	@RequestMapping("/res")

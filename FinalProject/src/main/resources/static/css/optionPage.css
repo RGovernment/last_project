@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+#profile {
+	margin-bottom: 30px;
+}
+
+#my-text1 {
+	font-weight: 700;
+	font-family: 'Dancing Script', cursive;
+	font-size: 60px;
+	color: #483d8b;
+}
+
+#profile_img {
+	width: 80px;
+	height: 80px;
+	border-radius: 70%;
+}
+
+#content_title {
+	margin-bottom: 30px;
+}
+
+#content {
+	font-size: 30px;
+}
+
+#loginid {
+	font-size: 20px;
+	white-space: pre-line;
+}
+
+#loginid:first-line {
+	font-weight: bold;
+	font-size: 40px;
+	color: #483d8b;
+}
+
+#main-con {
+	min-height: 900px
+}
+
+@media screen and (min-width: 783px) {
+	#side-bar {
+		background-color: #211f29;
+	}
+	#mb-bar {
+		display: none;
+	}
+	.grid>div {
+		padding-top: 45px;
+		padding-bottom: 45px;
+		cursor: pointer;
+		font-size: 130%;
+		text-align: center;
+		cursor: pointer;
+		color: #fdfdfd;
+	}
+	.grid>div:hover {
+		border-bottom: #fdfdfd 4px solid;
+	}
+	.grid>div:active {
+		color: #212121;
+		background: #fdfdfd;
+	}
+}
+
+@media screen and (max-width: 782px) {
+	#side-bar {
+		display: none;
+	}
+	#mb-bar {
+		cursor: pointer;
+		height: 50px;
+		line-height: 46px;
+		font-size: 90%;
+		text-align: center;
+		cursor: pointer;
+	}
+	#bar-menu {
+		width: 160px;
+		background-color: #211f29;
+		color: #fdfdfd;
+	}
+	#bar-menu:hover {
+		background-color: #fdfdfd;
+		color: #211f29;
+	}
+	#bar-menu:active {
+		color: #212121;
+		background: #fdfdfd;
+	}
+}

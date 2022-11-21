@@ -15,8 +15,8 @@ public class AnonymousDeniedHandler implements AccessDeniedHandler {
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,
 			AccessDeniedException accessDeniedException) throws IOException, ServletException {
-		request.setAttribute("loginFailMsg", "접근할 수 없는 페이지입니다.");
-		
+		request.setAttribute("message", "접근할 수 없는 페이지입니다.");
+		request.setAttribute("Url", "/index");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/member/errorDenied");
 		dispatcher.forward(request, response);
 		

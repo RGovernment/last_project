@@ -3,7 +3,7 @@
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
 	layout:decorate="layouts/first_layout">
 <th:block layout:fragment="content">
-	<link href="/css/mypage.css" rel="stylesheet">
+	<link th:href="@{/css/mypage.css}" rel="stylesheet">
 	<main role="main">
 		<div class="album py-0">
 			<div class="container">
@@ -13,7 +13,7 @@
 							<div th:onclick="|location.href='@{/mypage}'|">주문조회</div>
 							<div th:onclick="|location.href='@{/mypage/wishlist}'|">찜목록</div>
 							<div th:onclick="|location.href='@{/mypage/QAlist}'|">1:1문의</div>
-							<div th:onclick="#">정보수정</div>
+							<div th:onclick="|location.href='@{/mypage/editinfo}'|">정보수정</div>
 							<div th:onclick="|location.href='@{/mypage/acc_del}'|">회원탈퇴</div>
 						</div>
 					</div>
@@ -33,7 +33,7 @@
 								<div class="nav-item nav-link active" id="bar-menu"
 									th:onclick="|location.href='@{/mypage/QAlist}'|">1:1문의</div>
 								<div class="nav-item nav-link active" id="bar-menu"
-									th:onclick="#">정보수정</div>
+									th:onclick="|location.href='@{/mypage/editinfo}'|">정보수정</div>
 								<div class="nav-item nav-link active" id="bar-menu"
 									th:onclick="|location.href='@{/mypage/acc_del}'|">회원탈퇴</div>
 							</div>
@@ -45,10 +45,13 @@
 						<div id="content_title" class="fs-2">회원탈퇴</div>
 						<hr />
 						<div id="content" style="white-space:pre-line; font-size:25px;">
-							정말로 탈퇴하시겠습니까? 탈퇴된 회원의 정보는 즉시 삭제되며, 정보는 다시 복구할 수 없습니다.
-							동의하신다면 확인을 눌러주세요.
+							정말로 탈퇴하시겠습니까? 
+							
+							회원의 정보는 2주간 비활성화되며 유예기간 후 삭제되어 다시 복구할 수 없습니다.
+							
+							동의하신다면 버튼을 눌러주세요.
 							<br>
-							<button type="button" class="btn btn-primary" th:onclick="|location.href='@{/member/secession}'|" >동의</button>
+							<button type="button" class="btn btn-danger btn-lg" th:onclick="|location.href='@{/member/secession}'|" >동의</button>
 							</div>
 						</div>
 					

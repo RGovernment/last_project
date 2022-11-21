@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/first_layout">
+
+<th:block layout:fragment="content">
+	<link th:href="@{/css/reviewPage.css}" rel="stylesheet">
+	<main role="main">
+	<h2>싱글</h2>
+		<table border="1">
+			<tr>
+				<th>이름</th>
+				<th>비고</th>
+				<th>삭제</th>
+				<th>컨텐츠 리스트</th>
+				
+			</tr>
+			<tr th:each="opt : ${optionlist}" th:if="${opt.type} == ${T(team.last.project.constant.Option_type).SINGLE}">
+				<td><a th:text="${opt.name}"
+					th:href="@{/option/update/{id}(id=${opt.id})}"></a></td>
+				<td th:text="${opt.note}"></td>
+				<td><a th:href="@{/option/delete(id=${opt.id})}">x</a></td>
+				<td><a th:href="@{/option/price/list/{id}(id=${opt.id})}">리스트</a></td>
+			</tr>
+
+		</table>
+	<h2>패키지</h2>
+		<table border="1">
+			<tr>
+				<th>이름</th>
+				<th>비고</th>
+				<th>삭제</th>
+				<th>컨텐츠 리스트</th>
+			</tr>
+			<tr th:each="opt : ${optionlist}" th:if="${opt.type} == ${T(team.last.project.constant.Option_type).PACKAGE}">
+				<td><a th:text="${opt.name}"
+					th:href="@{/option/update/{id}(id=${opt.id})}"></a></td>
+				<td th:text="${opt.note}"></td>
+				<td><a th:href="@{/option/delete(id=${opt.id})}">x</a></td>
+				<td><a th:href="@{/option/price/list/{id}(id=${opt.id})}">리스트</a></td>
+			</tr>
+
+		</table>
+
+		<a href="/option/add" class="text-decoration-none text-dark">옵션추가</a>
+
+	</main>
+</th:block>
+</html>
