@@ -30,6 +30,7 @@ public class SecurityConfig {
 			.permitAll()
 			.mvcMatchers("/admin/**").hasRole("ADMIN")
 			.antMatchers("/mypage/**").hasRole("USER")
+			.antMatchers("/member/signup").hasRole("ANONYMOUS")
 			.antMatchers("/**").permitAll()
 			.and()
 			.exceptionHandling().accessDeniedHandler(DeniedHandler())

@@ -2,17 +2,13 @@ package team.last.project.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
-import team.last.project.dto.MemberDto;
-import team.last.project.dto.OptionDto;
 import team.last.project.entity.Member;
-import team.last.project.entity.Option;
 import team.last.project.repository.MemberRepository;
 
 @Service
@@ -20,6 +16,7 @@ import team.last.project.repository.MemberRepository;
 @RequiredArgsConstructor
 public class MemberService {
 
+	private final PasswordEncoder passwordEncoder;
 	private final MemberRepository memberRepository;
 
 	public Member join(Member member) {
@@ -38,10 +35,22 @@ public class MemberService {
 		return memberRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 
-//	public void edit(Integer id, final MemberDto memberDto) {
-//		Member mem = memberRepository.findById(id).orElseThrow();
-//		mem.modifyMember(memberDto.getName(), memberDto.getPhone(), memberDto.getGender());
-//	}
+	public void edit(Member member,String name,String phone) {
+		Member mem = memberRepository.findByEmail(member.getEmail()).orElse(null);
+		mem.modifyMember(name,phone);
+	}
+	
+	public boolean memberck(String password,Member member) {
+		return passwordEncoder.matches(password, member.getPassword());
+		
+	}
+	
+	@Transactional
+	public void editPass(Member member,String password) {
+		Member mem = memberRepository.findByEmail(member.getEmail()).orElse(null);
+		String pass= passwordEncoder.encode(password);
+		mem.modifyPass(pass);
+	}
 
 	public void getbyEmail(String email) {
 		Member member = memberRepository.findByEmail(email).orElse(null);

@@ -43,7 +43,7 @@
 				<div id="form-group">
 					<label th:for="password" class="mb-2">비밀번호</label> <br> <input
 						type="password" id="pass" th:field="*{password}"
-						class="form-control" placeholder="비밀번호를 입력해주세요. [4~16자리]"
+						class="form-control" placeholder="비밀번호를 입력해주세요. [8~16자리]"
 						th:errorclass="fieldError"> <input type="password"
 						name="passre" class="form-control mb-4" id="pass2"
 						placeholder="비밀번호 확인">
@@ -51,10 +51,10 @@
 			</div>
 			<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
 				class="fieldError">비밀번호는 비워둘 수 없습니다.</p>
-			<div class="alert alert-success" id="alert-success">비밀번호가
-				일치합니다.</div>
-			<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지
-				않습니다.</div>
+			<div class="alert alert-success" id="alert-success2">조건에 일치합니다.</div>
+			<div class="alert alert-danger" id="alert-danger2">영문, 숫자, 특수문자 중 2가지 이상 조합해주세요.</div>
+			<div class="alert alert-success" id="alert-success">비밀번호가 일치합니다.</div>
+			<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
 			<div id="form-group">
 				<label th:for="phone" class="mb-2">전화번호</label> <br> <input
 					type="text" th:field="*{phone}" class="form-control mb-4"
@@ -80,7 +80,7 @@
 			<div class="text-center">
 				<!-- Button trigger modal -->
 				<button type="button" class="btn btn-primary m-5"
-					data-bs-toggle="modal" data-bs-target="#infock" onclick="allck()">회원가입</button>
+					data-bs-toggle="modal" data-bs-target="#infock" onclick="allck()" id="signup">회원가입</button>
 			</div>
 			<!-- Modal -->
 			<div class="modal fade" id="infock" data-bs-backdrop="static"

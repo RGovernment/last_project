@@ -23,17 +23,17 @@ import team.last.project.dto.MemberDto;
 public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SEQ")
-    @SequenceGenerator(sequenceName = "member_id_seq", allocationSize = 1, name = "ID_SEQ")
+	@SequenceGenerator(sequenceName = "member_id_seq", allocationSize = 1, name = "ID_SEQ")
 	private Long id;
 	private String email;
 	private String name;
 	private String password;
 	private String phone;
-	private int	gender;
+	private int gender;
 	@Column(columnDefinition = "number Default 0")
 	private int secession;
 	@Enumerated(EnumType.ORDINAL)
-    private Role role;
+	private Role role;
 
 	public static Member createMember(MemberDto memberDto, PasswordEncoder passwordEncoder) {
 		Member member = new Member();
@@ -44,20 +44,20 @@ public class Member {
 		String password = passwordEncoder.encode(memberDto.getPassword());
 		member.setPassword(password);
 		member.setRole(Role.USER);
-        return member;
+		return member;
 	}
-	
-	public void modifyMember(String name,String phone,int gender) {
-		this.name =name;
+
+	public void modifyMember(String name, String phone) {
+		this.name = name;
 		this.phone = phone;
-		this.gender = gender;
-		// 비밀번호 맞는지 확인 [ passwordEncoder.matches(password, this.password); ] 다른 곳에 쓸때 쓰기 //
 	}
-	
+
+	public void modifyPass(String password) {
+		this.password = password;
+	}
 
 	public void secessionMember() {
 		this.secession = 1;
 	}
-
 
 }

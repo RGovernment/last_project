@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--headerFragment 선언-->
+<th:block th:fragment="header2Fragment">
+	<link th:href="@{/css/mypage.css}" rel="stylesheet">
+	<main role="main">
+	<div class="album py-0">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2" id="side-bar">
+					<div class="grid">
+						<div th:onclick="|location.href='@{/mypage}'|">주문조회</div>
+						<div th:onclick="|location.href='@{/mypage/wishlist}'|">찜목록</div>
+						<div th:onclick="|location.href='@{/mypage/QAlist}'|">1:1문의</div>
+						<div th:onclick="|location.href='@{/mypage/editinfo}'|">정보수정</div>
+						<div th:onclick="|location.href='@{/mypage/acc_del}'|">회원탈퇴</div>
+					</div>
+				</div>
+
+				<nav class="navbar navbar-expand-lg mt-3" id="mb-bar">
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarNavAltMarkup"
+						aria-controls="navbarNavAltMarkup" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span> 페이지 메뉴
+					</button>
+					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+						<div class="navbar-nav">
+							<div class="nav-item nav-link active" id="bar-menu"
+								th:onclick="|location.href='@{/mypage}'|">주문조회</div>
+							<div class="nav-item nav-link active" id="bar-menu"
+								th:onclick="|location.href='@{/mypage/wishlist}'|">찜목록</div>
+							<div class="nav-item nav-link active" id="bar-menu"
+								th:onclick="|location.href='@{/mypage/QAlist}'|">1:1문의</div>
+							<div class="nav-item nav-link active" id="bar-menu"
+								th:onclick="|location.href='@{/mypage/editinfo}'|">정보수정</div>
+							<div class="nav-item nav-link active" id="bar-menu"
+								th:onclick="|location.href='@{/mypage/acc_del}'|">회원탈퇴</div>
+						</div>
+					</div>
+				</nav>
+</th:block>
+</html>

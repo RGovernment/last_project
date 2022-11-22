@@ -1,79 +1,50 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
-	layout:decorate="layouts/first_layout"
+	layout:decorate="layouts/third_layout"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block layout:fragment="content">
 	<link th:href="@{/css/admin_main.css}" rel="stylesheet">
-	<main role="main">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-2" id="side-bar">
-					<div class="grid">
-						<div th:onclick="|location.href='@{/admin}'|">회원관리</div>
-						<div th:onclick="|location.href='@{/admin/room}'|">대관관리</div>
-						<div th:onclick="|location.href='@{/admin/QAinfo}'|">문의관리</div>
-						<div th:onclick="|location.href='@{/admin/option/list}'|">상품관리</div>
-					</div>
-				</div>
-
-				<nav class="navbar navbar-expand-lg mt-3" id="mb-bar">
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbarNavAltMarkup"
-						aria-controls="navbarNavAltMarkup" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span> 페이지 메뉴
-					</button>
-					<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-						<div class="navbar-nav">
-							<div class="nav-item nav-link active" id="bar-menu"
-								th:onclick="|location.href='@{/admin}'|">회원관리</div>
-							<div class="nav-item nav-link active" id="bar-menu"
-								th:onclick="|location.href='@{/admin/room}'|">대관관리</div>
-							<div class="nav-item nav-link active" id="bar-menu"
-								th:onclick="|location.href='@{/admin/QAinfo}'|">문의관리</div>
-							<div class="nav-item nav-link active" id="bar-menu"
-								th:onclick="|location.href='@{/admin/option/list}'|">상품관리</div>
-						</div>
-					</div>
-				</nav>
-				<div class="col-md-10 ps-5 pt-5 mb-5" id="main-con">
-					<div class="d-flex align-items-center justify-content-center mb-5"
-						id="my-text1">management</div>
-					<div id="profile">
-						<div id="loginid" th:inline="text">[[${member.name}]]님 
-						관리자 페이지에 오신걸 환영합니다.</div>
-					</div>
-					<div id="content_title">
-						<h2>회원관리</h2>
-					</div>
-					<hr />
-					<div id="content" align="center">
-						<table class="table table-striped table-bordered fs-5">
-							<thead>
-								<tr>
-									<th scope="col">No.</th>
-									<th scope="col">회원명</th>
-									<th scope="col">이메일</th>
-									<th scope="col">전화번호</th>
-									<th scope="col">성별</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr th:each="mem : ${memberlist}">
-									<td th:text="${mem.id}"></td>
-									<td th:text="${mem.name}"></td>
-									<td th:text="${mem.email}" ></td>
-									<td th:text="${mem.phone}"></td>
-									<td th:if="${mem.gender}==1" th:text="남자"></td>
-									<td th:if="${mem.gender}==2" th:text="여자"></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+	<div class="col-md-10 ps-5 pt-5 mb-5" id="main-con">
+		<div class="d-flex align-items-center justify-content-center mb-5"
+			id="my-text1">management</div>
+		<div id="profile">
+			<div id="loginid" th:inline="text">[[${member.name}]]님 
+			관리자 페이지에 오신걸 환영합니다.</div>
 		</div>
+		<div id="content_title">
+			<h2>회원관리</h2>
+		</div>
+		<hr />
+		<div id="content" align="center">
+			<table class="table table-striped table-bordered fs-5">
+				<thead>
+					<tr>
+						<th scope="col">No.</th>
+						<th scope="col">회원명</th>
+						<th scope="col">이메일</th>
+						<th scope="col">전화번호</th>
+						<th scope="col">성별</th>
+						<th scope="col">탈퇴여부</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="mem : ${memberlist}">
+						<td th:text="${mem.id}"></td>
+						<td th:text="${mem.name}"></td>
+						<td th:text="${mem.email}"></td>
+						<td th:text="${mem.phone}"></td>
+						<td th:if="${mem.gender}==1" th:text="남자"></td>
+						<td th:if="${mem.gender}==2" th:text="여자"></td>
+						<td th:if="${mem.secession}==0" th:text="X"></td>
+						<td th:if="${mem.secession}==1" th:text="O"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	</div>
+	</div>
 	</main>
 </th:block>
 </html>
