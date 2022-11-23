@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -16,6 +18,7 @@ import team.last.project.dto.OptPriceDto;
 @Entity
 @Data
 @Table(name="option_price")
+@NamedEntityGraph(name = "priceAllMenu", attributeNodes = @NamedAttributeNode("option"))
 public class OptPrice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "OPTION_PRICE_SEQ")

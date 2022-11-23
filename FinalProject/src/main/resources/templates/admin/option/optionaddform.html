@@ -3,10 +3,10 @@
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
 	layout:decorate="layouts/third_layout">
 <th:block layout:fragment="content">
-	<link th:href="@{/css/optionPage.css}" rel="stylesheet">
 	<link th:href="@{/css/optionaddPage.css}" rel="stylesheet">
+	<link th:href="@{/css/optionlistPage.css}" rel="stylesheet">
 	<script th:inline="javascript" th:src="@{/js/option.js}"></script>
-				<div class="col-md-10 ps-5 pt-5" id="main-con" >
+				<div class="col-md-10 ps-5 pt-5 mb-5" id="main-con" >
 				<div class="d-flex align-items-center justify-content-center mb-5"
 						id="my-text1">management</div>
 					<div id="profile">
@@ -17,6 +17,10 @@
 						<h2>상품관리</h2>
 					</div>
 					<hr />
+					<div id="content-1" class="mt-3 mb-3" style="font-size: 20px">옵션 등록 페이지입니다.
+					추가할 옵션의 내용을 정확히 입력해주세요.
+				
+				</div>
 					<form th:action="@{/admin/option/add}" method="post" th:object="${optionDto}">
 						<div class="form-group mb-3" id="name">
 							<label th:for="name">이름</label> <input type="text" th:field="*{name}" class="form-control">
@@ -39,8 +43,8 @@
 						<input type="hidden" th:name="${_csrf.parameterName}"
 							th:value="${_csrf.token}">
 							<div class="d-flex justify-content-between">
-						<button type="button" class="btn btn-secondary ms-3" th:onclick="window.history.back()" >뒤로 가기</button>
-						<button type="submit" class="btn btn-dark me-3">옵션 등록</button>
+						<button type="button" class="btn btn-secondary"  th:onclick="window.history.back()" >뒤로 가기</button>
+						<button type="submit" class="btn btn-dark btn-lg">옵션 등록</button>
 						</div>
 					</form>
 				</div>

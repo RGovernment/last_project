@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -21,6 +23,7 @@ import team.last.project.dto.OptionDto;
 @Entity
 @Data
 @Table(name = "option_table")
+@NamedEntityGraph(name = "OptionwithPrice", attributeNodes = @NamedAttributeNode("optPrices"))
 public class Option {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "OPTION_TABLE_SEQ")
@@ -33,7 +36,7 @@ public class Option {
 	private String note;
 
 	@OneToMany(mappedBy = "option")
-	private List<OptPrice> OptPrices = new ArrayList<>();
+	private List<OptPrice> optPrices = new ArrayList<>();
 
 	public static Option createOption(OptionDto optionDto) {
 		Option option = new Option();
@@ -50,7 +53,8 @@ public class Option {
 		optionDto.setType(type);
 		return optionDto;
 	}
-
+	
+	
 	public void update(String name, Option_type type, String note) {
 		this.name = name;
 		this.type = type;

@@ -9,8 +9,9 @@
 			id="my-text1">management</div>
 		<div id="profile">
 			<div id="loginid" th:inline="text">[[${member.name}]]님 
-			관리자 페이지에 오신걸 환영합니다.</div>
-
+			관리자 페이지에 오신걸 환영합니다.
+			
+			</div>
 			<div id="content_title">
 				<h2>문의내역</h2>
 			</div>
@@ -39,7 +40,7 @@
 				</table>
 				<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
 					<a th:if="${page != nowPage}"
-						th:href="@{/mypage/QAlist(page = ${page -1})}" th:text="${page}"></a>
+						th:href="@{/admin/QAlist(page = ${page -1})}" th:text="${page}"></a>
 					<strong th:if="${page == nowPage}" th:text="${page}"
 						style="color: red"></strong>
 				</th:block>

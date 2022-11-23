@@ -1,31 +1,53 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
-	layout:decorate="layouts/first_layout">
+	layout:decorate="layouts/third_layout">
 
 <th:block layout:fragment="content">
 	<link th:href="@{/css/optionlistPage.css}" rel="stylesheet">
-	<link th:href="@{/css/reviewPage.css}" rel="stylesheet">
-	<main role="main">
-	<div class="container">
-	<table >
-	<thead>
+	<div class="col-md-10 ps-5 pt-5" id="main-con">
+		<div class="d-flex align-items-center justify-content-center mb-5"
+			id="my-text1">management</div>
+		<div id="profile">
+			<div id="loginid" th:inline="text">[[${member.name}]]님 
+			관리자 페이지에 오신걸 환영합니다.</div>
+		</div>
+		<div id="content_title">
+			<h2>상품관리</h2>
+		</div>
+		<hr />
+		<div id="content-1" class="mt-3 mb-3" style="font-size: 20px">상세 옵션 페이지입니다. 
+			수정하실 옵션을 선택하시거나, 삭제, 추가할 수 있습니다. 
+		</div>
+		<div class="mt-5">
+		<table>
+			<thead>
 				<tr>
-					<th>내용</th>
-					<th>가격</th>
+					<th>옵션</th>
+					<th>가격(원/￦)</th>
 					<th>삭제</th>
 				</tr>
-				</thead>
-				<tbody>
+			</thead>
+			<tbody>
 				<tr th:each="optprice : ${option_prices}">
-					<td><a th:href="@{/admin/option/price/update/{id}(id=${optprice.id})}" type="text" th:text="${optprice.content}"></a></td>
-					<td><span th:text="${optprice.price}"></span></td>
-					<td><a th:href="@{/admin/option/price/delete/{id}(id=${optprice.id})}">x</a></td>
+					<td><a
+						th:href="@{/admin/option/price/update/{id}(id=${optprice.id})}"
+						type="text" th:inline="text">[[${optprice.content}]]</a></td>
+					<td><span th:inline="text">[[${#numbers.formatInteger(optprice.price,3,'COMMA')}]]원</span></td>
+					<td><a
+						th:href="@{/admin/option/price/delete/{id}(id=${optprice.id})}">삭제</a></td>
 				</tr>
 			</tbody>
-			</table>
-		<a th:href="@{/admin/option/price/add/{id}(id=${id})}" class="text-decoration-none text-dark">옵션추가</a>
-</div>
+		</table>
+		<div class="d-flex justify-content-between">
+		<button type="button" class="btn btn-secondary" th:onclick="window.history.back()">뒤로 가기</button>
+		<button th:onclick="|location.href='@{/admin/option/price/add/{id}(id=${id})}'|"	class="btn btn-dark btn-lg">옵션추가</button>
+		<div style="width: 110px"></div>
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
 	</main>
 </th:block>
 </html>

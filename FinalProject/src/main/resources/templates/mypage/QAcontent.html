@@ -4,6 +4,7 @@
 	layout:decorate="layouts/second_layout"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block layout:fragment="content">
+	<link th:href="@{/css/QAcontent.css}" rel="stylesheet">
 
 	<div class="col-md-10 ps-5 pt-5" id="main-con">
 		<div class="d-flex align-items-center justify-content-center mb-5"
@@ -18,26 +19,25 @@
 				class="text-decoration-none text-dark float-end">문의하기</a>
 		</div>
 		<hr />
-		<div id="content">
+		<div id="content-QA">
 			<div class="mb-3 row">
-				<div class="fs-1 col-sm-2">제목 :</div>
-				<div class="fs-1 col-sm-10" th:text="${askBoard.title}"></div>
+				<div class=" col-sm-2">제목 :</div>
+				<div class=" col-sm-10" th:text="${askBoard.title}"></div>
 			</div>
 			<hr />
 			<div class="mb-3 row">
-				<div class="fs-5 col-sm-2">문의내역:</div>
-				<div class="fs-5 col-sm-10" th:text="${askBoard.content}"></div>
+				<div class=" col-sm-2">문의내역:</div>
+				<div class=" col-sm-10" th:text="${askBoard.content}"></div>
 			</div>
 		</div>
 		<div id="answer">
 			<hr />
 			<div class="mb-3 row">
-				<div class="fs-5 col-sm-2">문의답변:</div>
-				<div class="fs-5 col-sm-10" th:text="${askBoard.answer}"></div>
+				<div class=" col-sm-2">문의답변:</div>
+				<div class=" col-sm-10" th:text="${askBoard.answer}"></div>
 			</div>
 			<hr />
 		</div>
-	</div>
 	</div>
 	</div>
 	</div>

@@ -25,6 +25,14 @@ a:hover{
 	color: 33DD33;	
 }
 
+#content-1{
+	white-space: pre-line;
+}
+#content-1:first-line{
+	font-weight:bold;
+	font-size:25px;
+}
+
 th, td {
 	padding: 6px 15px;
 }

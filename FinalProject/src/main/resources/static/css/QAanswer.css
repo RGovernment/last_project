@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+#content-QA {
+	font-size: 18px;
+}
+
+#answer {
+	font-size: 22px;
+}
+
+#textarea {
+	resize: none;
+}
+
+#type {
+	text-align: right;
+}
+
+#submit_button {
+	margin-top:10px;
+	border: 0;
+	font-size: 14px;
+	width: 101px;
+	height: 30px;
+	float: right;
+}

@@ -1,14 +1,26 @@
 package team.last.project.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
+import team.last.project.entity.Option;
+import team.last.project.service.OptPriceService;
+import team.last.project.service.OptionService;
 
 @Controller
 @RequiredArgsConstructor
 public class MyController {
+
+	@Autowired
+	OptPriceService optPriceService;
+	@Autowired
+	OptionService optionService;
 
 	@RequestMapping("/")
 	public String root() {
@@ -30,10 +42,10 @@ public class MyController {
 
 		return "review";
 	}
-	
+
 	@RequestMapping("/er")
-	public String erpage2(){
-		
+	public String erpage2() {
+
 		return "er";
 	}
 
@@ -53,7 +65,9 @@ public class MyController {
 	}
 
 	@RequestMapping("/price")
-	public String price() {
+	public String price(Model model) {
+		List<Option> optlist = optionService.optionList();
+		model.addAttribute("optlist", optlist);
 		return "price";
 	}
 
