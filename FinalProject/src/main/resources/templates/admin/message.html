@@ -4,7 +4,8 @@
 	layout:decorate="layouts/first_layout">
 
 <th:block layout:fragment="content">
-<script th:inline="javascript">
+	<link th:href="@{/css/reviewPage.css}" rel="stylesheet">
+	<script th:inline="javascript">
 var message = [[${message}]];
 alert(message);
 location.replace([[${Url}]]);

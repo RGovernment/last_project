@@ -4,6 +4,14 @@
 	margin-bottom: 30px;
 }
 
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
 #my-text1 {
 	font-weight: 700;
 	font-family: 'Dancing Script', cursive;

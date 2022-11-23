@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/third_layout">
+<th:block layout:fragment="content">
+	<link th:href="@{/css/mypage.css}" rel="stylesheet">
+	<div class="col-md-10 ps-5 pt-5" id="main-con">
+		<div class="d-flex align-items-center justify-content-center mb-5"
+			id="my-text1">My Page</div>
+		<div id="profile">
+			<img src="/img/cake.jpg" class="img-pluid" id="profile_img">
+			<div id="loginid" th:inline="text">[[${member.name}]]님 안녕하세요
+				이곳은 문의페이지입니다.</div>
+		</div>
+		<div id="content_title" class="fs-3">
+			1:1문의
+		</div>
+		<hr />
+		<div id="content-side">
+			<div class="mb-3 row">
+				<div class="col-sm-2">제목 :</div>
+				<div class="col-sm-8" th:text="${askBoard.title}"></div>
+				<div class="col-sm-2" th:text="${askBoard.asktype.description}"></div>
+			</div>
+			<hr />
+			<div class="mb-3 row">
+				<div class="col-sm-2">문의내역:</div>
+				<div class="col-sm-10" th:text="${askBoard.content}"></div>
+			</div>
+		</div>
+		<div id="answer">
+			<hr />
+			<div class="mb-3 row d-flex flex-row justify-content-center">
+				<form th:action="@{/admin/QAanswer/{id}(id=${askBoard.id})}"
+					method="post" th:object="${askBoard}">
+					<input type="hidden" th:field="*{title}"> <input
+						type="hidden" th:field="*{content}"> <input type="hidden"
+						th:field="*{asktype}">
+					<div class="form-group mb-3">
+						<label th:for="answer">답변:</label>
+						<textarea th:field="*{answer}" class="form-control"></textarea>
+					</div>
+					<button class="col-md-1" type="submit">답변 전송</button>
+				</form>
+			</div>
+			<hr />
+		</div>
+	</div>
+	</div>
+	</div>
+	</main>
+</th:block>
+</html>

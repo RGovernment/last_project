@@ -2,6 +2,11 @@ package team.last.project.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,15 +17,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
+import team.last.project.dto.AskBoardDto;
 import team.last.project.dto.MemberDto;
+import team.last.project.entity.AskBoard;
 import team.last.project.entity.Member;
+import team.last.project.service.AskBoardService;
 import team.last.project.service.MemberService;
 
 @Controller
 @RequestMapping(value = "/mypage")
 @RequiredArgsConstructor
 public class MypageController {
-
+	private final AskBoardService askBoardService;
 	private final MemberService memberService;
 
 	@RequestMapping(value = "")
@@ -41,17 +49,49 @@ public class MypageController {
 	@RequestMapping(value = "/QAlist")
 	public String qaList(
 			@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : member") Member member,
-			Model model) {
+			Model model,
+			@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+		Page<AskBoard> list = null;
+
+		PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
+				Sort.by("id").descending());
+		list = askBoardService.boardUserList(member.getId(), pageRequest);
+		int nowPage = list.getPageable().getPageNumber() + 1;
+		int startPage = Math.max(nowPage - 4, 1);
+		int endPage = Math.min(nowPage + 5, list.getTotalPages());
+		model.addAttribute("list", list);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 		model.addAttribute("member", member);
 		return "/mypage/QAlist";
 	}
 
-	@RequestMapping(value = "/QAwrite")
-	public String qawrite(
+	@GetMapping(value = "/QAwrite")
+	public String qawriteform(
 			@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : member") Member member,
 			Model model) {
+		model.addAttribute("askBoardDto", new AskBoardDto());
 		model.addAttribute("member", member);
 		return "/mypage/QAwrite";
+	}
+
+	@PostMapping(value = "/QAwrite")
+	public String qawrite(
+			@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : member") Member member,
+			@Valid AskBoardDto askBoardDto, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			System.out.println("에러");
+			return "/mypage/QAwrite";
+		}
+		try {
+			AskBoard askBoard = AskBoard.createAskBoard(askBoardDto, member);
+			askBoardService.write(askBoard);
+		} catch (IllegalStateException e) {
+			model.addAttribute("errorMessage", e.getMessage());
+			return "/mypage/QAwrite";
+		}
+		return "redirect:/mypage/QAlist";
 	}
 
 	@RequestMapping("/acc_del")
@@ -117,15 +157,11 @@ public class MypageController {
 	}
 
 	@RequestMapping(value = "/QAcontent")
-	public String qainfo(
-			@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : member") Member member,
+	public String qaview(
+			@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : member") Member member, Integer id,
 			Model model) {
-		String user_title = "예약 문의합니다";
-		String user_text = "5인이서 미니룸A를 이용하려하는데 요금표에는 4인과 6인밖에 있지않아 문의 드립니다 5인일 경우 요금은 어떻게 되나요?";
-		String answer = "귀하께서 문의해주신 5인의 경우 4인과 6인의 중간가격으로 제공하고있습니다, 6인 이하의 경우 4인으로 예약하신후 매장에 방문하셔서 추가요금을 지불하신다면 5인이용이 가능합니다.";
-		model.addAttribute("user_title", user_title);
-		model.addAttribute("user_text", user_text);
-		model.addAttribute("text", answer);
+		AskBoard askBoard = askBoardService.boardView(id);
+		model.addAttribute("askBoard", askBoard);
 		model.addAttribute("member", member);
 		return "/mypage/QAcontent";
 	}

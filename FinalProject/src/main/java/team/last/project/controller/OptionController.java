@@ -40,7 +40,8 @@ public class OptionController {
 	}
 
 	@GetMapping(value = "/add")
-	public String optionaddform(Model model) {
+	public String optionaddform(@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : member") Member member,Model model) {
+		model.addAttribute("member",member);
 		model.addAttribute("Option_types", Option_type.values());
 		model.addAttribute("optionDto", new OptionDto());
 		return "/admin/option/optionaddform";
@@ -54,14 +55,16 @@ public class OptionController {
 	}
 	
 	@GetMapping(value = "/update/{id}")
-	public String optionupdateform(@PathVariable("id") Integer id, Model model) {
+	public String optionupdateform(@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : member") Member member, @PathVariable("id") Integer id, Model model) {
 		model.addAttribute("option", optionService.optionget(id));
+		model.addAttribute("member",member);
 		return "/admin/option/optionupdate";
 	}
 
 	@PostMapping(value = "/update/{id}")
-	public String optionupdate(@PathVariable("id") Integer id, OptionDto optionDto, Model model) {
+	public String optionupdate(@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : member") Member member,@PathVariable("id") Integer id, OptionDto optionDto, Model model) {
 		optionService.optionUpdate(id, optionDto);
+		model.addAttribute("member",member);
 		model.addAttribute("message", "옵션 수정 완료");
 		model.addAttribute("Url", "/admin/option/list");
 		return "/admin/option/Message";
@@ -73,15 +76,17 @@ public class OptionController {
 		return "redirect:/admin/option/list";
 	}
 	@RequestMapping(value = "/price/list/{id}")
-	public String optionpricelist(@PathVariable("id") Integer id,Model model) {
+	public String optionpricelist(@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : member") Member member,@PathVariable("id") Integer id,Model model) {
 		List<OptPrice> optionpricelist = optPriceService.optPriceListget(id);
+		model.addAttribute("member",member);
 		model.addAttribute("option_prices", optionpricelist);
 		return "/admin/option/optpricelist";
 	}
 
 	@GetMapping(value = "/price/add/{id}")
-	public String optionpriceaddform(@PathVariable("id") Integer id, Model model) {
+	public String optionpriceaddform(@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : member") Member member,@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("optPriceDto", new OptPriceDto());
+		model.addAttribute("member",member);
 		model.addAttribute("option", optionService.optionDtoget(id));
 		model.addAttribute("id", id);
 		return "/admin/option/optpriceaddform";
@@ -96,8 +101,9 @@ public class OptionController {
 		return "redirect:/admin/option/list";
 	}
 	@GetMapping(value = "/price/update/{id}")
-	public String optionpriceupdateform(@PathVariable("id") Integer id, Model model) {
+	public String optionpriceupdateform(@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : member") Member member,@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("optprice", optPriceService.optPriceget(id));
+		model.addAttribute("member",member);
 		return "/admin/option/optpriceupdate";
 	}
 	@PostMapping(value = "/price/update/{id}")

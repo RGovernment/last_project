@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
-	layout:decorate="layouts/third_layout"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	layout:decorate="layouts/third_layout">
 <th:block layout:fragment="content">
-<link th:href="@{/css/admin_main.css}" rel="stylesheet">
+	<link th:href="@{/css/admin_main.css}" rel="stylesheet">
 	<div class="col-md-10 ps-5 pt-5" id="main-con">
 		<div class="d-flex align-items-center justify-content-center mb-5"
 			id="my-text1">management</div>
@@ -23,19 +22,27 @@
 							<th scope="col" class="fs-3"></th>
 							<th scope="col">분류</th>
 							<th scope="col">제목</th>
+							<th scope="col">작성자</th>
 							<th scope="col">작성일</th>
 						</tr>
 					</thead>
 					<tbody class="fs-5">
-						<tr>
-							<th scope="row">1</th>
-							<td>예약</td>
-							<td><a href="QAinfo" class="text-decoration-none text-dark">예약
-									문의합니다</a></td>
-							<td>2022-11-16</td>
+						<tr th:each="board: ${list}">
+							<td th:text="${board.id}"></td>
+							<td th:text="${board.asktype.description}"></td>
+							<td><a th:text="${board.title}"
+								th:href="@{/admin/QAanswer(id=${board.id})}"></a></td>
+							<td th:text="${board.member.name}"></td>
+							<td th:text="${#dates.format(board.cdate, 'yyyy-MM-dd HH:mm')}"></td>
 						</tr>
 					</tbody>
 				</table>
+				<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
+					<a th:if="${page != nowPage}"
+						th:href="@{/mypage/QAlist(page = ${page -1})}" th:text="${page}"></a>
+					<strong th:if="${page == nowPage}" th:text="${page}"
+						style="color: red"></strong>
+				</th:block>
 			</div>
 		</div>
 	</div>

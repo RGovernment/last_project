@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+textarea {
+	width: 100%;
+	border: none;
+	background: transparent;
+	overflow: auto;
+	resize: none;
+}
+
+input {
+	border: none;
+	background: transparent;
+}
