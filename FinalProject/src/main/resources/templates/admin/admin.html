@@ -36,6 +36,7 @@
 						<td th:text="${mem.phone}"></td>
 						<td th:if="${mem.gender}==1" th:text="남자"></td>
 						<td th:if="${mem.gender}==2" th:text="여자"></td>
+						<td th:if="${mem.gender}==3" th:text="카카오"></td>
 						<td th:if="${mem.secession}==0" th:text="X"></td>
 						<td th:if="${mem.secession}==1" th:text="O"></td>
 					</tr>

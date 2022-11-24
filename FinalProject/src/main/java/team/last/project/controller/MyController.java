@@ -2,33 +2,45 @@ package team.last.project.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
+import team.last.project.entity.Member;
 import team.last.project.entity.Option;
+import team.last.project.service.MemberService;
 import team.last.project.service.OptPriceService;
 import team.last.project.service.OptionService;
 
 @Controller
 @RequiredArgsConstructor
 public class MyController {
-
+	
 	@Autowired
 	OptPriceService optPriceService;
 	@Autowired
 	OptionService optionService;
-
+	
+	
 	@RequestMapping("/")
 	public String root() {
+		
 		return "redirect:/index";
 	}
 
 	@RequestMapping("/index")
 	public String indexPage() {
+
 		return "index";
 	}
 
@@ -57,6 +69,11 @@ public class MyController {
 	@RequestMapping("/terms")
 	public String termsConditions() {
 		return "terms";
+	}
+
+	@RequestMapping("/privateInfo")
+	public String privateInfoConditions() {
+		return "privateInfo";
 	}
 
 	@RequestMapping("/intro")

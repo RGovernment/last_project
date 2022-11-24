@@ -1,6 +1,7 @@
 package team.last.project.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.security.authentication.AuthenticationTrustResolver;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.RequiredArgsConstructor;
 import team.last.project.dto.MemberDto;
 import team.last.project.entity.Member;
@@ -26,6 +28,21 @@ import team.last.project.service.MemberService;
 public class MemberController {
 	private final MemberService memberService;
 	private final PasswordEncoder passwordEncoder;
+
+	@RequestMapping("/kakaologin")
+	public String kakao(@Nullable HttpSession session) {
+		MemberDto memberdto = null;
+		if (session != null) {
+			if (session.getAttribute("memberDto") != null) {
+				memberdto = (MemberDto) session.getAttribute("memberDto");
+				Member member = Member.createMember(memberdto, passwordEncoder);
+				memberService.join(member);
+			}
+		} else {
+
+		}
+		return "redirect:/index";
+	}
 
 	@GetMapping(value = "/login")
 	public String loginForm(HttpServletRequest req) {
@@ -40,10 +57,10 @@ public class MemberController {
 	}
 
 	@GetMapping("/secession")
-	public String secession(Model model,Authentication authentication) {
+	public String secession(Model model, Authentication authentication) {
 		memberService.getbyEmail(authentication.getName());
-		model.addAttribute("secessionMsg","탈퇴가 완료되었습니다.");
-		
+		model.addAttribute("secessionMsg", "탈퇴가 완료되었습니다.");
+
 		return "member/secession_msg";
 	}
 

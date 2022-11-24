@@ -14,23 +14,31 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import lombok.RequiredArgsConstructor;
 import team.last.project.security.AnonymousDeniedHandler;
 import team.last.project.security.AuthenticationEntryPointCustom;
 import team.last.project.security.UserLoginFailHandler;
 import team.last.project.security.UserLoginSuccessHandler;
+import team.last.project.security.oauth2.KakaoOAuth2UserService;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+	private final KakaoOAuth2UserService kakaoOAuth2UserService;
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
 			.permitAll()
-			.mvcMatchers("/admin/**").hasRole("ADMIN")
-			.antMatchers("/mypage/**").hasRole("USER")
 			.antMatchers("/member/signup").hasRole("ANONYMOUS")
+			.antMatchers("/mypage/editinfo").hasRole("USER")
+			.antMatchers("/mypage/editpass").hasRole("USER")
+			.antMatchers("/mypage/editpro").hasRole("USER")
+			.antMatchers("/mypage/**").hasAnyRole("USER","KUSER")
+			.mvcMatchers("/admin/**").hasRole("ADMIN")
 			.antMatchers("/**").permitAll()
 			.and()
 			.exceptionHandling().accessDeniedHandler(DeniedHandler())
@@ -49,6 +57,8 @@ public class SecurityConfig {
         	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
         	.logoutSuccessUrl("/")
         	.invalidateHttpSession(true);
+        	
+        	http.oauth2Login().userInfoEndpoint().userService(kakaoOAuth2UserService);
 		
 		return http.build();
 	}
@@ -57,20 +67,22 @@ public class SecurityConfig {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+
 	@Bean
 	public AuthenticationSuccessHandler successHandler() {
-	  return new UserLoginSuccessHandler();//default로 이동할 url
+		return new UserLoginSuccessHandler();// default로 이동할 url
 	}
+
 	@Bean
 	public AuthenticationFailureHandler failureHandler() {
-		return new UserLoginFailHandler();//default로 이동할 url
+		return new UserLoginFailHandler();// default로 이동할 url
 	}
-	
+
 	@Bean
 	public AccessDeniedHandler DeniedHandler() {
-		return new AnonymousDeniedHandler();//default로 이동할 url
+		return new AnonymousDeniedHandler();// default로 이동할 url
 	}
-	
+
 	@Bean
 	public AuthenticationEntryPoint entryPoint() {
 		return new AuthenticationEntryPointCustom();

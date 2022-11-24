@@ -79,7 +79,7 @@
 				th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 			<div class="text-center">
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary m-5"
+				<button type="button" class="btn btn-dark m-5"
 					data-bs-toggle="modal" data-bs-target="#infock" onclick="allck()" id="signup">회원가입</button>
 			</div>
 			<!-- Modal -->
@@ -95,15 +95,13 @@
 						</div>
 						<div class="modal-body">
 							<span id="nameck" class="chtext"></span> <br>
-							<br> <span id="mailck" class="chtext"></span> <br> <span>[exam@company.domain
-								형식 확인]</span> <br>
-							<br> <span id="pnumck" class="chtext"></span> <br> <span>[010-0000-0000
-								형식 확인]</span> <br>
+							<br> <span id="mailck" class="chtext"></span> <br> <span>[exam@company.domain 형식 확인]</span> <br>
+							<br> <span id="pnumck" class="chtext"></span> <br> <span>[010-0000-0000 형식 확인]</span> <br>
 							<br> <span id="genderck" class="chtext"></span> <br>
 						</div>
 						<div class="modal-footer justify-content-between">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">재입력</button>
-						<button type="submit" class="btn btn-primary" th:onclick=@{/signup}>확인</button>							
+						<button type="submit" class="btn btn-dark" th:onclick=@{/signup}>확인</button>							
 							</div>
 						</div>
 					</div>

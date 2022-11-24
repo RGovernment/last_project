@@ -9,8 +9,8 @@
 			id="my-text1">My Page</div>
 		<div id="profile">
 			<img src="/img/cake.jpg" class="img-pluid" id="profile_img">
-			<div id="loginid" th:inline="text">[[${member.name}]]님 안녕하세요
-				이곳은 문의페이지입니다.</div>
+			<div id="loginid" th:inline="text">[[${member.name}]]님 
+			안녕하세요 이곳은 문의페이지입니다.</div>
 		</div>
 		<br>
 		<div id="content_title">
@@ -39,14 +39,13 @@
 
 				<div class="mb-3">
 					<label th:for="content" class="form-label">문의사항</label>
-					<textarea class="form-control" th:field="*{content}" id="content-3" rows="10"></textarea>
+					<textarea class="form-control" th:field="*{content}" id="content-3" rows="10" placeholder="문의를 작성해주세요. 개인정보를 입력하지 않도록 주의하시길 바랍니다."></textarea>
 				</div>
 				<div class="text-center">
 					<input type="hidden" th:name="${_csrf.parameterName}"
 						th:value="${_csrf.token}">
-					<button class="btn btn-primary">문의 작성</button>
-					<button class="btn btn-secondary"
-						th:onclick="window.history.back()">취소</button>
+					<button class="btn btn-dark">문의 작성</button>
+					<button type="button" class="btn btn-secondary" th:onclick="window.history.back()">취소</button>
 				</div>
 			</div>
 		</form>

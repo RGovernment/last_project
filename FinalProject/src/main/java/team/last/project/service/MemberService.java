@@ -15,6 +15,7 @@ import team.last.project.repository.MemberRepository;
 @Transactional
 @RequiredArgsConstructor
 public class MemberService {
+	
 
 	private final PasswordEncoder passwordEncoder;
 	private final MemberRepository memberRepository;
@@ -50,6 +51,14 @@ public class MemberService {
 		Member mem = memberRepository.findByEmail(member.getEmail()).orElse(null);
 		String pass= passwordEncoder.encode(password);
 		mem.modifyPass(pass);
+	}
+	
+	public Member getMemberK(Member member) {
+		Member findMember = memberRepository.findByEmail(member.getEmail()).orElse(null);
+		if (findMember != null) {
+			join(member);
+		}
+		return findMember;
 	}
 
 	public void getbyEmail(String email) {

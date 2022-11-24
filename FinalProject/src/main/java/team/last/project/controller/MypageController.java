@@ -1,5 +1,6 @@
 package team.last.project.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.RequiredArgsConstructor;
 import team.last.project.dto.AskBoardDto;
 import team.last.project.dto.MemberDto;
@@ -32,10 +34,10 @@ public class MypageController {
 	private final MemberService memberService;
 
 	@RequestMapping(value = "")
-	public String mypage(
-			@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : member") Member member,
+	public String mypage(@AuthenticationPrincipal(expression = "#this == 'anonymousUser' ? null : member") Member member,
 			Model model) {
-		model.addAttribute("member", member);
+		
+		model.addAttribute("member",member );
 		return "/mypage/mymain";
 	}
 

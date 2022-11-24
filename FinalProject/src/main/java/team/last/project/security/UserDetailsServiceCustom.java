@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import team.last.project.entity.Member;
 import team.last.project.repository.MemberRepository;
+import team.last.project.security.oauth2.PrincipalDetails;
 
 @RequiredArgsConstructor
 @Service
@@ -18,7 +19,7 @@ public class UserDetailsServiceCustom implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		Member member = memberRepository.findByEmail(email).orElseThrow(()-> new UsernameNotFoundException("등록되지 않은 사용자 입니다."));
-		return new UserAccount(member);
+		return new PrincipalDetails(member);
 	}
 
 }

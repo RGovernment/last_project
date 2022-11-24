@@ -1,25 +1,39 @@
-Kakao.init('8890a67c089173194979845f9389950d');
-console.log(Kakao.isInitialized());
+/*  $(function(){
+	$("#btn-kakao-login").click(function(event){
+		// a태그 기능 실행멈춤.
+		event.preventDefault();
+		// 카카오 로그인 실행시 오류메시지를 표시하는 경고창을 화면에 보이지 않게 한다.
+		$("alert-kakao-login").addClass("d-none");
+		// 사용자 키를 전달, 카카오 로그인 서비스 초기화.
+		Kakao.init('78a3092d5af53803282c4c49afd6a7a9');
+		// 카카오 로그인 서비스 실행하기 및 사용자 정보 가져오기.
+		Kakao.Auth.login({
+			success:function(auth){
+				Kakao.API.request({
+					url: '/v2/user/me',
+					success: function(response){
+						// 사용자 정보를 가져와서 폼에 추가.
+						var account = response.kakao_account;				
+						$('#form-kakao-login input[name=email]').val(account.email);
+						$('#form-kakao-login input[name=name]').val(account.profile.nickname);
+						// 사용자 정보가 포함된 폼을 서버로 제출한다.
+						document.querySelector('#form-kakao-login').submit();
+					},
+					fail: function(error){
+						// 경고창에 에러메시지 표시
+						$('alert-kakao-login').removeClass("d-none").text("카카오 로그인 처리 중 오류가 발생했습니다.")
+					}
+				}); // api request
+			}, // success 결과.
+			fail:function(error){
+				// 경고창에 에러메시지 표시
+				$('alert-kakao-login').removeClass("d-none").text("카카오 로그인 처리 중 오류가 발생했습니다.")
+			}
+		}); // 로그인 인증.
+	}) // 클릭이벤트
+})// 카카오로그인 끝.
 
-function kakaoLogin() {
-	window.Kakao.Auth.login({
-		scope: 'profile, gender, age_range', //동의항목 페이지에 있는 개인정보 보호 테이블의 활성화된 ID값을 넣습니다.
-		success: function(response) {
-			console.log(response) // 로그인 성공하면 받아오는 데이터
-			window.Kakao.API.request({ // 사용자 정보 가져오기 
-				url: '/v2/user/me',
-				success: (res) => {
-					const kakao_account = res.kakao_account;
-					console.log(kakao_account)
-				}
-			});
-			// window.location.href='/ex/kakao_login.html' //리다이렉트 되는 코드
-		},
-		fail: function(error) {
-			console.log(error);
-		}
-	});
-}
+*/
 
 $(function () {
   var token = $("meta[name='_csrf']").attr("content");
