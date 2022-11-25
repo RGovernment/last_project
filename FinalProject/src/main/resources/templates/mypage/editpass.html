@@ -17,8 +17,7 @@
 		});</script>
 
 	<div class="col-md-10 ps-5 pt-5 mb-5" id="main-con">
-		<br> <br> <br> <br>
-
+		<br> <br> <br><br>
 		<div id="content_title" class="fs-2">회원수정</div>
 		<hr />
 		<div id="con-text" style="white-space: pre-line; font-size: 120%;">수정하실 비밀번호를 입력해주세요. 
@@ -44,9 +43,8 @@
 					일치합니다.</div>
 				<div class="alert alert-danger" id="alert-danger">비밀번호가 일치하지
 					않습니다.</div>
-				<div class="d-flex justify-content-center">
-					<button type="submit" class="btn btn-dark" id="pass_button">비밀번호
-						수정</button>
+				<div class="d-flex justify-content-between">
+				<button type="button" class="btn btn-secondary" th:onclick="window.history.back()">취소</button><button type="submit" class="btn btn-dark" id="pass_button">비밀번호 수정</button><div style="width: 60px"></div>
 				</div>
 				<input th:field="*{secession}" hidden="hidden"> <input
 					th:field="*{name}" hidden="hidden"> <input

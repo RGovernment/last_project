@@ -4,45 +4,64 @@
 	layout:decorate="layouts/second_layout"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block layout:fragment="content">
+	<link th:href="@{/css/QAlistPage.css}" rel="stylesheet">
 	<div class="col-md-10 ps-5 pt-5" id="main-con">
 		<div class="d-flex align-items-center justify-content-center mb-5"
 			id="my-text1">My Page</div>
 		<div id="profile">
 			<img src="/img/cake.jpg" class="img-pluid" id="profile_img">
-			<div id="loginid" th:inline="text">[[${member.name}]]님 
+			<div id="loginid" th:inline="text">[[${name}]]님 
 			안녕하세요 이곳은 문의페이지입니다.</div>
 		</div>
 		<div id="content_title" class="fs-3 d-flex justify-content-between">
-			1:1문의 <button type="button" th:onclick='|location.href="@{/mypage/QAwrite}"|' class="btn btn-dark btn-lg">문의하기</button>
+			1:1문의
+			<button type="button"
+				th:onclick='|location.href="@{/mypage/QAwrite}"|'
+				class="btn btn-dark btn-lg">문의하기</button>
 		</div>
 		<hr />
-		<div id="content">
+		<div id="content-sub" class="p-5 mb-3">
 			<table class="table table-border border-dark">
-								<thead class="fs-4">
-									<tr>
-										<th scope="col" class="fs-3"></th>
-										<th scope="col">분류</th>
-										<th scope="col">제목</th>
-										<th scope="col">작성일</th>
-									</tr>
-								</thead>
-								<tbody class="fs-5">
-									<tr th:each="board: ${list}">
-										<td th:text="${board.id}"></td>
-										<td th:text="${board.asktype.description}"></td>
-										<td><a th:text="${board.title}"
-											th:href="@{/mypage/QAcontent(id=${board.id})}"></a></td>
-										<td th:text="${#dates.format(board.cdate, 'yyyy-MM-dd HH:mm')}"></td>
-									</tr>
-								</tbody>
-							</table>
-							<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
-								<a th:if="${page != nowPage}"
-									th:href="@{/mypage/QAlist(page = ${page -1})}"
-									th:text="${page}"></a>
-								<strong th:if="${page == nowPage}" th:text="${page}"
-									style="color: red"></strong>
-							</th:block>
+				<thead class="fs-4" id="web-con">
+					<tr>
+						<th scope="col">분류</th>
+						<th scope="col">제목</th>
+						<th scope="col">작성일</th>
+						<th scope="col">답변여부</th>
+					</tr>
+				</thead>
+				<thead class="fs-4" id="mobile-con">
+					<tr>
+						<th scope="col">분류</th>
+						<th scope="col">제목</th>
+						<th scope="col">답변여부</th>
+					</tr>
+				</thead>
+				<tbody class="fs-5" id="web-con">
+					<tr th:each="board: ${list}">
+						<td th:text="${board.asktype.description}"></td>
+						<td><div th:text="${board.title}" id ="user_qa" th:onclick='|location.href="@{/mypage/QAcontent(id=${board.id})}"|'></div></td>
+						<td th:text="${#dates.format(board.cdate,'yyyy-MM-dd HH:mm')}"></td>
+						<td th:if="${#strings.isEmpty(board.answer)}" id="answer-con">미답변</td>
+						<td th:if="${not #strings.isEmpty(board.answer)}">답변완료</td>
+					</tr>
+				</tbody>
+				<tbody class="fs-5" id="mobile-con">
+					<tr th:each="board: ${list}">
+						<td th:text="${board.asktype.description}"></td>
+						<td><div th:text="${board.title}" id ="user_qa"
+							 th:onclick='|location.href="@{/mypage/QAcontent(id=${board.id})}"|'></div></td>
+						<td th:if="${#strings.isEmpty(board.answer)}" id="answer-con">미답변</td>
+						<td th:if="${not #strings.isEmpty(board.answer)}">답변완료</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="d-flex justify-content-between" id="page_div">
+				<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
+					<a th:if="${page != nowPage}" th:href="@{/mypage/QAlist(page = ${page -1})}" th:text="${page}" id="page"></a>
+					<strong th:if="${page == nowPage}" th:text="${page}" id="page_now"></strong>
+				</th:block>
+			</div>
 		</div>
 	</div>
 	</div>

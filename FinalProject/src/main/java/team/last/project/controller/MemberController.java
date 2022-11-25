@@ -20,6 +20,8 @@ import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.RequiredArgsConstructor;
 import team.last.project.dto.MemberDto;
 import team.last.project.entity.Member;
+import team.last.project.repository.MemberRepository;
+import team.last.project.security.oauth2.PrincipalDetails;
 import team.last.project.service.MemberService;
 
 @Controller
@@ -28,21 +30,6 @@ import team.last.project.service.MemberService;
 public class MemberController {
 	private final MemberService memberService;
 	private final PasswordEncoder passwordEncoder;
-
-	@RequestMapping("/kakaologin")
-	public String kakao(@Nullable HttpSession session) {
-		MemberDto memberdto = null;
-		if (session != null) {
-			if (session.getAttribute("memberDto") != null) {
-				memberdto = (MemberDto) session.getAttribute("memberDto");
-				Member member = Member.createMember(memberdto, passwordEncoder);
-				memberService.join(member);
-			}
-		} else {
-
-		}
-		return "redirect:/index";
-	}
 
 	@GetMapping(value = "/login")
 	public String loginForm(HttpServletRequest req) {
@@ -55,7 +42,16 @@ public class MemberController {
 			return "redirect:/index";
 		}
 	}
-
+	
+	@GetMapping("/kakao")
+	public String kakao(Authentication au) {
+		
+		if(memberService.memgetInfo(au.getName()).getSecession() ==1) {
+			return "redirect:/kakaoError";
+		}
+		return "redirect:/index"; 
+	}
+	
 	@GetMapping("/secession")
 	public String secession(Model model, Authentication authentication) {
 		memberService.getbyEmail(authentication.getName());

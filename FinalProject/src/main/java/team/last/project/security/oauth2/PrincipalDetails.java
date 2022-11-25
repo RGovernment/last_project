@@ -39,14 +39,15 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 	 * MemberDetails 구현 해당 유저의 권한목록 리턴
 	 */
 	@Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Role role = member.getRole();
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(ROLE_PREFIX + role.toString());
-        Collection<GrantedAuthority> authorities = new ArrayList<>(); //List인 이유 : 여러개의 권한을 가질 수 있다
-        authorities.add(authority);
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Role role = member.getRole();
+		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(ROLE_PREFIX + role.toString());
+		Collection<GrantedAuthority> authorities = new ArrayList<>(); // List인 이유 : 여러개의 권한을 가질 수 있다
+		authorities.add(authority);
 
-        return authorities;
-    }
+		return authorities;
+	}
+
 	/**
 	 * MemberDetails 구현 비밀번호를 리턴
 	 */
@@ -92,6 +93,11 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 	 */
 	@Override
 	public boolean isEnabled() {
+		if (member != null) {
+			if (member.getSecession() != 0) {
+				return false;
+			}
+		}
 		return true;
 	}
 

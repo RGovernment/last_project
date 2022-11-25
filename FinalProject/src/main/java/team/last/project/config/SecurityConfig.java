@@ -58,7 +58,8 @@ public class SecurityConfig {
         	.logoutSuccessUrl("/")
         	.invalidateHttpSession(true);
         	
-        	http.oauth2Login().userInfoEndpoint().userService(kakaoOAuth2UserService);
+        	http.oauth2Login().defaultSuccessUrl("/member/kakao")
+        	.userInfoEndpoint().userService(kakaoOAuth2UserService);
 		
 		return http.build();
 	}

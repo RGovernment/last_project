@@ -21,6 +21,16 @@ body {
 	max-width: 450px;
 	padding: 15px;
 }
+#btn-kakao-login:hover{
+	
+	cursor: pointer;
+}
+
+#btn-kakao-login:active{
+	opacity:70%;
+	
+	cursor: pointer;
+}
 
 #login-text {
 	font-size: 100%;

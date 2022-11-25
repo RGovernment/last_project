@@ -1,0 +1,60 @@
+@charset "utf-8";
+
+#content-sub {
+	border-radius: 3px;
+	background-color: #cccccc;
+	border-top: 2px solid #232323;
+	border-left: 2px solid #232323;
+	border-right: 3px solid black;
+	border-bottom: 3px solid black;
+}
+
+#user_qa {
+		cursor:pointer;
+		text-overflow: ellipsis;
+	}
+
+#user_qa:hover{
+	color:#888888;
+	text-decoration: underline;
+}
+
+#user_qa:active {
+	color:#444444;
+}
+
+#page_div{
+	 max-width: 50px;
+}
+
+#page_now{
+	font-size:20px;
+	color: #121299;
+}
+
+#page {
+	text-decoration: none;
+	color: black;
+}
+
+#page:hover{
+	color: #888888;
+	text-decoration: underline;
+}
+#page:active{
+	color: #444444;
+}
+
+@media screen and (max-width: 782px) {
+	#web-con {
+		display: none;
+	}
+	
+}
+
+@media screen and (min-width: 783px){
+		#mobile-con {
+		display: none;
+	}
+	
+}

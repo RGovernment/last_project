@@ -22,6 +22,13 @@ public class AskBoardService {
 	public Page<AskBoard> boardList(Pageable pageable) {
 		return askBoardRepository.findAll(pageable);
 	}
+	
+	public Page<AskBoard> boardListNoAnswer(Pageable pageable) {
+		return askBoardRepository.findAll(pageable);
+	}
+	public Page<AskBoard> boardListAnswer(Pageable pageable) {
+		return askBoardRepository.findAll(pageable);
+	}
 
 
 	public AskBoard boardView(Integer id) {

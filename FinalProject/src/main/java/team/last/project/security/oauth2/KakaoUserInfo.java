@@ -33,4 +33,5 @@ public class KakaoUserInfo {
 	public String getName() {
 		return attributesProfile.get("nickname").toString();
 	}
+
 }

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 #content-QA {
-	border-radius: 3px;
+	border-radius: 5px;
 	background-color: #cccccc;
 	border-top: 2px solid #232323;
 	border-left: 2px solid #232323;
@@ -9,14 +9,20 @@
 	border-bottom: 3px solid black;
 }
 
-#content-QA>div:first-child {
+#ti {
 	font-size: 26px;
+	font-weight: bold;
 }
-
-.row>div:first-line {
+#mun{
+	font-size: 20px;
 	font-weight: bold;
 }
 
 #mun-text {
 	font-size: 20px;
+}
+
+#textarea{
+	resize: none;
+	
 }

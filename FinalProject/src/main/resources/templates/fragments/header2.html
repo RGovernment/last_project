@@ -12,7 +12,7 @@
 					<div class="grid">
 						<div th:onclick="|location.href='@{/mypage}'|">주문조회</div>
 						<div th:onclick="|location.href='@{/mypage/QAlist}'|">1:1문의</div>
-						<div th:onclick="|location.href='@{/mypage/editinfo}'|">정보수정</div>
+						<div th:onclick="|location.href='@{/mypage/editinfo}'|" sec:authorize="hasRole('USER')">정보수정</div>
 						<div th:onclick="|location.href='@{/mypage/acc_del}'|">회원탈퇴</div>
 					</div>
 				</div>
@@ -31,7 +31,7 @@
 							<div class="nav-item nav-link active" id="bar-menu"
 								th:onclick="|location.href='@{/mypage/QAlist}'|">1:1문의</div>
 							<div class="nav-item nav-link active" id="bar-menu"
-								th:onclick="|location.href='@{/mypage/editinfo}'|">정보수정</div>
+								th:onclick="|location.href='@{/mypage/editinfo}'|" sec:authorize="hasRole('USER')">정보수정</div>
 							<div class="nav-item nav-link active" id="bar-menu"
 								th:onclick="|location.href='@{/mypage/acc_del}'|">회원탈퇴</div>
 						</div>

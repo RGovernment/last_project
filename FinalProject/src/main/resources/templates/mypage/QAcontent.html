@@ -11,35 +11,40 @@
 			id="my-text1">My Page</div>
 		<div id="profile">
 			<img src="/img/cake.jpg" class="img-pluid" id="profile_img">
-			<div id="loginid" th:inline="text">[[${member.name}]]님 
+			<div id="loginid" th:inline="text">[[${name}]]님 
 			안녕하세요 이곳은 문의페이지입니다.</div>
 		</div>
-		<div id="content_title" class="fs-3">
-			1:1문의 <a th:href="@{/mypage/QAwrite}"
-				class="text-decoration-none text-dark float-end">문의하기</a>
+		<div id="content_title" class="fs-3 d-flex justify-content-between">
+			1:1문의 <button type="button" th:onclick='|location.href="@{/mypage/QAwrite}"|' class="btn btn-dark btn-lg">문의하기</button>
 		</div>
-		<hr />
-		<div id="content-QA">
+		<hr>
+		<div class="p-5 mb-3" id="content-QA">
 			<div class="mb-3 row">
-				<div class=" col-sm-2">제목 :</div>
-				<div class=" col-sm-10" th:text="${askBoard.title}"></div>
+				<div class=" col-sm-10" th:inline="text">제목 : [[${askBoard.title}]]</div>
+				<div class="col-sm-2" th:if="${askBoard.asktype}==${T(team.last.project.constant.AskType).RESERVE}" >종류 : 예약</div>
+				<div class="col-sm-2" th:if="${askBoard.asktype}==${T(team.last.project.constant.AskType).OPTION}" >종류 : 옵션</div>
+				<div class="col-sm-2" th:if="${askBoard.asktype}==${T(team.last.project.constant.AskType).REFUND}" >종류 : 환불</div>
+				<div class="col-sm-2" th:if="${askBoard.asktype}==${T(team.last.project.constant.AskType).ETC}" >종류 : 기타</div>
 			</div>
-			<hr />
+			<hr style="height: 4px; background-color: black;">
+		
 			<div class="mb-3 row">
-				<div class=" col-sm-2">문의내역:</div>
-				<div class=" col-sm-10" th:text="${askBoard.content}"></div>
+				<div class=" col-sm-2" id="mun-text">문의내역</div>
 			</div>
-		</div>
+		<hr>
+		<div th:text="${askBoard.content}" class="mb-5" style="min-height: 320px;"></div>
+		
 		<div id="answer">
-			<hr />
+			<hr style="height: 4px; background-color: black;">
 			<div class="mb-3 row">
-				<div class=" col-sm-2">문의답변:</div>
-				<div class=" col-sm-10" th:text="${askBoard.answer}"></div>
+				<div class=" col-sm-2" id="mun-text">문의답변</div>
 			</div>
-			<hr />
+			<hr class="g-0">
+			<div class="col-sm-10" th:if="${#strings.isEmpty(askBoard.answer)}" id="answer-con">아직 답변이 없습니다.</div>
+			<div class=" col-sm-10" th:text="${askBoard.answer}" id="answer-con" style="min-height: 100px;" ></div>
 		</div>
-		<button type="button" class="btn btn-secondary" th:onclick="window.history.back()">취소</button>
 	</div>
+	<button type="button" class="btn btn-secondary mb-5" th:onclick="window.history.back()">목록</button>
 	</div>
 	</div>
 	</main>

@@ -3,51 +3,54 @@
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
 	layout:decorate="layouts/third_layout">
 <th:block layout:fragment="content">
-	<link th:href="@{/css/QAanswer.css}" rel="stylesheet">
+	<link th:href="@{/css/admin_QAanswer.css}" rel="stylesheet">
 	<link th:href="@{/css/admin_main.css}" rel="stylesheet">
 	<div class="col-md-10 ps-5 pt-5" id="main-con">
 		<div class="d-flex align-items-center justify-content-center mb-5"
 			id="my-text1">My Page</div>
 		<div id="profile">
 			<img src="/img/cake.jpg" class="img-pluid" id="profile_img">
-			<div id="loginid" th:inline="text">[[${member.name}]]님 
+			<div id="loginid" th:inline="text">[[${name}]]님 
 			관리자 페이지에 오신걸 환영합니다.</div>
 		</div>
-		<div id="content_title" class="fs-3">1:1문의</div>
+		<div >
+		<div id="content_title" class="fs-3 d-flex justify-content-between">1:1문의
+		<button class="btn btn-secondary" type="button" th:onclick="window.history.back()">뒤로</button>
+		</div>
 		<hr />
-		<div id="content-QA">
+		<div class="p-5 mb-3" id="content-QA">
 			<div class="mb-3 row">
-				<div class="col-sm-2">제목 :</div>
-				<div class="col-sm-8" th:text="${askBoard.title}"></div>
-				<div id="type" class="col-sm-2"
-					th:text="${askBoard.asktype.description}"></div>
+				<div class="col-sm-10" th:inline="text" id="ti">제목 : [[${askBoard.title}]]</div>
+				<div class="col-sm-2" th:if="${askBoard.asktype}==${T(team.last.project.constant.AskType).RESERVE}" >종류 : 예약</div>
+				<div class="col-sm-2" th:if="${askBoard.asktype}==${T(team.last.project.constant.AskType).OPTION}" >종류 : 옵션</div>
+				<div class="col-sm-2" th:if="${askBoard.asktype}==${T(team.last.project.constant.AskType).REFUND}" >종류 : 환불</div>
+				<div class="col-sm-2" th:if="${askBoard.asktype}==${T(team.last.project.constant.AskType).ETC}" >종류 : 기타</div>
+			
 			</div>
-			<hr />
+			<hr style="height: 4px; background-color: black;">
 			<div class="mb-3 row">
-				<div class="col-sm-2">문의내역:</div>
-				<div class="col-sm-10" th:text="${askBoard.content}"></div>
+				<div id = "mun">문의내역</div>
 			</div>
-			<hr />
+			<hr>
+			<div th:inline="text" style="min-height: 320px;">[[${askBoard.content}]]</div>
 			<div id="answer">
+			<hr style="height: 4px; background-color: black;">
 				<div class="mb-3 row d-flex flex-row justify-content-center">
-					<form th:action="@{/admin/QAanswer/{id}(id=${askBoard.id})}"
-						method="post" th:object="${askBoard}">
-						<input type="hidden" th:field="*{title}"> <input
-							type="hidden" th:field="*{content}"> <input type="hidden"
-							th:field="*{asktype}">
-						<div class="row">
-							<div class="col-sm-2">
-								<label th:for="answer">답변:</label>
+					<form th:action="@{/admin/QAanswer/{id}(id=${askBoard.id})}" method="post" th:object="${askBoard}">
+						<input type="hidden" th:field="*{title}"> 
+						<input type="hidden" th:field="*{content}"> 
+						<input type="hidden" th:field="*{asktype}">
+						<div class="row mb-5">
+							<div class="col-sm-1">
+								<label th:for="answer">답변</label>
 							</div>
-							<div class="col-sm-10">
-								<textarea id="textarea" th:field="*{answer}"
-									class="form-control"></textarea>
+							<div class="col-sm-11">
+								<textarea id="textarea" th:field="*{answer}" class="form-control" rows="6"></textarea>
 							</div>
 						</div>
-
-						<hr />
-						<button id="submit_button" class="col-md-1" type="submit">답변
-							전송</button>
+						<div class="d-flex justify-content-center">
+						<button class="btn btn-dark" type="submit">답변 전송</button><div style="width: 60px"></div>
+							</div>
 					</form>
 				</div>
 			</div>

@@ -4,46 +4,82 @@
 	layout:decorate="layouts/third_layout">
 <th:block layout:fragment="content">
 	<link th:href="@{/css/admin_main.css}" rel="stylesheet">
+	<link th:href="@{/css/admin_QAlistPage.css}" rel="stylesheet">
+	<script th:inline="javascript" th:src="@{/js/admin_QAlist.js}"></script>
 	<div class="col-md-10 ps-5 pt-5" id="main-con">
 		<div class="d-flex align-items-center justify-content-center mb-5"
 			id="my-text1">management</div>
 		<div id="profile">
-			<div id="loginid" th:inline="text">[[${member.name}]]님 
-			관리자 페이지에 오신걸 환영합니다.
-			
+			<div id="loginid" th:inline="text">[[${name}]]님 
+			관리자 페이지에 오신걸 환영합니다.	
 			</div>
-			<div id="content_title">
+			<br>
+			<form method="post" th:action="@{/admin/QAlistsort}" class="select-form">
+			<div id="content_title" class="d-flex justify-content-between">
 				<h2>문의내역</h2>
+				<div>
+				<select th:name="sortingOrder" class="sel-box">
+				<option value="" selected disabled>정렬</option>
+				<option value="0">아이디순</option>
+				<option value="1">미답변순</option>
+				<option value="2">답변순</option>
+				</select>
+				</div>
 			</div>
+			</form>
 			<hr />
-			<div id="content" class="fs-3">
+			<div id="content-sub" class="p-5 mb-3">
 				<table class="table table-border border-dark">
-					<thead class="fs-4">
-						<tr>
-							<th scope="col" class="fs-3"></th>
-							<th scope="col">분류</th>
-							<th scope="col">제목</th>
-							<th scope="col">작성자</th>
-							<th scope="col">작성일</th>
-						</tr>
-					</thead>
-					<tbody class="fs-5">
+				<thead class="fs-4" id="web-con">
+					<tr>
+						<th scope="col">번호</th>
+						<th scope="col">분류</th>
+						<th scope="col">제목</th>
+						<th scope="col">작성자</th>
+						<th scope="col">작성일</th>
+						<th scope="col">답변여부</th>
+					</tr>
+				</thead>
+				<thead class="fs-4" id="mobile-con">
+					<tr>
+						<th scope="col">접수번호</th>
+						<th scope="col">분류</th>
+						<th scope="col">제목</th>
+						<th scope="col">작성자</th>
+						<th scope="col">답변여부</th>
+					</tr>
+				</thead>
+					<tbody class="fs-5" id="web-con">
 						<tr th:each="board: ${list}">
 							<td th:text="${board.id}"></td>
 							<td th:text="${board.asktype.description}"></td>
-							<td><a th:text="${board.title}"
-								th:href="@{/admin/QAanswer(id=${board.id})}"></a></td>
+							<td><div th:text="${board.title}" id ="user_qa" 
+								th:onclick="|location.href='@{/admin/QAanswer(id=${board.id})}'|"></div></td>
 							<td th:text="${board.member.name}"></td>
 							<td th:text="${#dates.format(board.cdate, 'yyyy-MM-dd HH:mm')}"></td>
+							<td th:if="${#strings.isEmpty(board.answer)}" id="answer-con">미답변</td>
+							<td th:if="${not #strings.isEmpty(board.answer)}">답변완료</td>
+						</tr>
+					</tbody>
+					<tbody class="fs-5" id="mobile-con">
+						<tr th:each="board: ${list}">
+							<td th:text="${board.id}"></td>
+							<td  th:text="${board.asktype.description}"></td>
+							<td><div th:text="${board.title}" id ="user_qa" 
+								th:onclick="|location.href='@{/admin/QAanswer(id=${board.id})}'|"></div></td>
+							<td th:text="${board.member.name}"></td>
+							<td th:if="${#strings.isEmpty(board.answer)}" id="answer-con">미답변</td>
+							<td th:if="${not #strings.isEmpty(board.answer)}" id="answer-con">답변완료</td>
 						</tr>
 					</tbody>
 				</table>
+				
+					<div class="d-flex justify-content-evenly" id="page_div">
 				<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
-					<a th:if="${page != nowPage}"
-						th:href="@{/admin/QAlist(page = ${page -1})}" th:text="${page}"></a>
-					<strong th:if="${page == nowPage}" th:text="${page}"
-						style="color: red"></strong>
+					<a th:if="${page != nowPage}" th:href="@{/admin/QAlist(page = ${page -1})}" th:text="${page}" id="page"></a>
+					<strong th:if="${page == nowPage}" th:text="${page}" id="page_now" style="color: #121299;"></strong>
 				</th:block>
+				</div>
 			</div>
 		</div>
 	</div>

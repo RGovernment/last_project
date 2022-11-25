@@ -43,7 +43,23 @@ public class MemberService {
 	
 	public boolean memberck(String password,Member member) {
 		return passwordEncoder.matches(password, member.getPassword());
-		
+	}
+	
+	public Member memgetInfo(String email) {
+		Member mem= memberRepository.findByEmail(email).orElse(null);
+		return mem;
+	}
+	
+	public String memgetName(String email) {
+		Member mem= memberRepository.findByEmail(email).orElse(null);
+		String name = mem.getName();
+		return name;
+	}
+	
+	public Long memgetId(String email) {
+		Member mem= memberRepository.findByEmail(email).orElse(null);
+		Long id = mem.getId();
+		return id;
 	}
 	
 	@Transactional

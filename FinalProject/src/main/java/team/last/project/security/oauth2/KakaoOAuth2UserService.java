@@ -26,7 +26,7 @@ public class KakaoOAuth2UserService extends DefaultOAuth2UserService {
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 		Member member = new Member();
 		OAuth2User oAuth2User = super.loadUser(userRequest);
-        KakaoUserInfo   kakao2UserInfo = new KakaoUserInfo(oAuth2User.getAttributes());
+        
 		String email = "";
 		Map<String, Object> attributes = oAuth2User.getAttributes();
 		Map<String, Object> properties = (Map<String, Object>) attributes.get("properties");
@@ -40,35 +40,26 @@ public class KakaoOAuth2UserService extends DefaultOAuth2UserService {
 		}
 		String nickname = properties.get("nickname").toString();
 
-		member.setEmail(email);
-		member.setName(nickname);
-		member.setPassword("kakaologin0");
-		member.setPhone("000-0000-0000");
-		member.setSecession(0);
-		member.setGender(3);
-		member.setRole(Role.KUSER);
-
-		if (validateDuplicateMember(member) == null) {
-			memberRepository.save(member);
+		if(null == memberRepository.findByEmail(email).orElse(null)) {
+			member.setEmail(email);
+			member.setName(nickname);
+			member.setPassword("kakaologin0");
+			member.setPhone("-");
+			member.setSecession(0);
+			member.setGender(3);
+			member.setRole(Role.KUSER);
 		}
-		
+		int secession = 0;
+		KakaoUserInfo kakao2UserInfo = 
+				new KakaoUserInfo(oAuth2User.getAttributes());
 		Member byMemberEmail = memberRepository.findByEmail(email).orElse(null);
 		if(byMemberEmail == null){
 			byMemberEmail = member;
 			memberRepository.save(byMemberEmail);
 	        }
-
-
 		
-
 		// memberService.join(Member.createMemberforKakao(memberdto));
-
 		//return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority("ROLE_KUSER")), attributes, "id");
 		return new PrincipalDetails(byMemberEmail, kakao2UserInfo);	
-	}
-
-	private Member validateDuplicateMember(Member member) {
-		return memberRepository.findByEmail(member.getEmail()).orElse(null);
-
 	}
 }
