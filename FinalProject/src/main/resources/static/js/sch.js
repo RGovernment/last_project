@@ -146,7 +146,9 @@ function changeToday(e) {
 	var keyValue = today.getFullYear() + '' + today.getMonth() + '' + today.getDate();
 	showMain();
 	keyValue = today.getFullYear() + '' + today.getMonth() + '' + today.getDate();
+	var weekend = today.getFullYear() + '-' + today_month + '-' + today.getDate();
 
+	getDayOfWeek(weekend);
 	reshowingList();
 }
 
@@ -223,10 +225,8 @@ $('.package').change(function() {
 	console.log(value);
 });
 
-var weekend = today.getFullYear() + '-' + today_month + '-' + today.getDate();
-getDayOfWeek(weekend);
-var wday = today;
 
+var wday = today;
 
 function getDayOfWeek(wday) {
 
