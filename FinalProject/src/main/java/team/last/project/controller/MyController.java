@@ -63,11 +63,6 @@ public class MyController {
 		return "er";
 	}
 
-	@RequestMapping("/res")
-	public String Reservation() {
-		return "Reservation";
-	}
-
 	@RequestMapping("/terms")
 	public String termsConditions() {
 		return "terms";

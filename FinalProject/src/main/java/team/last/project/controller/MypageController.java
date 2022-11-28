@@ -27,6 +27,7 @@ import team.last.project.entity.AskBoard;
 import team.last.project.entity.Member;
 import team.last.project.service.AskBoardService;
 import team.last.project.service.MemberService;
+import team.last.project.service.ReserveService;
 
 @Controller
 @RequestMapping(value = "/mypage")
@@ -34,13 +35,20 @@ import team.last.project.service.MemberService;
 public class MypageController {
 	private final AskBoardService askBoardService;
 	private final MemberService memberService;
+	private final ReserveService reserveService;
 
 	@RequestMapping(value = "")
-	public String mypage(@Nullable Member member, Authentication authentication, Model model) {
-
-		String name = memberService.memgetName(authentication.getName());
-
+	public String mypage(Authentication authentication, Model model) {
+		
+		Member mem = memberService.memgetInfo(authentication.getName());
+		
+		String name = mem.getName();
+		Long id = mem.getId();
+		
+		reserveService.
+		
 		model.addAttribute("name", name);
+		model.addAttribute("id",id);
 
 		return "/mypage/mymain";
 	}
