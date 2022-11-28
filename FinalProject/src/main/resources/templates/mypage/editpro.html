@@ -42,7 +42,7 @@
 					<p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="fieldError"></p>
 				</div>
 				<div class="d-flex justify-content-between">
-				<button type="button" class="btn btn-secondary" th:onclick="window.history.back()">취소</button><button type="submit" class="btn btn-dark" id="pass_button">비밀번호 수정</button><div style="width: 60px"></div>
+				<button type="button" class="btn btn-secondary" th:onclick="window.history.back()">취소</button><button type="submit" class="btn btn-dark" id="pass_button">프로필 수정</button><div style="width: 60px"></div>
 				</div>
 				<input th:field="*{password}" hidden="hidden"> 
 				<input th:field="*{secession}" hidden="hidden">
