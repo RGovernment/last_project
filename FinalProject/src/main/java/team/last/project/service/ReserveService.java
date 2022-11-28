@@ -19,10 +19,10 @@ public class ReserveService {
 		reserveRepository.save(reserve);
 	}
 
-	public List<?> reserveList(Long id) {
+	
+	public List<Reserve> reserveList(Long id) {
 		
 		List<Reserve> reserve = reserveRepository.findALLByMemberId(id);
-		
 		return reserve;
 	}
 

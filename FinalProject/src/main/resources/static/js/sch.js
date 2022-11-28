@@ -148,9 +148,7 @@ function clickStart() {
 	}
 }
 //
-
-
-
+var selectedDate;
 function changeToday(e) {
 	for (let i = 1; i <= pageYear[first.getMonth()]; i++) {
 		if (tdGroup[i].classList.contains('active')) {
@@ -160,57 +158,128 @@ function changeToday(e) {
 	clickedDate1 = e.currentTarget;
 	clickedDate1.classList.add('active');
 	today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
-	var keyValue = today.getFullYear() + '' + today.getMonth() + '' + today.getDate();
 	var today_month = today.getMonth() + 1
-	keyValue = today.getFullYear() + '' + today_month + '' + today.getDate();
-	console.log(keyValue);
-	document.getElementById('test').innerHTML = "<input type='hidden' name='d' value=" + keyValue + ">";
+	selectedDate = today.getFullYear() + '-' + today_month + '-' + today.getDate();
+	console.log(selectedDate);
+	$('.RentTime').find("option:eq(0)").prop("selected", true);
+	$('.S').css("display", "none");
+	$("#start_time").val(null);
+	$("#end_time").val(null);
 }
 
-$('.member_cnt').change(function() {
+var optionsid = "";
+var totalprice = 0;
+var Roomprice = 0;
+var Optionprice = 0;
+var optid = 0;
+//대여 시간 선택
+$('.RentTime').change(function() {
+	var Rtime = $(this).val();
+	var Rprice = $(this).find("option:selected").data("price");
+	if (Rtime == 3) {
+		$('#T6').css("display", "none");
+		$('#TA').css("display", "none");
+		$('#T3').removeAttr("style");
+	} else if (Rtime == 6) {
+		$('#T3').css("display", "none");
+		$('#TA').css("display", "none");
+		$('#T6').removeAttr("style");
+	} else if (Rtime == 15) {
+		$('#T3').css("display", "none");
+		$('#T6').css("display", "none");
+		$('#TA').removeAttr("style");
+	}
+	$('#T3').find("option:eq(0)").prop("selected", true);
+	$('#T6').find("option:eq(0)").prop("selected", true);
+	$('#TA').find("option:eq(0)").prop("selected", true);
+	Roomprice = Rprice;
+	totalprice = Optionprice + Roomprice;
+	$("#totalprice").val(totalprice);
 
-	var value = $(this).val();
-	console.log(value);
+});
+// 대여 시작 시간선택
+$('.S').change(function() {
+	var Stime = $(this).val();
+	var RentTime = $('.RentTime').val();
+	var Etime = parseInt(Stime) + parseInt(RentTime);
+	var Sresult = selectedDate + " " + Stime + ":00:00";
+	$("#start_time").val(Sresult);
+	var Eresult = "";
+	const tomorrow = new Date(today);
+	tomorrow.setDate(today.getDate() + 1);
+	if (Etime == 24) {
+		Eresult = tomorrow.getFullYear() + '-' + (tomorrow.getMonth() + 1) + '-' + tomorrow.getDate() + " " + "00:00:00";
+	} else {
+		Eresult = selectedDate + " " + Etime + ":00:00";
+	}
+	if (RentTime == 15) {
+		Eresult = tomorrow.getFullYear() + '-' + (tomorrow.getMonth() + 1) + '-' + tomorrow.getDate() + " " + "09:00:00";
+	}
+	$("#end_time").val(Eresult);
 });
 
-$('.option').change(function() {
+//영수증 출력
+$('.add_option').click(function() {
+	var optprice_id = $('#selectoption').val();
+	$.ajax({
+		type: "GET",
+		url: "/res/optprice",
+		data: { optprice_id: optprice_id },
+		success: function(result) {
+			printoptionlist(result);
+		},
+		error: function() {
+		}
 
-	var value = $(this).val();
-	console.log(value);
+	}); //$.ajax
+
+
 });
 
-$('.package').change(function() {
+function printoptionlist(optprice) {
+	var divArea = $("#printoptions");
 
-	var value = $(this).val();
-	console.log(value);
-});
+	var str = "";
+
+	str += "<div id=" + optid + ">";
+	str += optprice.content + "&nbsp" + optprice.price + "<a href='javascript:deletediv(" + optid + ")'>x</a>";
+	str += "</div>";
+	divArea.append(str);
+	optid += 1;
+	Optionprice += optprice.price;
+	if (optionsid == "") {
+		optionsid += optprice.id;
+	} else {
+		optionsid += ",";
+		optionsid += optprice.id;
+	}
+	totalprice = Optionprice + Roomprice;
+	$("#printtotalprice").html("금액 :" + totalprice);
+	$("#totalprice").val(totalprice);
+	$("#options").val(optionsid);
+};
+
+function deletediv(optid) {
+	$("#" + optid).remove();
+};
 
 
-var wday = today;
+//var star = document.getElementById("star").value;
+//console.log(star);
 
-function getDayOfWeek(wday) {
-
-	const week = ['일', '월', '화', '수', '목', '금', '토'];
-
-	const dayOfWeek = week[new Date(wday).getDay()];
-
-	console.log(dayOfWeek);
-
-	return dayOfWeek;
-
-}
-
-var weekend = today.getFullYear() + '-' + today_month + '-' + today.getDate();
-getDayOfWeek(weekend);
-
-
-
-var star = document.getElementById("star").value;
-console.log(star);
-
-$('#starRating').css('width', star);
+//$('#starRating').css('width', star);
 
 //새로고침용 페이지전환
+
+/*
+	var sel = "";
+	sel += "<select class='S'>";
+	for(var i = 0 ;i<24;i++){
+		sel += "<option value="+i+">"+i+"</option>"
+	}
+	sel += "</select>";
+		document.getElementById('Stime').innerHTML=sel;
+	*/
 prev();
 next();
 

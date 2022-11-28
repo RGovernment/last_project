@@ -12,7 +12,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@NamedEntityGraph(name = "RoomwitRoomtype", attributeNodes = @NamedAttributeNode("roomtype"))
+@NamedEntityGraph(name = "RoomwithRoomtype", attributeNodes = @NamedAttributeNode("roomtype"))
 public class Room {
 	@Id
 	private int id;
