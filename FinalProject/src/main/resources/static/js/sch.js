@@ -16,7 +16,9 @@ if (first.getFullYear() % 4 === 0) {
 	pageYear = notLeapYear;
 }
 
-function showCalendar() {
+
+
+function showCalendar(month) {
 	let monthCnt = 100;
 	let cnt = 1;
 	for (var i = 0; i < 6; i++) {
@@ -34,16 +36,30 @@ function showCalendar() {
 				var x = "예약가능";
 				var d1 = "";
 				var d2 = "";
+				var d3 = "";
+
+				var month_list = first.getMonth();
+				month_list = month;
+				console.log(month_list);
+
 				//더미생성
 				if (j % 2 == 0) {
 					d1 = o;
 					d2 = x;
+					d3 = o;
 				} else {
 					d1 = x;
 					d2 = o;
+					d3 = x;
 				}
 
-				//주말 색깔넣기
+				if (i == 3 & j == 4) {
+					d1 = o;
+					d2 = " ";
+					d3 = " ";
+				}
+
+				//주말 색깔넣기 일요일=빨강 , 토요일=파랑
 				var weekend = "";
 				if (j == 0) {
 					weekend = "red";
@@ -52,7 +68,7 @@ function showCalendar() {
 				}
 
 				$td.innerHTML = "<div id='day_content_date' style='color:" + weekend + "'>" + cnt + "</div>" +
-					"<div id='day_content1'>" + d1 + "</div>" + "<div id='day_content2'>" + d2 + "</div>" + "<div id='day_content3'>" + d2 + "</div>";
+					"<div id='day_content1'>" + d1 + "</div>" + "<div id='day_content2'>" + d2 + "</div>" + "<div id='day_content3'>" + d3 + "</div>";
 
 				$td.setAttribute('id', cnt);
 				$tr.appendChild($td);
@@ -63,7 +79,7 @@ function showCalendar() {
 		calendarBody.appendChild($tr);
 	}
 }
-showCalendar();
+showCalendar(11);
 
 function removeCalendar() {
 	let catchTr = 100;
@@ -73,6 +89,8 @@ function removeCalendar() {
 		catchTr++;
 	}
 }
+
+var month="";
 
 //prev , next
 function prev() {
@@ -94,10 +112,13 @@ function prev() {
 		first = pageFirst;
 	}
 	today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+	month = today.getMonth()+1;
+	console.log(today.getMonth()+1);
+	
 	currentTitle.innerHTML = monthList[today.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;'
 		+ first.getFullYear();
 	removeCalendar();
-	showCalendar();
+	showCalendar(month);
 	clickedDate1 = document.getElementById(today.getDate());
 	clickedDate1.classList.add('active');
 	clickStart();
@@ -123,9 +144,12 @@ function next() {
 	}
 
 	today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+	
+	month = today.getMonth()+1;
+	console.log(today.getMonth()+1);
 	document.getElementById('current-year-month').innerHTML = monthList[first.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;' + first.getFullYear();
 	removeCalendar();
-	showCalendar();
+	showCalendar(month);
 	clickedDate1 = document.getElementById(today.getDate());
 	clickedDate1.classList.add('active');
 	clickStart();
@@ -264,10 +288,10 @@ function deletediv(optid) {
 };
 
 
-//var star = document.getElementById("star").value;
-//console.log(star);
+var star = document.getElementById("star").value;
+console.log(star);
 
-//$('#starRating').css('width', star);
+$('#starRating').css('width', star);
 
 //새로고침용 페이지전환
 
