@@ -45,10 +45,10 @@ public class MypageController {
 		String name = mem.getName();
 		Long id = mem.getId();
 		
-		reserveService.
+		List<?> reserveList = reserveService.reserveList(id);
 		
 		model.addAttribute("name", name);
-		model.addAttribute("id",id);
+		model.addAttribute("list",reserveList);
 
 		return "/mypage/mymain";
 	}
