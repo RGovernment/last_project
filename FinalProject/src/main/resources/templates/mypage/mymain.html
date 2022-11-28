@@ -26,15 +26,15 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="list : ${reslist}" th:if="${list} != null">
-						<td th:text="${list.room.name}"></td>
-						<td th:inline="text">[[${#dates.format(list.start_time,'yyyy-MM-dd HH시 예약')}]]</td>
-						<td th:inline="text">[[${#numbers.formatInteger(list.totalprice,3,'COMMA')}]]원</td>
-					</tr>
-					<tr th:unless="${not #strings.isEmpty(list)}">
+					<tr th:if="${#lists.isEmpty(reslist)}">
 					<td colspan="3">
-						아직 예약한 방이 없습니다.
+						아직 예약 결제한 내역이 없습니다.
 					</td>
+					</tr>
+					<tr th:each="list : ${reslist}" th:unless="${#lists.isEmpty(reslist)}">
+						<td th:text="${list.room.name}"></td>
+						<td th:inline="text">[[${#dates.format(list.start_time,'yyyy-MM-dd HH시 00분')}]]</td>
+						<td th:inline="text">[[${#numbers.formatInteger(list.totalprice,3,'COMMA')}]]원</td>
 					</tr>
 				</tbody>
 			</table>

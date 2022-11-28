@@ -57,9 +57,9 @@ public class SecurityConfig {
         	.logout().permitAll()
         	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
         	.logoutSuccessUrl("/")
-        	.invalidateHttpSession(true);
-        	
-        	http.oauth2Login().defaultSuccessUrl("/member/kakao")
+        	.invalidateHttpSession(true)
+        	.and()
+        	.oauth2Login().defaultSuccessUrl("/member/kakao")
         	.userInfoEndpoint().userService(kakaoOAuth2UserService);
 		
 		return http.build();

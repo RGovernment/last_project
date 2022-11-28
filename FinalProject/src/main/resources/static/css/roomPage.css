@@ -29,3 +29,26 @@
 	z-index: 0;
 	padding: 0;
 }
+
+#start_time{
+	text-align: center;
+	border:none;
+	outline:none;
+	border-top-left-radius:5px;
+	border-bottom-left-radius:5px;
+	border-right:1px solid black;
+}
+#end_time{
+	text-align: center;
+	border:1px;
+	outline:none;
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+}
+
+#room-text1{
+	font-weight:700;
+	font-family: 'Dancing Script', cursive;
+	font-size: 60px;
+	color:#483d8b;
+}

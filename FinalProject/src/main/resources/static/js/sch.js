@@ -9,6 +9,7 @@ var leapYear = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 var notLeapYear = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 var pageFirst = first;
 var pageYear;
+var delprice = 0;
 
 if (first.getFullYear() % 4 === 0) {
 	pageYear = leapYear;
@@ -180,14 +181,17 @@ $('.RentTime').change(function() {
 		$('#T6').css("display", "none");
 		$('#TA').css("display", "none");
 		$('#T3').removeAttr("style");
+		$('#T3').css("border-radius","5px");
 	} else if (Rtime == 6) {
 		$('#T3').css("display", "none");
 		$('#TA').css("display", "none");
 		$('#T6').removeAttr("style");
+		$('#T6').css("border-radius","5px");
 	} else if (Rtime == 15) {
 		$('#T3').css("display", "none");
 		$('#T6').css("display", "none");
 		$('#TA').removeAttr("style");
+		$('#TA').css("border-radius","5px");
 	}
 	$('#T3').find("option:eq(0)").prop("selected", true);
 	$('#T6').find("option:eq(0)").prop("selected", true);
@@ -232,9 +236,10 @@ $('.add_option').click(function() {
 		}
 
 	}); //$.ajax
-
-
 });
+
+
+
 
 function printoptionlist(optprice) {
 	var divArea = $("#printoptions");
@@ -242,7 +247,7 @@ function printoptionlist(optprice) {
 	var str = "";
 
 	str += "<div id=" + optid + ">";
-	str += optprice.content + "&nbsp" + optprice.price + "<a href='javascript:deletediv(" + optid + ")'>x</a>";
+	str += optprice.content + "&nbsp" + "<div id="+optid+"price>"+optprice.price + "<div><a class='listDel' href='javascript:deletediv(" + optid + ")'>삭제</a>";
 	str += "</div>";
 	divArea.append(str);
 	optid += 1;
@@ -259,9 +264,38 @@ function printoptionlist(optprice) {
 	$("#options").val(optionsid);
 };
 
+let clearAll = () => {
+	$("#printoptions").text("");
+	$("#printtotalprice").text("");
+	$("#options").val("");
+	Optionprice = 0;
+	
+}
+
 function deletediv(optid) {
+	delprice =  $("#"+optid+"price").val();
+	totalprice -= delprice;
+	$("#totalprice").val(totalprice);
+	$("#printtotalprice").html("금액 :" + totalprice);
 	$("#" + optid).remove();
 };
+
+//영수증 출력
+$('.listDel').click(function() {
+	var optprice_id = $('#selectoption').val();
+	$.ajax({
+		type: "GET",
+		url: "/res/optprice",
+		data: { optprice_id: optprice_id },
+		success: function(result) {
+			printoptionlist(result);
+		},
+		error: function() {
+		}
+
+	}); //$.ajax
+});
+
 
 
 //var star = document.getElementById("star").value;

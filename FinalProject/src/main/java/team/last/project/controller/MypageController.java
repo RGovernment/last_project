@@ -45,7 +45,6 @@ public class MypageController {
 		
 		String name = mem.getName();
 		Long id = mem.getId();
-		System.out.println(id);
 		List<Reserve> reserveList = reserveService.reserveList(id);
 		model.addAttribute("name", name);
 		model.addAttribute("reslist",reserveList);
