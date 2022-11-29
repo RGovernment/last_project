@@ -152,16 +152,22 @@ function clickStart() {
 var selectedDate;
 function changeToday(e) {
 	for (let i = 1; i <= pageYear[first.getMonth()]; i++) {
+		
 		if (tdGroup[i].classList.contains('active')) {
 			tdGroup[i].classList.remove('active');
+			clickedDate1.classList.remove("back");
 		}
 	}
 	clickedDate1 = e.currentTarget;
+	$(".chan-text").text("날짜 선택");
+	$('.RentTime').removeAttr("disabled");
 	clickedDate1.classList.add('active');
+	clickedDate1.classList.add('back');
 	today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
 	var today_month = today.getMonth() + 1
 	selectedDate = today.getFullYear() + '-' + today_month + '-' + today.getDate();
 	console.log(selectedDate);
+	
 	$('.RentTime').find("option:eq(0)").prop("selected", true);
 	$('.S').css("display", "none");
 	$("#start_time").val(null);
@@ -181,17 +187,17 @@ $('.RentTime').change(function() {
 		$('#T6').css("display", "none");
 		$('#TA').css("display", "none");
 		$('#T3').removeAttr("style");
-		$('#T3').css("border-radius","5px");
+		$('#T3').css("border-radius", "5px");
 	} else if (Rtime == 6) {
 		$('#T3').css("display", "none");
 		$('#TA').css("display", "none");
 		$('#T6').removeAttr("style");
-		$('#T6').css("border-radius","5px");
+		$('#T6').css("border-radius", "5px");
 	} else if (Rtime == 15) {
 		$('#T3').css("display", "none");
 		$('#T6').css("display", "none");
 		$('#TA').removeAttr("style");
-		$('#TA').css("border-radius","5px");
+		$('#TA').css("border-radius", "5px");
 	}
 	$('#T3').find("option:eq(0)").prop("selected", true);
 	$('#T6').find("option:eq(0)").prop("selected", true);
@@ -241,13 +247,18 @@ $('.add_option').click(function() {
 
 
 
+
 function printoptionlist(optprice) {
 	var divArea = $("#printoptions");
 
 	var str = "";
 
-	str += "<div id=" + optid + ">";
-	str += optprice.content + "&nbsp" + "<div id="+optid+"price>"+optprice.price + "<div><a class='listDel' href='javascript:deletediv(" + optid + ")'>삭제</a>";
+	str += "<div class='justify-content-middle g-0 mb-2' id=" + optid 
+	+ " style='border:1px solid black;border-radius:5px; background-color:#7d7d7f; color:white;'>";
+	
+	str += optprice.content + "&nbsp" + "<div class='my-0' id=" + optid 
+	+ "price style='background-color:#ffffff;color:#000000;border-bottom-left-radius:5px;border-bottom-right-radius:5px;'>" + optprice.price + "원<div>";
+	
 	str += "</div>";
 	divArea.append(str);
 	optid += 1;
@@ -259,7 +270,7 @@ function printoptionlist(optprice) {
 		optionsid += optprice.id;
 	}
 	totalprice = Optionprice + Roomprice;
-	$("#printtotalprice").html("금액 :" + totalprice);
+	$("#printtotalprice").html(totalprice +"원");
 	$("#totalprice").val(totalprice);
 	$("#options").val(optionsid);
 };
@@ -269,26 +280,34 @@ let clearAll = () => {
 	$("#printtotalprice").text("");
 	$("#options").val("");
 	Optionprice = 0;
-	
-}
+	$(".optbtn").attr("disabled","disabled");
+	$(".S").attr("hidden","hidden");
+	$(".RentTime").attr("disabled","disabled");
+	$(".chan-text").text("날짜 선택(달력에서 날짜를 선택해주세요.)");
+	$(".chan-text2").text("옵션(날짜를 먼저 선택해주세요.)");
+	//optbtn disabled;
+	//class s hidden;
+	//RenTime disabled;
 
+}
+/*
 function deletediv(optid) {
-	delprice =  $("#"+optid+"price").val();
+	delprice = $("#" + optid + "price").val();
 	totalprice -= delprice;
 	$("#totalprice").val(totalprice);
 	$("#printtotalprice").html("금액 :" + totalprice);
 	$("#" + optid).remove();
-};
+};*/
 
 //영수증 출력
-$('.listDel').click(function() {
+$('.S').change(function() {
 	var optprice_id = $('#selectoption').val();
 	$.ajax({
 		type: "GET",
 		url: "/res/optprice",
 		data: { optprice_id: optprice_id },
 		success: function(result) {
-			printoptionlist(result);
+			printoptionlist2(result);
 		},
 		error: function() {
 		}
@@ -297,6 +316,45 @@ $('.listDel').click(function() {
 });
 
 
+function printoptionlist2(optprice) {
+
+	optid += 1;
+	Optionprice += optprice.price;
+	if (optionsid == "") {
+		optionsid += optprice.id;
+	} else {
+		optionsid += ",";
+		optionsid += optprice.id;
+	}
+	totalprice = Roomprice;
+	$("#printtotalprice").html("금액 :" + totalprice);
+	$("#totalprice").val(totalprice);
+	$("#options").val(optionsid);
+};
+
+
+
+$(function() {
+	$(".S").change(function() {
+
+		if ($(".S").val() != "") {
+			$(".optbtn").removeAttr("disabled");
+			$(".chan-text2").text("옵션");
+		} else {
+			$(".optbtn").attr("disabled", "disabled");
+		}
+
+
+	});
+});
+
+//* 최종 가격 널 체크, totalprice 미 존재시 버튼 비활성화 */
+let nullck = () =>{
+	if( !$.trim( $('#printtotalprice').html()).length ) {
+	return false;
+	}
+return true;
+}
 
 //var star = document.getElementById("star").value;
 //console.log(star);

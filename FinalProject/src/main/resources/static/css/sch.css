@@ -89,6 +89,9 @@
 		color: #ff7583;
 		font-size: 17px;
 	}
+	.back{
+	background-color: #BCD182;
+	}
 }
 
 /*태블릿 사이즈*/
@@ -179,6 +182,9 @@
 		color: #ff7583;
 		font-size: 25px;
 	}
+	.back{
+		background-color: #BCD182;
+	}
 }
 
 @media screen and (min-width:1200px) {
@@ -257,5 +263,8 @@
 	.active {
 		color: #ff7583;
 		font-size: 17px;
+	}
+	.back{
+		background-color: #BCD182;
 	}
 }

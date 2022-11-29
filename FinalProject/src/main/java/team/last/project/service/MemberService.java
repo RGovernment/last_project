@@ -36,10 +36,6 @@ public class MemberService {
 		return memberRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
 
-	public void edit(Member member,String name,String phone) {
-		Member mem = memberRepository.findByEmail(member.getEmail()).orElse(null);
-		mem.modifyMember(name,phone);
-	}
 	
 	public boolean memberck(String password,Member member) {
 		return passwordEncoder.matches(password, member.getPassword());
@@ -63,10 +59,22 @@ public class MemberService {
 	}
 	
 	@Transactional
+	public void edit(Member member,String name,String phone) {
+		Member mem = memberRepository.findByEmail(member.getEmail()).orElse(null);
+		mem.modifyMember(name,phone);
+	}
+	
+	@Transactional
 	public void editPass(Member member,String password) {
 		Member mem = memberRepository.findByEmail(member.getEmail()).orElse(null);
 		String pass= passwordEncoder.encode(password);
 		mem.modifyPass(pass);
+	}
+	
+	@Transactional
+	public void restore(String email) {
+		Member mem = memberRepository.findByEmail(email).orElse(null);
+		mem.restoreMember();
 	}
 	
 	public Member getMemberK(Member member) {

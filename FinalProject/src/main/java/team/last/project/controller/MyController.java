@@ -2,31 +2,31 @@ package team.last.project.controller;
 
 import java.util.List;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.RequiredArgsConstructor;
+import team.last.project.entity.Member;
 import team.last.project.entity.Option;
-import team.last.project.service.OptPriceService;
+import team.last.project.service.MemberService;
 import team.last.project.service.OptionService;
 
 @Controller
 @RequiredArgsConstructor
 public class MyController {
+	@Autowired
+	private final OptionService optionService;
 
 	@Autowired
-	OptPriceService optPriceService;
-	@Autowired
-	OptionService optionService;
+	private final MemberService memberService;
 
 	@RequestMapping("/kakaoError")
 	public String logout(Model model) {
@@ -42,7 +42,7 @@ public class MyController {
 
 	@RequestMapping("/index")
 	public String indexPage(@Nullable HttpSession session, Model model) {
-	
+
 		return "index";
 	}
 
@@ -76,6 +76,33 @@ public class MyController {
 	@RequestMapping("/intro")
 	public String introPage() {
 		return "intro";
+	}
+	
+	@GetMapping("/support")
+	public String support() {
+		return "support";
+	}
+
+	@PostMapping("/support")
+	public String supportPage(@RequestParam(value = "password", required = false) String password,
+			@RequestParam(value = "email", required = false) String email, Model model) {
+
+		Member mem = memberService.memgetInfo(email);
+		if (mem != null) {
+			if (memberService.memberck(password, mem)) {
+				if (mem.getSecession() == 1) {
+					memberService.restore(email);
+					model.addAttribute("Message", "회원정보가 복구되었습니다. 로그인 후 확인해주세요.");
+				} else {
+					model.addAttribute("Message", "탈퇴하지 않은 회원입니다. 다시 확인해주세요.");
+				}
+			} else {
+				model.addAttribute("Message", "정보가 일치하지 않습니다. 다시 확인해주세요.");
+			}
+		} else {
+			model.addAttribute("Message", "회원정보가 일치하지 않습니다. 다시 확인해주세요.");
+		}
+		return "support";
 	}
 
 	@RequestMapping("/price")
