@@ -33,6 +33,7 @@ public class SecurityConfig {
 		http.authorizeRequests()
 			.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
 			.permitAll()
+			.antMatchers("/res/room").authenticated()
 			.antMatchers("/member/signup").hasRole("ANONYMOUS")
 			.antMatchers("/mypage/editinfo").hasRole("USER")
 			.antMatchers("/mypage/editpass").hasRole("USER")
@@ -56,9 +57,9 @@ public class SecurityConfig {
         	.logout().permitAll()
         	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
         	.logoutSuccessUrl("/")
-        	.invalidateHttpSession(true);
-        	
-        	http.oauth2Login().defaultSuccessUrl("/member/kakao")
+        	.invalidateHttpSession(true)
+        	.and()
+        	.oauth2Login().defaultSuccessUrl("/member/kakao")
         	.userInfoEndpoint().userService(kakaoOAuth2UserService);
 		
 		return http.build();

@@ -23,13 +23,20 @@
 						<th scope="col">상품명</th>
 						<th scope="col">예약일자</th>
 						<th scope="col">가격</th>
+						<th scope="col">후기작성</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="${relist}">
-						<td>미니룸A</td>
-						<td>2022-11-18</td>
-						<td>220,000원</td>
+					<tr th:each="list : ${reslist}" th:if="${list} != null">
+						<td th:text="${list.room.name}"></td>
+						<td th:inline="text">[[${#dates.format(list.start_time,'yyyy-MM-dd HH시 예약')}]]</td>
+						<td th:inline="text">[[${#numbers.formatInteger(list.totalprice,3,'COMMA')}]]원</td>
+						<td><a th:href="@{/review/write(roomid=${list.room.id})}">작성하기</a></td>
+					</tr>
+					<tr th:unless="${not #strings.isEmpty(list)}">
+					<td colspan="3">
+						아직 예약한 방이 없습니다.
+					</td>
 					</tr>
 				</tbody>
 			</table>

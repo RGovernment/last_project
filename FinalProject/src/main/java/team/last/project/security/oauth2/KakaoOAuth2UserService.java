@@ -49,7 +49,6 @@ public class KakaoOAuth2UserService extends DefaultOAuth2UserService {
 			member.setGender(3);
 			member.setRole(Role.KUSER);
 		}
-		int secession = 0;
 		KakaoUserInfo kakao2UserInfo = 
 				new KakaoUserInfo(oAuth2User.getAttributes());
 		Member byMemberEmail = memberRepository.findByEmail(email).orElse(null);

@@ -20,7 +20,7 @@ public class RoomService {
 		return roomRepository.findAll();
 	}
 
-	public Optional<Room> roomget(Integer id) {
+	public Optional<Room> roomget(int id) {
 		return roomRepository.findById(id);
 	}
 }

@@ -27,12 +27,12 @@
 								<button type="button"
 									data-bs-target="#carouselExampleIndicators"
 									data-bs-slide-to="3" aria-label="Slide 4"></button>
-<!-- 								<button type="button"
+								<button type="button"
 									data-bs-target="#carouselExampleIndicators"
 									data-bs-slide-to="4" aria-label="Slide 5"></button>
 								<button type="button"
 									data-bs-target="#carouselExampleIndicators"
-									data-bs-slide-to="5" aria-label="Slide 6"></button> -->
+									data-bs-slide-to="5" aria-label="Slide 6"></button>
 							</div>
 							<div class="carousel-inner">
 								<div class="carousel-item active">
@@ -51,14 +51,14 @@
 									<img th:src="@{/img/__${room.name}__4.PNG}"
 										class="d-block w-100" alt="...">
 								</div>
-<!-- 								<div class="carousel-item">
+								<div class="carousel-item">
 									<img th:src="@{/img/__${room.name}__5.PNG}"
-										class="d-block w-100" alt="..." th:if="@{/img/__${room.name}__6.PNG} != null">
+										class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
 									<img th:src="@{/img/__${room.name}__6.PNG}"
-										class="d-block w-100" alt="..." th:if="@{/img/__${room.name}__6.PNG} != null">
-								</div> -->
+										class="d-block w-100" alt="...">
+								</div>
 							</div>
 							<button class="carousel-control-prev" type="button"
 								data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -145,8 +145,12 @@
 								</div>
 								<div class="Reservation">
 									<div id="printtotalprice"></div>
+									<div class="d-flex justify-content-between">
+									<button type="button" class="btn btn-secondary"
+										data-bs-toggle="modal" data-bs-target="#modaloption">옵션 예시</button>
 									<button type="submit" class="btn btn-outline-success"
 										style="float: right">예약하기</button>
+										</div>
 								</div>
 							</form>
 							<!-- form end -->
@@ -203,9 +207,7 @@
 			<!-- modal end -->
 
 			<!-- 옵션 예시 Button trigger modal -->
-			<button type="button" class="btn btn-secondary btn-sm rounded-0"
-				data-bs-toggle="modal" data-bs-target="#modaloption"
-				style="height: 25px;">옵션 예시</button>
+			
 			<!-- 옵션 예시 Modal -->
 			<div class="modal fade " id="modaloption" data-bs-backdrop="static"
 				data-bs-keyboard="false" tabindex="-1"
@@ -218,35 +220,55 @@
 								aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<div class="title" align="center">
-								옵션 예시 <br />제공하는 옵션들의 종류입니다.
-							</div>
-							<hr />
-							<div class="content">
-								<h3>초콜릿 케이크 |</h3>
-								<img src="/img/chococake1.jpg" style="width: 40%; height: 10%;">
-								<img src="/img/chococake2.jpg" style="width: 40%; height: 10%;"><br />
-								수제 초콜릿을 이용한 초콜릿 무스 케이크를 제공해드립니다.<br />(방문 3일전까지 문의를 통해 케이크 변경이
-								가능합니다.)
-							</div>
-							<br /> <br />
-							<div class="content">
-								<h3>생크림 케이크 |</h3>
-								<img src="/img/creamcake1.PNG" style="width: 40%; height: 10%;">
-								<img src="/img/creamcake2.PNG" style="width: 40%; height: 10%;"><br />
-								생크림을 이용한 달달한 케이크를 제공해드립니다.<br />(방문 3일전까지 문의를 통해 케이크 변경이
-								가능합니다.)
-							</div>
-							<br /> <br />
-							<div class="content">
-								<h3>페인팅 케이크 |</h3>
-								<img src="/img/facecake1.jpg" style="width: 40%; height: 10%;">
-								<img src="/img/facecake2.jpg" style="width: 40%; height: 10%;">
-								<img src="/img/facecake3.jpg" style="width: 40%; height: 10%;">
-								<br /> 고객님의 하나뿐인 얼굴이 그려진 특별한 케이크를 제공해드립니다.<br />(방문 3일전까지 문의를
-								통해 케이크 변경이 가능합니다.)
-							</div>
-						</div>
+												<div class="title" align="center" style="font-size:25px; font-weight: bold; ">옵션 예시
+												<br />제공하는 옵션들의 종류입니다.
+												</div>
+												<hr />
+												<div class="content">
+													<h3>레터링 초콜릿 케이크 |</h3>
+													<img src="/img/chococake1.jpg"
+														style="width: 40%; height: 10%;"> <img
+														src="/img/chococake2.jpg" style="width: 40%; height: 290px;"><br />
+													수제 초콜릿을 이용한 레터링 케이크입니다.<br />(방문 5일전까지 문의를 통해 케이크
+													예약이 가능합니다.)
+												</div>
+												<br /> <br />
+												<div class="content">
+													<h3>레터링 생크림 케이크 |</h3>
+													<img src="/img/creamcake1.PNG"
+														style="width: 40%; height: 10%;"> <img
+														src="/img/creamcake2.PNG" style="width: 40%; height: 386px;"><br />
+													부드러운 생크림을 이용한 레터링 케이크입니다.<br />(방문 5일전까지 문의를 통해 케이크 예약이
+													가능합니다.)
+												</div>
+												<br /> <br />
+												<div class="content">
+													<h3>페인팅 케이크 |</h3>
+													<img src="/img/facecake1.jpg"
+														style="width: 40%; height: 10%;"> <img
+														src="/img/facecake2.jpg" style="width: 40%; height: 10%;">
+													<br /> 고객님의 하나뿐인
+													얼굴이 그려진 특별한 케이크를 만들어 드립니다.<br />(방문 5일전까지 문의를 통해 케이크 예약이
+													가능합니다.)
+												</div>
+												<br /> <br />
+												<div class="content">
+													<h3>파티룸 데코레이션 |</h3>
+													<img src="/img/deco1.PNG"
+														style="width: 436px; height: 386px;"> <img
+														src="/img/deco2.PNG" style="width: 436px; height: 386px;">
+													<br /> 파티를 더욱 아름답고 풍성하게 즐기실 수 있는
+													데코레이션 입니다.<br />(방문 3일전까지 문의를 통해 데코레이션 컨셉을 정하실 수 있습니다.)
+												</div>
+												<br /> <br />
+												<div class="content">
+													<h3>포토 스냅 |</h3>
+													<img src="/img/photosnap1.PNG"
+														style="width: 436px; height: 386px;"> <img
+														src="/img/photosnap2.PNG" style="width: 436px; height: 386px;">
+													<br /> 고객님의 가장 행복한 순간을 담아드립니다.<br />(전문가 자격증을 보유한 사진작가님과 함께합니다.)
+												</div>
+											</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-bs-dismiss="modal">Close</button>

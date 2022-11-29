@@ -23,6 +23,7 @@ import team.last.project.dto.AskBoardDto;
 import team.last.project.dto.MemberDto;
 import team.last.project.entity.AskBoard;
 import team.last.project.entity.Member;
+import team.last.project.entity.Reserve;
 import team.last.project.service.AskBoardService;
 import team.last.project.service.MemberService;
 import team.last.project.service.ReserveService;
@@ -42,11 +43,9 @@ public class MypageController {
 		
 		String name = mem.getName();
 		Long id = mem.getId();
-		
-		List<?> reserveList = reserveService.reserveList(id);
-		
+		List<Reserve> reserveList = reserveService.reserveList(id);
 		model.addAttribute("name", name);
-		model.addAttribute("list",reserveList);
+		model.addAttribute("reslist",reserveList);
 
 		return "/mypage/mymain";
 	}

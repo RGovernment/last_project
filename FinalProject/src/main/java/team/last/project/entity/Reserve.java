@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.SequenceGenerator;
 
 import lombok.Data;
@@ -16,6 +18,7 @@ import team.last.project.dto.ReserveDto;
 
 @Entity
 @Data
+@NamedEntityGraph(name = "Room_id", attributeNodes = @NamedAttributeNode("room"))
 public class Reserve {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RESERVE_ID_SEQ")
