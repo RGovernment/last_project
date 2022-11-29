@@ -17,7 +17,7 @@
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/card}'|">후기</div>
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/price}'|">가격</div>
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/member/login}'|" sec:authorize ="isAnonymous()">접속</div>
-				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/logout}'|" sec:authorize="hasRole('USER')">해제</div>
+				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/logout}'|" sec:authorize="hasAnyRole('USER','ADMIN')">해제</div>
 				<div class="col-md-1" id="index-1" sec:authorize="hasRole('KUSER')" 
 				th:onclick="|location.href='@{https://kauth.kakao.com/oauth/logout?client_id=13da41e01c3d7861d06de918b0daedcc&logout_redirect_uri=http://localhost:8082/logout}'|" >해제</div>
 			</div>
@@ -32,7 +32,7 @@
 				<div class="col-2" id="index-2" th:onclick="|location.href='@{/card}'|">후기</div>
 				<div class="col-2" id="index-2" th:onclick="|location.href='@{/price}'|">가격</div>
 				<div class="col-2" id="index-2" th:onclick="|location.href='@{/member/login}'|" sec:authorize ="isAnonymous()">접속</div>
-				<div class="col-2" id="index-2" th:onclick="|location.href='@{/logout}'|" sec:authorize="hasRole('USER')">해제</div>
+				<div class="col-2" id="index-2" th:onclick="|location.href='@{/logout}'|" sec:authorize="hasAnyRole('USER','ADMIN')">해제</div>
 				<div class="col-2" id="index-2" sec:authorize="hasRole('KUSER')" th:onclick="|location.href='@{https://kauth.kakao.com/oauth/logout?client_id=13da41e01c3d7861d06de918b0daedcc&logout_redirect_uri=http://localhost:8082/logout}'|" >해제</div>
 			</div>
 		</header>
