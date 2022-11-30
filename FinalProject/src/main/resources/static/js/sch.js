@@ -16,9 +16,9 @@ if (first.getFullYear() % 4 === 0) {
 	pageYear = notLeapYear;
 }
 
+var month = "";
 
-
-function showCalendar(month) {
+function showCalendar() {
 	let monthCnt = 100;
 	let cnt = 1;
 	for (var i = 0; i < 6; i++) {
@@ -32,16 +32,32 @@ function showCalendar(month) {
 				var $td = document.createElement('td');
 
 				//더미데이터 변수
-				var o = "예약중";
-				var x = "예약가능";
+				var o = "o";
+				var x = "x";
 				var d1 = "";
 				var d2 = "";
 				var d3 = "";
 
-				var month_list = first.getMonth();
-				month_list = month;
-				console.log(month_list);
+				var st = "2022-11-22 14:00:00.0";
+				var et = "2022-11-23 17:00:00.0";
+				var tt = st.substring(8, 10);
+				var st_tt = st.substring(11, 13);
+				var et_tt = et.substring(11, 13);
+				var sch_tt = Math.abs(et_tt - st_tt);
+				console.log(st_tt);
+				console.log(et_tt);
+				console.log(sch_tt);
+				if (cnt == tt) {
+					if (sch_tt == 3) {
+						d1="3H";
+					} else if (sch_tt == 6) {
+						d1="6H";
+					} else if (sch_tt > 6) {
+						d1="AllDay"
+					}
+				}
 
+				/*
 				//더미생성
 				if (j % 2 == 0) {
 					d1 = o;
@@ -52,12 +68,7 @@ function showCalendar(month) {
 					d2 = o;
 					d3 = x;
 				}
-
-				if (i == 3 & j == 4) {
-					d1 = o;
-					d2 = " ";
-					d3 = " ";
-				}
+				*/
 
 				//주말 색깔넣기 일요일=빨강 , 토요일=파랑
 				var weekend = "";
@@ -69,7 +80,6 @@ function showCalendar(month) {
 
 				$td.innerHTML = "<div id='day_content_date' style='color:" + weekend + "'>" + cnt + "</div>" +
 					"<div id='day_content1'>" + d1 + "</div>" + "<div id='day_content2'>" + d2 + "</div>" + "<div id='day_content3'>" + d3 + "</div>";
-
 				$td.setAttribute('id', cnt);
 				$tr.appendChild($td);
 				cnt++;
@@ -79,7 +89,7 @@ function showCalendar(month) {
 		calendarBody.appendChild($tr);
 	}
 }
-showCalendar(11);
+showCalendar();
 
 function removeCalendar() {
 	let catchTr = 100;
@@ -90,7 +100,7 @@ function removeCalendar() {
 	}
 }
 
-var month="";
+
 
 //prev , next
 function prev() {
@@ -112,16 +122,17 @@ function prev() {
 		first = pageFirst;
 	}
 	today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
-	month = today.getMonth()+1;
-	console.log(today.getMonth()+1);
-	
+	month = today.getMonth() + 1;
+	console.log(today.getMonth() + 1);
+
 	currentTitle.innerHTML = monthList[today.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;'
 		+ first.getFullYear();
 	removeCalendar();
-	showCalendar(month);
+	showCalendar();
 	clickedDate1 = document.getElementById(today.getDate());
 	clickedDate1.classList.add('active');
 	clickStart();
+	month_sch();
 }
 
 function next() {
@@ -144,15 +155,16 @@ function next() {
 	}
 
 	today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
-	
-	month = today.getMonth()+1;
-	console.log(today.getMonth()+1);
-	document.getElementById('current-year-month').innerHTML = monthList[first.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;' + first.getFullYear();
+
+	month = today.getMonth() + 1;
+	console.log(today.getMonth() + 1);
+	document.getElementById('current-year-month').innerHTML = monthList[today.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;' + first.getFullYear();
 	removeCalendar();
-	showCalendar(month);
+	showCalendar();
 	clickedDate1 = document.getElementById(today.getDate());
 	clickedDate1.classList.add('active');
 	clickStart();
+	month_sch();
 }
 
 //달력 꾸미기 : 화살표 버튼과 년도(숫자),월(영문)
@@ -257,8 +269,58 @@ $('.add_option').click(function() {
 
 	}); //$.ajax
 
-
 });
+
+
+//바뀐 월 출력
+function month_sch() {
+	var month_id = month;
+
+	$.ajax({
+		type: "GET",
+		url: "/res/getreservedata",
+		data: { month_id, month_id },
+		success: function(result) {
+			let list = []
+			list.push(result)
+			console.log(list.length)
+
+			alert("성공");
+		},
+		error: function() {
+			alert('에러');
+		}
+	}); //$.ajaxs
+};
+
+/*
+function month_sch() {
+	//console.log(month_id);
+	const str = {
+		month_id: month
+	};
+//var a = [[${test}]];
+//console.log(a);
+//const obj = JSON.stringify(str);
+
+$.ajax({
+	type: "get",
+	url: "/res/getreservedata",
+	//url: "/getreservedata",
+	//processData: false,
+	//contentType: false,
+	data: { month_id, month },
+	//data: obj ,
+	//dataType:'json',
+	success: function(result) {
+		alert("success");
+	},
+	error: function() {
+		alert('에러');
+	}
+}); //$.ajaxs
+};
+*/
 
 function printoptionlist(optprice) {
 	var divArea = $("#printoptions");
