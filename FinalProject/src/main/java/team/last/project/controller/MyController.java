@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.RequiredArgsConstructor;
@@ -99,20 +98,6 @@ public class MyController {
 		List<Option> optlist = optionService.optionList();
 		model.addAttribute("optlist", optlist);
 		return "price";
-	}
-
-	@RequestMapping("/room")
-	public String layout(@RequestParam(value = "roomType") String roomType) {
-		String type = "ARoom";
-		if (roomType.equals("A")) {
-		} else if (roomType.equals("B")) {
-			type = "BRoom";
-		} else if (roomType.equals("C")) {
-			type = "CRoom";
-		} else if (roomType.equals("D")) {
-			type = "DRoom";
-		}
-		return type;
 	}
 
 };

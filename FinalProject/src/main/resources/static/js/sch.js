@@ -221,10 +221,15 @@ $('.S').change(function() {
 //영수증 출력
 $('.add_option').click(function() {
 	var optprice_id = $('#selectoption').val();
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
 	$.ajax({
-		type: "GET",
+		type: "POST",
 		url: "/res/optprice",
 		data: { optprice_id: optprice_id },
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(header, token);
+		},
 		success: function(result) {
 			console.log(result);
 			printoptionlist(result);
