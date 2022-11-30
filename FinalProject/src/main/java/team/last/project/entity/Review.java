@@ -1,5 +1,8 @@
 package team.last.project.entity;
 
+import java.sql.Timestamp;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,6 +33,9 @@ public class Review {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "room_id")
 	private Room room;
+	
+	@Column(columnDefinition = "timestamp default current_timestamp")
+	private Timestamp cdate;
 	
 	public static Review createReview(ReviewDto reviewDto,Member member,Room room) {
 		Review review = new Review();

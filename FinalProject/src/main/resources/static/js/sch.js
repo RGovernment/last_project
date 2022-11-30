@@ -226,6 +226,7 @@ $('.add_option').click(function() {
 		url: "/res/optprice",
 		data: { optprice_id: optprice_id },
 		success: function(result) {
+			console.log(result);
 			printoptionlist(result);
 		},
 		error: function() {

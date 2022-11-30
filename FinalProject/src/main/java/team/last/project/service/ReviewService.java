@@ -15,25 +15,25 @@ import team.last.project.repository.ReviewRepository;
 @RequiredArgsConstructor
 public class ReviewService {
 private final ReviewRepository reviewRepository;
-public void write(Review board) {
-	reviewRepository.save(board);
+public void write(Review review) {
+	reviewRepository.save(review);
 }
-public Page<Review> boardList(Pageable pageable) {
+public Page<Review> reviewList(Pageable pageable) {
 	return reviewRepository.findAll(pageable);
 }
-public Review boardView(Integer id) {
+public Review reviewView(Integer id) {
 	return reviewRepository.findById(id).get();
 }
-public void boardDelete(Integer id) {
+public void reviewDelete(Integer id) {
 	reviewRepository.deleteById(id);
 }
 @Transactional
-public Integer boardUpdate(Integer id, final ReviewDto params) {
+public Integer reviewUpdate(Integer id, final ReviewDto params) {
 	Review review = reviewRepository.findById(id).orElseThrow();
 	review.update(params.getTitle(), params.getContent());
 	return id;
 }
-public Page<Review> boardSearchList(String searchKeyword, Pageable pageable) {
+public Page<Review> reviewSearchList(String searchKeyword, Pageable pageable) {
 	return reviewRepository.findByTitleContaining(searchKeyword, pageable);
 }
 }

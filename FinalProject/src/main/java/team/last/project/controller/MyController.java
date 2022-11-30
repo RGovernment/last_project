@@ -2,11 +2,13 @@ package team.last.project.controller;
 
 import java.util.List;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,18 +18,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.RequiredArgsConstructor;
 import team.last.project.entity.Option;
-import team.last.project.service.OptPriceService;
+import team.last.project.entity.Review;
 import team.last.project.service.OptionService;
+import team.last.project.service.ReviewService;
 
 @Controller
 @RequiredArgsConstructor
 public class MyController {
 
-	@Autowired
-	OptPriceService optPriceService;
-	@Autowired
-	OptionService optionService;
-
+	private final OptionService optionService;
+	private final ReviewService reviewService;
 	@RequestMapping("/kakaoError")
 	public String logout(Model model) {
 		model.addAttribute("kakaologinFailMsg", "비활성화된 계정입니다.");
@@ -52,9 +52,25 @@ public class MyController {
 	}
 
 	@RequestMapping("/card")
-	public String login() {
+	public String reviewlist(Authentication authentication, Model model,
+			@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+		Page<Review> list = null;
+		PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
+				Sort.by("id").descending());
 
-		return "review";
+		list = reviewService.reviewList(pageRequest);
+		int nowPage = list.getPageable().getPageNumber() + 1;
+		int startPage = Math.max(nowPage - 4, 1);
+		int endPage = Math.min(nowPage + 5, list.getTotalPages());
+		if (endPage == 0) {
+			endPage = 1;
+		}
+
+		model.addAttribute("list", list);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		return "/review";
 	}
 
 	@RequestMapping("/er")

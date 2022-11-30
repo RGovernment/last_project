@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import team.last.project.dto.ReserveDto;
+import team.last.project.entity.Img;
 import team.last.project.entity.Member;
 import team.last.project.entity.OptPrice;
 import team.last.project.entity.Reserve;
 import team.last.project.entity.Room;
+import team.last.project.service.ImgService;
 import team.last.project.service.MemberService;
 import team.last.project.service.OptPriceService;
 import team.last.project.service.OptionService;
@@ -69,4 +71,6 @@ public class ReserveController {
 		reserveService.reserve(reserve);
 		return "redirect:/res";
 	}
+	
+	
 };
