@@ -7,6 +7,9 @@
 #prev, #next {
 	cursor: pointer;
 }
+#calendar:hover {
+		cursor: pointer;
+	}
 
 /*모바일*/
 @media screen and (max-width:991px) {

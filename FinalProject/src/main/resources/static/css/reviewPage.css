@@ -19,3 +19,7 @@
 #modal-image:hover {
 	cursor: pointer;
 }
+.carousel-item {
+	background-color:black;
+	height: 300px;
+}
