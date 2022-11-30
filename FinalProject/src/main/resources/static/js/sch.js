@@ -32,43 +32,36 @@ function showCalendar() {
 				var $td = document.createElement('td');
 
 				//더미데이터 변수
-				var o = "o";
-				var x = "x";
 				var d1 = "";
 				var d2 = "";
 				var d3 = "";
 
-				var st = "2022-11-22 14:00:00.0";
-				var et = "2022-11-23 17:00:00.0";
+				var st;
+				var et;
+				st = "2022-11-30 18:00:00.0";
+				et = "2022-12-01 09:00:00.0";
 				var tt = st.substring(8, 10);
+				//시작시간
 				var st_tt = st.substring(11, 13);
+				//종료시간
 				var et_tt = et.substring(11, 13);
+				//대여시간
 				var sch_tt = Math.abs(et_tt - st_tt);
-				console.log(st_tt);
-				console.log(et_tt);
-				console.log(sch_tt);
+
+				//일이 같으면
 				if (cnt == tt) {
-					if (sch_tt == 3) {
-						d1="3H";
-					} else if (sch_tt == 6) {
-						d1="6H";
-					} else if (sch_tt > 6) {
-						d1="AllDay"
+					if (sch_tt != null) {
+						if (sch_tt == 3) {
+							d1 = st_tt + "~" + et_tt;
+						} else if (sch_tt == 6) {
+							d2 = st_tt + "~" + et_tt;
+						} else if (sch_tt > 6) {
+							d3 = st_tt + "~" + et_tt;
+						}
 					}
 				}
 
-				/*
-				//더미생성
-				if (j % 2 == 0) {
-					d1 = o;
-					d2 = x;
-					d3 = o;
-				} else {
-					d1 = x;
-					d2 = o;
-					d3 = x;
-				}
-				*/
+				//3H = 초록색 , 6H주황색 , AllDay = 핑크색 
 
 				//주말 색깔넣기 일요일=빨강 , 토요일=파랑
 				var weekend = "";
@@ -99,8 +92,6 @@ function removeCalendar() {
 		catchTr++;
 	}
 }
-
-
 
 //prev , next
 function prev() {
@@ -266,9 +257,7 @@ $('.add_option').click(function() {
 		},
 		error: function() {
 		}
-
 	}); //$.ajax
-
 });
 
 
@@ -281,10 +270,6 @@ function month_sch() {
 		url: "/res/getreservedata",
 		data: { month_id, month_id },
 		success: function(result) {
-			let list = []
-			list.push(result)
-			console.log(list.length)
-
 			alert("성공");
 		},
 		error: function() {
@@ -293,34 +278,6 @@ function month_sch() {
 	}); //$.ajaxs
 };
 
-/*
-function month_sch() {
-	//console.log(month_id);
-	const str = {
-		month_id: month
-	};
-//var a = [[${test}]];
-//console.log(a);
-//const obj = JSON.stringify(str);
-
-$.ajax({
-	type: "get",
-	url: "/res/getreservedata",
-	//url: "/getreservedata",
-	//processData: false,
-	//contentType: false,
-	data: { month_id, month },
-	//data: obj ,
-	//dataType:'json',
-	success: function(result) {
-		alert("success");
-	},
-	error: function() {
-		alert('에러');
-	}
-}); //$.ajaxs
-};
-*/
 
 function printoptionlist(optprice) {
 	var divArea = $("#printoptions");

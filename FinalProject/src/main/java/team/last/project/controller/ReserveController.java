@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,6 +49,12 @@ public class ReserveController {
 		model.addAttribute("reserveDto", new ReserveDto());
 		model.addAttribute("option", optionService.optionList());
 		model.addAttribute("room", roomService.roomget(roomid).get());
+		// 별점
+		double score = 2.4;
+		double star = score * 20f;
+		model.addAttribute("score", score);
+		model.addAttribute("star", star + "%");
+
 		return "/res/Room";
 	}
 
@@ -64,9 +72,21 @@ public class ReserveController {
 
 	@PostMapping("/reserve/{id}")
 	public String reserve(@PathVariable("id") Integer id, Authentication autentication, ReserveDto reserveDto) {
-		Member member = memberService.memgetInfo(autentication.getName());	
+		Member member = memberService.memgetInfo(autentication.getName());
 		Reserve reserve = Reserve.createReserve(reserveDto, member, roomService.roomget(id).get());
 		reserveService.reserve(reserve);
 		return "redirect:/res";
+	}
+
+	@ResponseBody
+	@RequestMapping("/getreservedata")
+	public List<Reserve> getreservedata(String month_id, HttpServletRequest request, Model model) {
+		List<Reserve> reservelist = reserveService.findschedule(month_id);
+		System.out.println(month_id);
+		for (int i = 0; i < reservelist.size(); i++) {
+			System.out.println(reservelist.get(i).getStart_time());
+			System.out.println(reservelist.get(i).getEnd_time());
+		}
+		return reservelist;
 	}
 };
