@@ -2,6 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <!--headerFragment 선언-->
 <th:block th:fragment="headerFragment">
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<div class="container-fluid mb-0" id="nav-bg">
 		<header class="d-flex flex-wrap justify-content-center pb-0 mb-0">
 			<div class="row">
@@ -17,7 +18,9 @@
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/card}'|">후기</div>
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/price}'|">가격</div>
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/member/login}'|" sec:authorize ="isAnonymous()">접속</div>
-				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/logout}'|" sec:authorize="isAuthenticated()">해제</div>
+				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/logout}'|" sec:authorize="hasAnyRole('USER','ADMIN')">해제</div>
+				<div class="col-md-1" id="index-1" sec:authorize="hasRole('KUSER')" 
+				th:onclick="|location.href='@{https://kauth.kakao.com/oauth/logout?client_id=13da41e01c3d7861d06de918b0daedcc&logout_redirect_uri=http://localhost:8082/logout}'|" >해제</div>
 			</div>
 			<div class="row">
 				<div class="col-2 align-self-center" id="index-2-title">
@@ -30,7 +33,8 @@
 				<div class="col-2" id="index-2" th:onclick="|location.href='@{/card}'|">후기</div>
 				<div class="col-2" id="index-2" th:onclick="|location.href='@{/price}'|">가격</div>
 				<div class="col-2" id="index-2" th:onclick="|location.href='@{/member/login}'|" sec:authorize ="isAnonymous()">접속</div>
-				<div class="col-2" id="index-2" th:onclick="|location.href='@{/logout}'|" sec:authorize="isAuthenticated()">해제</div>
+				<div class="col-2" id="index-2" th:onclick="|location.href='@{/logout}'|" sec:authorize="hasAnyRole('USER','ADMIN')">해제</div>
+				<div class="col-2" id="index-2" sec:authorize="hasRole('KUSER')" th:onclick="|location.href='@{https://kauth.kakao.com/oauth/logout?client_id=13da41e01c3d7861d06de918b0daedcc&logout_redirect_uri=http://localhost:8082/logout}'|" >해제</div>
 			</div>
 		</header>
 	</div>

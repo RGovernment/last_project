@@ -51,7 +51,7 @@ public class ReserveController {
 	}
 
 	@ResponseBody
-	@RequestMapping("/optprice")
+	@PostMapping("/optprice")
 	public Map<String, Object> getoptPrice(@RequestParam("optprice_id") Integer optprice_id) {
 		OptPrice optPrice = optPriceService.optPriceget(optprice_id);
 		Map<String, Object> result = new HashMap<String, Object>();

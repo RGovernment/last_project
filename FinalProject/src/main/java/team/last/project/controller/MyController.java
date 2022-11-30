@@ -12,12 +12,17 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.RequiredArgsConstructor;
+import team.last.project.entity.Member;
 import team.last.project.entity.Option;
 import team.last.project.entity.Review;
+import team.last.project.service.MemberService;
 import team.last.project.service.OptionService;
 import team.last.project.service.ReviewService;
 
@@ -27,6 +32,8 @@ public class MyController {
 
 	private final OptionService optionService;
 	private final ReviewService reviewService;
+	private final MemberService memberService;
+
 	@RequestMapping("/kakaoError")
 	public String logout(Model model) {
 		model.addAttribute("kakaologinFailMsg", "비활성화된 계정입니다.");
@@ -38,10 +45,14 @@ public class MyController {
 
 		return "redirect:/index";
 	}
+	
+	@RequestMapping("/kakaotest")
+	public String kakao() {
+		return "/kakao/kakaoPay";
+	}
 
 	@RequestMapping("/index")
 	public String indexPage(@Nullable HttpSession session, Model model) {
-	
 		return "index";
 	}
 
@@ -74,7 +85,7 @@ public class MyController {
 
 	@RequestMapping("/er")
 	public String erpage2() {
-
+		System.out.println("나는 문어");
 		return "er";
 	}
 
@@ -91,6 +102,33 @@ public class MyController {
 	@RequestMapping("/intro")
 	public String introPage() {
 		return "intro";
+	}
+	
+	@GetMapping("/support")
+	public String support() {
+		return "support";
+	}
+
+	@PostMapping("/support")
+	public String supportPage(@RequestParam(value = "password", required = false) String password,
+			@RequestParam(value = "email", required = false) String email, Model model) {
+
+		Member mem = memberService.memgetInfo(email);
+		if (mem != null) {
+			if (memberService.memberck(password, mem)) {
+				if (mem.getSecession() == 1) {
+					memberService.restore(email);
+					model.addAttribute("Message", "회원정보가 복구되었습니다. 로그인 후 확인해주세요.");
+				} else {
+					model.addAttribute("Message", "탈퇴하지 않은 회원입니다. 다시 확인해주세요.");
+				}
+			} else {
+				model.addAttribute("Message", "정보가 일치하지 않습니다. 다시 확인해주세요.");
+			}
+		} else {
+			model.addAttribute("Message", "회원정보가 일치하지 않습니다. 다시 확인해주세요.");
+		}
+		return "support";
 	}
 
 	@RequestMapping("/price")

@@ -1,0 +1,20 @@
+@charset "utf-8";
+
+#privit-con {
+	width: 900px;
+}
+
+#support-title {
+	font-size: 50px;
+	font-weight: 700;
+	font-family: 'Dancing Script', cursive;
+	font-size: 60px;
+	color: #483d8b;
+}
+
+strong{
+	font-size: 20px;
+	color: #32a7a1;
+	
+	
+}

@@ -9,6 +9,7 @@ var leapYear = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 var notLeapYear = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 var pageFirst = first;
 var pageYear;
+var delprice = 0;
 
 if (first.getFullYear() % 4 === 0) {
 	pageYear = leapYear;
@@ -151,12 +152,17 @@ function clickStart() {
 var selectedDate;
 function changeToday(e) {
 	for (let i = 1; i <= pageYear[first.getMonth()]; i++) {
+
 		if (tdGroup[i].classList.contains('active')) {
 			tdGroup[i].classList.remove('active');
+			clickedDate1.classList.remove("back");
 		}
 	}
 	clickedDate1 = e.currentTarget;
+	$(".chan-text").text("날짜 선택");
+	$('.RentTime').removeAttr("disabled");
 	clickedDate1.classList.add('active');
+	clickedDate1.classList.add('back');
 	today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
 	var today_month = today.getMonth() + 1
 	selectedDate = today.getFullYear() + '-' + today_month + '-' + today.getDate();
@@ -180,14 +186,17 @@ $('.RentTime').change(function() {
 		$('#T6').css("display", "none");
 		$('#TA').css("display", "none");
 		$('#T3').removeAttr("style");
+		$('#T3').css("border-radius", "5px");
 	} else if (Rtime == 6) {
 		$('#T3').css("display", "none");
 		$('#TA').css("display", "none");
 		$('#T6').removeAttr("style");
+		$('#T6').css("border-radius", "5px");
 	} else if (Rtime == 15) {
 		$('#T3').css("display", "none");
 		$('#T6').css("display", "none");
 		$('#TA').removeAttr("style");
+		$('#TA').css("border-radius", "5px");
 	}
 	$('#T3').find("option:eq(0)").prop("selected", true);
 	$('#T6').find("option:eq(0)").prop("selected", true);
@@ -195,6 +204,7 @@ $('.RentTime').change(function() {
 	Roomprice = Rprice;
 	totalprice = Optionprice + Roomprice;
 	$("#totalprice").val(totalprice);
+	$(".S").removeAttr("hidden");
 
 });
 // 대여 시작 시간선택
@@ -217,19 +227,26 @@ $('.S').change(function() {
 	}
 	$("#end_time").val(Eresult);
 });
+var xhr = new XMLHttpRequest();
+var csrf_token = $('[name=csrfmiddlewaretoken]').val();
+xhr.open("POST", "요청 주소", true);
+xhr.setRequestHeader('X-CSRFToken', csrf_token);
+
 
 //영수증 출력
 $('.add_option').click(function() {
-	var optprice_id = $('#selectoption').val();
 	var token = $("meta[name='_csrf']").attr("content");
 	var header = $("meta[name='_csrf_header']").attr("content");
+	var optprice_id = $('#selectoption').val();
 	$.ajax({
 		type: "POST",
 		url: "/res/optprice",
-		data: { optprice_id: optprice_id },
-		beforeSend: function(xhr) {
+		beforeSend: function(xhr) {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
 			xhr.setRequestHeader(header, token);
 		},
+		data: { optprice_id: optprice_id },
+		async: true, //동기, 비동기 여부
+		cache: false, // 캐시 여부
 		success: function(result) {
 			console.log(result);
 			printoptionlist(result);
@@ -238,17 +255,22 @@ $('.add_option').click(function() {
 		}
 
 	}); //$.ajax
-
-
 });
+
+
+
 
 function printoptionlist(optprice) {
 	var divArea = $("#printoptions");
 
 	var str = "";
 
-	str += "<div id=" + optid + ">";
-	str += optprice.content + "&nbsp" + optprice.price + "<a href='javascript:deletediv(" + optid + ")'>x</a>";
+	str += "<div class='justify-content-middle g-0 mb-2' id=" + optid
+		+ " style='border:1px solid black;border-radius:5px; background-color:#7d7d7f; color:white;'>";
+
+	str += optprice.content + "&nbsp" + "<div class='my-0' id=" + optid
+		+ "price style='background-color:#ffffff;color:#000000;border-bottom-left-radius:5px;border-bottom-right-radius:5px;'>" + optprice.price + "원<div>";
+
 	str += "</div>";
 	divArea.append(str);
 	optid += 1;
@@ -260,15 +282,70 @@ function printoptionlist(optprice) {
 		optionsid += optprice.id;
 	}
 	totalprice = Optionprice + Roomprice;
-	$("#printtotalprice").html("금액 :" + totalprice);
+	$("#printtotalprice").html(totalprice + "원");
 	$("#totalprice").val(totalprice);
 	$("#options").val(optionsid);
 };
 
+let clearAll = () => {
+	$("#printoptions").text("");
+	$("#printtotalprice").text("");
+	$("#options").val("");
+	Optionprice = 0;
+	$(".optbtn").attr("disabled", "disabled");
+	$(".S").attr("hidden", "hidden");
+	$(".RentTime").attr("disabled", "disabled");
+	$(".chan-text").text("날짜 선택(달력에서 날짜를 선택해주세요.)");
+	$(".chan-text2").text("옵션(날짜를 먼저 선택해주세요.)");
+
+}
+/*
 function deletediv(optid) {
+	delprice = $("#" + optid + "price").val();
+	totalprice -= delprice;
+	$("#totalprice").val(totalprice);
+	$("#printtotalprice").html("금액 :" + totalprice);
 	$("#" + optid).remove();
+};*/
+
+//영수증 출력
+$(function() {
+	$('.S').change(function() {
+		printoptionlist2();
+	});
+});
+
+
+function printoptionlist2() {
+
+	totalprice = Roomprice;
+	$("#printtotalprice").html(totalprice + "원");
+	$("#totalprice").val(totalprice);
 };
 
+
+
+$(function() {
+	$(".S").change(function() {
+
+		if ($(".S").val() != "") {
+			$(".optbtn").removeAttr("disabled");
+			$(".chan-text2").text("옵션");
+		} else {
+			$(".optbtn").attr("disabled", "disabled");
+		}
+
+
+	});
+});
+
+//* 최종 가격 널 체크, totalprice 미 존재시 버튼 비활성화 */
+let nullck = () => {
+	if (!$.trim($('#printtotalprice').html()).length) {
+		return false;
+	}
+	return true;
+}
 
 //var star = document.getElementById("star").value;
 //console.log(star);

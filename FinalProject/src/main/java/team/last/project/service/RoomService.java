@@ -1,5 +1,6 @@
 package team.last.project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,13 @@ public class RoomService {
 		return roomRepository.findAll();
 	}
 
+	public List<String> roomnameList() {
+		List<String> idlist = new ArrayList<>();
+		List<Room> id = roomRepository.findAll();
+		id.forEach(x -> idlist.add(x.getName()));
+		return idlist;
+
+	}
 	public Optional<Room> roomget(int id) {
 		return roomRepository.findById(id);
 	}

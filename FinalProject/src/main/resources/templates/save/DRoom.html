@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/first_layout">
+<th:block layout:fragment="content">
+<link th:href="@{/css/room.css}" rel="stylesheet">
+	<main>
+		<div class="container">
+			<div class="row" id="room">
+				<div class="col-md-8 mb-4 mt-4" align="center">
+					<div id="carouselExampleIndicators" class="carousel slide"
+						data-bs-ride="carousel">
+						<div class="carousel-indicators">
+							<button type="button" data-bs-target="#carouselExampleIndicators"
+								data-bs-slide-to="0" class="active" aria-current="true"
+								aria-label="Slide 1"></button>
+							<button type="button" data-bs-target="#carouselExampleIndicators"
+								data-bs-slide-to="1" aria-label="Slide 2"></button>
+							<button type="button" data-bs-target="#carouselExampleIndicators"
+								data-bs-slide-to="2" aria-label="Slide 3"></button>
+							<button type="button" data-bs-target="#carouselExampleIndicators"
+								data-bs-slide-to="3" aria-label="Slide 4"></button>
+						</div>
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<img src="/img/D1.PNG" class="d-block w-100" alt="...">
+							</div>
+							<div class="carousel-item">
+								<img src="/img/D2.PNG" class="d-block w-100" alt="...">
+							</div>
+							<div class="carousel-item">
+								<img src="/img/D3.PNG" class="d-block w-100" alt="...">
+							</div>
+							<div class="carousel-item">
+								<img src="/img/D4.PNG" class="d-block w-100" alt="...">
+							</div>
+						</div>
+						<button class="carousel-control-prev" type="button"
+							data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button"
+							data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4" align="center">
+					<div>
+						사용자 <br />별점 : 4점
+						<div class="star-ratings">
+							<div class="star-ratings-fill space-x-2 text-lg"
+								style="width: 81.5%">
+								<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+							</div>
+							<div class="star-ratings-base space-x-2 text-lg">
+								<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+							</div>
+						</div>
+					</div>
+					<div class="price">40,000원</div>
+					<div>
+						<hr />
+						인원:<select name="인원">
+							<option selected>4인(+8만원)</option>
+							<option>6인(+10만원)</option>
+						</select><br />
+						<hr />
+						옵션:<select name="옵션">
+							<option>선택안함</option>
+							<option>포토스냅A(+10만원)</option>
+							<option>포토스냅B(+12만원)</option>
+						</select> <br />
+						<hr />
+						패키지:<select name="패키지">
+							<option>선택안함</option>
+							<option>올인원 패키지[Hot!](+23만원)</option>
+							<option>내맘쏙 패키지A(+18만원)</option>
+							<option>내맘쏙 패키지B(+16만원)</option>
+							<option>내맘쏙 패키지C(+11만원)</option>
+						</select>
+						<hr />
+					</div>
+					<div>
+						금액 : ??만원
+						<button type="button" class="btn btn-outline-success">
+							예약하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+			crossorigin="anonymous"></script>
+
+	</main>
+</th:block>
+</html>

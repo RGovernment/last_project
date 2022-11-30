@@ -33,7 +33,12 @@
 						<td th:text="${mem.id}"></td>
 						<td th:text="${mem.name}"></td>
 						<td th:text="${mem.email}"></td>
-						<td th:text="${mem.phone}"></td>
+						<td th:text="${mem.phone}" th:if="${#strings.length(mem.phone)} == 1 or 
+						${#strings.length(mem.phone)} > 11 and not ${#strings.contains(mem.phone,'.')}" ></td>
+						<td th:if="${#strings.length(mem.phone)} != 1 and ${#strings.length(mem.phone)} < 12" th:inline="text">
+						[[${#strings.substring(mem.phone, 0, 3)}]]-[[${#strings.substring(mem.phone, 3, 7)}]]-[[${#strings.substring(mem.phone, 7, 11)}]]
+						</td>
+						<td th:if="${#strings.contains(mem.phone,'.')}" th:inline="text">[[${#strings.replace(mem.phone,'.','-')}]]</td>
 						<td th:if="${mem.gender}==1" th:text="남자"></td>
 						<td th:if="${mem.gender}==2" th:text="여자"></td>
 						<td th:if="${mem.gender}==3" th:text="카카오"></td>

@@ -30,25 +30,63 @@
 	padding: 0;
 }
 
-#start_time{
+#start_time {
 	text-align: center;
-	border:none;
-	outline:none;
-	border-top-left-radius:5px;
-	border-bottom-left-radius:5px;
-	border-right:1px solid black;
-}
-#end_time{
-	text-align: center;
-	border:1px;
-	outline:none;
-	border-top-right-radius:5px;
-	border-bottom-right-radius:5px;
+	border: none;
+	outline: none;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-right: 1px solid black;
 }
 
-#room-text1{
-	font-weight:700;
+#end_time {
+	text-align: center;
+	border: 1px;
+	outline: none;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+#room-text1 {
+	font-weight: 700;
 	font-family: 'Dancing Script', cursive;
 	font-size: 60px;
-	color:#483d8b;
+	color: #483d8b;
+}
+
+.side-section {
+	background: #f3f3f3;
+	border: solid black;
+	border-width: 1px 1px 1px 0px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+#printoptions {
+	overflow: auto;
+	height: 63px;
+	border-bottom: 2px solid black
+}
+
+.reserv-option {
+	background-color: #7d7d7f;
+	border-radius: 5px;
+	border: black solid;
+	border-width: 1px 1px 1px 0px;
+}
+
+.reserv-option-body {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border: black solid;
+	border-width: 1px 0px 1px 1px;
+	background-color: #ffffff;
+}
+
+.overfit>div{
+	height: 660px;
+}
+.overfit img{
+	height:100%;
+	object-fit: cover;
 }

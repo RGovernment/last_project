@@ -85,4 +85,9 @@ public class Member {
 		this.secession = 1;
 	}
 
+	public void restoreMember() {
+		this.secession = 0;
+		
+	}
+
 }
