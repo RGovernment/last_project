@@ -9,7 +9,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +19,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 import com.nimbusds.jose.shaded.json.JSONObject;
 import com.nimbusds.jose.shaded.json.parser.JSONParser;
 import com.nimbusds.jose.shaded.json.parser.ParseException;
 
 import lombok.RequiredArgsConstructor;
+import team.last.project.dto.AmountDto;
 import team.last.project.dto.KakaoPayApprovalDto;
 import team.last.project.service.KakaopayService;
 
@@ -51,17 +55,10 @@ public class KakaoPayController {
 			payconnect.setDoOutput(true);
 			// 요기까지 기본설정
 
-			String parameter = "cid=TC0ONETIME&" 
-					+ "partner_order_id=partner_order_id&"
-					+ "partner_user_id=partner_user_id&" 
-					+ "item_name=chicken&" 
-					+ "quantity=1&" 
-					+ "total_amount=2200&"
-					+ "vat_amount=200&" 
-					+ "tax_free_amount=0&" 
-					+ "approval_url=/kakao/success&"
-					+ "fail_url=/kakao/fail&" 
-					+ "cancel_url=/kakao/cancel";
+			String parameter = "cid=TC0ONETIME&" + "partner_order_id=partner_order_id&"
+					+ "partner_user_id=partner_user_id&" + "item_name=chicken&" + "quantity=1&" + "total_amount=2200&"
+					+ "vat_amount=200&" + "tax_free_amount=0&" + "approval_url=http://localhost:8082/kakao/success&"
+					+ "fail_url=/kakao/fail&" + "cancel_url=/kakao/cancel";
 			// 카카오에서 ox 있는 길게 나와있는표에서 필요한것들만 넣었다
 
 			OutputStream DataPakage = payconnect.getOutputStream();
@@ -105,7 +102,6 @@ public class KakaoPayController {
 			kakao = new KakaoPayApprovalDto();
 
 			kakao.setTid((String) jsonObject.get("tid"));
-			System.out.println();
 
 			// return changeResult.readLine();
 			return jsonObject;
@@ -121,6 +117,9 @@ public class KakaoPayController {
 
 	@GetMapping("/success")
 	public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) throws ParseException {
+		RestTemplate restTemplate = new RestTemplate();
+
+		System.out.println("여기까지 오긴 함 ?");
 		try {
 			URL address = new URL("https://kapi.kakao.com/v1/payment/approve");
 			HttpURLConnection payconnect = (HttpURLConnection) address.openConnection();
@@ -130,21 +129,16 @@ public class KakaoPayController {
 			payconnect.setDoInput(true);
 			payconnect.setDoOutput(true);
 
-			String parameter = "cid=TC0ONETIME&" 
-							+ "tid=" + kakao + "&" 
-							+ "partner_order_id=partner_order_id&"
-							+ "partner_user_id=partner_user_id&" 
-							+ "item_name=chicken&" + "pg_token=" + pg_token;
+			String parameter = "cid=TC0ONETIME&" + "tid=" + kakao.getTid() + "&" + "partner_order_id=partner_order_id&"
+					+ "partner_user_id=partner_user_id&" + "pg_token=" + pg_token;
 			// 카카오에서 ox 있는 길게 나와있는표에서 필요한것들만 넣었다
 
 			OutputStream DataPakage = payconnect.getOutputStream();
 			// outputstream은 서버에서 주고싶은 데이터를 담는다.
-
 			DataOutputStream throwData = new DataOutputStream(DataPakage);
 			// 아웃풋 스트림에 담긴 데이터를 카카오로 던져주는아이
 			throwData.writeBytes(parameter);
 			// 카카오에서 바이트형식으로 달라했으니 바이트형식으로 형변환을 해준다.
-
 			throwData.flush();
 			// 본인한테 담겨있는 데이터를 카카오로 넘김과 동시에 본인을 비운다.
 			throwData.close();
@@ -169,9 +163,25 @@ public class KakaoPayController {
 			@SuppressWarnings("deprecation")
 			JSONParser jsonParser = new JSONParser();
 			JSONObject jsonObject = (JSONObject) jsonParser.parse(resultReader);
-
+			JSONObject jsonObject2 = (JSONObject) jsonObject.get("amount");
 			System.out.println(jsonObject);
-			model.addAttribute("info",jsonObject);
+			System.out.println(jsonObject2.get("total"));
+			KakaoPayApprovalDto kakaoAdto = new KakaoPayApprovalDto();
+			LocalDateTime local = LocalDateTime.parse((String) jsonObject.get("approved_at"));
+			Date date = Date.from(local.atZone(ZoneId.systemDefault()).toInstant());
+			String a = (String) jsonObject.get("approved_at");
+			System.out.println(a);
+			AmountDto amount2 = new AmountDto();
+			kakaoAdto.setAmount(amount2);
+			amount2.setTotal((Integer) jsonObject2.get("total"));
+			kakaoAdto.setApproved_at(date);
+			kakaoAdto.setPartner_order_id(jsonObject.getAsString("partner_user_id"));
+			kakaoAdto.setItem_name(jsonObject.getAsString("item_name"));
+			kakaoAdto.setQuantity((Integer) jsonObject.get("quantity"));
+			kakaoAdto.getAmount().setTotal(amount2.getTotal());
+			kakaoAdto.setPayment_method_type(jsonObject.getAsString("payment_method_type"));
+
+			model.addAttribute("info", kakaoAdto);
 			// return changeResult.readLine();
 			return "/kakao/kakaoPaySuccess";
 
