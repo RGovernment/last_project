@@ -18,10 +18,15 @@ public class ReserveService {
 	public void reserve(Reserve reserve) {
 		reserveRepository.save(reserve);
 	}
+	//요청한 달의 데이터 select
+	public List<Reserve> findschedule(String month){
+		return reserveRepository.findschedule(month);
+	}
+	
 	public List<Reserve> reserveList(Long id) {
-		
 		List<Reserve> reserve = reserveRepository.findALLByMemberId(id);
 		return reserve;
 	}
+	
 
 }
