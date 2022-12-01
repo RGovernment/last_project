@@ -67,16 +67,15 @@ public class ReserveController {
 	}
 
 	@PostMapping("/reserve/{id}")
-	public String reserve(@PathVariable("id") Integer id, Authentication autentication, ReserveDto reserveDto,Model model) {
+	public String reserve(@PathVariable("id") Integer id, Authentication autentication, ReserveDto reserveDto,Model model,HttpServletRequest req) {
 		Member member = memberService.memgetInfo(autentication.getName());
-		Reserve reserve = Reserve.createReserve(reserveDto, member, roomService.roomget(id).get());
-		reserveService.reserve(reserve);
+		Reserve reserve = Reserve.createReserve(reserveDto, member, roomService.roomget(id).get());	
 		Room room =roomService.roomget(id).get();
 		String roomname =room.getName();
 		model.addAttribute("member",member);
 		model.addAttribute("reservedto",reserveDto);
 		model.addAttribute("item",roomname);
-		
+		req.getSession().setAttribute("reserve", reserve);
 		return "/kakao/kakaoPay";
 	}
 	

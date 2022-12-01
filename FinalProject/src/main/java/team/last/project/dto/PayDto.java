@@ -15,6 +15,7 @@ public class PayDto {
 	private Timestamp pay_date_time;
 	private String item;
 	private String tid;
+	private String ordercode;
 
 	
 }
