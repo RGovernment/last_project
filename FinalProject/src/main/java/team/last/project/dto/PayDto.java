@@ -13,5 +13,8 @@ public class PayDto {
 
 	private int pay_amount;
 	private Timestamp pay_date_time;
+	private String item;
+	private String tid;
+
 	
 }

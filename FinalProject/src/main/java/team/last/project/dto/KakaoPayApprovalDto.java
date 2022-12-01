@@ -1,6 +1,6 @@
 package team.last.project.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import lombok.Data;
 
@@ -13,7 +13,7 @@ public class KakaoPayApprovalDto {
 	private CardDto card_info;
 	private String item_name, item_code, payload;
 	private Integer quantity, tax_free_amount, vat_amount;
-	private Date created_at, approved_at;
+	private Timestamp created_at, approved_at;
 }
 
 

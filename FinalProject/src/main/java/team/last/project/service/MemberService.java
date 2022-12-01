@@ -2,6 +2,8 @@ package team.last.project.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,9 +33,17 @@ public class MemberService {
 			throw new IllegalStateException("이미 가입된 회원입니다.");
 		}
 	}
-
+	
+	public void deleteMember(Member member) {
+		 memberRepository.delete(member);
+	}
+	
 	public List<Member> memberList() {
 		return memberRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+	}
+	
+	public Page<Member> memberListPaging(Pageable pageable) {
+		return memberRepository.findAll(pageable);
 	}
 
 	

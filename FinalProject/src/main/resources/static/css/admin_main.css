@@ -41,6 +41,28 @@
 	min-height: 900px
 }
 
+#page {
+	font-size: 20px;
+	text-decoration: none;
+	color: black;
+}
+
+#page_div{
+	 max-width: 300px;
+}
+#page_now{
+	font-size:20px;
+	color: #121299;
+}
+
+#page:hover{
+	color: #888888;
+	text-decoration: underline;
+}
+#page:active{
+	color: #444444;
+}
+
 @media screen and (min-width: 783px) {
 	#side-bar {
 		background-color: #211f29;

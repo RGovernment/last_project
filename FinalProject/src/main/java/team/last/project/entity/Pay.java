@@ -23,8 +23,10 @@ public class Pay {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PAY_SEQ")
 	@SequenceGenerator(sequenceName = "pay_seq", allocationSize = 1, name = "PAY_SEQ")
 	private int id;
-	private Timestamp pay_date_time;
+	private String tid;
+	private String item;
 	private int pay_amount;
+	private Timestamp pay_date_time;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="member_id")
@@ -33,6 +35,7 @@ public class Pay {
 	public static Pay Pay_success(PayDto paydto,Member member) {
 		Pay pay = new Pay();
 		pay.setPay_amount(paydto.getPay_amount());
+		pay.setItem(paydto.getItem());
 		pay.setPay_date_time(paydto.getPay_date_time());
 		pay.setMember(member);
 		return pay;
