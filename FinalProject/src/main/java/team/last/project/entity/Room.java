@@ -10,6 +10,7 @@ import javax.persistence.NamedEntityGraph;
 
 import lombok.Data;
 
+
 @Entity
 @Data
 @NamedEntityGraph(name = "RoomwithRoomtype", attributeNodes = @NamedAttributeNode("roomtype"))

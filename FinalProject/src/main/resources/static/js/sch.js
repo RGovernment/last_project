@@ -36,32 +36,27 @@ function showCalendar() {
 				var d2 = "";
 				var d3 = "";
 
-				var st;
-				var et;
-				st = "2022-11-30 18:00:00.0";
-				et = "2022-12-01 09:00:00.0";
-				var tt = st.substring(8, 10);
+				var sd = SDay = 11;
+
 				//시작시간
-				var st_tt = st.substring(11, 13);
+				var sh = SHour = 12;
 				//종료시간
-				var et_tt = et.substring(11, 13);
+				var eh = EHour = 15;
 				//대여시간
-				var sch_tt = Math.abs(et_tt - st_tt);
+				var sch_tt = Math.abs(sh - eh);
 
 				//일이 같으면
-				if (cnt == tt) {
+				if (cnt == sd) {
 					if (sch_tt != null) {
 						if (sch_tt == 3) {
-							d1 = st_tt + "~" + et_tt;
+							d1 = sh + "~" + eh;
 						} else if (sch_tt == 6) {
-							d2 = st_tt + "~" + et_tt;
+							d2 = sh + "~" + eh;
 						} else if (sch_tt > 6) {
-							d3 = st_tt + "~" + et_tt;
+							d3 = sh + "~" + eh;
 						}
 					}
 				}
-
-				//3H = 초록색 , 6H주황색 , AllDay = 핑크색 
 
 				//주말 색깔넣기 일요일=빨강 , 토요일=파랑
 				var weekend = "";
@@ -146,7 +141,6 @@ function next() {
 	}
 
 	today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
-
 	month = today.getMonth() + 1;
 	console.log(today.getMonth() + 1);
 	document.getElementById('current-year-month').innerHTML = monthList[today.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;' + first.getFullYear();
@@ -270,6 +264,7 @@ function month_sch() {
 		url: "/res/getreservedata",
 		data: { month_id, month_id },
 		success: function(result) {
+
 			alert("성공");
 		},
 		error: function() {

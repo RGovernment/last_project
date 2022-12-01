@@ -1,7 +1,6 @@
 package team.last.project.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.security.authentication.AuthenticationTrustResolver;
@@ -16,12 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.RequiredArgsConstructor;
 import team.last.project.dto.MemberDto;
 import team.last.project.entity.Member;
-import team.last.project.repository.MemberRepository;
-import team.last.project.security.oauth2.PrincipalDetails;
 import team.last.project.service.MemberService;
 
 @Controller

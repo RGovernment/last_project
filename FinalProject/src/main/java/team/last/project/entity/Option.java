@@ -53,8 +53,7 @@ public class Option {
 		optionDto.setType(type);
 		return optionDto;
 	}
-	
-	
+
 	public void update(String name, Option_type type, String note) {
 		this.name = name;
 		this.type = type;

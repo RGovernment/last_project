@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,8 +61,7 @@ public class AdminController {
 			sortingOrder = 0;
 		switch (sortingOrder) {
 		case 0:
-			pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
-					Sort.by("id").descending());
+			pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
 			break;
 		case 1:
 			pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),

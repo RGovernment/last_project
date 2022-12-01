@@ -30,12 +30,11 @@ public class OptPriceService {
 		return optpricelist;
 	}
 
-	public List<OptPrice> optPriceAllList(){
-		
-		
+	public List<OptPrice> optPriceAllList() {
+
 		return optPriceRepository.findAll();
 	}
-	
+
 	public void optPriceDelete(Integer id) {
 		optPriceRepository.deleteById(id);
 	}
