@@ -1,7 +1,5 @@
 package team.last.project.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,14 +34,78 @@ public class AdminController {
 	private AskBoardService askBoardService;
 
 	@RequestMapping(value = "")
-	public String adminPage(Authentication authentication, Model model) {
+	public String adminPage(Authentication authentication, Model model
+			,@PageableDefault(page = 0, size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
+			,@Nullable Integer sortingOrder) {
+		
 		String name = memberService.memgetName(authentication.getName());
-		List<Member> memberlist = memberService.memberList();
+		
+		PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
+		
+		Page<Member> memberlist = memberService.memberListPaging(pageRequest);
+		
+		int nowPage = memberlist.getPageable().getPageNumber() + 1;
+		int startPage = Math.max(nowPage - 4, 1);
+		int endPage = Math.min(nowPage + 5, memberlist.getTotalPages());
+		if (endPage == 0) {
+			endPage = 1;
+		}
+		model.addAttribute("lastPage",memberlist.getTotalPages());
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
 		model.addAttribute("memberlist", memberlist);
 		model.addAttribute("name", name);
 		return "/admin/admin";
 	}
+	
+	@PostMapping("/del_member")
+	public String delUser(@RequestParam(value = "delEmail", required = false) String delEmail,Model model) {
+		
+		Member mem= memberService.memgetInfo(delEmail);
+		memberService.deleteMember(mem);	
+		System.out.println(delEmail);
+		model.addAttribute("message","회원탈퇴에 성공했습니다.");
+		model.addAttribute("Url","/admin");
+		
+		return "/admin/message";
+	}
 
+	@RequestMapping(value = "/secessionOrder")
+	public String adminPage2(Authentication authentication, Model model
+			,@PageableDefault(page = 0, size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
+			,@Nullable Integer sortingOrder) {
+		
+		String name = memberService.memgetName(authentication.getName());
+		PageRequest pageRequest = null;
+		if (sortingOrder == null)
+			sortingOrder = 0;
+		switch (sortingOrder) {
+		case 0:
+			pageRequest =  PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
+			break;
+		case 1:
+			pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("secession").descending());
+			break;
+		}
+		
+		Page<Member> memberlist = memberService.memberListPaging(pageRequest);
+		
+		int nowPage = memberlist.getPageable().getPageNumber() + 1;
+		int startPage = Math.max(nowPage - 4, 1);
+		int endPage = Math.min(nowPage + 5, memberlist.getTotalPages());
+		if (endPage == 0) {
+			endPage = 1;
+		}
+		model.addAttribute("lastPage",memberlist.getTotalPages());
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("memberlist", memberlist);
+		model.addAttribute("name", name);
+		return "/admin/admin";
+	}
+	
 	@RequestMapping("/room")
 	public String room(Authentication authentication, Model model) {
 		String name = memberService.memgetName(authentication.getName());
@@ -81,6 +143,7 @@ public class AdminController {
 		if (endPage == 0) {
 			endPage = 1;
 		}
+		model.addAttribute("lastPage",list.getTotalPages());
 		model.addAttribute("list", list);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);
@@ -103,6 +166,7 @@ public class AdminController {
 		if (endPage == 0) {
 			endPage = 1;
 		}
+		model.addAttribute("lastPage",list.getTotalPages());
 		model.addAttribute("list", list);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);

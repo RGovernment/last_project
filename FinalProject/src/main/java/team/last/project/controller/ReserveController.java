@@ -67,11 +67,17 @@ public class ReserveController {
 	}
 
 	@PostMapping("/reserve/{id}")
-	public String reserve(@PathVariable("id") Integer id, Authentication autentication, ReserveDto reserveDto) {
+	public String reserve(@PathVariable("id") Integer id, Authentication autentication, ReserveDto reserveDto,Model model) {
 		Member member = memberService.memgetInfo(autentication.getName());
 		Reserve reserve = Reserve.createReserve(reserveDto, member, roomService.roomget(id).get());
 		reserveService.reserve(reserve);
-		return "redirect:/res";
+		Room room =roomService.roomget(id).get();
+		String roomname =room.getName();
+		model.addAttribute("member",member);
+		model.addAttribute("reservedto",reserveDto);
+		model.addAttribute("item",roomname);
+		
+		return "/kakao/kakaoPay";
 	}
 	
 	//달력에 예약 현황을 보여주기 위한 요청URL

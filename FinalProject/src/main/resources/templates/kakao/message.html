@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/first_layout">
+
+<th:block layout:fragment="content">
+	<link th:href="@{/css/reviewPage.css}" rel="stylesheet">
+	<script th:inline="javascript">
+var message = [[${message}]];
+alert(message);
+location.replace([[${Url}]]);
+</script>
+</th:block>
+</html>
