@@ -39,7 +39,6 @@ function showCalendar() {
 					weekend = "blue";
 				}
 				let scheduledata = "<div id='day_content_date' style='color:" + weekend + "'>" + cnt + "</div>";
-				//3H = 초록색 , 6H주황색 , AllDay = 핑크색 
 
 				//주말 색깔넣기 일요일=빨강 , 토요일=파랑
 				$td.innerHTML = scheduledata;

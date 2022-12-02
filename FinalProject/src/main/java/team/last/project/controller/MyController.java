@@ -69,6 +69,8 @@ public class MyController {
 				Sort.by("id").descending());
 
 		list = reviewService.reviewList(pageRequest);
+		if(list!=null) {
+			
 		int nowPage = list.getPageable().getPageNumber() + 1;
 		int startPage = Math.max(nowPage - 4, 1);
 		int endPage = Math.min(nowPage + 5, list.getTotalPages());
@@ -81,6 +83,11 @@ public class MyController {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		return "/review";
+		}else {
+			model.addAttribute("message","작성된 후기가 없습니다.");
+			model.addAttribute("Url","/index");
+			return "/er";
+		}
 	}
 
 	@RequestMapping("/er")
