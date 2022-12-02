@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import lombok.Data;
@@ -27,19 +28,24 @@ public class Pay {
 	private String item;
 	private int pay_amount;
 	private Timestamp pay_date_time;
+	private String ordercode;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="member_id")
 	private Member member;
-
+	
+	@OneToOne(mappedBy = "pay")
+	private Reserve reserve;
+	
 	public static Pay Pay_success(PayDto paydto,Member member) {
 		Pay pay = new Pay();
 		pay.setPay_amount(paydto.getPay_amount());
 		pay.setItem(paydto.getItem());
 		pay.setPay_date_time(paydto.getPay_date_time());
+		pay.setTid(paydto.getTid());
+		pay.setOrdercode(paydto.getOrdercode());
 		pay.setMember(member);
-		return pay;
-		
+		return pay;	
 	}
 	
 }

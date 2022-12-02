@@ -67,34 +67,34 @@ public class ReserveController {
 	}
 
 	@PostMapping("/reserve/{id}")
-	public String reserve(@PathVariable("id") Integer id, Authentication autentication, ReserveDto reserveDto,Model model) {
+	public String reserve(@PathVariable("id") Integer id, Authentication autentication, ReserveDto reserveDto,Model model,HttpServletRequest req) {
 		Member member = memberService.memgetInfo(autentication.getName());
-		Reserve reserve = Reserve.createReserve(reserveDto, member, roomService.roomget(id).get());
-		reserveService.reserve(reserve);
+		Reserve reserve = Reserve.createReserve(reserveDto, member, roomService.roomget(id).get());	
 		Room room =roomService.roomget(id).get();
 		String roomname =room.getName();
 		model.addAttribute("member",member);
 		model.addAttribute("reservedto",reserveDto);
 		model.addAttribute("item",roomname);
-		
+		req.getSession().setAttribute("reserve", reserve);
 		return "/kakao/kakaoPay";
 	}
 	
 	//달력에 예약 현황을 보여주기 위한 요청URL
 	@ResponseBody
 	@PostMapping("/getreservedata")
-	public List<Map<String, String>> getreservedata(String month_id, HttpServletRequest request, Model model) {
+	public List<Map<String, Object>> getreservedata(String month_id, HttpServletRequest request, Model model) {
 		List<Reserve> reservelist = reserveService.findschedule(month_id);
-		List<Map<String, String>> reserveMapList = new ArrayList<Map<String, String>>();
+		List<Map<String, Object>> reserveMapList = new ArrayList<Map<String, Object>>();
 		if (reservelist != null) {
 			for (int i = 0; i < reservelist.size(); i++) {
-				Map<String, String> reserveMap = new HashMap<String, String>();
+				Map<String, Object> reserveMap = new HashMap<String, Object>();
 				String SDay = new SimpleDateFormat("dd").format(reservelist.get(i).getStart_time());
 				String SHour = new SimpleDateFormat("HH").format(reservelist.get(i).getStart_time());
 				String EHour = new SimpleDateFormat("HH").format(reservelist.get(i).getEnd_time());
-				String Hour = SHour + "-" + EHour;
+				
 				reserveMap.put("SDay", SDay);
-				reserveMap.put("Hour", Hour);
+				reserveMap.put("SHour", Integer.parseInt(SHour));
+				reserveMap.put("EHour", Integer.parseInt(EHour));
 				reserveMapList.add(reserveMap);
 			}
 		}// 필요한 데이터인 날짜와 시작,끝 시간을 가공해 HashMap 형태로 묶은 후 List에 담아서 return

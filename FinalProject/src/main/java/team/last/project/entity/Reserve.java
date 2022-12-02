@@ -11,19 +11,25 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import team.last.project.dto.ReserveDto;
 
 @Entity
 @Data
 @NamedEntityGraph(name = "Room_id", attributeNodes = @NamedAttributeNode("room"))
+@NamedEntityGraph(name = "ReserveWithPay", attributeNodes = @NamedAttributeNode("pay"))
+@AllArgsConstructor
+@NoArgsConstructor
 public class Reserve {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RESERVE_ID_SEQ")
 	@SequenceGenerator(sequenceName = "reserve_id_seq", allocationSize = 1, name = "RESERVE_ID_SEQ")
-	private int id;
+	private Long id;
 	private Timestamp start_time;
 	private Timestamp end_time;
 	private int totalprice;
@@ -34,6 +40,10 @@ public class Reserve {
 	@JoinColumn(name = "member_id")
 	private Member member;
 
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pay_id")
+	private Pay pay;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "room_id")
 	private Room room;
@@ -49,7 +59,7 @@ public class Reserve {
 		reserve.setRoom(room);
 		return reserve;
 	}
-
-	public void update(String content, int price) {
+	public void addPay(Pay pay) {
+		this.pay = pay;
 	}
 }

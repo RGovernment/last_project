@@ -13,5 +13,4 @@ public interface OptionRepository extends JpaRepository<Option, Integer> {
 
 	@EntityGraph("OptionwithPrice")
 	List<Option> findAll();
-
 }

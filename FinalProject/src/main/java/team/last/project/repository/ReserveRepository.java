@@ -18,4 +18,5 @@ public interface ReserveRepository extends JpaRepository<Reserve, Long>{
 	//요청한 달의 데이터 select
 	@Query(value="select r from Reserve r where to_char(r.start_time,'MM') = ?1")
 	List<Reserve> findschedule(String month);
+	
 }

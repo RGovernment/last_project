@@ -29,5 +29,12 @@ public class ReserveService {
 		return reserve;
 	}
 	
+	public Reserve get(Long resid) {
+		return reserveRepository.findById(resid).orElse(null);
+	}
+	
+	public void delete(Reserve reserve) {
+		reserveRepository.delete(reserve);
+	}
 
 }

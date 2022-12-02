@@ -33,6 +33,7 @@ public class SecurityConfig {
 		http.authorizeRequests()
 			.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
 			.permitAll()
+			.antMatchers("/review/**").hasRole("USER")
 			.antMatchers("/res/room").authenticated()
 			.antMatchers("/member/signup").hasRole("ANONYMOUS")
 			.antMatchers("/mypage/editinfo").hasRole("USER")
