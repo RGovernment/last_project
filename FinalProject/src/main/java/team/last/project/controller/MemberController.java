@@ -61,6 +61,7 @@ public class MemberController {
 		return "member/secession_msg";
 	}
 
+	
 	@GetMapping("/signup")
 	public String sign_up(Model model) {
 		model.addAttribute("memberDto", new MemberDto());
@@ -81,6 +82,13 @@ public class MemberController {
 		}
 		return "redirect:/index";
 	}
+	
+	@RequestMapping("/agree")
+	public String agree() {
+		
+		return "/member/agree";
+	}
+	
 
 	@RequestMapping(value = "/errorDenied")
 	public String showAccessDeniedPage() {
