@@ -14,16 +14,21 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import team.last.project.dto.MemberDto;
 import team.last.project.entity.Member;
+import team.last.project.service.EmailServiceImpl;
 import team.last.project.service.MemberService;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
+	
+	private final EmailServiceImpl emailService;
 	private final MemberService memberService;
 	private final PasswordEncoder passwordEncoder;
 
@@ -81,5 +86,17 @@ public class MemberController {
 	public String showAccessDeniedPage() {
 		return "/er";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value="/emailck")
+	public String emailck(@RequestParam("email")String email) {
+		String code = "";
+		try {
+			code = emailService.sendSimpleMessage(email);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return code;
+	}
 }
