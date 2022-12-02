@@ -2,6 +2,7 @@ package team.last.project.entity;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,6 +28,7 @@ public class Pay {
 	private String tid;
 	private String item;
 	private int pay_amount;
+	@Column(columnDefinition = "timestamp default current_timestamp")
 	private Timestamp pay_date_time;
 	private String ordercode;
 	

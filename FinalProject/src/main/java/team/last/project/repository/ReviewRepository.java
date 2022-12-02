@@ -16,4 +16,6 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 	@Query(value = "select r " + "from Review r " + "left join fetch r.room "
 			+ "left join fetch r.member ", countQuery = "select count(r.id) from Review r")
 	Page<Review> findAll(Pageable pageable);
+
+	
 }

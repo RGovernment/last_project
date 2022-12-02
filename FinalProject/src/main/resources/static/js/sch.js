@@ -10,13 +10,14 @@ var notLeapYear = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 var pageFirst = first;
 var pageYear;
 var delprice = 0;
-
+var room_id = $('#room_id').val();
 if (first.getFullYear() % 4 === 0) {
 	pageYear = leapYear;
 } else {
 	pageYear = notLeapYear;
 }
 
+var year = "";
 var month = "";
 
 function showCalendar() {
@@ -69,6 +70,7 @@ function changemonth(cal) {
 		case 0:
 			currentTitle.innerHTML = monthList[today.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;'
 				+ first.getFullYear();
+			year = today.getFullYear();
 			month = today.getMonth() + +1;
 			break;
 		case -1:
@@ -85,6 +87,7 @@ function changemonth(cal) {
 				first = pageFirst;
 			}
 			today = new Date(today.getFullYear(), today.getMonth() + cal, today.getDate());
+			year = today.getFullYear();
 			month = today.getMonth() + +1;
 			console.log(today.getMonth() + 1);
 
@@ -106,6 +109,7 @@ function changemonth(cal) {
 			}
 
 			today = new Date(today.getFullYear(), today.getMonth() + cal, today.getDate());
+			year = today.getFullYear();
 			month = today.getMonth() + 1;
 			currentTitle.innerHTML = monthList[today.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;' + first.getFullYear();
 			break;
@@ -144,6 +148,26 @@ function changeToday(e) {
 		}
 	}
 	clickedDate1 = e.currentTarget;
+	
+	//날짜 선택 시 예약 가능 시간만 선택할 수 있게 변환하기
+	var dayschedules = clickedDate1.children;
+	for (let dayschedulesindex = 1; dayschedulesindex<dayschedules.length;dayschedulesindex++){
+		var tempStime = dayschedules[dayschedulesindex].dataset.starttime
+		var tempEtime = dayschedules[dayschedulesindex].dataset.endtime
+		for(let k = tempStime-3; k<=tempEtime;k++){
+		console.log($('.S#T3').find('[value='+k+']'));
+		$('.S#T3').find('[value='+k+']').attr("disabled", true);
+		}
+		for(let k = tempStime-6; k<=tempEtime;k++){
+		console.log($('.S#T6').find('[value='+k+']'));
+		$('.S#T6').find('[value='+k+']').attr("disabled", true);
+		}
+		for(let k = tempStime; k<=tempEtime;k++){
+		console.log($('.S#TA').find('[value='+k+']'));
+		$('.S#TA').find('[value='+k+']').attr("disabled", true);
+		}
+	}
+	
 	$(".chan-text").text("날짜 선택");
 	$('.RentTime').removeAttr("disabled");
 	clickedDate1.classList.add('active');
@@ -245,13 +269,21 @@ $('.add_option').click(function() {
 
 //해당 달의 예약 현황을 가져오는 메소드
 function month_sch() {
+	var year_id = year;
 	var month_id = month;
+	var room_id_ob = room_id;
 	var token = $("meta[name='_csrf']").attr("content");
 	var header = $("meta[name='_csrf_header']").attr("content");
+	let object = {
+		"year_id": year_id,
+		"month_id": month_id,
+		"room_id_ob": room_id_ob,
+	};
 	$.ajax({
 		type: "POST",
 		url: "/res/getreservedata",
-		data: { month_id, month_id },
+		dataType: 'json',
+		data: object,
 		beforeSend: function(xhr) {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
 			xhr.setRequestHeader(header, token);
 		},
@@ -269,7 +301,7 @@ function addsch(reserve) {
 	if (reserve != null) {
 		for (var reserveindex = 0; reserveindex < reserve.length; reserveindex++) {
 			let tdid = Number(reserve[reserveindex].SDay)
-			$("#" + tdid).append("<div id='day_content2'>" + reserve[reserveindex].Hour + "</div>");
+			$("#" + tdid).append("<div id='day_content1' data-StartTime ='"+reserve[reserveindex].SHour+"'data-EndTime ='"+reserve[reserveindex].EHour+"'>" + reserve[reserveindex].SHour + " - " + reserve[reserveindex].EHour + "</div>");
 		}
 	}
 }

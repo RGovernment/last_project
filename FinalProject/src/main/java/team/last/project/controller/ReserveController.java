@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.catalina.Session;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +41,12 @@ public class ReserveController {
 	private final MemberService memberService;
 
 	@RequestMapping("")
-	public String root(Model model) {
+	public String root(Model model,HttpServletRequest req) {
+		//예약 결제 세션 초기화//
+		if(req.getSession().getAttribute("reserve") != null) {
+			req.getSession().removeAttribute("reserve");
+		}
+				
 		List<Room> roomlist = roomService.roomList();
 		model.addAttribute("roomlist", roomlist);
 		return "/res/Reservation";
@@ -82,18 +88,19 @@ public class ReserveController {
 	//달력에 예약 현황을 보여주기 위한 요청URL
 	@ResponseBody
 	@PostMapping("/getreservedata")
-	public List<Map<String, String>> getreservedata(String month_id, HttpServletRequest request, Model model) {
+	public List<Map<String, Object>> getreservedata(String month_id, HttpServletRequest request, Model model) {
 		List<Reserve> reservelist = reserveService.findschedule(month_id);
-		List<Map<String, String>> reserveMapList = new ArrayList<Map<String, String>>();
+		List<Map<String, Object>> reserveMapList = new ArrayList<Map<String, Object>>();
 		if (reservelist != null) {
 			for (int i = 0; i < reservelist.size(); i++) {
-				Map<String, String> reserveMap = new HashMap<String, String>();
+				Map<String, Object> reserveMap = new HashMap<String, Object>();
 				String SDay = new SimpleDateFormat("dd").format(reservelist.get(i).getStart_time());
 				String SHour = new SimpleDateFormat("HH").format(reservelist.get(i).getStart_time());
 				String EHour = new SimpleDateFormat("HH").format(reservelist.get(i).getEnd_time());
-				String Hour = SHour + "-" + EHour;
+				
 				reserveMap.put("SDay", SDay);
-				reserveMap.put("Hour", Hour);
+				reserveMap.put("SHour", Integer.parseInt(SHour));
+				reserveMap.put("EHour", Integer.parseInt(EHour));
 				reserveMapList.add(reserveMap);
 			}
 		}// 필요한 데이터인 날짜와 시작,끝 시간을 가공해 HashMap 형태로 묶은 후 List에 담아서 return

@@ -20,6 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,9 +87,9 @@ public class KakaoPayController {
 					+ "quantity=1&" //상품갯수
 					+ "total_amount="+price+"&" //상품가격
 					+ "tax_free_amount=0&" //비과세액
-					+ "approval_url=http://localhost:8082/kakao/success&" // 성공 주소
-					+ "fail_url=http://localhost:8082/kakao/fail&" //실패 주소
-					+ "cancel_url=http://localhost:8082/kakao/cancel"; //취소 주소
+					+ "approval_url=http://192.168.0.16:8082/kakao/success&" // 성공 주소
+					+ "fail_url=http://192.168.0.16:8082/kakao/fail&" //실패 주소
+					+ "cancel_url=http://192.168.0.16:8082/kakao/cancel"; //취소 주소
 
 			OutputStream DataPakage = payconnect.getOutputStream();
 			// outputstream은 서버에서 주고싶은 데이터를 담는다.
@@ -199,7 +200,7 @@ public class KakaoPayController {
 			paydto.setOrdercode(kakao.getPartner_order_id());
 			Pay pay = Pay.Pay_success(paydto,mem);
 			payService.savepay(pay);
-			
+
 			/*
 			KakaoPayApprovalDto kakaoAdto = new KakaoPayApprovalDto();
 			AmountDto amount2 = new AmountDto();
@@ -306,4 +307,66 @@ public class KakaoPayController {
 		}
 		return null;
 	}
+
+
+@GetMapping("/secession/{email}")
+public String kakaosecession(@PathVariable("email") String email,Model model) throws ParseException {
+	try {
+		URL address = new URL("https://kapi.kakao.com//v1/user/unlink");
+		HttpURLConnection payconnect = (HttpURLConnection) address.openConnection();
+		payconnect.setRequestMethod("POST");
+		payconnect.setRequestProperty("Authorization", "KakaoAK e21543cbd75b9b045e2caaaacfd53b9f");
+		payconnect.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		payconnect.setDoInput(true);
+		payconnect.setDoOutput(true);
+		 
+		String[] a  = email.split("@");
+		
+		String id = a[0];
+		
+		String parameter = "target_id_type=user_id&"//주문번호
+				+ "target_id="+ id; 
+
+		OutputStream DataPakage = payconnect.getOutputStream();
+
+		DataOutputStream throwData = new DataOutputStream(DataPakage);
+		
+		throwData.writeBytes(parameter);
+		throwData.flush();
+		throwData.close();
+
+		int resultset = payconnect.getResponseCode();
+
+		InputStream resultData;
+
+		if (resultset == 200) 
+		{
+			memberService.deleteMember(email);
+			resultData = payconnect.getInputStream();
+		} else {
+			resultData = payconnect.getErrorStream();
+		}
+		
+//		InputStreamReader resultReader = new InputStreamReader(resultData);
+//
+//		@SuppressWarnings("deprecation")
+//		JSONParser jsonParser = new JSONParser();
+//		JSONObject jsonObject = (JSONObject) jsonParser.parse(resultReader);
+//		
+//		String id2 = jsonObject.get("id").toString();
+		
+		model.addAttribute("secessionMsg","탈퇴가 완료되었습니다.");
+		
+		
+		return "/member/secession_msg";
+
+	} catch (MalformedURLException e) {
+
+		e.printStackTrace();
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	return null;
 }
+}
+

@@ -38,6 +38,11 @@ public class MemberService {
 		 memberRepository.delete(member);
 	}
 	
+	public void deleteMember(String email) {
+		Member member = memberRepository.findByEmail(email).orElse(null);
+		memberRepository.delete(member);
+	}
+	
 	public List<Member> memberList() {
 		return memberRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 	}
@@ -100,5 +105,7 @@ public class MemberService {
 
 		member.secessionMember();
 	}
+	
+
 
 }

@@ -20,7 +20,7 @@
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/member/login}'|" sec:authorize ="isAnonymous()">접속</div>
 				<div class="col-md-1" id="index-1" th:onclick="|location.href='@{/logout}'|" sec:authorize="hasAnyRole('USER','ADMIN')">해제</div>
 				<div class="col-md-1" id="index-1" sec:authorize="hasRole('KUSER')" 
-				th:onclick="|location.href='@{https://kauth.kakao.com/oauth/logout?client_id=13da41e01c3d7861d06de918b0daedcc&logout_redirect_uri=http://localhost:8082/logout}'|" >해제</div>
+				th:onclick="|location.href='@{https://kauth.kakao.com/oauth/logout?client_id=13da41e01c3d7861d06de918b0daedcc&logout_redirect_uri=http://192.168.0.16:8082/logout}'|" >해제</div>
 			</div>
 			<div class="row">
 				<div class="col-2 align-self-center" id="index-2-title">

@@ -45,11 +45,6 @@ public class MyController {
 
 		return "redirect:/index";
 	}
-	
-	@RequestMapping("/kakaotest")
-	public String kakao() {
-		return "/kakao/kakaoPay";
-	}
 
 	@RequestMapping("/index")
 	public String indexPage(@Nullable HttpSession session, Model model) {
@@ -69,6 +64,8 @@ public class MyController {
 				Sort.by("id").descending());
 
 		list = reviewService.reviewList(pageRequest);
+		if(list.getTotalPages()!=0) {
+			
 		int nowPage = list.getPageable().getPageNumber() + 1;
 		int startPage = Math.max(nowPage - 4, 1);
 		int endPage = Math.min(nowPage + 5, list.getTotalPages());
@@ -81,11 +78,15 @@ public class MyController {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
 		return "/review";
+		}else {
+			model.addAttribute("message","작성된 후기가 없습니다.");
+			model.addAttribute("Url","/index");
+			return "/er";
+		}
 	}
 
 	@RequestMapping("/er")
 	public String erpage2() {
-		System.out.println("나는 문어");
 		return "er";
 	}
 

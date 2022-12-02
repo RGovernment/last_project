@@ -11,9 +11,9 @@
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" th:src="@{/js/kakao.js}" th:inline="javascript"></script>
 	
-	<input type="text" th:id="name" th:value="${member.email}">
-	<input type="text" th:id="price" th:value="${reservedto.totalprice}">
-	<input type="text" th:id="item" th:value="${item}">
+	<input hidden="hidden" type="text" th:id="name" th:value="${member.email}">
+	<input hidden="hidden" type="text" th:id="price" th:value="${reservedto.totalprice}">
+	<input hidden="hidden" type="text" th:id="item" th:value="${item}">
 	<div style="min-height: 600px;">결제 진행중입니다.</div>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

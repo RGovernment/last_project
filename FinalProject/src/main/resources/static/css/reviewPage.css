@@ -10,6 +10,17 @@
 #review-card {
 	max-width: 970px;
 }
+.wrapper{
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+.wrapper.visible {
+  opacity: 1;
+}
+
+.root-margin{
+	background-color: red;
+}
 
 #title {
 	font-weight: bold;
