@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import lombok.Data;
@@ -33,6 +34,10 @@ public class Review {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "room_id")
 	private Room room;
+	
+	@OneToOne()
+	@JoinColumn(name = "reserve_id")
+	private Reserve reserve;
 	
 	@Column(columnDefinition = "timestamp default current_timestamp")
 	private Timestamp cdate;

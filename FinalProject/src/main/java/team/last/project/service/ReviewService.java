@@ -54,5 +54,9 @@ public class ReviewService {
 		return lastid;
 
 	}
+	
+	public Review reviewByreserveId(Integer id) {
+		return reviewRepository.findByReserveId(id).orElse(null);
+	}
 
 }
