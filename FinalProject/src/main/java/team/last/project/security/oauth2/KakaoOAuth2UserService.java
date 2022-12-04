@@ -32,18 +32,15 @@ public class KakaoOAuth2UserService extends DefaultOAuth2UserService {
 		Map<String, Object> properties = (Map<String, Object>) attributes.get("properties");
 		Map<String, Object> account = (Map<String, Object>) attributes.get("kakao_account");
 		Long id = Long.parseLong(attributes.get("id").toString());
-		if ("true".equals(account.get("has_email").toString())) {
-
-			email = account.get("email").toString();
-		} else {
-			email = id + "@kakao.com";
-		}
+		
+		email = id + "@kakao.com";
+		
 		String nickname = properties.get("nickname").toString();
 
 		if(null == memberRepository.findByEmail(email).orElse(null)) {
 			member.setEmail(email);
 			member.setName(nickname);
-			member.setPassword("kakaologin0");
+			member.setPassword("kakaologin");
 			member.setPhone("-");
 			member.setSecession(0);
 			member.setGender(3);

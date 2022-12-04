@@ -29,10 +29,10 @@ import team.last.project.service.ReviewService;
 @Controller
 @RequiredArgsConstructor
 public class MyController {
-
+	
 	private final OptionService optionService;
-	private final ReviewService reviewService;
 	private final MemberService memberService;
+	private final ReviewService reviewService;
 
 	@RequestMapping("/kakaoError")
 	public String logout(Model model) {
@@ -44,11 +44,6 @@ public class MyController {
 	public String root() {
 
 		return "redirect:/index";
-	}
-	
-	@RequestMapping("/kakaotest")
-	public String kakao() {
-		return "/kakao/kakaoPay";
 	}
 
 	@RequestMapping("/index")
@@ -69,7 +64,7 @@ public class MyController {
 				Sort.by("id").descending());
 
 		list = reviewService.reviewList(pageRequest);
-		if(list!=null) {
+		if(list.getTotalPages()!=0) {
 			
 		int nowPage = list.getPageable().getPageNumber() + 1;
 		int startPage = Math.max(nowPage - 4, 1);
@@ -92,7 +87,6 @@ public class MyController {
 
 	@RequestMapping("/er")
 	public String erpage2() {
-		System.out.println("나는 문어");
 		return "er";
 	}
 
@@ -144,5 +138,4 @@ public class MyController {
 		model.addAttribute("optlist", optlist);
 		return "price";
 	}
-
 };

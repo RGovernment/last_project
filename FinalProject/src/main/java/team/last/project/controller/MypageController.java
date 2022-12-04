@@ -110,7 +110,12 @@ public class MypageController {
 	}
 
 	@RequestMapping("/acc_del")
-	public String deluser() {
+	public String deluser(Authentication authentication,Model model) {
+		Member mem = memberService.memgetInfo(authentication.getName());
+		
+		String email = mem.getEmail();
+		model.addAttribute("email",email);
+		
 		return "/mypage/accDel";
 	}
 

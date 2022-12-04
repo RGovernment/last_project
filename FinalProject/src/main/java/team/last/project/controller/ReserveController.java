@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.catalina.Session;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,7 +41,12 @@ public class ReserveController {
 	private final MemberService memberService;
 
 	@RequestMapping("")
-	public String root(Model model) {
+	public String root(Model model,HttpServletRequest req) {
+		//예약 결제 세션 초기화//
+		if(req.getSession().getAttribute("reserve") != null) {
+			req.getSession().removeAttribute("reserve");
+		}
+				
 		List<Room> roomlist = roomService.roomList();
 		model.addAttribute("roomlist", roomlist);
 		return "/res/Reservation";

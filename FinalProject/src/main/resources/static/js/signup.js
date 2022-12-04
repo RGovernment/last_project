@@ -1,3 +1,14 @@
+$(document).ready(function() {
+	$('#signup').hover(function() {
+		var emailauth = $("#mail-check-warn").data("ck");
+		if (emailauth) {
+			$("#signup").attr("disabled", false);
+		} else {
+			$("#signup").attr("disabled", true);
+		}
+	})
+});
+
 $(function() {
 
 	$("#alert-success").hide();

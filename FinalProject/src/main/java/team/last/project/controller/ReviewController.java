@@ -28,10 +28,12 @@ import lombok.RequiredArgsConstructor;
 import team.last.project.dto.ReviewDto;
 import team.last.project.entity.Img;
 import team.last.project.entity.Member;
+import team.last.project.entity.Reserve;
 import team.last.project.entity.Review;
 import team.last.project.entity.Room;
 import team.last.project.service.ImgService;
 import team.last.project.service.MemberService;
+import team.last.project.service.ReserveService;
 import team.last.project.service.ReviewService;
 import team.last.project.service.RoomService;
 
@@ -47,13 +49,18 @@ public class ReviewController {
 	private final ImgService imgService;
 
 	@GetMapping("/write")
-	public String reviewwriteform(int roomid, Authentication authentication, Model model) {
-		System.out.println(roomid);
-		model.addAttribute("roomid", roomid);
-		model.addAttribute("reviewDto", new ReviewDto());
-		String name = memberService.memgetName(authentication.getName());
-		model.addAttribute("name", name);
-		return "/review/reviewwrite";
+	public String reviewwriteform(int resid, Authentication authentication, Model model) {
+		Review review = reviewService.reviewByreserveId(resid);
+		if (review == null) {
+			model.addAttribute("resid", resid);
+			model.addAttribute("reviewDto", new ReviewDto());
+			String name = memberService.memgetName(authentication.getName());
+			model.addAttribute("name", name);
+			return "/review/reviewwrite";
+		} else {
+			model.addAttribute("review",review);
+			return "/revuew/reviewupdate";
+		}
 	}
 
 	@PostMapping("/write")
@@ -119,8 +126,8 @@ public class ReviewController {
 	 * 
 	 * }
 	 */
-	
-	//DB에서 review의 사진 경로를 찾아서 리턴
+
+	// DB에서 review의 사진 경로를 찾아서 리턴
 	@ResponseBody
 	@RequestMapping("/imglist")
 	public List<String> getImgList(@RequestParam("review_id") Integer review_id) {

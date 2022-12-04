@@ -4,15 +4,37 @@
 	layout:decorate="layouts/first_layout">
 
 <th:block layout:fragment="content">
+<script th:inline="javascript">
+$(function(){
+const option = {
+			  root: null,
+			  rootMargin: '-400px 0px -400px 0px',
+			  threshold: 0.8
+			};
+	
+const io = new IntersectionObserver((entries, observer) => {
+	  entries.forEach((entry) => {
+	    if(entry.intersectionRect > 0.8){
+	      entry.target.classList.add('visible');
+	    } else {
+	      entry.target.classList.remove('visible');
+	    }
+	  }, option);                            
+	});
+
+	document.querySelectorAll('.wrapper').forEach((wrapper) => io.observe(wrapper));
+});
+</script>
 	<link th:href="@{/css/reviewPage.css}" rel="stylesheet">
 	<main role="main">
-		<div class="container mt-5">
+		<div class="container mt-5 root">
 			<div class="d-flex align-items-center justify-content-center mb-5"
 				id="review-text1">Review</div>
 			<div class="row">
 				<th:block th:each="review :${list}">
 					<div class="col-md-6">
-						<div class="card mb-4 shadow-sm" id="review-card">
+						
+						<div class="card mb-4 shadow-sm wrapper" id="review-card">
 							<a class="d-block h-100" data-bs-toggle="modal"
 								th:data-bs-target="'#reviewModal'+${review.id}"> <img
 								class="card-img-top" name="modal-image"
@@ -23,12 +45,13 @@
 							<div class="card-body ps-3 ms-0 me-0">
 								<div id="desc" th:text="${review.room.name}">룸 종류</div>
 								<div class="row justify-content-between">
-									<div class="col-4" align="right"
-										th:text="${#dates.format(review.cdate,'yyyy-MM-dd')}"></div>
+									<div class="col-4" align="right" 
+									th:text="${#dates.format(review.cdate,'yyyy-MM-dd')}"></div>
 								</div>
 								<div></div>
 							</div>
 						</div>
+						
 					</div>
 					<!-- Modal -->
 					<div class="modal fade" th:id="'reviewModal'+${review.id}"
@@ -110,7 +133,6 @@
 						review_id : review_id
 					},
 					success : function(result) {
-						console.log(result[0]);
 						if (result != null) {
 							modalimage.attr("src", result[0]);
 						}
