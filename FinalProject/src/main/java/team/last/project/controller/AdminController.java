@@ -1,5 +1,9 @@
 package team.last.project.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,15 +22,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.RequiredArgsConstructor;
 import team.last.project.dto.AskBoardDto;
+import team.last.project.dto.ReserveDto;
 import team.last.project.entity.AskBoard;
 import team.last.project.entity.Member;
+import team.last.project.entity.Room;
 import team.last.project.service.AskBoardService;
 import team.last.project.service.MemberService;
+import team.last.project.service.OptionService;
+import team.last.project.service.RoomService;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin")
 public class AdminController {
+
+	private final RoomService roomService;
+	private final OptionService optionService;
 
 	@Autowired
 	private final MemberService memberService;
@@ -34,23 +45,24 @@ public class AdminController {
 	private AskBoardService askBoardService;
 
 	@RequestMapping(value = "")
-	public String adminPage(Authentication authentication, Model model
-			,@PageableDefault(page = 0, size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
-			,@Nullable Integer sortingOrder) {
-		
+	public String adminPage(Authentication authentication, Model model,
+			@PageableDefault(page = 0, size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+			@Nullable Integer sortingOrder) {
+
 		String name = memberService.memgetName(authentication.getName());
-		
-		PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
-		
+
+		PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
+				Sort.by("id").descending());
+
 		Page<Member> memberlist = memberService.memberListPaging(pageRequest);
-		
+
 		int nowPage = memberlist.getPageable().getPageNumber() + 1;
 		int startPage = Math.max(nowPage - 4, 1);
 		int endPage = Math.min(nowPage + 5, memberlist.getTotalPages());
 		if (endPage == 0) {
 			endPage = 1;
 		}
-		model.addAttribute("lastPage",memberlist.getTotalPages());
+		model.addAttribute("lastPage", memberlist.getTotalPages());
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
@@ -58,46 +70,47 @@ public class AdminController {
 		model.addAttribute("name", name);
 		return "/admin/admin";
 	}
-	
+
 	@PostMapping("/del_member")
-	public String delUser(@RequestParam(value = "delEmail", required = false) String delEmail,Model model) {
-		
-		Member mem= memberService.memgetInfo(delEmail);
-		memberService.deleteMember(mem);	
+	public String delUser(@RequestParam(value = "delEmail", required = false) String delEmail, Model model) {
+
+		Member mem = memberService.memgetInfo(delEmail);
+		memberService.deleteMember(mem);
 		System.out.println(delEmail);
-		model.addAttribute("message","회원탈퇴에 성공했습니다.");
-		model.addAttribute("Url","/admin");
-		
+		model.addAttribute("message", "회원탈퇴에 성공했습니다.");
+		model.addAttribute("Url", "/admin");
+
 		return "/admin/message";
 	}
 
 	@RequestMapping(value = "/secessionOrder")
-	public String adminPage2(Authentication authentication, Model model
-			,@PageableDefault(page = 0, size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
-			,@Nullable Integer sortingOrder) {
-		
+	public String adminPage2(Authentication authentication, Model model,
+			@PageableDefault(page = 0, size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+			@Nullable Integer sortingOrder) {
+
 		String name = memberService.memgetName(authentication.getName());
 		PageRequest pageRequest = null;
 		if (sortingOrder == null)
 			sortingOrder = 0;
 		switch (sortingOrder) {
 		case 0:
-			pageRequest =  PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
+			pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
 			break;
 		case 1:
-			pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("secession").descending());
+			pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
+					Sort.by("secession").descending());
 			break;
 		}
-		
+
 		Page<Member> memberlist = memberService.memberListPaging(pageRequest);
-		
+
 		int nowPage = memberlist.getPageable().getPageNumber() + 1;
 		int startPage = Math.max(nowPage - 4, 1);
 		int endPage = Math.min(nowPage + 5, memberlist.getTotalPages());
 		if (endPage == 0) {
 			endPage = 1;
 		}
-		model.addAttribute("lastPage",memberlist.getTotalPages());
+		model.addAttribute("lastPage", memberlist.getTotalPages());
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
@@ -105,11 +118,17 @@ public class AdminController {
 		model.addAttribute("name", name);
 		return "/admin/admin";
 	}
-	
+
 	@RequestMapping("/room")
-	public String room(Authentication authentication, Model model) {
+	public String room(Authentication authentication, Model model, HttpServletRequest req) {
 		String name = memberService.memgetName(authentication.getName());
 		model.addAttribute("name", name);
+		if (req.getSession().getAttribute("reserve") != null) {
+			req.getSession().removeAttribute("reserve");
+		}
+
+		List<Room> roomlist = roomService.roomList();
+		model.addAttribute("roomlist", roomlist);
 		return "/admin/room";
 	}
 
@@ -123,8 +142,7 @@ public class AdminController {
 			sortingOrder = 0;
 		switch (sortingOrder) {
 		case 0:
-			pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
-					Sort.by("id").descending());
+			pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("id").descending());
 			break;
 		case 1:
 			pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
@@ -143,7 +161,7 @@ public class AdminController {
 		if (endPage == 0) {
 			endPage = 1;
 		}
-		model.addAttribute("lastPage",list.getTotalPages());
+		model.addAttribute("lastPage", list.getTotalPages());
 		model.addAttribute("list", list);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);
@@ -166,7 +184,7 @@ public class AdminController {
 		if (endPage == 0) {
 			endPage = 1;
 		}
-		model.addAttribute("lastPage",list.getTotalPages());
+		model.addAttribute("lastPage", list.getTotalPages());
 		model.addAttribute("list", list);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);
@@ -176,23 +194,23 @@ public class AdminController {
 	}
 
 	@RequestMapping("/modiroom")
-	public String layout(@RequestParam(value = "roomType") String roomType, Model model) {
+	public String layout(@RequestParam(value = "roomid") int roomid, Model model) {
+		model.addAttribute("room", roomService.roomget(roomid).get());
+		return "/admin/Room_update";
+	}
 
-		String admin = "";
-		String type = "/admin";
+	@PostMapping("/room_update_name")
+	public String room_update_name(Room RoomDto, Model model) {
+		roomService.name_update(RoomDto.getId(), RoomDto.getName());
+		System.out.println("수정완료");
+		return "redirect:/admin/room";
+	}
 
-		model.addAttribute("score", 4);
-		model.addAttribute("star", "70%");
-		if (roomType.equals("A")) {
-			admin = type + "/ARoom";
-		} else if (roomType.equals("B")) {
-			admin = type + "/BRoom";
-		} else if (roomType.equals("C")) {
-			admin = type + "/CRoom";
-		} else if (roomType.equals("D")) {
-			admin = type + "/DRoom";
-		}
-		return admin;
+	@PostMapping("/room_update_note")
+	public String room_update_note(Room RoomDto, Model model) {
+		roomService.note_update(RoomDto.getId(), RoomDto.getNote());
+		System.out.println("수정완료");
+		return "redirect:/admin/room";
 	}
 
 	@GetMapping(value = "/QAanswer")

@@ -2,6 +2,7 @@ package team.last.project.service;
 
 import java.util.Random;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;

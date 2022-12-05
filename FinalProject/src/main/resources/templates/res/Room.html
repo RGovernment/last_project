@@ -7,11 +7,14 @@
 	<link th:href="@{/css/sch.css}" rel="stylesheet">
 	<body>
 		<main>
-		<div class="d-flex align-items-center justify-content-center mb-5 mt-5"
-			id="room-text1">Reservation</div>
+			<input type="hidden" th:value="${room.id}" id="room_id">
+			<div
+				class="d-flex align-items-center justify-content-center mb-5 mt-5"
+				id="room-text1">Reservation</div>
 			<div class="container" style="min-height: 900px;">
 				<div class="row g-0" id="room">
-					<div class="col-lg-8 mb-4 mt-1 me-0" align="center" style="margin-top: 8px;">
+					<div class="col-lg-8 mb-4 mt-1 me-0" align="center"
+						style="margin-top: 8px;">
 						<div id="carouselExampleIndicators" class="carousel slide"
 							data-bs-ride="carousel">
 							<div class="carousel-indicators">
@@ -29,21 +32,22 @@
 									data-bs-target="#carouselExampleIndicators"
 									data-bs-slide-to="3" aria-label="Slide 4"></button>
 							</div>
-							<div class="carousel-inner overfit" style="border-top-left-radius: 10px; border-bottom-left-radius: 10px;">
+							<div class="carousel-inner overfit"
+								style="border-top-left-radius: 10px; border-bottom-left-radius: 10px;">
 								<div class="carousel-item active">
-									<img th:src="@{/img/__${room.name}__1.PNG}"
+									<img th:src="@{/img/room__${room.id}__1.PNG}"
 										class="d-block w-100 img-fluid" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img th:src="@{/img/__${room.name}__2.PNG}"
+									<img th:src="@{/img/room__${room.id}__2.PNG}"
 										class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img th:src="@{/img/__${room.name}__3.PNG}"
+									<img th:src="@{/img/room__${room.id}__3.PNG}"
 										class="d-block w-100" alt="...">
 								</div>
 								<div class="carousel-item">
-									<img th:src="@{/img/__${room.name}__4.PNG}"
+									<img th:src="@{/img/room__${room.id}__4.PNG}"
 										class="d-block w-100" alt="...">
 								</div>
 							</div>
@@ -58,12 +62,15 @@
 								<span class="visually-hidden">Next</span>
 							</button>
 						</div>
+						<div>🔌콘센트 있음/ &#x1F6AD;금연시설/ &#129347;주류반입 가능/ &#127908;음향.마이크 있음/🅿️주차가능/🍔음식물 반입가능/🚽1개/🧊냉,🔥난방 가능 </div>
 					</div>
-					<div class="col-lg-4 ms-0 mt-1 mb-4 p-3 side-section" align="left" >
-						<div style="font-size: 17px">X점
+					<div class="col-lg-4 ms-0 mt-1 mb-4 p-3 side-section" align="left">
+						<div style="font-size: 17px">
+							[[${score}]]점
 							<div class="star-ratings">
-								<div class="star-ratings-fill space-x-2 text-lg"
-									style="width: 101.5%">
+							<input id="star" type="hidden" th:value="${star}">
+								<div id="star-rating" class="star-ratings-fill space-x-2 text-lg"
+									>
 									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 								</div>
 								<div class="star-ratings-base space-x-2 text-lg">
@@ -76,81 +83,91 @@
 							<form th:action="@{/res/reserve/{id}(id=${room.id})}"
 								method="post" th:object="${reserveDto}">
 								<hr />
-								인원 선택&nbsp;
-								<br>	
-								<select th:field="*{person}" style="width: 40%; height:38px; border-radius: 5px;">
+								인원 선택&nbsp; <br> <select th:field="*{person}"
+									style="width: 40%; height: 38px; border-radius: 5px;">
 									<option th:value=2 selected th:inline="text">[[${2}]]인</option>
 									<option th:value=3 th:inline="text">[[${3}]]인</option>
 									<option th:value=4 th:inline="text">[[${4}]]인</option>
+									<option th:value=5 th:inline="text">[[${5}]]인</option>
+									<option th:value=6 th:inline="text">[[${6}]]인</option>
 								</select>
 								<hr />
 								<div class="date">
-								<span class="chan-text">
-									날짜 선택(달력에서 날짜를 선택해주세요.)</span>
-									<br>
+									<span class="chan-text"> 날짜 선택(달력에서 날짜를 선택해주세요.)</span> <br>
 									<div class="d-flex justify-content-middle">
-									<button type="button" id="res_buton" class="btn btn-secondary me-2"
-										data-bs-toggle="modal" data-bs-target="#date">달력 보기</button>
-										
-									<input type="hidden" name="d">
-									<select class="me-2 RentTime" disabled="disabled"  style="height: 38px; width:90px; border-radius: 5px;">
-										<option value="" disabled selected>대여시간</option>
-										<option value=3 th:data-price="${room.roomtype.price1}">3H</option>
-										<option value=6 th:data-price="${room.roomtype.price2}">6H</option>
-										<option value=15 th:data-price="${room.roomtype.price3}">AllNight</option>
-									</select>
-									<select class="S" id="T3" style="display:none;">
-										<option value="" disabled selected>대여시작시간</option>
-										<option th:each ="num : ${#numbers.sequence(10, 21)}" th:text="|${num}시|" th:value="${num}"></option>
-									</select>
-									<select class="S" id="T6" style="display:none;">
-										<option value="" disabled selected>대여시작시간</option>
-										<option th:each ="num : ${#numbers.sequence(10, 18)}" th:text="|${num}시|" th:value="${num}"></option>
-									</select>
-									<select class="S" id="TA" style="display:none;">
-										<option value="" disabled selected>대여시작시간</option>
-										<option value=18>18시</option>
-									</select>
+										<button type="button" id="res_buton"
+											class="btn btn-secondary me-2" data-bs-toggle="modal"
+											data-bs-target="#date">달력 보기</button>
+
+										<input type="hidden" name="d"> <select
+											class="me-2 RentTime" disabled="disabled"
+											style="height: 38px; width: 90px; border-radius: 5px;">
+											<option value="" disabled selected>대여시간</option>
+											<option value=3 th:data-price="${room.roomtype.price1}">3H</option>
+											<option value=6 th:data-price="${room.roomtype.price2}">6H</option>
+											<option value=15 th:data-price="${room.roomtype.price3}">AllNight</option>
+										</select> <select class="S" id="T3" style="display: none;">
+											<option value="" disabled selected>대여시작시간</option>
+											<option th:each="num : ${#numbers.sequence(10, 21)}"
+												th:text="|${num}시|" th:value="${num}"></option>
+										</select> <select class="S" id="T6" style="display: none;">
+											<option value="" disabled selected>대여시작시간</option>
+											<option th:each="num : ${#numbers.sequence(10, 18)}"
+												th:text="|${num}시|" th:value="${num}"></option>
+										</select> <select class="S" id="TA" style="display: none;">
+											<option value="" disabled selected>대여시작시간</option>
+											<option value=18>18시</option>
+										</select>
 									</div>
 									<hr>
 									<div>선택 날짜</div>
-									<input type="text" class="me-0" th:field="*{start_time}" id="start_time" readonly="readonly"><input type="text" class="ms-0 act1" th:field="*{end_time}" id="end_time" readonly="readonly"> 
-									<input type="number" th:field="*{totalprice}" hidden="hidden"> 
-									<input type="text" th:field="*{options}" hidden="hidden">
+									<input type="text" class="me-0" th:field="*{start_time}"
+										id="start_time" readonly="readonly"><input type="text"
+										class="ms-0 act1" th:field="*{end_time}" id="end_time"
+										readonly="readonly"> <input type="number"
+										th:field="*{totalprice}" hidden="hidden"> <input
+										type="text" th:field="*{options}" hidden="hidden">
 									<hr>
-									
+
 								</div>
 								<script type="text/javascript" th:inline="javascript">
-								
-								
+									
 								</script>
-								
+
 								<div class="option">
-								<span class="chan-text2">옵션(날짜를 먼저 선택해주세요.)</span>
+									<span class="chan-text2">옵션(날짜를 먼저 선택해주세요.)</span>
 									<div class="d-flex justify-content-middle">
-									<select id="selectoption" class="me-3" name="옵션" style="width: 40%; height: 38px; border-radius: 5px;">
-									<option disabled="disabled" selected="selected" th:value=30>옵션 선택</option>
-										<optgroup th:label="${opt.name}" th:each="opt : ${option}">
-											<option th:each="optprice : ${opt.optPrices}"
-												th:text="${optprice.content}" th:value="${optprice.id}">1</option>
-										</optgroup>
-									</select> &nbsp; 
-									<button type="button" class="btn btn-secondary add_option me-3 optbtn" disabled="disabled">옵션 추가</button>
-									<button type="button" class="btn btn-info"
-										data-bs-toggle="modal" data-bs-target="#modaloption">옵션 예시</button>
+										<select id="selectoption" class="me-3" name="옵션"
+											style="width: 40%; height: 38px; border-radius: 5px;">
+											<option disabled="disabled" selected="selected" th:value=30>옵션
+												선택</option>
+											<optgroup th:label="${opt.name}" th:each="opt : ${option}">
+												<option th:each="optprice : ${opt.optPrices}"
+													th:text="${optprice.content}" th:value="${optprice.id}">1</option>
+											</optgroup>
+										</select> &nbsp;
+										<button type="button"
+											class="btn btn-secondary add_option me-3 optbtn"
+											disabled="disabled">옵션 추가</button>
+										<button type="button" class="btn btn-info"
+											data-bs-toggle="modal" data-bs-target="#modaloption">옵션
+											예시</button>
 									</div>
 									<hr />
 									<div id="printoptions"></div>
-								</div>	
+								</div>
 								<div class="Reservation">
 									<div class="d-flex justify-content-middle my-2 reserv-option">
-									<div class=" ps-3 pe-3 reserv-option-body">총가격</div>&nbsp;
-									<div id="printtotalprice" class="ps-1" style="color:white;"></div>
+										<div class=" ps-3 pe-3 reserv-option-body">총가격</div>
+										&nbsp;
+										<div id="printtotalprice" class="ps-1" style="color: white;"></div>
 									</div>
 									<div class="d-flex justify-content-between">
-									<button type="reset" class="btn btn-secondary" th:onclick="clearAll()">다시 작성</button>
-									<button type="submit" class="btn btn-outline-dark resbutton" style="float: right" th:onclick="return nullck();">예약하기</button>
-										</div>
+										<button type="reset" class="btn btn-secondary"
+											th:onclick="clearAll()">다시 작성</button>
+										<button type="submit" class="btn btn-outline-dark resbutton"
+											style="float: right" th:onclick="return nullck();">예약하기</button>
+									</div>
 								</div>
 							</form>
 							<!-- form end -->
@@ -160,7 +177,7 @@
 			</div>
 			<br>
 			<div class="d-flex justify-content-center">
-			<button type="button" th:onclick="|location.href='@{/res}'|">메인으로</button>
+				<button type="button" th:onclick="|location.href='@{/res}'|">메인으로</button>
 			</div>
 			<br> <br>
 			<!-- Modal -->
@@ -207,7 +224,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- modal end -->			
+			<!-- modal end -->
 			<!-- 옵션 예시 Modal -->
 			<div class="modal fade " id="modaloption" data-bs-backdrop="static"
 				data-bs-keyboard="false" tabindex="-1"
@@ -220,55 +237,52 @@
 								aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-												<div class="title" align="center" style="font-size:25px; font-weight: bold; ">옵션 예시
-												<br />제공하는 옵션들의 종류입니다.
-												</div>
-												<hr />
-												<div class="content">
-													<h3>레터링 초콜릿 케이크 |</h3>
-													<img src="/img/chococake1.jpg"
-														style="width: 40%; height: 10%;"> <img
-														src="/img/chococake2.jpg" style="width: 40%; height: 290px;"><br />
-													수제 초콜릿을 이용한 레터링 케이크입니다.<br />(방문 5일전까지 문의를 통해 케이크
-													예약이 가능합니다.)
-												</div>
-												<br /> <br />
-												<div class="content">
-													<h3>레터링 생크림 케이크 |</h3>
-													<img src="/img/creamcake1.PNG"
-														style="width: 40%; height: 10%;"> <img
-														src="/img/creamcake2.PNG" style="width: 40%; height: 386px;"><br />
-													부드러운 생크림을 이용한 레터링 케이크입니다.<br />(방문 5일전까지 문의를 통해 케이크 예약이
-													가능합니다.)
-												</div>
-												<br /> <br />
-												<div class="content">
-													<h3>페인팅 케이크 |</h3>
-													<img src="/img/facecake1.jpg"
-														style="width: 40%; height: 10%;"> <img
-														src="/img/facecake2.jpg" style="width: 40%; height: 10%;">
-													<br /> 고객님의 하나뿐인
-													얼굴이 그려진 특별한 케이크를 만들어 드립니다.<br />(방문 5일전까지 문의를 통해 케이크 예약이
-													가능합니다.)
-												</div>
-												<br /> <br />
-												<div class="content">
-													<h3>파티룸 데코레이션 |</h3>
-													<img src="/img/deco1.PNG"
-														style="width: 436px; height: 386px;"> <img
-														src="/img/deco2.PNG" style="width: 436px; height: 386px;">
-													<br /> 파티를 더욱 아름답고 풍성하게 즐기실 수 있는
-													데코레이션 입니다.<br />(방문 3일전까지 문의를 통해 데코레이션 컨셉을 정하실 수 있습니다.)
-												</div>
-												<br /> <br />
-												<div class="content">
-													<h3>포토 스냅 |</h3>
-													<img src="/img/photosnap1.PNG"
-														style="width: 436px; height: 386px;"> <img
-														src="/img/photosnap2.PNG" style="width: 436px; height: 386px;">
-													<br /> 고객님의 가장 행복한 순간을 담아드립니다.<br />(전문가 자격증을 보유한 사진작가님과 함께합니다.)
-												</div>
-											</div>
+							<div class="title" align="center"
+								style="font-size: 25px; font-weight: bold;">
+								옵션 예시 <br />제공하는 옵션들의 종류입니다.
+							</div>
+							<hr />
+							<div class="content">
+								<h3>레터링 초콜릿 케이크 |</h3>
+								<img src="/img/chococake1.jpg" style="width: 40%; height: 10%;">
+								<img src="/img/chococake2.jpg"
+									style="width: 40%; height: 290px;"><br /> 수제 초콜릿을 이용한
+								레터링 케이크입니다.<br />(방문 5일전까지 문의를 통해 케이크 예약이 가능합니다.)
+							</div>
+							<br /> <br />
+							<div class="content">
+								<h3>레터링 생크림 케이크 |</h3>
+								<img src="/img/creamcake1.PNG" style="width: 40%; height: 10%;">
+								<img src="/img/creamcake2.PNG"
+									style="width: 40%; height: 386px;"><br /> 부드러운 생크림을 이용한
+								레터링 케이크입니다.<br />(방문 5일전까지 문의를 통해 케이크 예약이 가능합니다.)
+							</div>
+							<br /> <br />
+							<div class="content">
+								<h3>페인팅 케이크 |</h3>
+								<img src="/img/facecake1.jpg" style="width: 40%; height: 10%;">
+								<img src="/img/facecake2.jpg" style="width: 40%; height: 10%;">
+								<br /> 고객님의 하나뿐인 얼굴이 그려진 특별한 케이크를 만들어 드립니다.<br />(방문 5일전까지 문의를
+								통해 케이크 예약이 가능합니다.)
+							</div>
+							<br /> <br />
+							<div class="content">
+								<h3>파티룸 데코레이션 |</h3>
+								<img src="/img/deco1.PNG" style="width: 436px; height: 386px;">
+								<img src="/img/deco2.PNG" style="width: 436px; height: 386px;">
+								<br /> 파티를 더욱 아름답고 풍성하게 즐기실 수 있는 데코레이션 입니다.<br />(방문 3일전까지 문의를
+								통해 데코레이션 컨셉을 정하실 수 있습니다.)
+							</div>
+							<br /> <br />
+							<div class="content">
+								<h3>포토 스냅 |</h3>
+								<img src="/img/photosnap1.PNG"
+									style="width: 436px; height: 386px;"> <img
+									src="/img/photosnap2.PNG" style="width: 436px; height: 386px;">
+								<br /> 고객님의 가장 행복한 순간을 담아드립니다.<br />(전문가 자격증을 보유한 사진작가님과
+								함께합니다.)
+							</div>
+						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-bs-dismiss="modal">Close</button>
@@ -277,7 +291,7 @@
 				</div>
 			</div>
 			<!-- 옵션 예시 modal end -->
-			
+
 			<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 			<script
 				src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

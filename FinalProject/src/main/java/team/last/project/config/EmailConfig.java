@@ -26,7 +26,7 @@ public class EmailConfig {
 	private String auth;
 
 	@Bean
-	public JavaMailSender javaMailService()  {
+	public JavaMailSender javaMailService() {
 		JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 		javaMailSender.setHost(host);
 		javaMailSender.setUsername(id);
@@ -36,10 +36,11 @@ public class EmailConfig {
 		javaMailSender.setDefaultEncoding(encode);
 		return javaMailSender;
 	}
+
 	private Properties getMailProperties() {
 		Properties props = new Properties();
 		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.auth" , auth);
+		props.put("mail.smtp.auth", auth);
 		props.put("mail.smtp.starttls.required", "true");
 		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		return props;

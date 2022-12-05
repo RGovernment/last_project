@@ -90,3 +90,13 @@
 	height:100%;
 	object-fit: cover;
 }
+
+#room_note_label{
+	float:left;
+}
+
+#room_note{
+	width : 550px;
+	height:150px;
+	resize:none;
+}

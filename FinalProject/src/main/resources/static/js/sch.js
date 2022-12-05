@@ -148,26 +148,26 @@ function changeToday(e) {
 		}
 	}
 	clickedDate1 = e.currentTarget;
-	
+
 	//날짜 선택 시 예약 가능 시간만 선택할 수 있게 변환하기
 	var dayschedules = clickedDate1.children;
-	for (let dayschedulesindex = 1; dayschedulesindex<dayschedules.length;dayschedulesindex++){
+	for (let dayschedulesindex = 1; dayschedulesindex < dayschedules.length; dayschedulesindex++) {
 		var tempStime = dayschedules[dayschedulesindex].dataset.starttime
 		var tempEtime = dayschedules[dayschedulesindex].dataset.endtime
-		for(let k = tempStime-3; k<=tempEtime;k++){
-		console.log($('.S#T3').find('[value='+k+']'));
-		$('.S#T3').find('[value='+k+']').attr("disabled", true);
+		for (let k = tempStime - 3; k <= tempEtime; k++) {
+			console.log($('.S#T3').find('[value=' + k + ']'));
+			$('.S#T3').find('[value=' + k + ']').attr("disabled", true);
 		}
-		for(let k = tempStime-6; k<=tempEtime;k++){
-		console.log($('.S#T6').find('[value='+k+']'));
-		$('.S#T6').find('[value='+k+']').attr("disabled", true);
+		for (let k = tempStime - 6; k <= tempEtime; k++) {
+			console.log($('.S#T6').find('[value=' + k + ']'));
+			$('.S#T6').find('[value=' + k + ']').attr("disabled", true);
 		}
-		for(let k = tempStime; k<=tempEtime;k++){
-		console.log($('.S#TA').find('[value='+k+']'));
-		$('.S#TA').find('[value='+k+']').attr("disabled", true);
+		for (let k = tempStime; k <= tempEtime; k++) {
+			console.log($('.S#TA').find('[value=' + k + ']'));
+			$('.S#TA').find('[value=' + k + ']').attr("disabled", true);
 		}
 	}
-	
+
 	$(".chan-text").text("날짜 선택");
 	$('.RentTime').removeAttr("disabled");
 	clickedDate1.classList.add('active');
@@ -301,7 +301,7 @@ function addsch(reserve) {
 	if (reserve != null) {
 		for (var reserveindex = 0; reserveindex < reserve.length; reserveindex++) {
 			let tdid = Number(reserve[reserveindex].SDay)
-			$("#" + tdid).append("<div id='day_content1' data-StartTime ='"+reserve[reserveindex].SHour+"'data-EndTime ='"+reserve[reserveindex].EHour+"'>" + reserve[reserveindex].SHour + " - " + reserve[reserveindex].EHour + "</div>");
+			$("#" + tdid).append("<div id='day_content1' data-StartTime ='" + reserve[reserveindex].SHour + "'data-EndTime ='" + reserve[reserveindex].EHour + "'>" + reserve[reserveindex].SHour + " - " + reserve[reserveindex].EHour + "</div>");
 		}
 	}
 }
@@ -384,5 +384,6 @@ let nullck = () => {
 	}
 	return true;
 }
+
 
 changemonth(0);
