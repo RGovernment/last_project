@@ -68,21 +68,20 @@ public class ReviewController {
 	public String reviewwrite(Long resid, Authentication authentication, @Valid ReviewDto reviewDto,
 			BindingResult bindingResult, Model model, @RequestParam(value = "images") MultipartFile[] images) {
 		if (bindingResult.hasErrors()) {
-			System.out.println("에러");
 			return "/review/reviewwrite";
 		}
+		Reserve reserve = reserveService.get(resid);
+		Member mem = memberService.memgetInfo(authentication.getName());
+		Room room = reserve.getRoom();
+		Review review = Review.createReview(reviewDto, mem, room, reserve);
+		reviewService.write(review);
 		if (images[0].getSize() != 0) {
+
 			try {
-				Reserve reserve = reserveService.get(resid);
-				Member mem = memberService.memgetInfo(authentication.getName());
-				Room room = reserve.getRoom();
-				Review review = Review.createReview(reviewDto, mem, room, reserve);
-				reviewService.write(review);
 				for (MultipartFile file : images) {
 					// 실제 파일 이름이 IE나 Edge는 전체 경로가 들어오므로
 					String originalName = file.getOriginalFilename();
 					String fileName = originalName.substring(originalName.lastIndexOf("\\") + 1);
-
 
 					// 날짜 폴더 생성
 					String folderPath = makeFolder();
@@ -126,7 +125,6 @@ public class ReviewController {
 					// 실제 파일 이름이 IE나 Edge는 전체 경로가 들어오므로
 					String originalName = file.getOriginalFilename();
 					String fileName = originalName.substring(originalName.lastIndexOf("\\") + 1);
-
 
 					// 날짜 폴더 생성
 					String folderPath = makeFolder();

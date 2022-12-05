@@ -58,5 +58,9 @@ public class ReviewService {
 	public Review reviewByreserveId(Long id) {
 		return reviewRepository.findByReserveId(id).orElse(null);
 	}
+	
+	public List<Review> reviewbyroomid(int id) {
+		return reviewRepository.findByRoomId(id);
+	}
 
 }

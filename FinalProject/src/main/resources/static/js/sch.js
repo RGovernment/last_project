@@ -384,4 +384,26 @@ let nullck = () => {
 	return true;
 }
 
+//별점
+$(function() {
+	let room_id = $('.star-ratings').data("id");
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	console.log(room_id);
+	$.ajax({
+		type: "POST",
+		url: "/res/staravg",
+		data: {room_id,room_id},
+		beforeSend: function(xhr) {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+			xhr.setRequestHeader(header, token);
+		},
+		success: function(reserve) {
+			console.log(reserve);
+			$('.star-ratings-fill').css('width',reserve+'%');
+		},
+		error: function() {
+			alert('에러');
+		}
+	}); //$.ajax
+});
 changemonth(0);

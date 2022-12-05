@@ -1,5 +1,6 @@
 package team.last.project.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -20,5 +21,7 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 	Page<Review> findAll(Pageable pageable);
 	
 	Optional<Review> findByReserveId(Long id);
+
+	List<Review> findByRoomId(int id);
 	
 }
