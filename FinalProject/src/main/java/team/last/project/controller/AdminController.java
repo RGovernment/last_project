@@ -186,8 +186,10 @@ public class AdminController {
 	}
 
 	@RequestMapping("/modiroom")
-	public String layout(@RequestParam(value = "roomid") int roomid, Model model) {
+	public String layout(@RequestParam(value = "roomid") int roomid, Authentication authentication, Model model) {
+		String name = memberService.memgetName(authentication.getName());
 		model.addAttribute("room", roomService.roomget(roomid).get());
+		model.addAttribute("name", name);
 		return "/admin/Room_update";
 	}
 
@@ -195,14 +197,14 @@ public class AdminController {
 	public String room_update_name(Room room, Model model) {
 		roomService.name_update(room.getId(), room.getName());
 		System.out.println("수정완료");
-		return "/admin/room";
+		return "redirect:/admin/room";
 	}
 
 	@PostMapping("/room_update_note")
 	public String room_update_note(Room room, Model model) {
 		roomService.note_update(room.getId(), room.getNote());
 		System.out.println("수정완료");
-		return "/admin/room";
+		return "redirect:/admin/room";
 	}
 
 	@GetMapping(value = "/QAanswer")
