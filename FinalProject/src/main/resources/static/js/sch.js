@@ -39,7 +39,6 @@ function showCalendar() {
 					weekend = "blue";
 				}
 				let scheduledata = "<div id='day_content_date' style='color:" + weekend + "'>" + cnt + "</div>";
-				//3H = 초록색 , 6H주황색 , AllDay = 핑크색 
 
 				//주말 색깔넣기 일요일=빨강 , 토요일=파랑
 				$td.innerHTML = scheduledata;
@@ -385,4 +384,26 @@ let nullck = () => {
 	return true;
 }
 
+//별점
+$(function() {
+	let room_id = $('.star-ratings').data("id");
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	console.log(room_id);
+	$.ajax({
+		type: "POST",
+		url: "/res/staravg",
+		data: {room_id,room_id},
+		beforeSend: function(xhr) {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+			xhr.setRequestHeader(header, token);
+		},
+		success: function(result) {
+			$('#star-score').html(result+"점");
+			$('.star-ratings-fill').css('width',(result*20)+'%');
+		},
+		error: function() {
+			alert('에러');
+		}
+	}); //$.ajax
+});
 changemonth(0);

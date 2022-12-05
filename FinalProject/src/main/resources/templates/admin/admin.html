@@ -111,21 +111,19 @@
 					</tr>
 				</tbody>
 			</table>
-		
-		<div class="d-flex justify-content-evenly" id="page_div">
-			<a th:href="@{/admin(page = 0)}" id="page"><<</a>
+		<div align="center">
+		<div class="btn-group d-flex justify-content-evenly" id="page_div">
+			<button type="button" class="btn btn-dark" th:onclick='|location.href="@{/admin(page = 0)}"|' id="page"><<</button>
 			<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
-				<a th:if="${page != nowPage}" th:href="@{/admin(page = ${page -1})}"
-					th:text="${page}" id="page"></a>
-				<strong th:if="${page == nowPage}" th:text="${page}" id="page_now"
-					style="color: #121299;"></strong>
+				<button type="button" class="btn btn-outline-secondary" th:if="${page != nowPage}" th:onclick='|location.href="@{/admin(page = ${page -1})}"|'
+					th:text="${page}" id="page"></button>
+				<button type="button" class="btn btn-dark" th:if="${page == nowPage}" th:text="${page}" id="page_now"></button>
 			</th:block>
-			<a th:href="@{/admin(page = ${lastPage-1})}" id="page">>></a>
+			<button type="button" class="btn btn-dark" th:onclick='|location.href="@{/admin(page = ${lastPage-1})}"|' id="page">>></button>
 		</div>
 	</div>
+	</div>
 </div>
-
-
 	</div>
 	</div>
 	</div>

@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import lombok.Data;
@@ -34,21 +35,26 @@ public class Review {
 	@JoinColumn(name = "room_id")
 	private Room room;
 	
+	@OneToOne()
+	@JoinColumn(name = "reserve_id")
+	private Reserve reserve;
+	
 	@Column(columnDefinition = "timestamp default current_timestamp")
 	private Timestamp cdate;
 	
-	public static Review createReview(ReviewDto reviewDto,Member member,Room room) {
+	public static Review createReview(ReviewDto reviewDto,Member member,Room room,Reserve reserve) {
 		Review review = new Review();
-		review.setId(reviewDto.getId());
 		review.setTitle(reviewDto.getTitle());
 		review.setContent(reviewDto.getContent());
 		review.setScore(reviewDto.getScore());
 		review.setMember(member);
 		review.setRoom(room);
+		review.setReserve(reserve);
 		return review;
 	}
-	public void update(String title, String content) {
+	public void update(String title, String content,int score) {
 		this.title = title;
 		this.content = content;
+		this.score = score;
 	}
 }

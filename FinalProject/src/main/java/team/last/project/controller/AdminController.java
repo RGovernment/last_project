@@ -1,6 +1,7 @@
 package team.last.project.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,21 +19,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.RequiredArgsConstructor;
 import team.last.project.dto.AskBoardDto;
+import team.last.project.dto.ReserveDto;
 import team.last.project.entity.AskBoard;
 import team.last.project.entity.Member;
+import team.last.project.entity.Room;
 import team.last.project.service.AskBoardService;
 import team.last.project.service.MemberService;
+import team.last.project.service.OptionService;
+import team.last.project.service.RoomService;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin")
 public class AdminController {
 
-	@Autowired
 	private final MemberService memberService;
-	@Autowired
-	private AskBoardService askBoardService;
-
+	private final AskBoardService askBoardService;
+	private final RoomService roomService;
+	private final OptionService optionService;
+	
 	@RequestMapping(value = "")
 	public String adminPage(Authentication authentication, Model model
 			,@PageableDefault(page = 0, size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
@@ -110,8 +115,24 @@ public class AdminController {
 	public String room(Authentication authentication, Model model) {
 		String name = memberService.memgetName(authentication.getName());
 		model.addAttribute("name", name);
+		
+		List<Room> roomlist = roomService.roomList();
+		model.addAttribute("roomlist", roomlist);
+		
 		return "/admin/room";
 	}
+	
+	@RequestMapping("/management")
+	public String managementRoom(@RequestParam(value = "roomid") int roomid, Model model) {
+		model.addAttribute("reserveDto", new ReserveDto());
+		model.addAttribute("option", optionService.optionList());
+		model.addAttribute("room", roomService.roomget(roomid).get());
+		return "/admin/management";
+	}
+
+	
+	
+	
 
 	@PostMapping(value = "/QAlistsort")
 	public String qaListSort(Authentication authentication, Model model,

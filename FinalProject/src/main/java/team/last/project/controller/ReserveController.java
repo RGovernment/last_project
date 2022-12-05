@@ -23,11 +23,13 @@ import team.last.project.dto.ReserveDto;
 import team.last.project.entity.Member;
 import team.last.project.entity.OptPrice;
 import team.last.project.entity.Reserve;
+import team.last.project.entity.Review;
 import team.last.project.entity.Room;
 import team.last.project.service.MemberService;
 import team.last.project.service.OptPriceService;
 import team.last.project.service.OptionService;
 import team.last.project.service.ReserveService;
+import team.last.project.service.ReviewService;
 import team.last.project.service.RoomService;
 
 @Controller
@@ -39,6 +41,7 @@ public class ReserveController {
 	private final OptionService optionService;
 	private final OptPriceService optPriceService;
 	private final MemberService memberService;
+	private final ReviewService reviewService;
 
 	@RequestMapping("")
 	public String root(Model model,HttpServletRequest req) {
@@ -105,5 +108,22 @@ public class ReserveController {
 			}
 		}// 필요한 데이터인 날짜와 시작,끝 시간을 가공해 HashMap 형태로 묶은 후 List에 담아서 return
 		return reserveMapList;
+	}
+	
+	// 별점평균 만들기 요청 URL
+	@ResponseBody
+	@PostMapping("/staravg")
+	public double staravg(@RequestParam(value = "room_id") int room_id) {
+		System.out.println("test");
+		double staravg = 0;
+		double totalscore = 0;
+		List<Review> reviewlist = reviewService.reviewbyroomid(room_id);
+		for (Review r : reviewlist) {
+			totalscore += r.getScore();
+		}
+		totalscore = totalscore / reviewlist.size();
+		staravg = totalscore;
+		System.out.println(staravg);
+		return staravg;
 	}
 };

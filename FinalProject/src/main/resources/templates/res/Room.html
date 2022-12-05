@@ -60,10 +60,11 @@
 						</div>
 					</div>
 					<div class="col-lg-4 ms-0 mt-1 mb-4 p-3 side-section" align="left" >
-						<div style="font-size: 17px">X점
-							<div class="star-ratings">
+						<div style="font-size: 17px">
+						<div id="star-score"></div>
+							<div class="star-ratings" th:data-id="${room.id}">
 								<div class="star-ratings-fill space-x-2 text-lg"
-									style="width: 101.5%">
+									style="width: 100%">
 									<span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
 								</div>
 								<div class="star-ratings-base space-x-2 text-lg">
@@ -93,11 +94,19 @@
 										data-bs-toggle="modal" data-bs-target="#date">달력 보기</button>
 										
 									<input type="hidden" name="d">
-									<select class="me-2 RentTime" disabled="disabled"  style="height: 38px; width:90px; border-radius: 5px;">
+									<select class="me-2 RentTime" disabled="disabled" th:if="${room.id}==1 or ${room.id}==3"  
+									style="height: 38px; width:90px; border-radius: 5px;">
 										<option value="" disabled selected>대여시간</option>
 										<option value=3 th:data-price="${room.roomtype.price1}">3H</option>
 										<option value=6 th:data-price="${room.roomtype.price2}">6H</option>
 										<option value=15 th:data-price="${room.roomtype.price3}">AllNight</option>
+									</select>
+									<select class="me-2 RentTime" disabled="disabled" th:if="${room.id}==2 or ${room.id}==4"  
+									style="height: 38px; width:90px; border-radius: 5px;">
+										<option value="" disabled selected>대여시간</option>
+										<option value=3 th:data-price="${room.roomtype.price4}">3H</option>
+										<option value=6 th:data-price="${room.roomtype.price5}">6H</option>
+										<option value=15 th:data-price="${room.roomtype.price6}">AllNight</option>
 									</select>
 									<select class="S" id="T3" style="display:none;">
 										<option value="" disabled selected>대여시작시간</option>

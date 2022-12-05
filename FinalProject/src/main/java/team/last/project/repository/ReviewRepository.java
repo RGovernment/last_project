@@ -1,5 +1,8 @@
 package team.last.project.repository;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,6 +19,9 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 	@Query(value = "select r " + "from Review r " + "left join fetch r.room "
 			+ "left join fetch r.member ", countQuery = "select count(r.id) from Review r")
 	Page<Review> findAll(Pageable pageable);
+	
+	Optional<Review> findByReserveId(Long id);
 
+	List<Review> findByRoomId(int id);
 	
 }

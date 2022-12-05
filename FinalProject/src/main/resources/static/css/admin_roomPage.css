@@ -55,3 +55,11 @@
 #room_name_update{
 	width:150px;
 }
+
+.overfit>div{
+	height: 660px;
+}
+.overfit img{
+	height:100%;
+	object-fit: cover;
+}

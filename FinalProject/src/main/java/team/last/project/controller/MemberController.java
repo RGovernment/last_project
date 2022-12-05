@@ -1,11 +1,14 @@
 package team.last.project.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -91,7 +94,15 @@ public class MemberController {
 	
 
 	@RequestMapping(value = "/errorDenied")
-	public String showAccessDeniedPage() {
+	public String showAccessDeniedPage(Authentication authentication,HttpServletRequest request) {
+		
+		@SuppressWarnings("unchecked")
+		List<GrantedAuthority> authList = (List<GrantedAuthority>) authentication.getAuthorities();
+		
+		if(authList.get(0).getAuthority().contains("ADMIN")) {
+			request.setAttribute("message", "어드민은 결제 및 마이페이지 기능을 사용할 수 없습니다.");
+		}
+		
 		return "/er";
 	}
 	

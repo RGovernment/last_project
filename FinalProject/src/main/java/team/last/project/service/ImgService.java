@@ -23,4 +23,8 @@ public class ImgService {
 	public List<Img> getimglist(int reviewid) {
 		return imgRepository.getAllByReviewId(reviewid);
 	}
+
+	public void imgdelete(Integer id) {
+		imgRepository.deleteById(id);
+	}
 }

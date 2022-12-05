@@ -74,7 +74,7 @@ public class MypageController {
 		if (endPage == 0) {
 			endPage = 1;
 		}
-
+		model.addAttribute("lastPage",list.getTotalPages());
 		model.addAttribute("list", list);
 		model.addAttribute("nowPage", nowPage);
 		model.addAttribute("startPage", startPage);

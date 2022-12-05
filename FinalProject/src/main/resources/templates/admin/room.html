@@ -19,122 +19,41 @@
 		<hr />
 		<div id="content" align="center">
 			<div class="container mt-5">
-				<div class="card mb-0" id="card-main">
+			<div th:each="room : ${roomlist}">
+				<div class="card mb-3" id="card-main">
 					<div class="row g-0" id="web-pool">
 						<div class="col-md-4">
-							<img src="/img/미니룸A1.PNG" class="img-fluid rounded-start" alt="미니룸A">
+							<img th:src="@{/img/__${room.name}__1.PNG}"
+								class="img-fluid rounded-start" th:alt="${room.name}">
 						</div>
-						<div class="col-md-8 pt-1">
-							<div class="card-title" align="center" id="card-title">미니룸
-								A</div>
-							<div class="card-body" align="center">
-								<a th:onclick="|location.href='@{/admin/modiroom?roomType=A}'|"
+						<div class="col-md-8 pt-3">
+							<div class="card-title" align="center" id="card-title"
+								th:text="${room.name}"></div>
+							<div class="card-body" align="center" >
+								<a th:onclick="|location.href='@{/admin/management(roomid=${room.id})}'|"
 									class="btn btn-danger">수정하기</a>
 							</div>
 						</div>
 					</div>
+
 					<div class="row g-0" id="mobile-pool">
 						<div class="col-4">
-							<img src="/img/미니룸A1.PNG" class="img-fluid rounded-start" alt="미니룸A">
+							<img th:src="@{/img/__${room.name}__1.PNG}"
+								class="img-fluid rounded-start" th:alt="${room.name}">
 						</div>
 						<div class="col-8 pt-1">
-							<div class="card-title" align="center" id="card-title-2">미니룸
-								A</div>
+							<div class="card-title" align="center" id="card-title-2"
+								th:text="${room.name}"></div>
 							<div class="card-body" align="center">
-								<a th:onclick="|location.href='@{/admin/modiroom?roomType=A}'|"
+								<br> <a
+									th:onclick="|location.href='@{/admin/management(roomid=${room.id})}'|"
 									class="btn btn-danger">수정</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<br> <br> <br>
-				<div class="card mb-0" id="card-main">
-					<div class="row g-0" id="web-pool">
-						<div class="col-md-4">
-							<img src="/img/미니룸B1.PNG" class="img-fluid rounded-start" alt="미니룸A">
-						</div>
-						<div class="col-md-8 pt-1">
-							<div class="card-title" align="center" id="card-title">미니룸
-								B</div>
-							<div class="card-body" align="center">
-								<a th:onclick="|location.href='@{/admin/modiroom?roomType=B}'|"
-									class="btn btn-danger">수정하기</a>
-							</div>
-						</div>
-					</div>
-					<div class="row g-0" id="mobile-pool">
-						<div class="col-4">
-							<img src="/img/미니룸B1.PNG" class="img-fluid rounded-start" alt="미니룸B">
-						</div>
-						<div class="col-8 pt-1">
-							<div class="card-title" align="center" id="card-title-2">미니룸
-								B</div>
-							<div class="card-body" align="center">
-								<a th:onclick="|location.href='@{/admin/modiroom?roomType=B}'|"
-									class="btn btn-danger btn-sm">수정</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<br> <br> <br>
-				<div class="card mb-0" id="card-main">
-					<div class="row g-0" id="web-pool">
-						<div class="col-md-4">
-							<img src="/img/파티룸A1.PNG" class="img-fluid rounded-start" alt="미니룸A">
-						</div>
-						<div class="col-md-8 pt-1">
-							<div class="card-title" align="center" id="card-title">파티룸
-								A</div>
-							<div class="card-body" align="center">
-								<a th:onclick="|location.href='@{/admin/modiroom?roomType=C}'|"
-									class="btn btn-danger">수정하기</a>
-							</div>
-						</div>
-					</div>
-					<div class="row g-0" id="mobile-pool">
-						<div class="col-4">
-							<img src="/img/파티룸A1.PNG" class="img-fluid rounded-start" alt="미니룸A">
-						</div>
-						<div class="col-8 pt-1">
-							<div class="card-title" align="center" id="card-title-2">파티룸
-								A</div>
-							<div class="card-body" align="center">
-								<a th:onclick="|location.href='@{/admin/modiroom?roomType=C}'|"
-									class="btn btn-danger btn-sm">수정</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<br> <br> <br>
-				<div class="card mb-0" id="card-main">
-					<div class="row g-0" id="web-pool">
-						<div class="col-md-4">
-							<img src="/img/파티룸B1.PNG" class="img-fluid rounded-start" alt="미니룸A">
-						</div>
-						<div class="col-md-8 pt-1">
-							<div class="card-title" align="center" id="card-title">파티룸
-								B</div>
-							<div class="card-body" align="center">
-								<a th:onclick="|location.href='@{/admin/modiroom?roomType=D}'|"
-									class="btn btn-danger">수정하기</a>
-							</div>
-						</div>
-					</div>
-					<div class="row g-0" id="mobile-pool">
-						<div class="col-4">
-							<img src="/img/파티룸B1.PNG" class="img-fluid rounded-start" alt="미니룸A">
-						</div>
-						<div class="col-8 pt-1">
-							<div class="card-title" align="center" id="card-title-2">파티룸
-								B</div>
-							<div class="card-body" align="center">
-								<a th:onclick="|location.href='@{/admin/modiroom?roomType=D}'|"
-									class="btn btn-danger btn-sm">수정</a>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
+		</div>
 		</div>
 		<br>
 		<br>

@@ -26,7 +26,7 @@ public class ReviewService {
 		return reviewRepository.findAll(pageable);
 	}
 
-	public Review reviewView(Integer id) {
+	public Review reviewGet(Integer id) {
 		return reviewRepository.findById(id).get();
 	}
 
@@ -37,7 +37,7 @@ public class ReviewService {
 	@Transactional
 	public Integer reviewUpdate(Integer id, final ReviewDto params) {
 		Review review = reviewRepository.findById(id).orElseThrow();
-		review.update(params.getTitle(), params.getContent());
+		review.update(params.getTitle(), params.getContent(), params.getScore());
 		return id;
 	}
 
@@ -53,6 +53,14 @@ public class ReviewService {
 		int lastid = list.get(0).getId();
 		return lastid;
 
+	}
+	
+	public Review reviewByreserveId(Long id) {
+		return reviewRepository.findByReserveId(id).orElse(null);
+	}
+	
+	public List<Review> reviewbyroomid(int id) {
+		return reviewRepository.findByRoomId(id);
 	}
 
 }
