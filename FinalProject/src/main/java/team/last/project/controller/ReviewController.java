@@ -59,7 +59,7 @@ public class ReviewController {
 			return "/review/reviewwrite";
 		} else {
 			model.addAttribute("review",review);
-			return "/revuew/reviewupdate";
+			return "/review/reviewupdate";
 		}
 	}
 
