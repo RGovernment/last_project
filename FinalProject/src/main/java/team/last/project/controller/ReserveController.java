@@ -114,7 +114,6 @@ public class ReserveController {
 	@ResponseBody
 	@PostMapping("/staravg")
 	public double staravg(@RequestParam(value = "room_id") int room_id) {
-		System.out.println("test");
 		double staravg = 0;
 		double totalscore = 0;
 		List<Review> reviewlist = reviewService.reviewbyroomid(room_id);
@@ -123,7 +122,6 @@ public class ReserveController {
 		}
 		totalscore = totalscore / reviewlist.size();
 		staravg = totalscore;
-		System.out.println(staravg);
 		return staravg;
 	}
 };

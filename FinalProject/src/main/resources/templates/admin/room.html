@@ -30,7 +30,7 @@
 							<div class="card-title" align="center" id="card-title"
 								th:text="${room.name}"></div>
 							<div class="card-body" align="center" >
-								<a th:onclick="|location.href='@{/admin/management(roomid=${room.id})}'|"
+								<a th:onclick="|location.href='@{/admin/modiroom(roomid=${room.id})}'|"
 									class="btn btn-danger">수정하기</a>
 							</div>
 						</div>
@@ -46,7 +46,7 @@
 								th:text="${room.name}"></div>
 							<div class="card-body" align="center">
 								<br> <a
-									th:onclick="|location.href='@{/admin/management(roomid=${room.id})}'|"
+									th:onclick="|location.href='@{/admin/modiroom(roomid=${room.id})}'|"
 									class="btn btn-danger">수정</a>
 							</div>
 						</div>

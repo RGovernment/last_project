@@ -121,18 +121,7 @@ public class AdminController {
 		
 		return "/admin/room";
 	}
-	
-	@RequestMapping("/management")
-	public String managementRoom(@RequestParam(value = "roomid") int roomid, Model model) {
-		model.addAttribute("reserveDto", new ReserveDto());
-		model.addAttribute("option", optionService.optionList());
-		model.addAttribute("room", roomService.roomget(roomid).get());
-		return "/admin/management";
-	}
 
-	
-	
-	
 
 	@PostMapping(value = "/QAlistsort")
 	public String qaListSort(Authentication authentication, Model model,
@@ -197,23 +186,23 @@ public class AdminController {
 	}
 
 	@RequestMapping("/modiroom")
-	public String layout(@RequestParam(value = "roomType") String roomType, Model model) {
+	public String layout(@RequestParam(value = "roomid") int roomid, Model model) {
+		model.addAttribute("room", roomService.roomget(roomid).get());
+		return "/admin/Room_update";
+	}
 
-		String admin = "";
-		String type = "/admin";
+	@PostMapping("/room_update_name")
+	public String room_update_name(Room room, Model model) {
+		roomService.name_update(room.getId(), room.getName());
+		System.out.println("수정완료");
+		return "/admin/room";
+	}
 
-		model.addAttribute("score", 4);
-		model.addAttribute("star", "70%");
-		if (roomType.equals("A")) {
-			admin = type + "/ARoom";
-		} else if (roomType.equals("B")) {
-			admin = type + "/BRoom";
-		} else if (roomType.equals("C")) {
-			admin = type + "/CRoom";
-		} else if (roomType.equals("D")) {
-			admin = type + "/DRoom";
-		}
-		return admin;
+	@PostMapping("/room_update_note")
+	public String room_update_note(Room room, Model model) {
+		roomService.note_update(room.getId(), room.getNote());
+		System.out.println("수정완료");
+		return "/admin/room";
 	}
 
 	@GetMapping(value = "/QAanswer")
