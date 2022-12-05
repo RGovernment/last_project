@@ -312,7 +312,7 @@ public class KakaoPayController {
 @GetMapping("/secession/{email}")
 public String kakaosecession(@PathVariable("email") String email,Model model) throws ParseException {
 	try {
-		URL address = new URL("https://kapi.kakao.com//v1/user/unlink");
+		URL address = new URL("https://kapi.kakao.com/v1/user/unlink");
 		HttpURLConnection payconnect = (HttpURLConnection) address.openConnection();
 		payconnect.setRequestMethod("POST");
 		payconnect.setRequestProperty("Authorization", "KakaoAK e21543cbd75b9b045e2caaaacfd53b9f");
@@ -324,7 +324,7 @@ public String kakaosecession(@PathVariable("email") String email,Model model) th
 		
 		String id = a[0];
 		
-		String parameter = "target_id_type=user_id&"//주문번호
+		String parameter = "target_id_type=user_id&"//회원번호 종류, user_id로 고정
 				+ "target_id="+ id; 
 
 		OutputStream DataPakage = payconnect.getOutputStream();
@@ -368,5 +368,6 @@ public String kakaosecession(@PathVariable("email") String email,Model model) th
 	}
 	return null;
 }
+
 }
 

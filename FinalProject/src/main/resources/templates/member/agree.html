@@ -7,12 +7,12 @@
 	<script th:inline="javascript"
 		th:src="@{https://developers.kakao.com/sdk/js/kakao.js}"></script>
 	<script th:inline="javascript" type="text/javascript"
-		th:src="@{/js/login.js}"></script>
-	<div class="container mt-0">
-		<div class="d-flex align-items-center justify-content-center mb-5"
+		th:src="@{/js/agree.js}"></script>
+	<div class="container mt-0 main-con">
+		<div class="d-flex align-items-center justify-content-center mb-5 mt-3"
 			id="agree-text1">My Page</div>
 		
-		
+		<div style="height:60px; "></div>
 		<textarea class="form-control" readonly="readonly" rows="5">
 		약관의 목적과 정의
 			
@@ -290,7 +290,7 @@
 			② “샵”과 이용자 간에 제기된 전자상거래 소송에는 한국법을 적용합니다.
 			
 		</textarea>
-		<div class="form-check  mb-3">
+		<div class="form-check  mb-5">
 			<input class="form-check-input term-ck main-ck" name="t-ck" type="checkbox">			
 			<label class="form-check-label" for="flexCheckDefault"> 'Memory Gift' 이용 약관에 동의합니다.</label>
 		</div>
@@ -450,7 +450,7 @@
 		
 		
 		</textarea>
-		<div class="form-check  mb-3">
+		<div class="form-check mb-3">
 			<input class="form-check-input priv-ck main-ck" name="p-ck" type="checkbox" > 
 				<label class="form-check-label" for="flexCheckDefault"> 'Memory Gift'의 개인정보처리방침에 동의합니다.</label>
 		</div>
@@ -476,45 +476,6 @@
 	</div>
 	<br>
 	<br>
-	<script>
-	
-	$(function(){
-
-		$('.main-ck').click(function(){
-		let priv = $("input:checkbox[name='p-ck']").is(":checked");
-		let term = $("input:checkbox[name='t-ck']").is(":checked");
-		console.log(priv);
-			if(priv && term){
-				$(".signbutton").removeAttr("disabled");
-				$(".allCk").prop('checked',true);
-			} else {
-				$(".signbutton").attr("disabled","disabled");
-				$(".allCk").prop('checked',false);
-			}
-		});
-					
-	});
-	
-	
-	$(function(){
-		$('.allCk').click(function(){
-			var checked = $('.allCk').is(':checked');
-			
-			if(checked){
-				$('input:checkbox').prop('checked',true);
-				$(".signbutton").removeAttr("disabled");
-			} else {
-				$('input:checkbox').prop('checked',false);
-				$(".signbutton").attr("disabled","disabled");
-			}
-		});
-		
-	});
-	
-	
-	
-	</script>
-	
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"

@@ -9,5 +9,11 @@
 
 textarea{
 	white-space: pre-line;
-	
+	resize: none;
+}
+.main-con{
+	min-height:600px;
+}
+textarea:-webkit-scrollbar {
+    display: none;
 }
