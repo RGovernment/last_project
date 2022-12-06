@@ -5,6 +5,7 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block layout:fragment="content">
 <script th:inline="javascript" th:src="@{/js/reviewwrite.js}"></script>
+<link th:href="@{/css/reviewWandU.css}" rel="stylesheet">
 	<div class="col-md-10 ps-5 pt-5 mb-3" id="main-con">
 		<div class="d-flex align-items-center justify-content-center mb-5"
 			id="my-text1">My Page</div>
@@ -21,25 +22,33 @@
 		<form th:action="@{/review/update}" method="post"
 			th:object="${review}" enctype="multipart/form-data">
 			<div id="content" class="fs-3">
-				<input type="hidden" th:field="*{id}">
+				<input type="hidden" th:field="*{id}" >
 				<div class="mb-3">
-					<label th:for="title" class="form-label">제목</label> <input
-						type="text" class="form-control reTitle" th:field="*{title}"
-						placeholder="제목">
+					<label th:for="title" class="form-label">제목</label> 
+					<input type="text" class="form-control reTitle" th:field="*{title}" style="width: 400px;" placeholder="제목">
 				</div>
-				<div class="mb-3">
-					<label th:for="title" class="form-label">점수</label> <input
-						type="number" min="1" max="5" class="form-control" th:field="*{score}"
-						placeholder="점수">
+				<label th:for="btn-group" class="form-label" >별점</label>
+				<br>
+				<div class="btn-group mb-3" style="border:1px black solid">
+				<button type="button" class="btn clickck button-class1 btn-default">★</button>
+				<button type="button" class="btn clickck button-class2 btn-default">★</button>
+				<button type="button" class="btn clickck button-class3 btn-default">★</button>
+				<button type="button" class="btn clickck button-class4 btn-default">★</button>
+				<button type="button" class="btn clickck button-class5 btn-default">★</button>	
 				</div>
-				
-	
-
-				
+				<div class="form-group" hidden="">
+				<input type="radio" th:field="*{score}" value=1 class="form-check-input">1점
+				<input type="radio" th:field="*{score}" value=2 class="form-check-input">2점
+				<input type="radio" th:field="*{score}" value=3 class="form-check-input">3점
+				<input type="radio" th:field="*{score}" value=4 class="form-check-input">4점
+				<input type="radio" th:field="*{score}" value=5 class="form-check-input">5점
+				</div>
+				<br>
+				<label th:for="images" class="form-label" >파일선택</label>
 				<div class="mb-3" >
-					파일 선택 : <input type="file" class="form-control" multiple="multiple" name="images" id="images"> 
+				<input type="file" class="form-control" multiple="multiple" name="images" id="images"> 
 				</div>
-				<div class="mb-3" id="review-images"> 
+				<div class="row mb-3" id="review-images" style='overflow:auto; max-height: 220px;'> 
 				</div>
 				<div class="mb-3" id="img-preview"> 
 				</div>
@@ -104,11 +113,13 @@
 						review_id : review_id
 					},
 					success : function(result) {
+						
 						for (var i = 0; i < result.length; i++) {
-							var str = "";
-							var str = "<div class='my-3' id='img"+result[i].id+"'><img src='"+result[i].path+"' alt='사진미리보기' style='width:160px; height:140px;'><br><button type='button' class='btn btn-dark' onclick='delck("+result[i].id+")'>삭제</button></div> ";
+							
+							var str = "<div class='col-3 my-3' id='img"+result[i].id+"'><img src='"+result[i].path+"' alt='사진미리보기' style='width:160px; height:140px;'><br><button type='button' class='btn btn-dark' onclick='delck("+result[i].id+")'>삭제</button></div> ";
 			           		$imagediv.append(str);
 						}
+						
 					},
 					error : function() {
 					}

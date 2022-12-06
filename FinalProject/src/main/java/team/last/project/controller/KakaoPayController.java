@@ -260,14 +260,12 @@ public class KakaoPayController {
 			payconnect.setDoOutput(true);
 			
 			
-			String orderId = pay.getOrdercode();
 			String tid= pay.getTid();
 			int amount = pay.getPay_amount();
 			 
 			String parameter = 
 					"cid=TC0ONETIME&" 
 					+ "tid=" + tid + "&" //요청번호 
-					+ "partner_order_id="+ orderId +"&"//주문번호
 					+ "cancel_amount="+ amount +"&"
 					+ "cancel_tax_free_amount=0"; 
 
@@ -283,7 +281,7 @@ public class KakaoPayController {
  
 			@SuppressWarnings("unused")
 			InputStream resultData;
-
+			System.out.println(resultset);
 			if (resultset == 200) 
 			{
 				payService.delete(pay);

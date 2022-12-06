@@ -1,0 +1,36 @@
+@charset "UTF-8";
+@keyframes fadein {
+
+	from {
+        opacity: 0;
+        }
+        
+	to {
+		opacity: 1;
+		}
+}
+
+.clickck:nth-child(1){
+	color : #6c6282;
+}
+
+.clickck:nth-child(2){
+	color : #615874;
+}
+
+.clickck:nth-child(3){
+	color : #524a62;
+}
+
+.clickck:nth-child(4){
+	color : #443e51;
+}
+
+.clickck:nth-child(5){
+	color : #363140;
+}
+
+.clickck:hover{
+	color : #363140;
+	animation: fadein 0.3s;
+}

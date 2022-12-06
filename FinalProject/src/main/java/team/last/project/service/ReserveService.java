@@ -36,5 +36,10 @@ public class ReserveService {
 	public void delete(Reserve reserve) {
 		reserveRepository.delete(reserve);
 	}
+	public List<Reserve> allList() {
+		List<Reserve> list = reserveRepository.findAll();
+		
+		return list;
+	}
 
 }
