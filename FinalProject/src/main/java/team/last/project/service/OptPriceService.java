@@ -31,8 +31,6 @@ public class OptPriceService {
 	}
 
 	public List<OptPrice> optPriceAllList(){
-		
-		
 		return optPriceRepository.findAll();
 	}
 	

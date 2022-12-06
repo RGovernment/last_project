@@ -36,6 +36,29 @@
 						<input class="btn btn-dark" type="submit" value="수정">
 					</form>
 				</div>
+				
+				<div id="room_price">
+					<form th:action="@{/admin/room_price_update}" method="post">
+					<input type="hidden" id="price1" th:value="${room.roomtype.price1}">
+					<input type="hidden" id="price2" th:value="${room.roomtype.price2}">
+					<input type="hidden" id="price3" th:value="${room.roomtype.price3}">
+					<input type="hidden" id="price4" th:value="${room.roomtype.price4}">
+					<input type="hidden" id="price5" th:value="${room.roomtype.price5}">
+					<input type="hidden" id="price6" th:value="${room.roomtype.price6}">
+						<input type="hidden" th:value="${room.roomtype.id}" name="id">
+						<select id="price_num" name="price_num">
+							<option>price1</option>
+							<option>price2</option>
+							<option>price3</option>
+							<option>price4</option>
+							<option>price5</option>
+							<option>price6</option>
+						</select>
+						<input type='number' id='price' name='price'  th:value='${room.roomtype.price1}'>
+						<input style="float: right" type="submit" value="수정">
+					</form>
+				</div>
+				
 				<div class="d-flex justify-content-center">
 				<button type="button" class="btn btn-secondary" th:onclick="|location.href='@{/admin}'|">수정 취소</button>
 			</div>

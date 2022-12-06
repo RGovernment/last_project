@@ -19,13 +19,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.RequiredArgsConstructor;
 import team.last.project.dto.AskBoardDto;
-import team.last.project.dto.ReserveDto;
 import team.last.project.entity.AskBoard;
 import team.last.project.entity.Member;
+import team.last.project.entity.OptPrice;
+import team.last.project.entity.Option;
+import team.last.project.entity.Reserve;
 import team.last.project.entity.Room;
 import team.last.project.service.AskBoardService;
 import team.last.project.service.MemberService;
+import team.last.project.service.OptPriceService;
 import team.last.project.service.OptionService;
+import team.last.project.service.ReserveService;
 import team.last.project.service.RoomService;
 
 @Controller
@@ -36,7 +40,8 @@ public class AdminController {
 	private final MemberService memberService;
 	private final AskBoardService askBoardService;
 	private final RoomService roomService;
-	private final OptionService optionService;
+	private final OptPriceService optpriceService;
+	private final ReserveService reserveService;
 	
 	@RequestMapping(value = "")
 	public String adminPage(Authentication authentication, Model model
@@ -185,6 +190,24 @@ public class AdminController {
 		return "/admin/QAlist";
 	}
 
+	@RequestMapping("/resmanage")
+	public String resmanage(Authentication authentication,Model model) {
+		String name = memberService.memgetName(authentication.getName());
+		List<Reserve> reservelist = reserveService.allList();
+		List<OptPrice> optionlist = optpriceService.optPriceAllList();
+		String[] a = new String[reservelist.size()];
+		for(int i = 0; i< reservelist.size();i++) {
+			 a[i] = reservelist.get(i).getOptions();
+		}
+		
+		
+		model.addAttribute("name",name);
+		model.addAttribute("reslist",reservelist);
+		model.addAttribute("oplist",optionlist);
+		
+		return "/admin/resmanagement";
+	}
+	
 	@RequestMapping("/modiroom")
 	public String layout(@RequestParam(value = "roomid") int roomid, Authentication authentication, Model model) {
 		String name = memberService.memgetName(authentication.getName());
@@ -206,7 +229,20 @@ public class AdminController {
 		System.out.println("수정완료");
 		return "redirect:/admin/room";
 	}
-
+	@PostMapping("/room_price_update")
+	public String room_price_update(@RequestParam(value = "id") int id,
+			@RequestParam(value = "price_num") String price_num, @RequestParam(value = "price") int price,
+			Model model) {
+		
+		System.out.println(id);
+		System.out.println(price_num);
+		System.out.println(price);
+		
+		roomService.room_price_update(id, price_num, price);
+		
+		System.out.println("수정완료");
+		return "redirect:/admin/room";
+	}
 	@GetMapping(value = "/QAanswer")
 	public String qaanswer(Authentication authentication, Integer id, Model model) {
 		String name = memberService.memgetName(authentication.getName());
