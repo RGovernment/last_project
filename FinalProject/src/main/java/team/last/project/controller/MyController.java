@@ -29,7 +29,7 @@ import team.last.project.service.ReviewService;
 @Controller
 @RequiredArgsConstructor
 public class MyController {
-	
+
 	private final OptionService optionService;
 	private final MemberService memberService;
 	private final ReviewService reviewService;
@@ -64,23 +64,23 @@ public class MyController {
 				Sort.by("id").descending());
 
 		list = reviewService.reviewList(pageRequest);
-		if(list.getTotalPages()!=0) {
-			
-		int nowPage = list.getPageable().getPageNumber() + 1;
-		int startPage = Math.max(nowPage - 4, 1);
-		int endPage = Math.min(nowPage + 5, list.getTotalPages());
-		if (endPage == 0) {
-			endPage = 1;
-		}
+		if (list.getTotalPages() != 0) {
 
-		model.addAttribute("list", list);
-		model.addAttribute("nowPage", nowPage);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		return "/review";
-		}else {
-			model.addAttribute("message","작성된 후기가 없습니다.");
-			model.addAttribute("Url","/index");
+			int nowPage = list.getPageable().getPageNumber() + 1;
+			int startPage = Math.max(nowPage - 4, 1);
+			int endPage = Math.min(nowPage + 5, list.getTotalPages());
+			if (endPage == 0) {
+				endPage = 1;
+			}
+			model.addAttribute("lastPage",list.getTotalPages());
+			model.addAttribute("list", list);
+			model.addAttribute("nowPage", nowPage);
+			model.addAttribute("startPage", startPage);
+			model.addAttribute("endPage", endPage);
+			return "/review";
+		} else {
+			model.addAttribute("message", "작성된 후기가 없습니다.");
+			model.addAttribute("Url", "/index");
 			return "/er";
 		}
 	}
@@ -104,7 +104,7 @@ public class MyController {
 	public String introPage() {
 		return "intro";
 	}
-	
+
 	@GetMapping("/support")
 	public String support() {
 		return "support";

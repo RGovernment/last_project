@@ -397,9 +397,9 @@ $(function() {
 		beforeSend: function(xhr) {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
 			xhr.setRequestHeader(header, token);
 		},
-		success: function(reserve) {
-			console.log(reserve);
-			$('.star-ratings-fill').css('width',reserve+'%');
+		success: function(result) {
+			$('#star-score').html(result+"점");
+			$('.star-ratings-fill').css('width',(result*20)+'%');
 		},
 		error: function() {
 			alert('에러');

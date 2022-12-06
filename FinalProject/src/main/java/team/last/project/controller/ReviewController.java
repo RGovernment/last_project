@@ -52,13 +52,14 @@ public class ReviewController {
 	@GetMapping("/write")
 	public String reviewwriteform(Long resid, Authentication authentication, Model model) {
 		Review review = reviewService.reviewByreserveId(resid);
+		String name = memberService.memgetName(authentication.getName());
 		if (review == null) {
 			model.addAttribute("resid", resid);
 			model.addAttribute("reviewDto", new ReviewDto());
-			String name = memberService.memgetName(authentication.getName());
 			model.addAttribute("name", name);
 			return "/review/reviewwrite";
 		} else {
+			model.addAttribute("name", name);
 			model.addAttribute("review", review);
 			return "/review/reviewupdate";
 		}

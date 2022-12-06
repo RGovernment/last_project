@@ -34,17 +34,14 @@
 
 #page_now{
 	font-size:20px;
-	color: #121299;
 }
 
 #page {
 	text-decoration: none;
-	color: black;
 }
 
 #page:hover{
 	color: #888888;
-	text-decoration: underline;
 }
 #page:active{
 	color: #444444;

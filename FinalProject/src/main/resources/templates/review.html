@@ -6,34 +6,31 @@
 <th:block layout:fragment="content">
 <script th:inline="javascript">
 $(function(){
-const option = {
-			  root: null,
-			  rootMargin: '-400px 0px -400px 0px',
-			  threshold: 0.8
-			};
 	
-const io = new IntersectionObserver((entries, observer) => {
+const options = {
+		root : document.querySelector(".root"),
+			threshold: 0.35314312235
+};
+	
+const observer = new IntersectionObserver((entries, observer) => {
 	  entries.forEach((entry) => {
-	    if(entry.intersectionRect > 0.8){
-	      entry.target.classList.add('visible');
-	    } else {
-	      entry.target.classList.remove('visible');
-	    }
-	  }, option);                            
-	});
+	    	entry.target.classList.toggle('visible',entry.isIntersecting);
+	  });                            
+	}, options);
 
-	document.querySelectorAll('.wrapper').forEach((wrapper) => io.observe(wrapper));
+	document.querySelectorAll('.wrapper').forEach((wrapper) => observer.observe(wrapper));
+	
 });
+	
 </script>
 	<link th:href="@{/css/reviewPage.css}" rel="stylesheet">
 	<main role="main">
-		<div class="container mt-5 root">
+		<div class="container mt-5">
 			<div class="d-flex align-items-center justify-content-center mb-5"
 				id="review-text1">Review</div>
-			<div class="row">
+			<div class="row my-5">
 				<th:block th:each="review :${list}">
-					<div class="col-md-6">
-						
+					<div class="col-md-6 my-5 card-group over">
 						<div class="card mb-4 shadow-sm wrapper" id="review-card">
 							<a class="d-block h-100" data-bs-toggle="modal"
 								th:data-bs-target="'#reviewModal'+${review.id}"> <img
@@ -51,23 +48,23 @@ const io = new IntersectionObserver((entries, observer) => {
 								<div></div>
 							</div>
 						</div>
-						
 					</div>
+					
 					<!-- Modal -->
 					<div class="modal fade" th:id="'reviewModal'+${review.id}"
 						tabindex="-1" aria-labelledby="reviewModalLabel"
 						aria-hidden="true">
-						<div class="modal-dialog modal-lg modal-dialog-centered">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="reviewModalLabel"
+						<div class="modal-dialog modal-fullsize modal modal-lg modal-dialog-centered" style="height: 600px;">
+							<div class="modal-content modal-fullsize">
+								<div class="modal-header modal-fullsize">
+									<h5 class="modal-title modal-fullsize" id="reviewModalLabel"
 										th:text="${review.title}">{Review Title}</h5>
 									<button type="button" class="btn-close" data-bs-dismiss="modal"
 										aria-label="Close"></button>
 								</div>
 								<div class="modal-body">
 									<div class="row">
-										<div class="col-md-8 border-end">
+										<div class="col-md-12">
 											<div th:id="'carouselreviewIndicators'+${review.id}" class="carousel slide"
 												data-bs-ride="carousel">
 												<div class="carousel-inner" th:data-id="${review.id}">
@@ -85,15 +82,18 @@ const io = new IntersectionObserver((entries, observer) => {
 													<span class="visually-hidden">Next</span>
 												</button>
 											</div>
+											</div>
 											<!-- 이미지 하나 출력
 											<img class="card-img-top" name="modal-image"
 												th:data-id="${review.id}" src="/img/picture.jpg"
 												onerror="this.src='/img/picture.jpg'" alt="이미지가 없습니다"> -->
 										</div>
-										<div class="col-md-4">
-											<div class="border-bottom" th:text="${review.member.name}">{작성자}</div>
-											<div th:text="${review.score}">{별점}</div>
-											<div th:text="${review.title}">{제목}</div>
+										<div class="row">
+										<div class="col-md-12 p-3">
+											<div class="border-bottom mb-2 pb-2" style="font-weight:bold; font-size: 35px;" th:inline="text">[[${review.title}]]</div>
+											<div th:inline="text">작성자 : [[${review.member.name}]]</div>
+											<div class="mb-3" th:inline="text">별점 : [[${review.score}]]점</div>
+											<hr>
 											<div th:text="${review.content}">{내용}</div>
 										</div>
 									</div>
@@ -103,14 +103,25 @@ const io = new IntersectionObserver((entries, observer) => {
 					</div>
 				</th:block>
 			</div>
-			<div class="d-flex justify-content-between" id="page_div">
-				<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
-					<a th:if="${page != nowPage}"
-						th:href="@{/mypage/QAlist(page = ${page -1})}" th:text="${page}"
-						id="page"></a>
-					<strong th:if="${page == nowPage}" th:text="${page}" id="page_now"></strong>
-				</th:block>
+			<br>
+			<br>
+			<br>
+			<div style="min-height: 500px;"></div>
+			<div align="right">
+			<button type="button" class="btn btn-outline-secondary" onclick='location.href="#review-text1"'>
+			   ▲ 맨위로</button>
 			</div>
+					<div class="my-5" align="center">
+		<div class="btn-group d-flex justify-content-evenly" id="page_div">
+			<button type="button" class="btn btn-dark" th:onclick='|location.href="@{/card(page = 0)}"|' id="page"><<</button>
+			<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
+				<button type="button" class="btn btn-outline-secondary" th:if="${page != nowPage}" th:onclick='|location.href="@{/card(page = ${page -1})}"|'
+					th:text="${page}" id="page"></button>
+				<button type="button" class="btn btn-dark" th:if="${page == nowPage}" th:text="${page}" id="page_now"></button>
+			</th:block>
+			<button type="button" class="btn btn-dark" th:onclick='|location.href="@{/card(page = ${lastPage-1})}"|' id="page">>></button>
+		</div>
+		</div>		
 		</div>
 
 
@@ -162,9 +173,9 @@ const io = new IntersectionObserver((entries, observer) => {
 													if (i == 0) {
 														str += "<div class='carousel-item active'>";
 													} else {
-														str += "<div class='carousel-item'>";
+														str += "<div class='carousel-item '>";
 													}
-													str += "<img class='d-block h-100' src='"+result[i]+"'alt='이미지가 없습니다' onerror="+"this.src='/img/picture.jpg'"+">";
+													str += "<div class='d-flex justify-content-center h-100'><img class='d-block' src='"+result[i]+"'alt='이미지가 없습니다' onerror="+"this.src='/img/picture.jpg'"+"></div>";
 													str += "</div>";
 													div.append(str);
 												}

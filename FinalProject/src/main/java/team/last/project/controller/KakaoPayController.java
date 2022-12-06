@@ -337,6 +337,7 @@ public String kakaosecession(@PathVariable("email") String email,Model model) th
 
 		int resultset = payconnect.getResponseCode();
 
+		@SuppressWarnings("unused")
 		InputStream resultData;
 
 		if (resultset == 200) 

@@ -7,19 +7,60 @@
 	color: #483d8b;
 }
 
+.over{
+	height: 380px;
+	
+}
+
+
 #review-card {
 	max-width: 970px;
 }
-.wrapper{
-	opacity: 0;
-	transition: opacity 0.5s;
-}
-.wrapper.visible {
-  opacity: 1;
+#review-card:active{
+	z-index: 1;
+	
 }
 
-.root-margin{
-	background-color: red;
+#page_div{
+	 max-width: 50px;
+}
+
+#page_now{
+	font-size:20px;
+}
+
+#page {
+	text-decoration: none;
+}
+
+#page:hover{
+	color: #888888;
+}
+#page:active{
+	color: #444444;
+}
+
+
+
+@keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translate3d(0, 50%, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+    }
+
+.wrapper{
+	opacity: 0;
+	transition: opacity 0.6s;
+}
+.wrapper.visible {
+	position: relative;
+    animation: fadeInUp 1s;
+  	opacity: 1;
 }
 
 #title {

@@ -109,21 +109,19 @@ public class ReserveController {
 		} // 필요한 데이터인 날짜와 시작,끝 시간을 가공해 HashMap 형태로 묶은 후 List에 담아서 return
 		return reserveMapList;
 	}
-
+	
 	// 별점평균 만들기 요청 URL
 	@ResponseBody
 	@PostMapping("/staravg")
-	public int staravg(@RequestParam(value = "room_id") int room_id) {
-		System.out.println("test");
-		int staravg = 0;
-		int totalscore = 0;
+	public double staravg(@RequestParam(value = "room_id") int room_id) {
+		double staravg = 0;
+		double totalscore = 0;
 		List<Review> reviewlist = reviewService.reviewbyroomid(room_id);
 		for (Review r : reviewlist) {
 			totalscore += r.getScore();
 		}
 		totalscore = totalscore / reviewlist.size();
-		staravg = totalscore * 20;
-		System.out.println(staravg);
+		staravg = totalscore;
 		return staravg;
 	}
 };

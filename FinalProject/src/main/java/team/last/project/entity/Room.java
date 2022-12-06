@@ -25,7 +25,11 @@ public class Room {
 	
 	private String note;
 	
-	public void update(String name) {
+	public void name_update(String name) {
 		this.name = name;
+	}
+	
+	public void note_update(String note) {
+		this.note = note;
 	}
 }

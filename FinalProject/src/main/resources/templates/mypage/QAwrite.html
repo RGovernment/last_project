@@ -29,8 +29,7 @@
 
 				<div class="mb-3">
 					<label th:for="type" class="form-label">문의 종류</label> <select
-						th:field="*{type}" class="form-select"
-						aria-label="Default select example">
+						th:field="*{type}" class="form-select" aria-label="Default select example">
 						<option
 							th:each="type : ${T(team.last.project.constant.AskType).values()}"
 							th:value="${type.name()}" th:text="${type.description}">

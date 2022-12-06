@@ -32,4 +32,16 @@ public class RoomService {
 		return roomRepository.findById(id);
 	}
 	
+	public void name_update(int id , String name) {
+		//id를 찾아서 Room Entity와 연동
+	Room room =	roomRepository.findById(id).get();
+	room.name_update(name);
+	}
+	
+	public void note_update(int id , String note) {
+		//id를 찾아서 Room Entity와 연동
+		Room room =	roomRepository.findById(id).get();
+		room.note_update(note);
+	}
+	
 }
