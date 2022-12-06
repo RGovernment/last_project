@@ -4,70 +4,179 @@
 	layout:decorate="layouts/first_layout">
 
 <th:block layout:fragment="content">
+<script th:inline="javascript">
+$(function(){
+const option = {
+			  root: null,
+			  rootMargin: '-400px 0px -400px 0px',
+			  threshold: 0.8
+			};
+	
+const io = new IntersectionObserver((entries, observer) => {
+	  entries.forEach((entry) => {
+	    if(entry.intersectionRect > 0.8){
+	      entry.target.classList.add('visible');
+	    } else {
+	      entry.target.classList.remove('visible');
+	    }
+	  }, option);                            
+	});
+
+	document.querySelectorAll('.wrapper').forEach((wrapper) => io.observe(wrapper));
+});
+</script>
 	<link th:href="@{/css/reviewPage.css}" rel="stylesheet">
 	<main role="main">
-		<div class="container mt-5">
+		<div class="container mt-5 root">
 			<div class="d-flex align-items-center justify-content-center mb-5"
 				id="review-text1">Review</div>
 			<div class="row">
-				<th:block th:each="num:${#numbers.sequence(1,6)}">
+				<th:block th:each="review :${list}">
 					<div class="col-md-6">
-						<div class="card mb-4 shadow-sm" id="review-card">
-							<a data-bs-toggle="modal" data-bs-target="#exampleModal"> <img
-								class="card-img-top" id="modal-image" src="/img/picture.jpg"
-								alt="Card image cap"></a>
+						
+						<div class="card mb-4 shadow-sm wrapper" id="review-card">
+							<a class="d-block h-100" data-bs-toggle="modal"
+								th:data-bs-target="'#reviewModal'+${review.id}"> <img
+								class="card-img-top" name="modal-image"
+								th:data-id="${review.id}" src="/img/picture.jpg"
+								onerror="this.src='/img/picture.jpg'" alt="이미지가 없습니다"></a>
 							<div class="card-title pt-3" id="title"
-								style="text-align: center;">제목이 될겁니다.</div>
+								style="text-align: center;" th:text="${review.title}"></div>
 							<div class="card-body ps-3 ms-0 me-0">
-								<div id="desc">회사이름</div>
-								<div id="address">방종류</div>
+								<div id="desc" th:text="${review.room.name}">룸 종류</div>
 								<div class="row justify-content-between">
-									<div class="col-4" id="price">30000원</div>
-									<div class="col-4" align="right">22-11-14</div>
+									<div class="col-4" align="right" 
+									th:text="${#dates.format(review.cdate,'yyyy-MM-dd')}"></div>
 								</div>
-								<div>★★★★★</div>
+								<div></div>
+							</div>
+						</div>
+						
+					</div>
+					<!-- Modal -->
+					<div class="modal fade" th:id="'reviewModal'+${review.id}"
+						tabindex="-1" aria-labelledby="reviewModalLabel"
+						aria-hidden="true">
+						<div class="modal-dialog modal-lg modal-dialog-centered">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="reviewModalLabel"
+										th:text="${review.title}">{Review Title}</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<div class="row">
+										<div class="col-md-8 border-end">
+											<div th:id="'carouselreviewIndicators'+${review.id}" class="carousel slide"
+												data-bs-ride="carousel">
+												<div class="carousel-inner" th:data-id="${review.id}">
+												</div>
+												<button class="carousel-control-prev" type="button"
+													th:data-bs-target="'#carouselreviewIndicators'+${review.id}"
+													data-bs-slide="prev">
+													<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+													<span class="visually-hidden">Previous</span>
+												</button>
+												<button class="carousel-control-next" type="button"
+													th:data-bs-target="'#carouselreviewIndicators'+${review.id}"
+													data-bs-slide="next">
+													<span class="carousel-control-next-icon" aria-hidden="true"></span>
+													<span class="visually-hidden">Next</span>
+												</button>
+											</div>
+											<!-- 이미지 하나 출력
+											<img class="card-img-top" name="modal-image"
+												th:data-id="${review.id}" src="/img/picture.jpg"
+												onerror="this.src='/img/picture.jpg'" alt="이미지가 없습니다"> -->
+										</div>
+										<div class="col-md-4">
+											<div class="border-bottom" th:text="${review.member.name}">{작성자}</div>
+											<div th:text="${review.score}">{별점}</div>
+											<div th:text="${review.title}">{제목}</div>
+											<div th:text="${review.content}">{내용}</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</th:block>
 			</div>
-		</div>
-
-		<!-- Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">{Review Title}</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<div class="row">
-							<div class="col-md-8 border-end">
-								<img class="card-img-top" src="/img/picture.jpg"
-									alt="Card image cap">
-							</div>
-							<div class="col-md-4">
-								<div class="border-bottom">{작성자} {별점}</div>
-								<div>{이용내역}</div>
-								<div>{내용}사장님이 맛있고 음식이 친절해요</div>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div class="d-flex justify-content-between" id="page_div">
+				<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
+					<a th:if="${page != nowPage}"
+						th:href="@{/mypage/QAlist(page = ${page -1})}" th:text="${page}"
+						id="page"></a>
+					<strong th:if="${page == nowPage}" th:text="${page}" id="page_now"></strong>
+				</th:block>
 			</div>
 		</div>
+
+
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-			crossorigin="anonymous"></script>
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+			crossorigin="anonymous"></script>
+		<script th:inline="javascript">
+			$('img[name="modal-image"]').each(function() {
+				var review_id = $(this).data("id");
+				var modalimage = $(this);
+				//사진 데이터 가져오기
+				$.ajax({
+					type : "GET",
+					url : "/review/imglist",
+					data : {
+						review_id : review_id
+					},
+					success : function(result) {
+						if (result != null) {
+							modalimage.attr("src", result[0]);
+						}
+					},
+					error : function() {
+					}
+
+				}); //$.ajax
+			});
+			$('div[class="carousel-inner"]')
+					.each(
+							function() {
+								var review_id = $(this).data("id");
+								var div = $(this);
+								console.log(review_id);
+								//사진 데이터 가져오기
+								$
+										.ajax({
+											type : "GET",
+											url : "/review/imglist",
+											data : {
+												review_id : review_id
+											},
+											success : function(result) {
+												for (var i = 0; i < result.length; i++) {
+													var str = "";
+													if (i == 0) {
+														str += "<div class='carousel-item active'>";
+													} else {
+														str += "<div class='carousel-item'>";
+													}
+													str += "<img class='d-block h-100' src='"+result[i]+"'alt='이미지가 없습니다' onerror="+"this.src='/img/picture.jpg'"+">";
+													str += "</div>";
+													div.append(str);
+												}
+											},
+											error : function() {
+											}
+
+										}); //$.ajax
+							});
+		</script>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 			crossorigin="anonymous"></script>
 	</main>
 	<br>

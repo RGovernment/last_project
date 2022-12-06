@@ -7,6 +7,9 @@
 #prev, #next {
 	cursor: pointer;
 }
+#calendar:hover {
+		cursor: pointer;
+	}
 
 /*모바일*/
 @media screen and (max-width:991px) {
@@ -88,6 +91,9 @@
 	.active {
 		color: #ff7583;
 		font-size: 17px;
+	}
+	.back{
+	background-color: #BCD182;
 	}
 }
 
@@ -179,6 +185,9 @@
 		color: #ff7583;
 		font-size: 25px;
 	}
+	.back{
+		background-color: #BCD182;
+	}
 }
 
 @media screen and (min-width:1200px) {
@@ -257,5 +266,8 @@
 	.active {
 		color: #ff7583;
 		font-size: 17px;
+	}
+	.back{
+		background-color: #BCD182;
 	}
 }

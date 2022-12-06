@@ -10,7 +10,7 @@ import team.last.project.entity.Room;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Integer> {
-	
+
 	@EntityGraph("RoomwithRoomtype")
 	public Optional<Room> findById(int id);
 

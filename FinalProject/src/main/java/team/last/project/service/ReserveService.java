@@ -1,6 +1,8 @@
+
 package team.last.project.service;
 
 import java.util.List;
+
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +20,7 @@ public class ReserveService {
 	public void reserve(Reserve reserve) {
 		reserveRepository.save(reserve);
 	}
-	
+	//요청한 달의 데이터 select
 	public List<Reserve> findschedule(String month){
 		return reserveRepository.findschedule(month);
 	}
@@ -26,6 +28,14 @@ public class ReserveService {
 	public List<Reserve> reserveList(Long id) {
 		List<Reserve> reserve = reserveRepository.findALLByMemberId(id);
 		return reserve;
+	}
+	
+	public Reserve get(Long resid) {
+		return reserveRepository.findById(resid).orElse(null);
+	}
+	
+	public void delete(Reserve reserve) {
+		reserveRepository.delete(reserve);
 	}
 
 }

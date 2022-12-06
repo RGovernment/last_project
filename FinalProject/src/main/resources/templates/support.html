@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/first_layout">
+
+<th:block layout:fragment="content">
+<script th:inline="javascript">
+		$(document).ready(function() {
+			var errorMessage = [[${ Message }]];
+			console.log(errorMessage);
+			if (errorMessage != null) {
+				alert(errorMessage);
+			}
+		});</script>
+
+	<link th:href="@{/css/csupportPage.css}" rel="stylesheet">
+	<div class="container my-5 " id="privit-con">
+		<p class="d-flex my-5 justify-content-center" id="support-title">Customer
+			Support</p>
+
+		<div class="d-flex justify-content-center">현재 고객지원 페이지에서는 탈퇴한 회원의 회원정보 복구만 할 수 있습니다.</div>
+		<br>
+		<div class="d-flex justify-content-center">탈퇴한 회원정보를 복구하시겠습니까?</div>
+		<div class="d-flex justify-content-center">
+		<br><br>
+		<button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#infock">복구한다</button>
+		</div>
+		<form th:action="@{/support}" method="post">
+			<!-- Modal -->
+			<div class="modal fade" id="infock" data-bs-backdrop="static"
+				data-bs-keyboard="false" tabindex="-1"
+				aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">회원정보 확인</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="container d-flex justify-content-center mt-3 mb-3">
+								<div id="form-size">
+								<div id="form-group">
+									<label th:for="email" class="mb-2">이메일 확인</label> <br>
+										<input id="email" type="email" th:name="email" class="form-control mb-4" style="width: 350px">
+									</div>
+									<div id="form-group">
+										<label th:for="password" class="mb-2">비밀번호 확인</label> <br> 
+										<input type="password" th:name="password" id="pass3"
+											class="form-control mb-4" style="width: 350px">
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer justify-content-between">
+								<button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+								<button type="submit" class="btn btn-primary">확인</button>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+				<!-- 모달 끝나는 부분 -->
+			</div>
+		</form>
+</div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
+</th:block>
+</html>

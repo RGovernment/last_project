@@ -10,6 +10,3 @@ let editpass = () => {
 
 };
 
-let clear = () => {
-	$("#pass3").clear();
-}
