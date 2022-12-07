@@ -50,11 +50,12 @@ public class ReserveController {
 		model.addAttribute("reserveDto", new ReserveDto());
 		model.addAttribute("option", optionService.optionList());
 		model.addAttribute("room", roomService.roomget(roomid).get());
+
 		// 별점
 		double score = 2.4;
-		double star = score * 20f;
+		double star = score * 20;
 		model.addAttribute("score", score);
-		model.addAttribute("star", star + "%");
+		model.addAttribute("star", star);
 
 		return "/res/Room";
 	}

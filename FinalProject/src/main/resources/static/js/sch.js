@@ -419,10 +419,9 @@ function changemonth(cal) {
 	};
 
 
-	var star = document.getElementById("star").value;
+	var star = document.getElementById('star').value;
 	console.log(star);
-
-	$('#starRating').css('width', star);
+	$('#starrating').css('width', star+"%");
 
 	$(function() {
 		$(".S").change(function() {
