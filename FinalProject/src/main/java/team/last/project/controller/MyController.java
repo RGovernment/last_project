@@ -2,8 +2,6 @@ package team.last.project.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.RequiredArgsConstructor;
 import team.last.project.entity.Member;
 import team.last.project.entity.Option;
@@ -47,7 +44,7 @@ public class MyController {
 	}
 
 	@RequestMapping("/index")
-	public String indexPage(@Nullable HttpSession session, Model model) {
+	public String indexPage() {
 		return "index";
 	}
 
