@@ -3,6 +3,7 @@ package team.last.project.service;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,11 @@ public class ReviewService {
 	public Page<Review> reviewList(Pageable pageable) {
 		return reviewRepository.findAll(pageable);
 	}
-
+	//방 별 리뷰 가져오기 2022.12.07
+	public Page<Review> reviewList(int roomid, Pageable pageable) {
+		return reviewRepository.findAllByRoomid(roomid, pageable);
+	}
+	
 	public Review reviewGet(Integer id) {
 		return reviewRepository.findById(id).get();
 	}
@@ -62,5 +67,7 @@ public class ReviewService {
 	public List<Review> reviewbyroomid(int id) {
 		return reviewRepository.findByRoomId(id);
 	}
+
+
 
 }

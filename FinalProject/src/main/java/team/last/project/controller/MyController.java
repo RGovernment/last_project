@@ -29,7 +29,7 @@ import team.last.project.service.ReviewService;
 @Controller
 @RequiredArgsConstructor
 public class MyController {
-
+	
 	private final OptionService optionService;
 	private final MemberService memberService;
 	private final ReviewService reviewService;
@@ -58,12 +58,16 @@ public class MyController {
 
 	@RequestMapping("/card")
 	public String reviewlist(Authentication authentication, Model model,
-			@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+			@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,Integer roomid) {
 		Page<Review> list = null;
 		PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
 				Sort.by("id").descending());
-
-		list = reviewService.reviewList(pageRequest);
+		//방 별 리뷰 가져오기 2022.12.07
+		if(roomid == null) {
+			list = reviewService.reviewList(pageRequest);
+		}else {
+			list = reviewService.reviewList(roomid,pageRequest);		
+			}
 		if (list.getTotalPages() != 0) {
 
 			int nowPage = list.getPageable().getPageNumber() + 1;
