@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
-	layout:decorate="layouts/first_layout"
+	layout:decorate="~{layouts/first_layout}"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block layout:fragment="content">
 	<link th:href="@{/css/mainPage.css}" rel="stylesheet">
@@ -17,8 +17,7 @@
 	</div>
 
 	<div class="d text-center" id="normal-text" style="height: 10%">
-		최고의 대여 <span id="partyroom-text">파티룸 </span> 배달음식도<span
-			id="Memory-text"> Memory Gift에서!</span> 커피/물/얼음정수기<span
+		최고의 대여 <span id="partyroom-text">파티룸 </span> 배달음식도<span id="Memory-text"> Memory Gift에서!</span> 커피/물/얼음정수기<span
 			id="free-text"> 무료제공</span> 생일풍선/생일모자/<span id="mirrorball-text">미러볼</span>제공
 	</div>
 	<br>
@@ -36,8 +35,7 @@
 	</div>
 	<br>
 
-	<div class="d text-center" id="red-text" style=>파티용 미니빔 무료대여(각방
-		1대)</div>
+	<div class="d text-center" id="red-text" style=>파티용 미니빔 무료대여(각방 1대)</div>
 	<div class="container">
 		<div class="row align-items-center pt-5">
 			<div class="col-md-2.4" id="img-minibeam1"></div>
@@ -49,10 +47,8 @@
 	</div>
 	<br>
 
-	<div class="d text-center" id="blue-text" style=>다양한
-		장비(영상조명/사진조명/링라이트)</div>
-	<div class="d text-center" id="blue-text" style=>삼각대/블루투스
-		리모컨/스피커로 간편한 촬영</div>
+	<div class="d text-center" id="blue-text" style=>다양한 장비(영상조명/사진조명/링라이트)</div>
+	<div class="d text-center" id="blue-text" style=>삼각대/블루투스 리모컨/스피커로 간편한 촬영</div>
 	<div class="container">
 		<div class="row align-items-center pt-5">
 			<div class="col-md-4" id="img-bluepic1"></div>
@@ -88,6 +84,7 @@
 	</div>
 	<div class="container">
 		<div class="row ">
+<<<<<<< HEAD
 			<div class="col-md-3 offset-md-2">
 				<div id="map" style="width: 400px; height: 400px;"></div>
 			</div>
@@ -104,6 +101,28 @@
 					<tr>
 						<td><span style="font-size: 20px; font-weight: bold;">버스
 								정거장 영남아파트 부터 약 100m</span></td>
+=======
+			<div class="col-md-3">
+				<div id="map" style="width: 600px; height: 400px;"></div>
+			</div>
+			<div class="col-md-6 offset-md-3">
+				<table class="table mt-5">
+					<tr>
+						<td colspan="2"><span style="font-size: 30px; font-weight: bold; white-space: pre-line;">인천 OOO구 OOO로OOO번길 O-OO 
+						OO빌딩 3~5층</span></td>
+					</tr>
+					<tr style="height: 50px;">
+					
+					</tr>
+					<tr>
+						<td><span style="font-size: 20px; font-weight: bold;">신동아아파트 정거장에서 약 200m</span></td>
+						<td><span style="font-size: 20px; font-weight: bold; white-space: pre-line;">버스 번호: 111-2, 46
+						 515, 9200</span></td>
+					</tr>
+					<tr style="height: 10px;"></tr>
+					<tr>
+						<td><span style="font-size: 20px; font-weight: bold;">영남아파트 정거장에서 약 100m</span></td>
+>>>>>>> refs/heads/master
 						<td><span style="font-size: 20px; font-weight: bold;">버스 번호: 4, 5</span></td>
 					</tr>
 				</table>
@@ -118,7 +137,11 @@
 	<br>
 	<br>
 	<script type="text/javascript"
+<<<<<<< HEAD
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=523b4642a94f0fed1387f518ff689418&libraries=services,clusterer,drawing"></script>
+=======
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=78a3092d5af53803282c4c49afd6a7a9&libraries=services,clusterer,drawing"></script>
+>>>>>>> refs/heads/master
 	<script type="text/javascript">
 		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 		var options = { //지도를 생성할 때 필요한 기본 옵션

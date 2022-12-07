@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
-	layout:decorate="layouts/third_layout">
+	layout:decorate="~{layouts/third_layout}">
 <th:block layout:fragment="content">
 	<link th:href="@{/css/admin_main.css}" rel="stylesheet">
 	<link th:href="@{/css/roomPage.css}" rel="stylesheet">
@@ -18,26 +18,20 @@
 		</div>
 		<hr />
 			<div class="container" style="min-height: 600px;">
+			<div class="row">
+			<div class="col-6 d-flex justify-content-start">
 				<div id="room_name">
 					<form th:action="@{/admin/room_update_name}" method="post"
 						th:object="${room}">
-						룸 제목 : &nbsp; <input type="hidden" th:field="${room.id}">
-						<input type="text" th:field="${room.name}" class="form-control mb-2" th:value="${room.name}" style="width: 200px;">
+						<label id="room_note_label" class="mb-2">룸 제목 수정</label> <input type="hidden" th:field="${room.id}">
+						<input type="text" th:field="${room.name}" class="form-control mb-5" th:value="${room.name}" style="width: 200px;">
 						<input class="btn btn-dark" type="submit" value="수정">
 					</form>
 				</div>
-				<br/>
-				<div id="room_note">
-					<form th:action="@{/admin/room_update_note}" method="post"
-						th:object="${Room}">
-						<label id="room_note_label">룸 설명</label> <input type="hidden"
-							th:field="${room.id}"> <span><textarea class="form-control mb-2"
-								id="room_note" th:field="${room.note}" th:value="${room.note}" style="resize: none; overflow: auto;" rows="3"> </textarea></span>
-						<input class="btn btn-dark" type="submit" value="수정">
-					</form>
 				</div>
-				
+				<div class="col-6 d-flex justify-content-end">
 				<div id="room_price">
+				<label id="room_note_label" class="mb-2">룸 가격 수정</label>
 					<form th:action="@{/admin/room_price_update}" method="post">
 					<input type="hidden" id="price1" th:value="${room.roomtype.price1}">
 					<input type="hidden" id="price2" th:value="${room.roomtype.price2}">
@@ -46,21 +40,37 @@
 					<input type="hidden" id="price5" th:value="${room.roomtype.price5}">
 					<input type="hidden" id="price6" th:value="${room.roomtype.price6}">
 						<input type="hidden" th:value="${room.roomtype.id}" name="id">
-						<select id="price_num" name="price_num">
-							<option>price1</option>
-							<option>price2</option>
-							<option>price3</option>
-							<option>price4</option>
-							<option>price5</option>
-							<option>price6</option>
+						<select id="price_num" name="price_num" class="form-control mb-2" style="width: 130px;">
+						<optgroup label="주중">
+							<option th:value="price1">3시간</option>
+							<option th:value="price2">6시간</option>
+							<option th:value="price3">AllNight</option>
+							</optgroup>
+							<optgroup label="주말">
+							<option th:value="price4">3시간</option>
+							<option th:value="price5">6시간</option>
+							<option th:value="price6">AllNight</option>
+							</optgroup>
 						</select>
-						<input type='number' id='price' name='price'  th:value='${room.roomtype.price1}'>
-						<input style="float: right" type="submit" value="수정">
+						<input type='number' id='price' class="form-control mb-2" name='price' style="width: 130px;" th:value='${room.roomtype.price1}'>
+						<div class="d-flex justify-content-end"><input class="btn btn-dark" type="submit" value="수정"></div>
+					</form>
+				</div>
+				</div>
+				<br/>
+				<div id="room_note">
+					<form th:action="@{/admin/room_update_note}" method="post"
+						th:object="${Room}">
+						<label id="room_note_label" class="mb-2  mt-5">룸 설명 수정</label> <input type="hidden"
+							th:field="${room.id}"> <span><textarea class="form-control mb-2"
+								id="room_note" th:field="${room.note}" th:value="${room.note}" style="resize: none; overflow: auto;" rows="3"> </textarea></span>
+						<input class="btn btn-dark mb-2" type="submit" value="수정">
 					</form>
 				</div>
 				
+				
 				<div class="d-flex justify-content-center">
-				<button type="button" class="btn btn-secondary" th:onclick="|location.href='@{/admin}'|">수정 취소</button>
+				<button type="button" class="btn btn-secondary" th:onclick="|location.href='@{/admin}'|">수정 종료</button>
 			</div>
 			</div>
 			<br>

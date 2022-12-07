@@ -83,6 +83,12 @@
 	background-color: #ffffff;
 }
 
+div[id^="room"]{
+	
+	font-size:20px;
+	
+}
+
 .overfit>div{
 	height: 660px;
 }

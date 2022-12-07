@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+#page_div{
+	 max-width: 50px;
+}
+
+#page_now{
+	font-size:20px;
+}
+
+#page {
+	text-decoration: none;
+}
+
+#page:hover{
+	color: #888888;
+}
+#page:active{
+	color: #444444;
+}

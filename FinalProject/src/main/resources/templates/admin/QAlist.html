@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
-	layout:decorate="layouts/third_layout">
+	layout:decorate="~{layouts/third_layout}">
 <th:block layout:fragment="content">
 	<link th:href="@{/css/admin_main.css}" rel="stylesheet">
 	<link th:href="@{/css/admin_QAlistPage.css}" rel="stylesheet">
@@ -75,13 +75,13 @@
 				</table>
 			<div align="center">
 				<div class="btn-group d-flex justify-content-evenly" id="page_div">
-					<button type="button" class="btn btn-dark" th:onclick='|location.href="@{/mypage/QAlist(page = 0)}"|' id="page"><<</button>
+					<button type="button" class="btn btn-dark" th:onclick='|location.href="@{/admin/QAlist(page = 0)}"|' id="page"><<</button>
 					<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
-						<button type="button" class="btn btn-outline-secondary" th:if="${page != nowPage}" th:onclick='|location.href="@{/mypage/QAlist(page = ${page -1})}"|'
+						<button type="button" class="btn btn-outline-secondary" th:if="${page != nowPage}" th:onclick='|location.href="@{/admin/QAlist(page = ${page -1})}"|'
 							th:text="${page}" id="page"></button>
 						<button type="button" class="btn btn-dark" th:if="${page == nowPage}" th:text="${page}" id="page_now"></button>
 					</th:block>
-				<button type="button" class="btn btn-dark" th:onclick='|location.href="@{/mypage/QAlist(page = ${lastPage-1})}"|' id="page">>></button>
+				<button type="button" class="btn btn-dark" th:onclick='|location.href="@{/admin/QAlist(page = ${lastPage-1})}"|' id="page">>></button>
 		</div>
 	</div>
 			</div>

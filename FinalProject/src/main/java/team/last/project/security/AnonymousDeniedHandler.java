@@ -19,7 +19,6 @@ public class AnonymousDeniedHandler implements AccessDeniedHandler {
 		request.setAttribute("Url", "/index");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/member/errorDenied");
 		dispatcher.forward(request, response);
-		
 	}
 
 }

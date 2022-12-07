@@ -98,7 +98,6 @@ public class MemberController {
 		
 		@SuppressWarnings("unchecked")
 		List<GrantedAuthority> authList = (List<GrantedAuthority>) authentication.getAuthorities();
-		
 		if(authList.get(0).getAuthority().contains("ADMIN")) {
 			request.setAttribute("message", "어드민은 결제 및 마이페이지 기능을 사용할 수 없습니다.");
 		}

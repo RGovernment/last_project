@@ -44,7 +44,6 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 		SimpleGrantedAuthority authority = new SimpleGrantedAuthority(ROLE_PREFIX + role.toString());
 		Collection<GrantedAuthority> authorities = new ArrayList<>(); // List인 이유 : 여러개의 권한을 가질 수 있다
 		authorities.add(authority);
-
 		return authorities;
 	}
 
@@ -63,6 +62,21 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 	public String getUsername() {
 		return member.getEmail();
 	}
+	
+	@Override
+	public boolean equals(Object obj){
+		if(obj instanceof PrincipalDetails){
+			return  this.getUsername().equals(((PrincipalDetails) obj).getUsername());
+		}
+	return false;
+	}
+
+	@Override
+	public int hashCode(){
+		return this.getUsername().hashCode();
+	}
+	
+	
 
 	/**
 	 * MemberDetails 구현 계정 만료 여부 true : 만료안됨 false : 만료됨

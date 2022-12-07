@@ -1,6 +1,6 @@
 var price_num = $("#price_num option:selected").val()
 //var price_num = document.getElementById('price_num').value;
-console.log(price_num);
+
 var price = 0;
 var price1 = document.getElementById('price1').value;
 var price2 = document.getElementById('price2').value;
@@ -8,13 +8,6 @@ var price3 = document.getElementById('price3').value;
 var price4 = document.getElementById('price4').value;
 var price5 = document.getElementById('price5').value;
 var price6 = document.getElementById('price6').value;
-
-console.log(price1);
-console.log(price2);
-console.log(price3);
-console.log(price4);
-console.log(price5);
-console.log(price6);
 
 $("#price_num").on("change", function() {
 	//selected value
@@ -24,7 +17,6 @@ $("#price_num").on("change", function() {
 	$("option:selected", this);
 	$("option:selected", this).text();
 	$(this).find("option:selected").text();
-	console.log(price_num);
 
 	if (price_num == "price1") {
 		price = price1;

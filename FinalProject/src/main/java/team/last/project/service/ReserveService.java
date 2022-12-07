@@ -3,6 +3,8 @@ package team.last.project.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,10 +38,9 @@ public class ReserveService {
 	public void delete(Reserve reserve) {
 		reserveRepository.delete(reserve);
 	}
-	public List<Reserve> allList() {
-		List<Reserve> list = reserveRepository.findAll();
-		
-		return list;
+
+	public Page<Reserve> allListPage(Pageable pageable) {
+		return reserveRepository.findAll(pageable);
 	}
 
 }

@@ -6,7 +6,7 @@ const options = {
 			threshold: 0.35314312235
 };
 	
-const observer = new IntersectionObserver((entries, observer) => {
+const observer = new IntersectionObserver((entries) => {
 	  entries.forEach((entry) => {
 	    	entry.target.classList.toggle('visible',entry.isIntersecting);
 	  });                            
@@ -42,7 +42,6 @@ $('div[class="carousel-inner"]')
 		function() {
 			var review_id = $(this).data("id");
 			var div = $(this);
-			console.log(review_id);
 			//사진 데이터 가져오기
 			$
 				.ajax({
@@ -57,7 +56,7 @@ $('div[class="carousel-inner"]')
 							if (i == 0) {
 								str += "<div class='carousel-item active'>";
 							} else {
-								str += "<div class='carousel-item '>";
+								str += "<div class='carousel-item'>";
 							}
 							str += "<div class='d-flex justify-content-center h-100'><img class='d-block' src='" + result[i] + "'alt='이미지가 없습니다' onerror=" + "this.src='/img/picture.jpg'" + "></div>";
 							str += "</div>";

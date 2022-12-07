@@ -4,10 +4,9 @@
 	layout:decorate="~{layouts/first_layout}">
 
 <th:block layout:fragment="content">
-<script th:inline="javascript">
-var message = [[${message}]];
-alert(message);
-location.replace([[${Url}]]);
-</script>
+	<script th:inline="javascript">
+	alert("유효하지 않은 세션입니다.");
+	window.location.href='/index';
+	</script>
 </th:block>
 </html>

@@ -20,6 +20,7 @@ $(function(){
 					
 					window.open(data.next_redirect_mobile_url, "모바일");
 				}else{
+					
 				window.open(data.next_redirect_pc_url, "PC");
 				}
 			},

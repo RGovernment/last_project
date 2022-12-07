@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
-	layout:decorate="layouts/first_layout">
+	layout:decorate="~{layouts/first_layout}">
 <th:block layout:fragment="content">
 	<link th:href="@{/css/agreePage.css}" rel="stylesheet">
 	<script th:inline="javascript"
@@ -290,9 +290,9 @@
 			② “샵”과 이용자 간에 제기된 전자상거래 소송에는 한국법을 적용합니다.
 			
 		</textarea>
-		<div class="form-check  mb-3">
-			<input class="form-check-input term-ck main-ck" name="t-ck" type="checkbox">			
-			<label class="form-check-label" for="flexCheckDefault"> 'Memory Gift' 이용 약관에 동의합니다.</label>
+		<div class="form-check  mb-5">
+						
+			<label class="form-check-label" for="flexCheck1"><input class="form-check-input term-ck main-ck" id="flexCheck1" name="t-ck" type="checkbox"> 'Memory Gift' 이용 약관에 동의합니다.</label>
 		</div>
 		
 		
@@ -450,16 +450,16 @@
 		
 		
 		</textarea>
-		<div class="form-check  mb-3">
-			<input class="form-check-input priv-ck main-ck" name="p-ck" type="checkbox" > 
-				<label class="form-check-label" for="flexCheckDefault"> 'Memory Gift'의 개인정보처리방침에 동의합니다.</label>
+		<div class="form-check mb-3">
+			
+				<label class="form-check-label" for="flexCheck2"> <input id="flexCheck2" class="form-check-input priv-ck main-ck" name="p-ck" type="checkbox" >  'Memory Gift'의 개인정보처리방침에 동의합니다.</label>
 		</div>
 	</div>
 	<br>
 	<div class="d-flex justify-content-center">
 	<div class="form-check">
-			<input class="form-check-input allCk" type="checkbox" > 
-				<label class="form-check-label" for="flexCheckDefault"> 모든 약관에 동의합니다.</label>
+			 
+				<label class="form-check-label" for="flexCheck3"> <input id="flexCheck3" class="form-check-input allCk" type="checkbox" > 모든 약관에 동의합니다.</label>
 		</div>
 		
 		</div>

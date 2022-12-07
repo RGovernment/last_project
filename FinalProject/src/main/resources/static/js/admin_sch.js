@@ -39,7 +39,6 @@ function showCalendar() {
 					weekend = "blue";
 				}
 				let scheduledata = "<div id='day_content_date' style='color:" + weekend + "'>" + cnt + "</div>";
-				//3H = 초록색 , 6H주황색 , AllDay = 핑크색 
 
 				//주말 색깔넣기 일요일=빨강 , 토요일=파랑
 				$td.innerHTML = scheduledata;
@@ -89,7 +88,6 @@ function changemonth(cal) {
 			today = new Date(today.getFullYear(), today.getMonth() + cal, today.getDate());
 			year = today.getFullYear();
 			month = today.getMonth() + +1;
-			console.log(today.getMonth() + 1);
 
 			currentTitle.innerHTML = monthList[today.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;'
 				+ first.getFullYear();
@@ -151,31 +149,40 @@ function changeToday(e) {
 	
 	//날짜 선택 시 예약 가능 시간만 선택할 수 있게 변환하기
 	var dayschedules = clickedDate1.children;
+	
+	//다른 날짜 선택 시 초기화 2022.12.07
+	$('.S').children().attr('disabled',false);
+	
 	for (let dayschedulesindex = 1; dayschedulesindex<dayschedules.length;dayschedulesindex++){
 		var tempStime = dayschedules[dayschedulesindex].dataset.starttime
 		var tempEtime = dayschedules[dayschedulesindex].dataset.endtime
+		//자정까지와 allnight 대여 시 버그 수정 2022.12.07
+		if(tempEtime ==  0|| tempEtime == 9){
+			tempEtime = 24;
+		}
+		
 		for(let k = tempStime-3; k<=tempEtime;k++){
-		console.log($('.S#T3').find('[value='+k+']'));
 		$('.S#T3').find('[value='+k+']').attr("disabled", true);
 		}
 		for(let k = tempStime-6; k<=tempEtime;k++){
-		console.log($('.S#T6').find('[value='+k+']'));
 		$('.S#T6').find('[value='+k+']').attr("disabled", true);
 		}
 		for(let k = tempStime; k<=tempEtime;k++){
-		console.log($('.S#TA').find('[value='+k+']'));
 		$('.S#TA').find('[value='+k+']').attr("disabled", true);
 		}
 	}
-	
+	today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
+	// 과거 선택 불가 2022.12.07
+	if(today < new Date()){
+		alert("선택할 수 없는 날짜 입니다.");
+		return;
+	}
 	$(".chan-text").text("날짜 선택");
 	$('.RentTime').removeAttr("disabled");
 	clickedDate1.classList.add('active');
 	clickedDate1.classList.add('back');
-	today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
 	var today_month = today.getMonth() + 1
 	selectedDate = today.getFullYear() + '-' + today_month + '-' + today.getDate();
-	console.log(selectedDate);
 	$('.RentTime').find("option:eq(0)").prop("selected", true);
 	$('.S').css("display", "none");
 	$("#start_time").val(null);
@@ -257,7 +264,6 @@ $('.add_option').click(function() {
 		async: true, //동기, 비동기 여부
 		cache: false, // 캐시 여부
 		success: function(result) {
-			console.log(result);
 			printoptionlist(result);
 		},
 		error: function() {
@@ -288,7 +294,6 @@ function month_sch() {
 			xhr.setRequestHeader(header, token);
 		},
 		success: function(reserve) {
-			console.log(reserve);
 			addsch(reserve);
 		},
 		error: function() {
@@ -306,4 +311,104 @@ function addsch(reserve) {
 	}
 }
 
+function printoptionlist(optprice) {
+	var divArea = $("#printoptions");
+
+	var str = "";
+
+	str += "<div class='justify-content-middle g-0 mb-2' id=" + optid
+		+ " style='border:1px solid black;border-radius:5px; background-color:#7d7d7f; color:white;'>";
+
+	str += optprice.content + "&nbsp" + "<div class='my-0' id=" + optid
+		+ "price style='background-color:#ffffff;color:#000000;border-bottom-left-radius:5px;border-bottom-right-radius:5px;'>" + optprice.price + "원<div>";
+
+	str += "</div>";
+	divArea.append(str);
+	optid += 1;
+	Optionprice += optprice.price;
+	if (optionsid == "") {
+		optionsid += optprice.id;
+	} else {
+		optionsid += ",";
+		optionsid += optprice.id;
+	}
+	totalprice = Optionprice + Roomprice;
+	$("#printtotalprice").html(totalprice + "원");
+	$("#totalprice").val(totalprice);
+	$("#options").val(optionsid);
+};
+
+let clearAll = () => {
+	$("#printoptions").text("");
+	$("#printtotalprice").text("");
+	$("#options").val("");
+	Optionprice = 0;
+	$(".optbtn").attr("disabled", "disabled");
+	$(".S").attr("hidden", "hidden");
+	$(".RentTime").attr("disabled", "disabled");
+	$(".chan-text").text("날짜 선택(달력에서 날짜를 선택해주세요.)");
+	$(".chan-text2").text("옵션(날짜를 먼저 선택해주세요.)");
+
+}
+
+//영수증 출력
+$(function() {
+	$('.S').change(function() {
+		printoptionlist2();
+	});
+});
+
+
+function printoptionlist2() {
+
+	totalprice = Roomprice;
+	$("#printtotalprice").html(totalprice + "원");
+	$("#totalprice").val(totalprice);
+};
+
+
+
+$(function() {
+	$(".S").change(function() {
+
+		if ($(".S").val() != "") {
+			$(".optbtn").removeAttr("disabled");
+			$(".chan-text2").text("옵션");
+		} else {
+			$(".optbtn").attr("disabled", "disabled");
+		}
+
+
+	});
+});
+
+//* 최종 가격 널 체크, totalprice 미 존재시 버튼 비활성화 */
+let nullck = () => {
+	if (!$.trim($('#printtotalprice').html()).length) {
+		return false;
+	}
+	return true;
+}
+
+//별점
+$(function() {
+	let room_id = $('.star-ratings').data("id");
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	$.ajax({
+		type: "POST",
+		url: "/res/staravg",
+		data: {room_id,room_id},
+		beforeSend: function(xhr) {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+			xhr.setRequestHeader(header, token);
+		},
+		success: function(result) {
+			$('#star-score').html(result+"점");
+			$('.star-ratings-fill').css('width',(result*20)+'%');
+		},
+		error: function() {
+			alert('에러');
+		}
+	}); //$.ajax
+});
 changemonth(0);

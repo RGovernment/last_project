@@ -25,5 +25,25 @@ public class UserAccount extends User {
 		}
 		return true;
 	}
+	
+	@Override
+	public String getUsername() {
+		return member.getEmail();
+	}
+	
+	@Override
+	public boolean equals(Object obj){
+		if(obj instanceof UserAccount){
+			return  this.getUsername().equals(((UserAccount) obj).getUsername());
+		}
+	return false;
+	}
+
+	@Override
+	public int hashCode(){
+		return this.getUsername().hashCode();
+	}
+	
+	
 
 }

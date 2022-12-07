@@ -44,13 +44,13 @@ public class MyController {
 	}
 
 	@RequestMapping("/index")
-	public String indexPage() {
+	public String indexPage() {		
 		return "index";
 	}
 
 	@RequestMapping(value = "/errortest")
 	public String erpage() {
-		return "member/login";
+		return "/er";
 	}
 
 	@RequestMapping("/card")
@@ -90,6 +90,17 @@ public class MyController {
 	public String erpage2() {
 		return "er";
 	}
+	
+	@RequestMapping("/sessionerror")
+	public String erpage3() {
+		return "/sessionerror";
+	}
+	
+	@RequestMapping("/sessionerror2")
+	public String erpage4() {
+		return "/sessionerror2";
+	}
+	
 
 	@RequestMapping("/terms")
 	public String termsConditions() {
