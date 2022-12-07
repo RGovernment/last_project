@@ -88,7 +88,6 @@ function changemonth(cal) {
 			today = new Date(today.getFullYear(), today.getMonth() + cal, today.getDate());
 			year = today.getFullYear();
 			month = today.getMonth() + +1;
-			console.log(today.getMonth() + 1);
 
 			currentTitle.innerHTML = monthList[today.getMonth()] + '&nbsp;&nbsp;&nbsp;&nbsp;'
 				+ first.getFullYear();
@@ -147,34 +146,43 @@ function changeToday(e) {
 		}
 	}
 	clickedDate1 = e.currentTarget;
-	
+
 	//날짜 선택 시 예약 가능 시간만 선택할 수 있게 변환하기
 	var dayschedules = clickedDate1.children;
-	for (let dayschedulesindex = 1; dayschedulesindex<dayschedules.length;dayschedulesindex++){
+
+	//다른 날짜 선택 시 초기화 2022.12.07
+	$('.S').children().attr('disabled', false);
+
+	for (let dayschedulesindex = 1; dayschedulesindex < dayschedules.length; dayschedulesindex++) {
 		var tempStime = dayschedules[dayschedulesindex].dataset.starttime
 		var tempEtime = dayschedules[dayschedulesindex].dataset.endtime
-		for(let k = tempStime-3; k<=tempEtime;k++){
-		console.log($('.S#T3').find('[value='+k+']'));
-		$('.S#T3').find('[value='+k+']').attr("disabled", true);
+		//자정까지와 allnight 대여 시 버그 수정 2022.12.07
+		if (tempEtime == 0 || tempEtime == 9) {
+			tempEtime = 24;
 		}
-		for(let k = tempStime-6; k<=tempEtime;k++){
-		console.log($('.S#T6').find('[value='+k+']'));
-		$('.S#T6').find('[value='+k+']').attr("disabled", true);
+
+		for (let k = tempStime - 3; k <= tempEtime; k++) {
+			$('.S#T3').find('[value=' + k + ']').attr("disabled", true);
 		}
-		for(let k = tempStime; k<=tempEtime;k++){
-		console.log($('.S#TA').find('[value='+k+']'));
-		$('.S#TA').find('[value='+k+']').attr("disabled", true);
+		for (let k = tempStime - 6; k <= tempEtime; k++) {
+			$('.S#T6').find('[value=' + k + ']').attr("disabled", true);
+		}
+		for (let k = tempStime; k <= tempEtime; k++) {
+			$('.S#TA').find('[value=' + k + ']').attr("disabled", true);
 		}
 	}
-	
+	today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
+	// 과거 선택 불가 2022.12.07
+	if (today < new Date()) {
+		alert("선택할 수 없는 날짜 입니다.");
+		return;
+	}
 	$(".chan-text").text("날짜 선택");
 	$('.RentTime').removeAttr("disabled");
 	clickedDate1.classList.add('active');
 	clickedDate1.classList.add('back');
-	today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
 	var today_month = today.getMonth() + 1
 	selectedDate = today.getFullYear() + '-' + today_month + '-' + today.getDate();
-	console.log(selectedDate);
 	$('.RentTime').find("option:eq(0)").prop("selected", true);
 	$('.S').css("display", "none");
 	$("#start_time").val(null);
@@ -246,23 +254,24 @@ $('.add_option').click(function() {
 	var token = $("meta[name='_csrf']").attr("content");
 	var header = $("meta[name='_csrf_header']").attr("content");
 	var optprice_id = $('#selectoption').val();
-	$.ajax({
-		type: "POST",
-		url: "/res/optprice",
-		beforeSend: function(xhr) {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-			xhr.setRequestHeader(header, token);
-		},
-		data: { optprice_id: optprice_id },
-		async: true, //동기, 비동기 여부
-		cache: false, // 캐시 여부
-		success: function(result) {
-			console.log(result);
-			printoptionlist(result);
-		},
-		error: function() {
-		}
+	if (optprice_id != null) {
+		$.ajax({
+			type: "POST",
+			url: "/res/optprice",
+			beforeSend: function(xhr) {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+				xhr.setRequestHeader(header, token);
+			},
+			data: { optprice_id: optprice_id },
+			async: true, //동기, 비동기 여부
+			cache: false, // 캐시 여부
+			success: function(result) {
+				printoptionlist(result);
+			},
+			error: function() {
+			}
 
-	}); //$.ajax
+		}); //$.ajax
+	}
 });
 
 
@@ -287,7 +296,6 @@ function month_sch() {
 			xhr.setRequestHeader(header, token);
 		},
 		success: function(reserve) {
-			console.log(reserve);
 			addsch(reserve);
 		},
 		error: function() {
@@ -300,7 +308,7 @@ function addsch(reserve) {
 	if (reserve != null) {
 		for (var reserveindex = 0; reserveindex < reserve.length; reserveindex++) {
 			let tdid = Number(reserve[reserveindex].SDay)
-			$("#" + tdid).append("<div id='day_content1' data-StartTime ='"+reserve[reserveindex].SHour+"'data-EndTime ='"+reserve[reserveindex].EHour+"'>" + reserve[reserveindex].SHour + " - " + reserve[reserveindex].EHour + "</div>");
+			$("#" + tdid).append("<div id='day_content1' data-StartTime ='" + reserve[reserveindex].SHour + "'data-EndTime ='" + reserve[reserveindex].EHour + "'>" + reserve[reserveindex].SHour + " - " + reserve[reserveindex].EHour + "</div>");
 		}
 	}
 }
@@ -364,8 +372,7 @@ function printoptionlist2() {
 
 $(function() {
 	$(".S").change(function() {
-
-		if ($(".S").val() != "") {
+		if ($(this).val() != "") {
 			$(".optbtn").removeAttr("disabled");
 			$(".chan-text2").text("옵션");
 		} else {
@@ -389,17 +396,16 @@ $(function() {
 	let room_id = $('.star-ratings').data("id");
 	var token = $("meta[name='_csrf']").attr("content");
 	var header = $("meta[name='_csrf_header']").attr("content");
-	console.log(room_id);
 	$.ajax({
 		type: "POST",
 		url: "/res/staravg",
-		data: {room_id,room_id},
+		data: { room_id, room_id },
 		beforeSend: function(xhr) {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
 			xhr.setRequestHeader(header, token);
 		},
 		success: function(result) {
-			$('#star-score').html(result+"점");
-			$('.star-ratings-fill').css('width',(result*20)+'%');
+			$('#star-score').html(result + "점");
+			$('.star-ratings-fill').css('width', (result * 20) + '%');
 		},
 		error: function() {
 			alert('에러');

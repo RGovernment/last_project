@@ -2,8 +2,6 @@ package team.last.project.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import groovyjarjarantlr4.v4.runtime.misc.Nullable;
 import lombok.RequiredArgsConstructor;
 import team.last.project.entity.Member;
 import team.last.project.entity.Option;
@@ -47,23 +44,27 @@ public class MyController {
 	}
 
 	@RequestMapping("/index")
-	public String indexPage(@Nullable HttpSession session, Model model) {
+	public String indexPage() {		
 		return "index";
 	}
 
 	@RequestMapping(value = "/errortest")
 	public String erpage() {
-		return "member/login";
+		return "/er";
 	}
 
 	@RequestMapping("/card")
 	public String reviewlist(Authentication authentication, Model model,
-			@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+			@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,Integer roomid) {
 		Page<Review> list = null;
 		PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
 				Sort.by("id").descending());
-
-		list = reviewService.reviewList(pageRequest);
+		//방 별 리뷰 가져오기 2022.12.07
+		if(roomid == null) {
+			list = reviewService.reviewList(pageRequest);
+		}else {
+			list = reviewService.reviewList(roomid,pageRequest);		
+			}
 		if (list.getTotalPages() != 0) {
 
 			int nowPage = list.getPageable().getPageNumber() + 1;
@@ -89,6 +90,17 @@ public class MyController {
 	public String erpage2() {
 		return "er";
 	}
+	
+	@RequestMapping("/sessionerror")
+	public String erpage3() {
+		return "/sessionerror";
+	}
+	
+	@RequestMapping("/sessionerror2")
+	public String erpage4() {
+		return "/sessionerror2";
+	}
+	
 
 	@RequestMapping("/terms")
 	public String termsConditions() {

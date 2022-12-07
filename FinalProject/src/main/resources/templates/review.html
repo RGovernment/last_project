@@ -1,34 +1,29 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
-	layout:decorate="layouts/first_layout">
+	layout:decorate="~{layouts/first_layout}">
 
 <th:block layout:fragment="content">
-<script th:inline="javascript">
-$(function(){
-	
-const options = {
-		root : document.querySelector(".root"),
-			threshold: 0.35314312235
-};
-	
-const observer = new IntersectionObserver((entries, observer) => {
-	  entries.forEach((entry) => {
-	    	entry.target.classList.toggle('visible',entry.isIntersecting);
-	  });                            
-	}, options);
-
-	document.querySelectorAll('.wrapper').forEach((wrapper) => observer.observe(wrapper));
-	
-});
-	
-</script>
 	<link th:href="@{/css/reviewPage.css}" rel="stylesheet">
 	<main role="main">
 		<div class="container mt-5">
 			<div class="d-flex align-items-center justify-content-center mb-5"
 				id="review-text1">Review</div>
-			<div class="row my-5">
+			<form method="post" th:action="@{/card}" class="select-form">
+			<div id="content_title" class="d-flex justify-content-between">
+				<h2>문의내역</h2>
+				<div>
+				<select th:name="roomid" class="sel-box">
+				<option value="" selected disabled>방 이름</option>
+				<option value=1>미니룸A</option>
+				<option value=2>미니룸B</option>
+				<option value=3>파티룸A</option>
+				<option value=4>파티룸B</option>
+				</select>
+				</div>
+			</div>
+			</form>
+			<div class="row">
 				<th:block th:each="review :${list}">
 					<div class="col-md-6 my-5 card-group over">
 						<div class="card mb-4 shadow-sm wrapper" id="review-card">
@@ -128,64 +123,12 @@ const observer = new IntersectionObserver((entries, observer) => {
 		<!-- Bootstrap core JavaScript
     ================================================== -->
 		<!-- Placed at the end of the document so the pages load faster -->
+			<script th:inline="javascript" type="text/javascript"
+				th:src="@{/js/review.js}"></script>
 		<script
 			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 			integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 			crossorigin="anonymous"></script>
-		<script th:inline="javascript">
-			$('img[name="modal-image"]').each(function() {
-				var review_id = $(this).data("id");
-				var modalimage = $(this);
-				//사진 데이터 가져오기
-				$.ajax({
-					type : "GET",
-					url : "/review/imglist",
-					data : {
-						review_id : review_id
-					},
-					success : function(result) {
-						if (result != null) {
-							modalimage.attr("src", result[0]);
-						}
-					},
-					error : function() {
-					}
-
-				}); //$.ajax
-			});
-			$('div[class="carousel-inner"]')
-					.each(
-							function() {
-								var review_id = $(this).data("id");
-								var div = $(this);
-								console.log(review_id);
-								//사진 데이터 가져오기
-								$
-										.ajax({
-											type : "GET",
-											url : "/review/imglist",
-											data : {
-												review_id : review_id
-											},
-											success : function(result) {
-												for (var i = 0; i < result.length; i++) {
-													var str = "";
-													if (i == 0) {
-														str += "<div class='carousel-item active'>";
-													} else {
-														str += "<div class='carousel-item '>";
-													}
-													str += "<div class='d-flex justify-content-center h-100'><img class='d-block' src='"+result[i]+"'alt='이미지가 없습니다' onerror="+"this.src='/img/picture.jpg'"+"></div>";
-													str += "</div>";
-													div.append(str);
-												}
-											},
-											error : function() {
-											}
-
-										}); //$.ajax
-							});
-		</script>
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 			crossorigin="anonymous"></script>

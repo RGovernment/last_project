@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultarag.net.nz/thymeleaf/layout"
-	layout:decorate="layouts/third_layout"
+	layout:decorate="~{layouts/third_layout}"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block layout:fragment="content">
+		<link th:href="@{/css/resmanagePage.css}" rel="stylesheet">
 		<div class="col-md-10 ps-5 pt-5 mb-5" id="main-con">
 		<div class="d-flex align-items-center justify-content-center mb-5"
 			id="my-text1">management</div>
@@ -32,9 +33,11 @@
 					</tr>
 				</thead>
 				<tbody>
+				
 					<tr th:if="${#lists.isEmpty(reslist)}">
 						<td colspan="4">아직 결제내역이 없습니다.</td>
 					</tr>
+					
 					<tr th:each="list : ${reslist}" th:unless="${#lists.isEmpty(reslist)}">
 						<th th:text="${list.member.name}"></th>
 						<td th:text="${list.room.name}"></td>
@@ -43,31 +46,43 @@
 						<div class="col-8">[[${#dates.format(list.start_time,'yy.MM.dd HH시')}]]</div>
 						<div class="col-4" th:if="${T(java.lang.Math).abs(__${#dates.format(list.end_time,'HH')}__-__${#dates.format(list.start_time,'HH')}__)}==3">3시간</div>
 						<div class="col-4" th:if="${T(java.lang.Math).abs(__${#dates.format(list.end_time,'HH')}__-__${#dates.format(list.start_time,'HH')}__)}==6">6시간</div>
-						<div class="col-4" th:if="${T(java.lang.Math).abs(__${#dates.format(list.end_time,'HH')}__-__${#dates.format(list.start_time,'HH')}__)}==9">Allnight</div>
+						<div class="col-4" th:if="${T(java.lang.Math).abs(__${#dates.format(list.end_time,'HH')}__-__${#dates.format(list.start_time,'HH')}__)}==9">AllNight</div>
 						<div class="col-4" th:if="${T(java.lang.Math).abs(__${#dates.format(list.end_time,'HH')}__-__${#dates.format(list.start_time,'HH')}__)}==18">6시간</div>
-						<div class="col-4" th:if="${T(java.lang.Math).abs(__${#dates.format(list.end_time,'HH')}__-__${#dates.format(list.start_time,'HH')}__)}==21">3시간</div>
-						
+						<div class="col-4" th:if="${T(java.lang.Math).abs(__${#dates.format(list.end_time,'HH')}__-__${#dates.format(list.start_time,'HH')}__)}==21">3시간</div>	
 						</div>
-						
 						</td>
 						<td id="option-tag">
 						<div th:id="'op'+${listStat.index}" hidden="" th:text="${list.options}">
 						</div>
 						<div th:id="${listStat.index}+'d'" hidden=""></div>
-						<div th:id="${listStat.index}+'s'"></div>
+						<div th:id="${listStat.index}+'s'" th:if="not ${#strings.isEmpty(list.options)}"></div>
+						<div th:unless="not ${#strings.isEmpty(list.options)}">추가 옵션 없음</div>
 						</td>
 						<td th:inline="text">[[${#numbers.formatInteger(list.totalprice,3,'COMMA')}]]원</td>
 					</tr>
 				</tbody>
 			</table>
+			
+			<div align="center" class="my-2">
+		<div class="btn-group d-flex justify-content-evenly" id="page_div">
+			<button type="button" class="btn btn-dark" th:onclick='|location.href="@{/admin/resmanage(page = 0)}"|' id="page"><<</button>
+			<th:block th:each="page:${#numbers.sequence(startPage,endPage)}">
+				<button type="button" class="btn btn-outline-secondary" th:if="${page != nowPage}" th:onclick='|location.href="@{/admin/resmanage(page = ${page -1})}"|'
+					th:text="${page}" id="page"></button>
+				<button type="button" class="btn btn-dark" th:if="${page == nowPage}" th:text="${page}" id="page_now"></button>
+			</th:block>
+			<button type="button" class="btn btn-dark" th:onclick='|location.href="@{/admin/resmanage(page = ${lastPage-1})}"|' id="page">>></button>
 		</div>
+	</div>
+		</div>	
 	</div>
 	</div>
 	</div>
 	</div>
 	</main>
 	<script th:inline="javascript">
-		for(var i =0;i<[[${#lists.size(reslist)}]];i++){
+	$(function(){
+		for(var i =0;i<[[${pagenumber}]];i++){
 			let str = [];
 			const words = $('#op'+i).text().split(',');
 			var c = [];
@@ -94,6 +109,9 @@
 				$('#'+i+'s').html(result2);				
 			}
 		}
+		
+	});
+		
 		</script>
 </th:block>
 </html>

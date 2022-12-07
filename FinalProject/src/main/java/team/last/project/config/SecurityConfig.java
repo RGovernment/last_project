@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -12,11 +15,13 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.RequiredArgsConstructor;
 import team.last.project.security.AnonymousDeniedHandler;
 import team.last.project.security.AuthenticationEntryPointCustom;
+import team.last.project.security.CustomInvalidSessionStrategy;
 import team.last.project.security.UserLoginFailHandler;
 import team.last.project.security.UserLoginSuccessHandler;
 import team.last.project.security.oauth2.KakaoOAuth2UserService;
@@ -30,11 +35,15 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		
 		http.authorizeRequests()
 			.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
 			.permitAll()
+			.antMatchers("/review/imglist").permitAll()
+			.antMatchers("/review/imgidlist").permitAll()
 			.antMatchers("/kakao/**").hasAnyRole("USER","KUSER")
-			.antMatchers("/review/**").hasAnyRole("USER","KUSER")
+			.antMatchers("/review/reviewupdate").hasAnyRole("USER","KUSER")
+			.antMatchers("/review/reviewwrite").hasAnyRole("USER","KUSER")
 			.antMatchers("/res/room").hasAnyRole("USER","KUSER")
 			.antMatchers("/member/signup").hasRole("ANONYMOUS")
 			.antMatchers("/mypage/editinfo").hasRole("USER")
@@ -45,9 +54,9 @@ public class SecurityConfig {
 			.antMatchers("/**").permitAll()
 			.and()
 			.exceptionHandling().accessDeniedHandler(DeniedHandler())
-			.authenticationEntryPoint(entryPoint())
-			.and()
-			.formLogin()
+			.authenticationEntryPoint(entryPoint());
+			
+		http.formLogin()
         	.loginPage("/member/login")
         	.usernameParameter("email")
         	.passwordParameter("password")
@@ -59,14 +68,40 @@ public class SecurityConfig {
         	.logout().permitAll()
         	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
         	.logoutSuccessUrl("/")
-        	.invalidateHttpSession(true)
+        	//.invalidateHttpSession(true)
         	.and()
         	.oauth2Login().defaultSuccessUrl("/member/kakao")
         	.userInfoEndpoint().userService(kakaoOAuth2UserService);
 		
+			
+		http.sessionManagement()
+			.enableSessionUrlRewriting(true)
+			.maximumSessions(1).expiredUrl("/sessionerror2")
+			.sessionRegistry(sessionRegistry())
+			.and()
+			.invalidSessionUrl("/sessionerror")
+			.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+			.invalidSessionStrategy(custominvalidSessionStrategy())
+			.sessionAuthenticationErrorUrl("/sessionerror")
+			.sessionFixation()
+			.migrateSession();
+			
 		return http.build();
 	}
+	
+	
+	
+	 @Bean
+	    public SessionRegistry sessionRegistry() {
+	        return new SessionRegistryImpl();
+	    }// Register HttpSessionEventPublisher
 
+	@Bean
+	public InvalidSessionStrategy custominvalidSessionStrategy() {
+		
+		return new CustomInvalidSessionStrategy();
+	}
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

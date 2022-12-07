@@ -34,6 +34,20 @@ public class UserDetailsCustom implements UserDetails {
 	public String getUsername() {
 		return member.getEmail();
 	}
+	
+	@Override
+	public boolean equals(Object obj){
+		if(obj instanceof UserDetailsCustom){
+			return  this.getUsername().equals(((UserDetailsCustom) obj).getUsername());
+		}
+	return false;
+	}
+
+	@Override
+	public int hashCode(){
+		return this.getUsername().hashCode();
+	}
+	
 
 	@Override
 	public boolean isAccountNonExpired() {

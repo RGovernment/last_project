@@ -178,7 +178,6 @@ public class ReviewController {
 			String imgPath = File.separator + "image" + File.separator + img.getPath() + File.separator + img.getUuid()
 					+ "_" + img.getName();
 			imgPathList.add(imgPath);
-			System.out.println(imgPath);
 		}
 		return imgPathList;
 

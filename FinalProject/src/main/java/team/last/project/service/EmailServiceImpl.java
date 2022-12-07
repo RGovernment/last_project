@@ -17,32 +17,40 @@ public class EmailServiceImpl implements EmailService {
 	@Autowired
 	JavaMailSender emailSender;
 	
-	public static String ePw = createKey();
+	private String ePw;
 
 	private MimeMessage createMessage(String to) throws Exception {
-		System.out.println("보내는 대상 : " + to);
-		System.out.println("인증 번호 : " + ePw);
+		ePw=createKey();
 		MimeMessage message = emailSender.createMimeMessage();
 
 		message.addRecipients(RecipientType.TO, to);// 보내는 대상
-		message.setSubject("이메일 인증 테스트");// 제목
+		message.setSubject("'Memory Gift 회원가입 인증 메일'");// 제목
 
 		String msgg = "";
-		msgg += "<div style='margin:20px;'>";
-		msgg += "<h1> 안녕하신가 힘세고 강한 아침 </h1>";
+		msgg += "<div align='center'>";
+		msgg += "<div style='background-color:#dfdfdf; width:600px;'>";
+		msgg += "<div style='padding:15px; margin:10px;'>";
+		msgg += "<h2 style='font-style:bold; font-size:200%'> Memory Gift </h2>";
 		msgg += "<br>";
-		msgg += "<p>누가 너에게 코드를 묻는다면 아래의 코드<p>";
+		msgg += "<h2> Memory Gift 회원가입을 위한 인증번호입니다. </h2>";
 		msgg += "<br>";
-		msgg += "<p>굿<p>";
+		msgg += "<p>아래 인증번호를 확인하여<p>";
+		msgg += "<p>이메일 주소 인증을 완료해 주세요.<p>";
 		msgg += "<br>";
-		msgg += "<div align='center' style='border:1px solid black; font-family:verdana';>";
-		msgg += "<h3 style='color:blue;'>회원가입 인증 코드입니다.</h3>";
+		msgg += "<hr>";
+		msgg += "<h3 style='color:#483d8b; font-style:bold;'>회원가입 인증 코드입니다.</h3>";
 		msgg += "<div style='font-size:130%'>";
-		msgg += "CODE : <strong>";
+		msgg += "인증번호 : <strong>";
 		msgg += ePw + "</strong><div><br/> ";
 		msgg += "</div>";
+		msgg += "<hr>";
+		msgg += "<div style='color:#1f1f1f; font-size:12px;'>본 메일은 발신전용입니다.</div>";
+		msgg += "<div style='color:#1f1f1f; font-size:12px;'>회원가입과 관련하여 궁금한 점이 있으시면 문의해주세요.</div>";
+		msgg += "<div style='color:#1f1f1f; font-size:12px; style='margin-bottom:5px;'>Copyright © Memory Gift All rights reserved.</div>";
+		msgg += "</div>";
+		msgg += "</div>";
 		message.setText(msgg, "utf-8", "html");// 내용
-		message.setFrom(new InternetAddress("TGIG0385@gmail.com", "너의 작은 친구"));// 보내는 사람
+		message.setFrom(new InternetAddress("wjdqn1324@gmail.com", "memory Gift"));// 보내는 사람
 
 		return message;
 	}

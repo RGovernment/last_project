@@ -24,4 +24,9 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
 	List<Review> findByRoomId(int id);
 	
+	//방 별 리뷰 데이터 가져오기 2022.12.07
+	@Query(value = "select r " + "from Review r " + "left join fetch r.room "
+			+ "left join fetch r.member where r.room.id = ?1", countQuery = "select count(r.id) from Review r")
+	Page<Review> findAllByRoomid(int roomid, Pageable pageable);
+	
 }
