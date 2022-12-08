@@ -83,12 +83,24 @@
 							<form th:action="@{/res/reserve/{id}(id=${room.id})}"
 								method="post" th:object="${reserveDto}">
 								<hr />
-								인원 선택&nbsp; <br> <select th:field="*{person}"
+								인원 선택&nbsp; <br> 
+								<th:block th:if="${room.roomtype.id} == 1">
+								<select th:field="*{person}"
 									style="width: 40%; height: 38px; border-radius: 5px;">
-									<option th:value=2 selected th:inline="text">[[${2}]]인</option>
-									<option th:value=3 th:inline="text">[[${3}]]인</option>
-									<option th:value=4 th:inline="text">[[${4}]]인</option>
+									<option value=2 selected >2인</option>
+									<option value=3 >3인</option>
+									<option value=4 >4인</option>
 								</select>
+								</th:block>
+								<th:block th:unless="${room.roomtype.id} == 1">
+								<select th:field="*{person}"
+									style="width: 40%; height: 38px; border-radius: 5px;">
+									<option value=5 selected >5인</option>
+									<option value=6 >6인</option>
+									<option value=7 >7인</option>
+									<option value=8 >8인</option>
+								</select>
+								</th:block>
 								<hr />
 								<div class="date">
 									<span class="chan-text"> 날짜 선택(달력에서 날짜를 선택해주세요.)</span> <br>

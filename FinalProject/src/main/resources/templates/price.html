@@ -20,9 +20,12 @@
 		</div>
 		<div class="row" id="table-hd">
 			<div class="col-md-3 align-self-center">룸 종류</div>
-			<div class="col-md-3 align-self-center">3H(2인기준)</div>
-			<div class="col-md-3 align-self-center">6H(2인기준)</div>
-			<div class="col-md-3 align-self-center">올나잇(2인기준)</div>
+			<div class="col-md-3 align-self-center" th:if="${roomtype.id} == 1">3H (2인 기준)</div>
+			<div class="col-md-3 align-self-center" th:unless="${roomtype.id} == 1">3H (5인 기준)</div>
+			<div class="col-md-3 align-self-center" th:if="${roomtype.id} == 1">6H (2인 기준)</div>
+			<div class="col-md-3 align-self-center" th:unless="${roomtype.id} == 1">6H (5인 기준)</div>
+			<div class="col-md-3 align-self-center" th:if="${roomtype.id} == 1">올나잇 (2인 기준)</div>
+			<div class="col-md-3 align-self-center" th:unless="${roomtype.id} == 1">올나잇 (5인 기준)</div>
 		</div>
 
 		<div class="row" id="table-con">
