@@ -11,17 +11,19 @@ import lombok.RequiredArgsConstructor;
 import team.last.project.entity.Room;
 import team.last.project.entity.Roomtype;
 import team.last.project.repository.RoomRepository;
+import team.last.project.repository.RoomtypeRepository;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class RoomService {
 	private final RoomRepository roomRepository;
-
+	private final RoomtypeRepository roomtypeRepository;
+	
 	public List<Room> roomList() {
 		return roomRepository.findAll();
 	}
-
+	
 	public List<String> roomnameList() {
 		List<String> idlist = new ArrayList<>();
 		List<Room> id = roomRepository.findAll();
@@ -51,5 +53,8 @@ public class RoomService {
 		Roomtype roomtype = room.getRoomtype();
 		roomtype.price_update(price_num, price);
 	}
-
+	
+	public List<Roomtype> roomtypelist(){
+		return roomtypeRepository.findAll();
+	}
 }

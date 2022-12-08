@@ -16,7 +16,8 @@ if (first.getFullYear() % 4 === 0) {
 } else {
 	pageYear = notLeapYear;
 }
-
+// 평일 주말 체크 변수 0 = 평일 1 = 주말 2022.12.08
+var week = 0;
 var year = "";
 var month = "";
 
@@ -182,6 +183,13 @@ function changeToday(e) {
 		alert("선택할 수 없는 날짜 입니다.");
 		return;
 	}
+	// 선택 요일 변수 저장 2022.12.08
+	if(today.getDay() == 0 || today.getDay() == 6){
+		week = 1;
+	}else{
+		week = 0;
+	}
+	
 	$(".chan-text").text("날짜 선택");
 	$('.RentTime').removeAttr("disabled");
 	clickedDate1.classList.add('active');
@@ -202,7 +210,15 @@ var optid = 0;
 //대여 시간 선택
 $('.RentTime').change(function() {
 	var Rtime = $(this).val();
-	var Rprice = $(this).find("option:selected").data("price");
+	console.log(Rtime);
+	var Rprice = 0;
+	// 평일 주말에 따른 가격 변화 2022.12.08
+	if(week == 0){
+		Rprice = $(this).find("option:selected").data("priceweekdays");
+	}else if(week == 1){
+		Rprice = $(this).find("option:selected").data("priceweekend");
+	}
+	console.log(Rprice);
 	if (Rtime == 3) {
 		$('#T6').css("display", "none");
 		$('#TA').css("display", "none");

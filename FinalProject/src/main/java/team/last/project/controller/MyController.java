@@ -19,9 +19,11 @@ import lombok.RequiredArgsConstructor;
 import team.last.project.entity.Member;
 import team.last.project.entity.Option;
 import team.last.project.entity.Review;
+import team.last.project.entity.Roomtype;
 import team.last.project.service.MemberService;
 import team.last.project.service.OptionService;
 import team.last.project.service.ReviewService;
+import team.last.project.service.RoomService;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,6 +32,7 @@ public class MyController {
 	private final OptionService optionService;
 	private final MemberService memberService;
 	private final ReviewService reviewService;
+	private final RoomService roomService;
 
 	@RequestMapping("/kakaoError")
 	public String logout(Model model) {
@@ -39,7 +42,6 @@ public class MyController {
 
 	@RequestMapping("/")
 	public String root() {
-
 		return "redirect:/index";
 	}
 
@@ -147,7 +149,9 @@ public class MyController {
 	@RequestMapping("/price")
 	public String price(Model model) {
 		List<Option> optlist = optionService.optionList();
+		List<Roomtype> roomtypelist = roomService.roomtypelist();
 		model.addAttribute("optlist", optlist);
+		model.addAttribute("roomtypelist",roomtypelist);
 		return "price";
 	}
 };

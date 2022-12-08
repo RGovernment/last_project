@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -68,23 +67,11 @@ public class SecurityConfig {
         	.logout().permitAll()
         	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
         	.logoutSuccessUrl("/")
-        	//.invalidateHttpSession(true)
+        	.invalidateHttpSession(true)
         	.and()
         	.oauth2Login().defaultSuccessUrl("/member/kakao")
         	.userInfoEndpoint().userService(kakaoOAuth2UserService);
 		
-			
-		http.sessionManagement()
-			.enableSessionUrlRewriting(true)
-			.maximumSessions(1).expiredUrl("/sessionerror2")
-			.sessionRegistry(sessionRegistry())
-			.and()
-			.invalidSessionUrl("/sessionerror")
-			.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-			.invalidSessionStrategy(custominvalidSessionStrategy())
-			.sessionAuthenticationErrorUrl("/sessionerror")
-			.sessionFixation()
-			.migrateSession();
 			
 		return http.build();
 	}
