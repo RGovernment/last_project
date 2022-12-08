@@ -1,6 +1,9 @@
 package team.last.project.security;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Service
 public class UserLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
@@ -34,7 +39,12 @@ public class UserLoginSuccessHandler extends SavedRequestAwareAuthenticationSucc
 //			System.out.print(authList.get(i).getAuthority() + " ");
 //		}
 //		//지워야할거 end
-			
+		
+		Date date = new Date(); 
+		SimpleDateFormat dateform = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+		String a = dateform.format(date);
+		log.info("회원 이메일 : {}, 로그인 시각 : {}",authentication.getName(),a);
+		
 		HttpSession session = request.getSession();
 		if (session != null) {
 			String redirectUrl = (String) session.getAttribute("prevPage");

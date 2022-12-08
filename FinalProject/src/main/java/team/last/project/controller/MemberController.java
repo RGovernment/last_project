@@ -53,6 +53,7 @@ public class MemberController {
 		if(memberService.memgetInfo(au.getName()).getSecession() ==1) {
 			return "redirect:/kakaoError";
 		}
+		
 		return "redirect:/index"; 
 	}
 	

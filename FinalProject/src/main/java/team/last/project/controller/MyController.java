@@ -1,13 +1,26 @@
 package team.last.project.controller;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +38,7 @@ import team.last.project.service.OptionService;
 import team.last.project.service.ReviewService;
 import team.last.project.service.RoomService;
 
+
 @Controller
 @RequiredArgsConstructor
 public class MyController {
@@ -33,6 +47,7 @@ public class MyController {
 	private final MemberService memberService;
 	private final ReviewService reviewService;
 	private final RoomService roomService;
+	private AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource = new WebAuthenticationDetailsSource();
 
 	@RequestMapping("/kakaoError")
 	public String logout(Model model) {
@@ -51,8 +66,23 @@ public class MyController {
 	}
 
 	@RequestMapping(value = "/errortest")
-	public String erpage() {
-		return "/er";
+	public String erpage(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+		
+		String key = UUID.randomUUID().toString();
+		
+		AnonymousAuthenticationFilter token = new AnonymousAuthenticationFilter(key,"anonymousUser",AuthorityUtils.createAuthorityList("ROLE_ANONYMOUS"));
+		
+		AnonymousAuthenticationToken token2 = new AnonymousAuthenticationToken(key, token.getPrincipal(), token.getAuthorities());
+		
+		token.setAuthenticationDetailsSource(authenticationDetailsSource);
+		
+		token2.setDetails(authenticationDetailsSource.buildDetails(request));
+		Authentication authentication = token2;
+		SecurityContext context = SecurityContextHolder.createEmptyContext();
+		context.setAuthentication(authentication);
+		SecurityContextHolder.setContext(context);
+		
+		return "/member/login";
 	}
 
 	@RequestMapping("/card")
@@ -95,6 +125,7 @@ public class MyController {
 	
 	@RequestMapping("/sessionerror")
 	public String erpage3() {
+		
 		return "/sessionerror";
 	}
 	

@@ -95,7 +95,6 @@ public class MypageController {
 	public String qawrite(Authentication authentication, @Valid AskBoardDto askBoardDto, BindingResult bindingResult,
 			Model model) {
 		if (bindingResult.hasErrors()) {
-			System.out.println("에러");
 			return "/mypage/QAwrite";
 		}
 		try {

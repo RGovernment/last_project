@@ -22,13 +22,11 @@ import team.last.project.dto.AskBoardDto;
 import team.last.project.entity.AskBoard;
 import team.last.project.entity.Member;
 import team.last.project.entity.OptPrice;
-import team.last.project.entity.Option;
 import team.last.project.entity.Reserve;
 import team.last.project.entity.Room;
 import team.last.project.service.AskBoardService;
 import team.last.project.service.MemberService;
 import team.last.project.service.OptPriceService;
-import team.last.project.service.OptionService;
 import team.last.project.service.ReserveService;
 import team.last.project.service.RoomService;
 
@@ -74,7 +72,6 @@ public class AdminController {
 		
 		Member mem= memberService.memgetInfo(delEmail);
 		memberService.deleteMember(mem);	
-		System.out.println(delEmail);
 		model.addAttribute("message","회원탈퇴에 성공했습니다.");
 		model.addAttribute("Url","/admin");
 		
@@ -230,14 +227,12 @@ public class AdminController {
 	@PostMapping("/room_update_name")
 	public String room_update_name(Room room, Model model) {
 		roomService.name_update(room.getId(), room.getName());
-		System.out.println("수정완료");
 		return "redirect:/admin/room";
 	}
 
 	@PostMapping("/room_update_note")
 	public String room_update_note(Room room, Model model) {
 		roomService.note_update(room.getId(), room.getNote());
-		System.out.println("수정완료");
 		return "redirect:/admin/room";
 	}
 	@PostMapping("/room_price_update")
@@ -245,13 +240,9 @@ public class AdminController {
 			@RequestParam(value = "price_num") String price_num, @RequestParam(value = "price") int price,
 			Model model) {
 		
-		System.out.println(id);
-		System.out.println(price_num);
-		System.out.println(price);
 		
 		roomService.room_price_update(id, price_num, price);
 		
-		System.out.println("수정완료");
 		return "redirect:/admin/room";
 	}
 	@GetMapping(value = "/QAanswer")

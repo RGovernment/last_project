@@ -29,16 +29,15 @@
 		</div>
 
 		<div class="row" id="table-con">
-			<div class="col-md-3 align-self-center" id="content-edit" th:text="${roomtype.name}+' 주중 (최대 '+${roomtype.id}*4+'인)'">주중 (최대 0인)</div>
-			<div class="col-md-3 align-self-center" id="content-edit" th:text="${roomtype.price1}">주중 3시간 가격</div>
-			<div class="col-md-3 align-self-center" id="content-edit" th:text="${roomtype.price2}">주중 6시간 가격</div>
-			<div class="col-md-3 align-self-center" id="content-edit" th:text="${roomtype.price3}">주중 올나잇 가격</div>
+			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price1,3,'COMMA')}+'원'">주중 3시간 가격</div>
+			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price2,3,'COMMA')}+'원'">주중 6시간 가격</div>
+			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price3,3,'COMMA')}+'원'">주중 올나잇 가격</div>
 		</div>
 		<div class="row" id="table-con">
 			<div class="col-md-3 align-self-center" id="content-edit" th:text="${roomtype.name}+' 주말 (최대 '+${roomtype.id}*4+'인)'">주말 (최대 0인)</div>
-			<div class="col-md-3 align-self-center" id="content-edit" th:text="${roomtype.price4}">주말 3시간 가격</div>
-			<div class="col-md-3 align-self-center" id="content-edit" th:text="${roomtype.price5}">주중 6시간 가격</div>
-			<div class="col-md-3 align-self-center" id="content-edit" th:text="${roomtype.price6}">주말 올나잇 가격</div>
+			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price4,3,'COMMA')}+'원'">주말 3시간 가격</div>
+			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price5,3,'COMMA')}+'원'">주중 6시간 가격</div>
+			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price6,3,'COMMA')}+'원'">주말 올나잇 가격</div>
 		</div>
 		<br> <br>
 		<br> <br>

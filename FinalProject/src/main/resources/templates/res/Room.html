@@ -13,7 +13,7 @@
 			<div
 				class="d-flex align-items-center justify-content-center mb-5 mt-5"
 				id="room-text1">Reservation</div>
-			<div class="container" style="min-height: 900px;">
+			<div class="container" style="min-height: 700px;">
 				<div class="row g-0" id="room">
 					<div class="col-lg-8 mb-4 mt-1 me-0" align="center"
 						style="margin-top: 8px;">
@@ -191,9 +191,8 @@
 					</div>
 				</div>
 			</div>
-			<br>
 			<div class="d-flex justify-content-center">
-				<button type="button" th:onclick="|location.href='@{/res}'|">메인으로</button>
+				<button type="button" class="btn btn-outline-dark" th:onclick="|location.href='@{/res}'|">메인으로</button>
 			</div>
 			<br> <br>
 			<!-- Modal -->
@@ -299,6 +298,10 @@
 									src="/img/photosnap2.PNG" style="width: 436px; height: 386px;">
 								<br /> 고객님의 가장 행복한 순간을 담아드립니다.<br />(전문가 자격증을 보유한 사진작가님과
 								함께합니다.)
+							</div>
+							<div class="content">
+												<h3>패키지 예시</h3>
+												<img src="/img/package_sample.jpg"style="width: 880px; height: 386px;">
 							</div>
 						</div>
 						<div class="modal-footer">

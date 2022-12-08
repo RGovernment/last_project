@@ -123,7 +123,6 @@ public class KakaoPayController {
 
 //			 String[] a = changeResult.readLine().split(",");
 
-			// System.out.println(a[0]);
 			@SuppressWarnings("deprecation")
 			JSONParser jsonParser = new JSONParser();
 			JSONObject jsonObject = (JSONObject) jsonParser.parse(resultReader);
@@ -281,7 +280,6 @@ public class KakaoPayController {
  
 			@SuppressWarnings("unused")
 			InputStream resultData;
-			System.out.println(resultset);
 			if (resultset == 200) 
 			{
 				payService.delete(pay);
