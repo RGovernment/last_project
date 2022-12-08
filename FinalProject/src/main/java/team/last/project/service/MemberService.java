@@ -99,10 +99,15 @@ public class MemberService {
 		}
 		return findMember;
 	}
-
-	public void getbyEmail(String email) {
+	//회원탈퇴 기능과 분리 2022.12.08
+	public Member getbyEmail(String email) {
 		Member member = memberRepository.findByEmail(email).orElse(null);
-
+		return member;
+		
+	}
+	
+	public void secessionMember(String email) {
+		Member member = getbyEmail(email);
 		member.secessionMember();
 	}
 	

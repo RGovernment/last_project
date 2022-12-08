@@ -57,7 +57,6 @@ public class EmailServiceImpl implements EmailService {
 
 	public static String createKey() {
 		StringBuffer key = new StringBuffer();
-		System.out.println();
 		Random rnd = new Random();
 
 		for (int i = 0; i < 8; i++) { // 인증코드 8자리

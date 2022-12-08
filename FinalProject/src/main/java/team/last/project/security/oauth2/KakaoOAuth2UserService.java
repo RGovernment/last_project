@@ -1,5 +1,7 @@
 package team.last.project.security.oauth2;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -9,10 +11,11 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import team.last.project.constant.Role;
 import team.last.project.entity.Member;
 import team.last.project.repository.MemberRepository;
-
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class KakaoOAuth2UserService extends DefaultOAuth2UserService {
@@ -54,6 +57,10 @@ public class KakaoOAuth2UserService extends DefaultOAuth2UserService {
 		
 		// memberService.join(Member.createMemberforKakao(memberdto));
 		//return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority("ROLE_KUSER")), attributes, "id");
+		Date date = new Date(); 
+		SimpleDateFormat dateform = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+		String a = dateform.format(date);
+		log.info("회원 이메일 : {}, 로그인 시각 : {}",email,a);
 		return new PrincipalDetails(byMemberEmail, kakao2UserInfo);	
 	}
 }

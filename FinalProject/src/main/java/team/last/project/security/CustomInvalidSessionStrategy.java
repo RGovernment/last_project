@@ -26,7 +26,7 @@ public class CustomInvalidSessionStrategy implements InvalidSessionStrategy {
 	@Override
 	public void onInvalidSessionDetected(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
-		// TODO Auto-generated method stub
+		
 		boolean ajaxRedirect = requestMatcher.matches(request);
 		if(ajaxRedirect) {
 			logger.debug("Session expired due to ajax request, starting a new session and redirect to requested status '{}'", 901);

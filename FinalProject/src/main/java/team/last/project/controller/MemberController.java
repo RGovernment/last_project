@@ -53,12 +53,13 @@ public class MemberController {
 		if(memberService.memgetInfo(au.getName()).getSecession() ==1) {
 			return "redirect:/kakaoError";
 		}
+		
 		return "redirect:/index"; 
 	}
 	
 	@GetMapping("/secession")
 	public String secession(Model model, Authentication authentication) {
-		memberService.getbyEmail(authentication.getName());
+		memberService.secessionMember(authentication.getName());
 		model.addAttribute("secessionMsg", "탈퇴가 완료되었습니다.");
 
 		return "member/secession_msg";
@@ -108,6 +109,11 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="/emailck")
 	public String emailck(@RequestParam("email")String email) {
+		//이메일 중복 가입 불가 2022.12.08
+		Member member = memberService.getbyEmail(email);
+		if(member != null) {
+			return "error";
+		}
 		String code = "";
 		try {
 			code = emailService.sendSimpleMessage(email);

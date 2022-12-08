@@ -15,53 +15,34 @@
 			</div>
 			<br>
 		</div>
-		<div id="room-font">미니룸 <span id=allnight-font>(올나잇 오후 6시 ~ 다음날 오전 9시)</span>
+		<th:block th:each = "roomtype : ${roomtypelist}">
+		<div id="room-font"> <span th:text="${roomtype.name}"></span> <span id=allnight-font>(올나잇 오후 6시 ~ 다음날 오전 9시)</span>
 		</div>
 		<div class="row" id="table-hd">
 			<div class="col-md-3 align-self-center">룸 종류</div>
-			<div class="col-md-3 align-self-center">3H(2인기준)</div>
-			<div class="col-md-3 align-self-center">6H(2인기준)</div>
-			<div class="col-md-3 align-self-center">올나잇(2인기준)</div>
+			<div class="col-md-3 align-self-center" th:if="${roomtype.id} == 1">3H (2인 기준)</div>
+			<div class="col-md-3 align-self-center" th:unless="${roomtype.id} == 1">3H (5인 기준)</div>
+			<div class="col-md-3 align-self-center" th:if="${roomtype.id} == 1">6H (2인 기준)</div>
+			<div class="col-md-3 align-self-center" th:unless="${roomtype.id} == 1">6H (5인 기준)</div>
+			<div class="col-md-3 align-self-center" th:if="${roomtype.id} == 1">올나잇 (2인 기준)</div>
+			<div class="col-md-3 align-self-center" th:unless="${roomtype.id} == 1">올나잇 (5인 기준)</div>
 		</div>
 
 		<div class="row" id="table-con">
-			<div class="col-md-3 align-self-center" id="content-edit">미니룸 A (최대 4인)</div>
-			<div class="col-md-3 align-self-center" id="content-edit">40,000원</div>
-			<div class="col-md-3 align-self-center" id="content-edit">60,000원</div>
-			<div class="col-md-3 align-self-center" id="content-edit">140,000원</div>
+			<div class="col-md-3 align-self-center" id="content-edit" th:text="${roomtype.name}+' 주중 (최대 '+${roomtype.id}*4+'인)'">주중 (최대 0인)</div>
+			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price1,3,'COMMA')}+'원'">주중 3시간 가격</div>
+			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price2,3,'COMMA')}+'원'">주중 6시간 가격</div>
+			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price3,3,'COMMA')}+'원'">주중 올나잇 가격</div>
 		</div>
 		<div class="row" id="table-con">
-			<div class="col-md-3 align-self-center" id="content-edit">미니룸 B (최대 4인)</div>
-			<div class="col-md-3 align-self-center" id="content-edit">50,000원</div>
-			<div class="col-md-3 align-self-center" id="content-edit">85,000원</div>
-			<div class="col-md-3 align-self-center" id="content-edit">160,000원</div>
+			<div class="col-md-3 align-self-center" id="content-edit" th:text="${roomtype.name}+' 주말 (최대 '+${roomtype.id}*4+'인)'">주말 (최대 0인)</div>
+			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price4,3,'COMMA')}+'원'">주말 3시간 가격</div>
+			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price5,3,'COMMA')}+'원'">주중 6시간 가격</div>
+			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price6,3,'COMMA')}+'원'">주말 올나잇 가격</div>
 		</div>
 		<br> <br>
 		<br> <br>
-
-
-		<div id="room-font">파티룸 <span id=allnight-font>(올나잇 오후 6시 ~ 다음날 오전 9시)</span>
-		</div>
-		<div class="row" id="table-hd">
-			<div class="col-md-3 align-self-center">룸 종류</div>
-			<div class="col-md-3 align-self-center" id="content-edit">3H(5인기준)</div>
-			<div class="col-md-3 align-self-center" id="content-edit">6H(5인기준)</div>
-			<div class="col-md-3 align-self-center" id="content-edit">올나잇(5인기준)</div>
-		</div>
-		<div class="row" id="table-con">
-			<div class="col-md-3 align-self-center" id="content-edit">파티룸 A (최대 8인)</div>
-			<div class="col-md-3 align-self-center" id="content-edit">90,000원</div>
-			<div class="col-md-3 align-self-center" id="content-edit">120,000원</div>
-			<div class="col-md-3 align-self-center" id="content-edit">200,000원</div>
-		</div>
-		<div class="row" id="table-con">
-			<div class="col-md-3 align-self-center" id="content-edit">파티룸 B (최대 8인)</div>
-			<div class="col-md-3 align-self-center" id="content-edit">110,000원</div>
-			<div class="col-md-3 align-self-center" id="content-edit">140,000원</div>
-			<div class="col-md-3 align-self-center" id="content-edit">220,000원</div>
-		</div>
-		<br>
-		<br>
+		</th:block>
 	</div>
 	<br>
 	<br>

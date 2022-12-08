@@ -10,11 +10,11 @@
 			<div class="d-flex align-items-center justify-content-center mb-5"
 				id="review-text1">Review</div>
 			<form method="post" th:action="@{/card}" class="select-form">
-			<div id="content_title" class="d-flex justify-content-between">
-				<h2>문의내역</h2>
+			<div id="content_title" class="d-flex justify-content-end">
 				<div>
 				<select th:name="roomid" class="sel-box">
 				<option value="" selected disabled>방 이름</option>
+				<option value="">전체보기</option>
 				<option value=1>미니룸A</option>
 				<option value=2>미니룸B</option>
 				<option value=3>파티룸A</option>
