@@ -9,7 +9,6 @@
 	<script th:inline="javascript">
 		$(document).ready(function() {
 			var errorMessage = [[${ Message }]];
-			console.log(errorMessage);
 			if (errorMessage != null) {
 				alert(errorMessage);
 			}
@@ -27,6 +26,7 @@
 		<hr />
 		<form method="post" th:action="@{/admin/secessionOrder}"
 			class="select-form">
+			 <input type="hidden" name="_method" value="delete"/>
 			<div id="content_title" class="d-flex justify-content-between">
 				<h2></h2>
 				<div>

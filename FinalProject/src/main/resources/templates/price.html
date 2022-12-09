@@ -16,7 +16,7 @@
 			<br>
 		</div>
 		<th:block th:each = "roomtype : ${roomtypelist}">
-		<div id="room-font"> <span th:text="${roomtype.name}"></span> <span id=allnight-font>(올나잇 오후 6시 ~ 다음날 오전 9시)</span>
+		<div id="room-font"> <span th:text="${roomtype.name}"></span> <span id='allnight-font'>(올나잇 오후 6시 ~ 다음날 오전 9시)</span>
 		</div>
 		<div class="row" id="table-hd">
 			<div class="col-md-3 align-self-center">룸 종류</div>
@@ -34,15 +34,17 @@
 			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price2,3,'COMMA')}+'원'">주중 6시간 가격</div>
 			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price3,3,'COMMA')}+'원'">주중 올나잇 가격</div>
 		</div>
-		<div class="row" id="table-con">
+		<div class="row mb-4" id="table-con">
 			<div class="col-md-3 align-self-center" id="content-edit" th:text="${roomtype.name}+' 주말 (최대 '+${roomtype.id}*4+'인)'">주말 (최대 0인)</div>
 			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price4,3,'COMMA')}+'원'">주말 3시간 가격</div>
 			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price5,3,'COMMA')}+'원'">주중 6시간 가격</div>
 			<div class="col-md-3 align-self-center" id="content-edit" th:text="${#numbers.formatInteger(roomtype.price6,3,'COMMA')}+'원'">주말 올나잇 가격</div>
 		</div>
-		<br> <br>
-		<br> <br>
+		<div id='allnight-font' class="mb-3">
+		※ 유의사항 : 기준 초과시 1인당 1만원 추가
+		</div>
 		</th:block>
+		
 	</div>
 	<br>
 	<br>

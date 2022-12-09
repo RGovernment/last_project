@@ -15,6 +15,18 @@ const observer = new IntersectionObserver((entries) => {
 	document.querySelectorAll('.wrapper').forEach((wrapper) => observer.observe(wrapper));
 	
 });
+
+$(function(){
+	
+	var selectRoom = $(".selectRoom").val();
+	if($(".selectRoom").val() != 0){
+	$('.sel-box').prop("selected", false);
+	$('.sel-box').val(selectRoom).prop("selected",true);
+	}
+	
+});
+
+
 //리뷰 대표 이미지 출력
 $('img[name="modal-image"]').each(function() {
 	var review_id = $(this).data("id");

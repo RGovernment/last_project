@@ -65,13 +65,12 @@ public class MyController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/errortest")
+	@RequestMapping(value = "/errorlogin")
 	public String erpage(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
 		
 		String key = UUID.randomUUID().toString();
 		
 		AnonymousAuthenticationFilter token = new AnonymousAuthenticationFilter(key,"anonymousUser",AuthorityUtils.createAuthorityList("ROLE_ANONYMOUS"));
-		
 		AnonymousAuthenticationToken token2 = new AnonymousAuthenticationToken(key, token.getPrincipal(), token.getAuthorities());
 		
 		token.setAuthenticationDetailsSource(authenticationDetailsSource);
@@ -104,6 +103,9 @@ public class MyController {
 			int endPage = Math.min(nowPage + 5, list.getTotalPages());
 			if (endPage == 0) {
 				endPage = 1;
+			}
+			if(roomid != null) {
+			model.addAttribute("roomid",roomid);
 			}
 			model.addAttribute("lastPage",list.getTotalPages());
 			model.addAttribute("list", list);

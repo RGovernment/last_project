@@ -23,6 +23,7 @@
 				<div id="room_name">
 					<form th:action="@{/admin/room_update_name}" method="post"
 						th:object="${room}">
+						 <input type="hidden" name="_method" value="put"/>
 						<label id="room_note_label" class="mb-2">룸 제목 수정</label> <input type="hidden" th:field="${room.id}">
 						<input type="text" th:field="${room.name}" class="form-control mb-5" th:value="${room.name}" style="width: 200px;">
 						<input class="btn btn-dark" type="submit" value="수정">
@@ -33,6 +34,7 @@
 				<div id="room_price">
 				<label id="room_note_label" class="mb-2">룸 가격 수정</label>
 					<form th:action="@{/admin/room_price_update}" method="post">
+					 <input type="hidden" name="_method" value="put"/>
 					<input type="hidden" id="price1" th:value="${room.roomtype.price1}">
 					<input type="hidden" id="price2" th:value="${room.roomtype.price2}">
 					<input type="hidden" id="price3" th:value="${room.roomtype.price3}">
@@ -61,6 +63,7 @@
 				<div id="room_note">
 					<form th:action="@{/admin/room_update_note}" method="post"
 						th:object="${Room}">
+						 <input type="hidden" name="_method" value="put"/>
 						<label id="room_note_label" class="mb-2  mt-5">룸 설명 수정</label> <input type="hidden"
 							th:field="${room.id}"> <span><textarea class="form-control mb-2"
 								id="room_note" th:field="${room.note}" th:value="${room.note}" style="resize: none; overflow: auto;" rows="3"> </textarea></span>

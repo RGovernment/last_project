@@ -163,7 +163,6 @@ function changeToday(e) {
 		}
 		
 		for(let k = tempStime-3; k<=tempEtime;k++){
-		console.log($('.S#T3').find('[value='+k+']'));
 		$('.S#T3').find('[value='+k+']').attr("disabled", true);
 		}
 
@@ -207,10 +206,10 @@ var totalprice = 0;
 var Roomprice = 0;
 var Optionprice = 0;
 var optid = 0;
+var addpriceperpeople = 0;
 //대여 시간 선택
 $('.RentTime').change(function() {
 	var Rtime = $(this).val();
-	console.log(Rtime);
 	var Rprice = 0;
 	// 평일 주말에 따른 가격 변화 2022.12.08
 	if(week == 0){
@@ -218,7 +217,6 @@ $('.RentTime').change(function() {
 	}else if(week == 1){
 		Rprice = $(this).find("option:selected").data("priceweekend");
 	}
-	console.log(Rprice);
 	if (Rtime == 3) {
 		$('#T6').css("display", "none");
 		$('#TA').css("display", "none");
@@ -355,7 +353,7 @@ function printoptionlist(optprice) {
 		optionsid += ",";
 		optionsid += optprice.id;
 	}
-	totalprice = Optionprice + Roomprice;
+	totalprice = Optionprice + Roomprice + addpriceperpeople;
 	$("#printtotalprice").html(totalprice + "원");
 	$("#totalprice").val(totalprice);
 	$("#options").val(optionsid);
@@ -371,6 +369,7 @@ let clearAll = () => {
 	$(".RentTime").attr("disabled", "disabled");
 	$(".chan-text").text("날짜 선택(달력에서 날짜를 선택해주세요.)");
 	$(".chan-text2").text("옵션(날짜를 먼저 선택해주세요.)");
+	$('#Ptext').html('');
 
 }
 
@@ -381,13 +380,28 @@ $(function() {
 	});
 });
 
-
 function printoptionlist2() {
 
-	totalprice = Roomprice;
+	totalprice = Roomprice + addpriceperpeople;
 	$("#printtotalprice").html(totalprice + "원");
 	$("#totalprice").val(totalprice);
 };
+
+$(function() {
+	$('.P').change(function() {
+		addpriceperpeople = $('.P option:selected').data('addprice');
+		$('#Ptext').html('+'+addpriceperpeople.toLocaleString()+'원');
+		printoptionlist3();
+	});
+});
+
+function printoptionlist3() {
+
+	totalprice = Roomprice + addpriceperpeople;
+	$("#printtotalprice").html(totalprice + "원");
+	$("#totalprice").val(totalprice);
+};
+
 
 
 

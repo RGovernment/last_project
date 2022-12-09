@@ -10,9 +10,11 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -67,7 +69,7 @@ public class AdminController {
 		return "/admin/admin";
 	}
 	
-	@PostMapping("/del_member")
+	@RequestMapping("/del_member")
 	public String delUser(@RequestParam(value = "delEmail", required = false) String delEmail,Model model) {
 		
 		Member mem= memberService.memgetInfo(delEmail);
@@ -78,7 +80,7 @@ public class AdminController {
 		return "/admin/message";
 	}
 
-	@RequestMapping(value = "/secessionOrder")
+	@DeleteMapping(value = "/secessionOrder")
 	public String adminPage2(Authentication authentication, Model model
 			,@PageableDefault(page = 0, size = 15, sort = "id", direction = Sort.Direction.DESC) Pageable pageable
 			,@Nullable Integer sortingOrder) {
@@ -224,18 +226,18 @@ public class AdminController {
 		return "/admin/Room_update";
 	}
 
-	@PostMapping("/room_update_name")
+	@PutMapping("/room_update_name")
 	public String room_update_name(Room room, Model model) {
 		roomService.name_update(room.getId(), room.getName());
 		return "redirect:/admin/room";
 	}
 
-	@PostMapping("/room_update_note")
+	@PutMapping("/room_update_note")
 	public String room_update_note(Room room, Model model) {
 		roomService.note_update(room.getId(), room.getNote());
 		return "redirect:/admin/room";
 	}
-	@PostMapping("/room_price_update")
+	@PutMapping("/room_price_update")
 	public String room_price_update(@RequestParam(value = "id") int id,
 			@RequestParam(value = "price_num") String price_num, @RequestParam(value = "price") int price,
 			Model model) {

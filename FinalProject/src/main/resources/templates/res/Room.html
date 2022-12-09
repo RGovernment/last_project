@@ -82,22 +82,23 @@
 								<hr />
 								인원 선택&nbsp; <br> 
 								<th:block th:if="${room.roomtype.id} == 1">
-								<select th:field="*{person}"
+								<select class="P" th:field="*{person}"
 									style="width: 40%; height: 38px; border-radius: 5px;">
-									<option value=2 selected >2인</option>
-									<option value=3 >3인</option>
-									<option value=4 >4인</option>
+									<option value=2 selected data-addprice=0>2인</option>
+									<option value=3 data-addprice=10000>3인</option>
+									<option value=4 data-addprice=20000>4인</option>
 								</select>
 								</th:block>
 								<th:block th:unless="${room.roomtype.id} == 1">
-								<select th:field="*{person}"
+								<select class="P" th:field="*{person}"
 									style="width: 40%; height: 38px; border-radius: 5px;">
-									<option value=5 selected >5인</option>
-									<option value=6 >6인</option>
-									<option value=7 >7인</option>
-									<option value=8 >8인</option>
+									<option value=5 selected data-addprice=0>5인</option>
+									<option value=6 data-addprice=10000>6인</option>
+									<option value=7 data-addprice=20000>7인</option>
+									<option value=8 data-addprice=30000>8인</option>
 								</select>
 								</th:block>
+								&nbsp;<span id="Ptext"></span>
 								<hr />
 								<div class="date">
 									<span class="chan-text"> 날짜 선택(달력에서 날짜를 선택해주세요.)</span> <br>
@@ -214,13 +215,13 @@
 												<td id="next_td"><label id="next"> &#62; </label></td>
 											</tr>
 											<tr>
-												<td class="sun" align="center">Sun</td>
-												<td align="center">Mon</td>
-												<td align="center">Tue</td>
-												<td align="center">Wed</td>
-												<td align="center">Thu</td>
-												<td align="center">Fri</td>
-												<td class="sat" align="center">Sat</td>
+												<th class="sun" align="center">Sun</th>
+												<th align="center">Mon</th>
+												<th align="center">Tue</th>
+												<th align="center">Wed</th>
+												<th align="center">Thu</th>
+												<th align="center">Fri</th>
+												<th class="sat" align="center">Sat</th>
 											</tr>
 										</thead>
 										<tbody id="calendar-body" class="calendar-body"></tbody>

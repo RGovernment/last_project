@@ -77,7 +77,6 @@
         var imgck = 0;
         var delArray =[];
         var files = $('#images')[0].files;
-		console.log(files[0]);
         var fileArray = Array.from(files);
         const dataTransfer = new DataTransfer();
         $.each(fileArray, function(index,file){
@@ -87,7 +86,6 @@
         	} else {
         		dataTransfer.items.add(file);
            		blobURL = window.URL.createObjectURL(file);
-           		console.log(blobURL);
            		var str = "<div><img src='"+blobURL+"' alt='사진미리보기' style='width:160px; height:140px;'></div> ";
            		var $div = $(str);
            		$('#img-preview').append($div);

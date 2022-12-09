@@ -135,27 +135,27 @@ public class SecurityConfig {
 
 	@Bean
 	public AuthenticationSuccessHandler successHandler() {
-		return new UserLoginSuccessHandler();// default로 이동할 url
+		return new UserLoginSuccessHandler();// 로그인 성공시 처리
 	}
 
 	@Bean
 	public AuthenticationFailureHandler failureHandler() {
-		return new UserLoginFailHandler();// default로 이동할 url
+		return new UserLoginFailHandler();// 로그인 실패시 처리
 	}
 
 	@Bean
 	public AccessDeniedHandler DeniedHandler() {
-		return new AnonymousDeniedHandler();// default로 이동할 url
+		return new AnonymousDeniedHandler();// 접근 거부시 처리
 	}
 
 	@Bean
 	public AuthenticationEntryPoint entryPoint() {
-		return new AuthenticationEntryPointCustom();
+		return new AuthenticationEntryPointCustom(); // 엔트리 포인트 에러 처리
 	}
 	
 	@Bean
 	public LogoutSuccessHandler logoutSuccessHandler() {
-		return new LogOutSuccessHandler();	
+		return new LogOutSuccessHandler();	// 로그아웃 성공 처리
 		
 	}
 }

@@ -19,6 +19,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import team.last.project.dto.ReviewDto;
 import team.last.project.entity.Img;
 import team.last.project.entity.Member;
@@ -38,6 +40,7 @@ import team.last.project.service.MemberService;
 import team.last.project.service.ReserveService;
 import team.last.project.service.ReviewService;
 
+@Slf4j
 @Controller
 @RequestMapping(value = "/review")
 @RequiredArgsConstructor
@@ -114,7 +117,15 @@ public class ReviewController {
 		return "redirect:/mypage";
 	}
 
-	@RequestMapping("/update")
+	@DeleteMapping("/delete")
+	public String reviewDelete(@RequestParam(value="del_id") int id) {
+		log.info("{}",id);
+		
+		reviewService.reviewDelete(id);
+		return "redirect:/mypage";
+	}
+	
+	@PostMapping("/update")
 	public String reviewupdate(int id, ReviewDto params, Model model,
 			@RequestParam(value = "images") MultipartFile[] images) {
 		reviewService.reviewUpdate(id, params);
@@ -204,7 +215,9 @@ public class ReviewController {
 
 	@RequestMapping("/imgdel")
 	public void getImgdel(@RequestParam("imgid") Integer imgid) {
-		imgService.imgdelete(imgid);
+		Img img = imgService.getimg(imgid);
+		removeFile(img);
+		imgService.imgdelete(img);
 		return;
 
 	}
@@ -223,5 +236,14 @@ public class ReviewController {
 		}
 		return folderPath;
 	}
-
+	private void removeFile(Img img) {
+		String imgPath = File.separator + "image" + File.separator + img.getPath() + File.separator + img.getUuid()
+		+ "_" + img.getName();
+		
+		File delfile = new File(uploadPath, imgPath);
+		if(delfile!=null) {
+			delfile.delete();
+		}
+		return ;
+	}
 };

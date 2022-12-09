@@ -23,17 +23,18 @@ public class LogOutSuccessHandler implements LogoutSuccessHandler {
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
-		Date date = new Date(); 
+		Date date = new Date();
 		SimpleDateFormat dateform = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
 		String a = dateform.format(date);
-		log.info("회원 이메일 : {}, 로그아웃 시각 : {}",authentication.getName(),a);
-		
+		if (authentication != null) {
+			log.info("회원 이메일 : {}, 로그아웃 시각 : {}", authentication.getName(), a);
+		}
 		String abc = request.getSession().getId();
-		
+
 		request.removeAttribute(abc);
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/");
 		dispatcher.forward(request, response);
 	}
-	
+
 }
