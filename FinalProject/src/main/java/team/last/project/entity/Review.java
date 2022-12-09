@@ -13,11 +13,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import lombok.Data;
 import team.last.project.dto.ReviewDto;
 
 @Entity
 @Data
+@DynamicInsert
 public class Review {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REVIEW_SEQ")

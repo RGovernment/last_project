@@ -69,11 +69,11 @@
 						<td th:if="${mem.gender}==1" th:text="남자"></td>
 						<td th:if="${mem.gender}==2" th:text="여자"></td>
 						<td th:if="${mem.gender}==3" th:text="카카오"></td>
-						<td th:if="${mem.secession}==0" th:text="X"></td>
+						<td th:if="${mem.secession}==0">활성화</td>
 						<td th:if="${mem.secession}==1">
 							<form th:action="@{/admin/del_member}" method="post">
 								<input hidden="hidden" th:name="delEmail" th:value="${mem.email}">
-								<span data-bs-toggle="modal" th:data-bs-target="'#infock'+${mem.id}">O</span>
+								<span data-bs-toggle="modal" th:data-bs-target="'#infock'+${mem.id}">비활성화</span>
 								<div class="modal fade" th:id="'infock'+${mem.id}" data-bs-backdrop="static"
 									data-bs-keyboard="false" tabindex="-1"
 									aria-labelledby="staticBackdropLabel" aria-hidden="true">

@@ -5,16 +5,14 @@
 	color: black;
 	font-size: 150%;
 	font-weight: 400;
-	white-space: pre-line;	
+	white-space: pre-line;
 }
-
 
 #partyroom-text {
 	height: 40px;
 	color: rgb(192, 57, 43);
 	font-size: 130%;
 	font-weight: 600;
-	
 }
 
 #Memory-text {
@@ -22,14 +20,13 @@
 	color: rgb(241, 196, 15);
 	font-size: 130%;
 	font-weight: 600;
-	
 }
+
 #free-text {
 	height: 40px;
 	color: rgb(10, 136, 63);
 	font-size: 130%;
 	font-weight: 600;
-	
 }
 
 #mirrorball-text {
@@ -37,7 +34,6 @@
 	color: rgb(142, 68, 173);
 	font-size: 130%;
 	font-weight: 600;
-	
 }
 
 #red-text {
@@ -54,27 +50,27 @@
 	font-weight: 600;
 }
 
-#mint-text{
-	white-space:preline;
+#mint-text {
+	white-space: preline;
 }
 
-#mint-text-in{
+#mint-text-in {
 	height: 40px;
 	font-size: 200%;
 	font-weight: 600;
 	color: rgb(22, 160, 133);
 }
 
-#mint-text-in:hover{
-	color:rgb(237, 201, 55);
+#mint-text-in:hover {
+	color: rgb(237, 201, 55);
 	cursor: pointer;
-} 
-#red2-text:hover{
-	color:rgb(237, 201, 55);
+}
+
+#red2-text:hover {
+	color: rgb(237, 201, 55);
 	cursor: pointer;
-} 
-		
-	
+}
+
 #red2-text {
 	height: 40px;
 	color: rgb(192, 57, 43);
@@ -89,115 +85,147 @@
 	font-weight: 600;
 }
 
-#img-quality1{
+#img-quality1 {
 	background: url("../img/quality1.PNG") center no-repeat;
 	width: 420px;
 	height: 254px;
-	
 }
-#img-quality2{
+
+#img-quality2 {
 	background: url("../img/quality2.PNG") center no-repeat;
 	width: 420px;
 	height: 254px;
-	
 }
-#img-quality3{
+
+#img-quality3 {
 	background: url("../img/quality3.PNG") center no-repeat;
 	width: 420px;
 	height: 254px;
 }
 
-#img-minibeam1{
+#img-minibeam1 {
 	background: url("../img/minibeam1.PNG") center no-repeat;
 	width: 250px;
 	height: 254px;
 }
-#img-minibeam2{
+
+#img-minibeam2 {
 	background: url("../img/minibeam2.PNG") center no-repeat;
 	width: 250px;
 	height: 254px;
 }
-#img-minibeam3{
+
+#img-minibeam3 {
 	background: url("../img/minibeam3.PNG") center no-repeat;
 	width: 250px;
 	height: 254px;
 }
-#img-minibeam4{
+
+#img-minibeam4 {
 	background: url("../img/minibeam4.PNG") center no-repeat;
 	width: 250px;
 	height: 254px;
 }
-#img-minibeam5{
+
+#img-minibeam5 {
 	background: url("../img/minibeam5.PNG") center no-repeat;
 	width: 250px;
 	height: 254px;
 }
-#img-bluepic1{
+
+#img-bluepic1 {
 	background: url("../img/bluepic1.PNG") center no-repeat;
 	width: 420px;
 	height: 254px;
 }
-#img-bluepic2{
+
+#img-bluepic2 {
 	background: url("../img/bluepic2.PNG") center no-repeat;
 	width: 420px;
 	height: 254px;
 }
-#img-bluepic3{
+
+#img-bluepic3 {
 	background: url("../img/bluepic3.PNG") center no-repeat;
 	width: 420px;
 	height: 254px;
 }
 
-#img-btmpic-1{
+#img-btmpic-1 {
 	background: url("../img/btmpic-1.PNG") center no-repeat;
 	width: 315;
 	height: 254px;
-	object-fit:cover;
+	object-fit: cover;
 }
-#img-btmpic-2{
+
+#img-btmpic-2 {
 	background: url("../img/btmpic-2.PNG") center no-repeat;
 	width: 315;
 	height: 254px;
-	object-fit:cover;
+	object-fit: cover;
 }
-#img-btmpic-3{
+
+#img-btmpic-3 {
 	background: url("../img/btmpic-3.PNG") center no-repeat;
 	width: 315;
 	height: 254px;
-	object-fit:cover;
+	object-fit: cover;
 }
-#img-btmpic-4{
+
+#img-btmpic-4 {
 	background: url("../img/btmpic-4.PNG") center no-repeat;
 	width: 315;
 	height: 254px;
-	object-fit:cover;
+	object-fit: cover;
 }
-#img-btmpic-5{
+
+#img-btmpic-5 {
 	background: url("../img/btmpic-5.PNG") center no-repeat;
 	width: 315;
 	height: 254px;
-	object-fit:cover;
+	object-fit: cover;
 }
-#img-btmpic-6{
+
+#img-btmpic-6 {
 	background: url("../img/btmpic-6.PNG") center no-repeat;
 	width: 315;
 	height: 254px;
-	object-fit:cover;
+	object-fit: cover;
 }
-#img-btmpic-7{
+
+#img-btmpic-7 {
 	background: url("../img/btmpic-7.PNG") center no-repeat;
 	width: 315;
 	height: 254px;
-	object-fit:cover;
+	object-fit: cover;
 }
-#img-btmpic-8{
+
+#img-btmpic-8 {
 	background: url("../img/btmpic-8.PNG") center no-repeat;
 	width: 315;
 	height: 254px;
-	object-fit:cover;
+	object-fit: cover;
 }
 
-#img-pointer{
+#img-pointer {
 	background: url("../img/pointer.PNG") center no-repeat;
-	
+}
+
+@media screen and (max-width: 782px) {
+	#map {
+		width: 300px;
+		height: 300px;
+	}
+}
+@media screen and (min-width: 783px) and (max-width: 1024px){
+	#map {
+		width: 500px;
+		height: 400px;
+	}
+}
+@media screen and (min-width: 1025px){
+	#map {
+		width: 500px;
+		height: 400px;
+	}
 }

@@ -59,6 +59,8 @@ public class SecurityConfig {
 			.permitAll()
 			.antMatchers("/review/imglist").permitAll()
 			.antMatchers("/review/imgidlist").permitAll()
+			.antMatchers("/kakao/refund").hasAnyRole("USER","KUSER","ADMIN")
+			.antMatchers("/kakao/message").hasAnyRole("USER","KUSER","ADMIN")
 			.antMatchers("/kakao/**").hasAnyRole("USER","KUSER")
 			.antMatchers("/review/reviewupdate").hasAnyRole("USER","KUSER")
 			.antMatchers("/review/reviewwrite").hasAnyRole("USER","KUSER")

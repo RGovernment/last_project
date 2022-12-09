@@ -297,7 +297,6 @@ function month_sch() {
 			addsch(reserve);
 		},
 		error: function() {
-			alert('에러');
 		}
 	}); //$.ajax
 };
@@ -407,7 +406,6 @@ $(function() {
 			$('.star-ratings-fill').css('width',(result*20)+'%');
 		},
 		error: function() {
-			alert('에러');
 		}
 	}); //$.ajax
 });

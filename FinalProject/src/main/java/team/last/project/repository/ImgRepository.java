@@ -9,6 +9,5 @@ import team.last.project.entity.Img;
 @Repository
 public interface ImgRepository extends JpaRepository<Img, Integer>{
 	
-	Img getByReviewId(int reviewid);
 	List<Img> getAllByReviewId(int reviewid);
 }

@@ -12,11 +12,14 @@ import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -246,7 +249,7 @@ public class KakaoPayController {
 	}
 
 	@GetMapping("/refund")
-	public String kakaoPayRefund(@RequestParam("resid")Long resid , Model model) throws ParseException {
+	public String kakaoPayRefund(@RequestParam("resid")Long resid , Model model,Authentication authentication) throws ParseException {
 		try {
 			Reserve reserve = reserveService.get(resid);
 			Pay pay = payService.get(reserve.getPay().getId());
@@ -292,7 +295,14 @@ public class KakaoPayController {
 //			payService.deleteTrade(parameter) ;
 			
 			model.addAttribute("message","환불이 완료되었습니다.");
-			model.addAttribute("Url","/mypage");
+			@SuppressWarnings("unchecked")
+			List<GrantedAuthority> authList = (List<GrantedAuthority>) authentication.getAuthorities();
+			if(!authList.get(0).getAuthority().contains("ADMIN")) {
+				model.addAttribute("Url","/mypage");
+			}else {
+				model.addAttribute("Url","/admin");
+			}
+			
 			return "/kakao/message";
 
 		} catch (MalformedURLException e) {

@@ -17,8 +17,8 @@ public class ImgService {
 		imgRepository.save(img);
 	}
 	
-	public Img getimg(int reviewid) {
-		return imgRepository.getByReviewId(reviewid);
+	public Img getimg(int imgid) {
+		return imgRepository.findById(imgid).orElse(null);
 	}
 	public List<Img> getimglist(int reviewid) {
 		return imgRepository.getAllByReviewId(reviewid);

@@ -150,20 +150,20 @@ function changeToday(e) {
 
 	//날짜 선택 시 예약 가능 시간만 선택할 수 있게 변환하기
 	var dayschedules = clickedDate1.children;
-	
+
 	//다른 날짜 선택 시 초기화 2022.12.07
-	$('.S').children().attr('disabled',false);
-	
-	for (let dayschedulesindex = 1; dayschedulesindex<dayschedules.length;dayschedulesindex++){
+	$('.S').children().attr('disabled', false);
+
+	for (let dayschedulesindex = 1; dayschedulesindex < dayschedules.length; dayschedulesindex++) {
 		var tempStime = dayschedules[dayschedulesindex].dataset.starttime
 		var tempEtime = dayschedules[dayschedulesindex].dataset.endtime
 		//자정까지와 allnight 대여 시 버그 수정 2022.12.07
-		if(tempEtime ==  0|| tempEtime == 9){
+		if (tempEtime == 0 || tempEtime == 9) {
 			tempEtime = 24;
 		}
-		
-		for(let k = tempStime-3; k<=tempEtime;k++){
-		$('.S#T3').find('[value='+k+']').attr("disabled", true);
+
+		for (let k = tempStime - 3; k <= tempEtime; k++) {
+			$('.S#T3').find('[value=' + k + ']').attr("disabled", true);
 		}
 
 		for (let k = tempStime - 3; k <= tempEtime; k++) {
@@ -178,17 +178,17 @@ function changeToday(e) {
 	}
 	today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
 	// 과거 선택 불가 2022.12.07
-	if(today < new Date()){
+	/*if(today < new Date()){
 		alert("선택할 수 없는 날짜 입니다.");
 		return;
-	}
+	}*/
 	// 선택 요일 변수 저장 2022.12.08
-	if(today.getDay() == 0 || today.getDay() == 6){
+	if (today.getDay() == 0 || today.getDay() == 6) {
 		week = 1;
-	}else{
+	} else {
 		week = 0;
 	}
-	
+
 	$(".chan-text").text("날짜 선택");
 	$('.RentTime').removeAttr("disabled");
 	clickedDate1.classList.add('active');
@@ -212,9 +212,9 @@ $('.RentTime').change(function() {
 	var Rtime = $(this).val();
 	var Rprice = 0;
 	// 평일 주말에 따른 가격 변화 2022.12.08
-	if(week == 0){
+	if (week == 0) {
 		Rprice = $(this).find("option:selected").data("priceweekdays");
-	}else if(week == 1){
+	} else if (week == 1) {
 		Rprice = $(this).find("option:selected").data("priceweekend");
 	}
 	if (Rtime == 3) {
@@ -260,6 +260,10 @@ $('.S').change(function() {
 	if (RentTime == 15) {
 		Eresult = tomorrow.getFullYear() + '-' + (tomorrow.getMonth() + 1) + '-' + tomorrow.getDate() + " " + "09:00:00";
 	}
+	$("#printoptions").text("");
+	optionsid = "";
+	$("#options").val(optionsid);
+	Optionprice = 0;
 	$("#end_time").val(Eresult);
 });
 var xhr = new XMLHttpRequest();
@@ -318,7 +322,6 @@ function month_sch() {
 			addsch(reserve);
 		},
 		error: function() {
-			alert('에러');
 		}
 	}); //$.ajax
 };
@@ -389,8 +392,12 @@ function printoptionlist2() {
 
 $(function() {
 	$('.P').change(function() {
+		Optionprice = 0;
+		$("#printoptions").text("");
+		optionsid = "";
+		$("#options").val(optionsid);
 		addpriceperpeople = $('.P option:selected').data('addprice');
-		$('#Ptext').html('+'+addpriceperpeople.toLocaleString()+'원');
+		$('#Ptext').html('+' + addpriceperpeople.toLocaleString() + '원');
 		printoptionlist3();
 	});
 });
@@ -443,7 +450,6 @@ $(function() {
 			$('.star-ratings-fill').css('width', (result * 20) + '%');
 		},
 		error: function() {
-			alert('에러');
 		}
 	}); //$.ajax
 });

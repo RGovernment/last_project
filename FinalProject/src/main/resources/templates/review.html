@@ -34,13 +34,9 @@
 								onerror="this.src='/img/picture.jpg'" alt="이미지가 없습니다"></a>
 							<div class="card-title pt-3" id="title"
 								style="text-align: center;" th:text="${review.title}"></div>
-							<div class="card-body ps-3 ms-0 me-0">
+							<div class="card-body ps-3 ms-0 me-0 d-flex justify-content-between">
 								<div id="desc" th:text="${review.room.name}">룸 종류</div>
-								<div class="row justify-content-between">
-									<div class="col-4" align="right" 
-									th:text="${#dates.format(review.cdate,'yyyy-MM-dd')}"></div>
-								</div>
-								<div></div>
+									<div th:text="${#dates.format(review.cdate,'yyyy-MM-dd')}"></div>
 							</div>
 						</div>
 					</div>

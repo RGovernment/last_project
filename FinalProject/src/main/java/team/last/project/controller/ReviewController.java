@@ -118,13 +118,22 @@ public class ReviewController {
 	}
 
 	@DeleteMapping("/delete")
-	public String reviewDelete(@RequestParam(value="del_id") int id) {
-		log.info("{}",id);
-		
+	public String reviewDelete(@RequestParam(value = "del_id") int id) {
+		log.info("{}", id);
+		List<Img> imglist = imgService.getimglist(id);
+		for (Img img : imglist) {
+			String imgPath = File.separator + img.getPath().replace("/", File.separator) + File.separator
+					+ img.getUuid() + "_" + img.getName();
+
+			File delfile = new File(uploadPath, imgPath);
+			if (delfile != null) {
+				delfile.delete();
+			}
+		}
 		reviewService.reviewDelete(id);
 		return "redirect:/mypage";
 	}
-	
+
 	@PostMapping("/update")
 	public String reviewupdate(int id, ReviewDto params, Model model,
 			@RequestParam(value = "images") MultipartFile[] images) {
@@ -210,15 +219,24 @@ public class ReviewController {
 			imgidList.add(imgmap);
 		}
 		return imgidList;
-
 	}
 
+	@ResponseBody
 	@RequestMapping("/imgdel")
-	public void getImgdel(@RequestParam("imgid") Integer imgid) {
+	public String getImgdel(@RequestParam("imgid") Integer imgid) {
 		Img img = imgService.getimg(imgid);
-		removeFile(img);
-		imgService.imgdelete(img);
-		return;
+		String name = img.getName();
+		if (img != null) {
+			String imgPath = File.separator + img.getPath().replace("/", File.separator) + File.separator
+					+ img.getUuid() + "_" + img.getName();
+
+			imgService.imgdelete(img);
+			File delfile = new File(uploadPath, imgPath);
+			if (delfile != null) {
+				delfile.delete();
+			}
+		}
+		return name;
 
 	}
 
@@ -235,15 +253,5 @@ public class ReviewController {
 			uploadPathFolder.mkdirs();
 		}
 		return folderPath;
-	}
-	private void removeFile(Img img) {
-		String imgPath = File.separator + "image" + File.separator + img.getPath() + File.separator + img.getUuid()
-		+ "_" + img.getName();
-		
-		File delfile = new File(uploadPath, imgPath);
-		if(delfile!=null) {
-			delfile.delete();
-		}
-		return ;
 	}
 };
