@@ -204,7 +204,9 @@ public class ReviewController {
 
 	@RequestMapping("/imgdel")
 	public void getImgdel(@RequestParam("imgid") Integer imgid) {
-		imgService.imgdelete(imgid);
+		Img img = imgService.getimg(imgid);
+		removeFile(img);
+		imgService.imgdelete(img);
 		return;
 
 	}
@@ -223,5 +225,14 @@ public class ReviewController {
 		}
 		return folderPath;
 	}
-
+	private void removeFile(Img img) {
+		String imgPath = File.separator + "image" + File.separator + img.getPath() + File.separator + img.getUuid()
+		+ "_" + img.getName();
+		
+		File delfile = new File(uploadPath, imgPath);
+		if(delfile!=null) {
+			delfile.delete();
+		}
+		return ;
+	}
 };
