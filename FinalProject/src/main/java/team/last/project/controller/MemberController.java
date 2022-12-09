@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.sun.mail.smtp.SMTPSendFailedException;
+import org.springframework.mail.MailSendException;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.AuthenticationTrustResolverImpl;
 import org.springframework.security.core.Authentication;
@@ -108,7 +110,7 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value="/emailck")
-	public String emailck(@RequestParam("email")String email) {
+	public String emailck(@RequestParam("email")String email,Model model) {
 		//이메일 중복 가입 불가 2022.12.08
 		Member member = memberService.getbyEmail(email);
 		if(member != null) {
@@ -117,9 +119,10 @@ public class MemberController {
 		String code = "";
 		try {
 			code = emailService.sendSimpleMessage(email);
+		}catch(MailSendException ew){
+			return "mailerror";
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return "anthorerror";
 		}
 		return code;
 	}

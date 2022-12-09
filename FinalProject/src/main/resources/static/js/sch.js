@@ -178,10 +178,10 @@ function changeToday(e) {
 	}
 	today = new Date(today.getFullYear(), today.getMonth(), clickedDate1.id);
 	// 과거 선택 불가 2022.12.07
-	/*if(today < new Date()){
+	if(today < new Date()){
 		alert("선택할 수 없는 날짜 입니다.");
 		return;
-	}*/
+	}
 	// 선택 요일 변수 저장 2022.12.08
 	if (today.getDay() == 0 || today.getDay() == 6) {
 		week = 1;

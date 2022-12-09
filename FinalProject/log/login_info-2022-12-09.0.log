@@ -129,3 +129,14 @@
 16:45:27 INFO  t.l.p.s.o.KakaoOAuth2UserService - 회원 이메일 : 2558743226@kakao.com, 로그인 시각 : 2022년 12월 09일 16시 45분
 16:45:43 INFO  t.l.p.s.UserLoginSuccessHandler - 회원 이메일 : 1@1.com, 로그인 시각 : 2022년 12월 09일 16시 45분
 16:47:18 INFO  t.l.p.s.o.KakaoOAuth2UserService - 회원 이메일 : 2547774037@kakao.com, 로그인 시각 : 2022년 12월 09일 16시 47분
+17:00:42 INFO  t.l.p.s.UserLoginSuccessHandler - 회원 이메일 : 1@1.com, 로그인 시각 : 2022년 12월 09일 17시 00분
+17:09:26 INFO  t.l.p.s.o.KakaoOAuth2UserService - 회원 이메일 : 2547774037@kakao.com, 로그인 시각 : 2022년 12월 09일 17시 09분
+17:19:50 INFO  t.l.p.security.LogOutSuccessHandler - 회원 이메일 : 1@1.com, 로그아웃 시각 : 2022년 12월 09일 17시 19분
+17:38:25 INFO  t.l.p.s.UserLoginSuccessHandler - 회원 이메일 : soon@naver.com, 로그인 시각 : 2022년 12월 09일 17시 38분
+17:43:56 INFO  t.l.p.security.LogOutSuccessHandler - 회원 이메일 : soon@naver.com, 로그아웃 시각 : 2022년 12월 09일 17시 43분
+17:44:02 INFO  t.l.p.s.UserLoginSuccessHandler - 회원 이메일 : soon@naver.com, 로그인 시각 : 2022년 12월 09일 17시 44분
+17:44:24 INFO  t.l.p.security.LogOutSuccessHandler - 회원 이메일 : soon@naver.com, 로그아웃 시각 : 2022년 12월 09일 17시 44분
+17:45:14 INFO  t.l.p.s.UserLoginSuccessHandler - 회원 이메일 : soon@naver.com, 로그인 시각 : 2022년 12월 09일 17시 45분
+17:45:34 INFO  t.l.p.security.LogOutSuccessHandler - 회원 이메일 : soon@naver.com, 로그아웃 시각 : 2022년 12월 09일 17시 45분
+17:45:39 INFO  t.l.p.s.UserLoginSuccessHandler - 회원 이메일 : test@email.com, 로그인 시각 : 2022년 12월 09일 17시 45분
+17:51:09 INFO  t.l.p.security.LogOutSuccessHandler - 회원 이메일 : test@email.com, 로그아웃 시각 : 2022년 12월 09일 17시 51분

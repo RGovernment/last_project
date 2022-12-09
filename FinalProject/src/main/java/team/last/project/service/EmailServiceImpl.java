@@ -2,6 +2,7 @@ package team.last.project.service;
 
 import java.util.Random;
 
+import com.sun.mail.smtp.SMTPSendFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -81,7 +82,7 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	@Override
-	public String sendSimpleMessage(String to) throws Exception {
+	public String sendSimpleMessage(String to) throws Exception,SMTPSendFailedException {
 		MimeMessage message = createMessage(to);
 		try {// 예외처리
 			emailSender.send(message);
