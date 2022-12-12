@@ -31,7 +31,7 @@ public class EmailServiceImpl implements EmailService {
 		msgg += "<div align='center'>";
 		msgg += "<div style='background-color:#dfdfdf; width:600px;'>";
 		msgg += "<div style='padding:15px; margin:10px;'>";
-		msgg += "<h2 style='font-style:bold; font-size:200%'> Memory Gift </h2>";
+		msgg += "<h1 style='font-style:bold; font-size:200%'> Memory Gift </h1>";
 		msgg += "<br>";
 		msgg += "<h2> Memory Gift 회원가입을 위한 인증번호입니다. </h2>";
 		msgg += "<br>";
@@ -46,7 +46,7 @@ public class EmailServiceImpl implements EmailService {
 		msgg += "</div>";
 		msgg += "<hr>";
 		msgg += "<div style='color:#1f1f1f; font-size:12px;'>본 메일은 발신전용입니다.</div>";
-		msgg += "<div style='color:#1f1f1f; font-size:12px;'>회원가입과 관련하여 궁금한 점이 있으시면 문의해주세요.</div>";
+		msgg += "<div style='color:#1f1f1f; font-size:12px;'>회원가입과 관련하여 궁금한 점이 있으시면 전화로 문의해주세요.</div>";
 		msgg += "<div style='color:#1f1f1f; font-size:12px; style='margin-bottom:5px;'>Copyright © Memory Gift All rights reserved.</div>";
 		msgg += "</div>";
 		msgg += "</div>";

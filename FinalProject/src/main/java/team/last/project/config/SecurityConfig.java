@@ -97,7 +97,7 @@ public class SecurityConfig {
 			.maximumSessions(1)
 			.expiredUrl("/sessionerror2")
 			.sessionRegistry(sessionRegistry())
-			.maxSessionsPreventsLogin(true)
+			.maxSessionsPreventsLogin(false)
 			.and()
 			.invalidSessionUrl("/sessionerror")
 			//.invalidSessionStrategy(custominvalidSessionStrategy())

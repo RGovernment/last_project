@@ -17,6 +17,11 @@ public interface ReserveRepository extends JpaRepository<Reserve, Long> {
 
 	@EntityGraph("Room_id")
 	List<Reserve> findALLByMemberId(Long id);
+	
+	@EntityGraph("Room_id")
+	@Query(value = "select r from Reserve r left join fetch r.member where r.member.id = ?1", 
+	countQuery = "select count(r) from Reserve r left join r.member where r.member.id = ?1")
+	Page<Reserve> findALLByMemberId(Pageable pageable,Long id);
 
 	@EntityGraph("Room_id")
 	Optional<Reserve> findById(Long id);

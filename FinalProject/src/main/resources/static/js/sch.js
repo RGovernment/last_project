@@ -39,6 +39,7 @@ function showCalendar() {
 				} else if (j == 6) {
 					weekend = "blue";
 				}
+				
 				let scheduledata = "<div id='day_content_date' style='color:" + weekend + "'>" + cnt + "</div>";
 
 				//주말 색깔넣기 일요일=빨강 , 토요일=파랑
@@ -446,8 +447,8 @@ $(function() {
 			xhr.setRequestHeader(header, token);
 		},
 		success: function(result) {
-			$('#star-score').html(result + "점");
-			$('.star-ratings-fill').css('width', (result * 20) + '%');
+			$('#star-score').html(result.toFixed(1) + "점");
+			$('.star-ratings-fill').css('width', (result * 20.3) + '%');
 		},
 		error: function() {
 		}
