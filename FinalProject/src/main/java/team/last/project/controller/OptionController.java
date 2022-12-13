@@ -35,8 +35,8 @@ public class OptionController {
 	private MemberService memberService;
 
 	@RequestMapping(value = "/list")
-	public String optionlist(Authentication autentication, Model model) {
-		String username = memberService.memgetName(autentication.getName());
+	public String optionlist(Authentication authentication, Model model) {
+		String username = memberService.memgetName(authentication.getName());
 		List<Option> optionlist = optionService.optionList();
 		model.addAttribute("name", username);
 		model.addAttribute("optionlist", optionlist);
@@ -44,8 +44,8 @@ public class OptionController {
 	}
 
 	@GetMapping(value = "/add")
-	public String optionaddform(Authentication autentication, Model model) {
-		String username = memberService.memgetName(autentication.getName());
+	public String optionaddform(Authentication authentication, Model model) {
+		String username = memberService.memgetName(authentication.getName());
 		model.addAttribute("Option_types", Option_type.values());
 		model.addAttribute("optionDto", new OptionDto());
 		model.addAttribute("name", username);
@@ -60,18 +60,18 @@ public class OptionController {
 	}
 
 	@GetMapping(value = "/update/{id}")
-	public String optionupdateform(Authentication autentication, @PathVariable("id") Integer id, Model model) {
-		String username = memberService.memgetName(autentication.getName());
+	public String optionupdateform(Authentication authentication, @PathVariable("id") Integer id, Model model) {
+		String username = memberService.memgetName(authentication.getName());
 		model.addAttribute("option", optionService.optionget(id));
 		model.addAttribute("name", username);
 		return "/admin/option/optionupdate";
 	}
 
 	@PostMapping(value = "/update/{id}")
-	public String optionupdate(Authentication autentication, @PathVariable("id") Integer id, OptionDto optionDto,
+	public String optionupdate(Authentication authentication, @PathVariable("id") Integer id, OptionDto optionDto,
 			Model model) {
 		optionService.optionUpdate(id, optionDto);
-		String username = memberService.memgetName(autentication.getName());
+		String username = memberService.memgetName(authentication.getName());
 		model.addAttribute("name", username);
 		model.addAttribute("message", "옵션 수정 완료");
 		model.addAttribute("Url", "/admin/option/list");
@@ -85,17 +85,17 @@ public class OptionController {
 	}
 
 	@RequestMapping(value = "/price/list/{id}")
-	public String optionpricelist(Authentication autentication, @PathVariable("id") Integer id, Model model) {
+	public String optionpricelist(Authentication authentication, @PathVariable("id") Integer id, Model model) {
 		List<OptPrice> optionpricelist = optPriceService.optPriceListget(id);
-		String username = memberService.memgetName(autentication.getName());
+		String username = memberService.memgetName(authentication.getName());
 		model.addAttribute("name", username);
 		model.addAttribute("option_prices", optionpricelist);
 		return "/admin/option/optpricelist";
 	}
 
 	@GetMapping(value = "/price/add/{id}")
-	public String optionpriceaddform(Authentication autentication, @PathVariable("id") Integer id, Model model) {
-		String username = memberService.memgetName(autentication.getName());
+	public String optionpriceaddform(Authentication authentication, @PathVariable("id") Integer id, Model model) {
+		String username = memberService.memgetName(authentication.getName());
 		model.addAttribute("optPriceDto", new OptPriceDto());
 		model.addAttribute("name", username);
 		model.addAttribute("option", optionService.optionDtoget(id));
@@ -113,8 +113,8 @@ public class OptionController {
 	}
 
 	@GetMapping(value = "/price/update/{id}")
-	public String optionpriceupdateform(Authentication autentication, @PathVariable("id") Integer id, Model model) {
-		String username = memberService.memgetName(autentication.getName());
+	public String optionpriceupdateform(Authentication authentication, @PathVariable("id") Integer id, Model model) {
+		String username = memberService.memgetName(authentication.getName());
 		model.addAttribute("optprice", optPriceService.optPriceget(id));
 		model.addAttribute("name", username);
 		return "/admin/option/optpriceupdate";

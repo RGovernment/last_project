@@ -111,7 +111,6 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value="/emailck")
 	public String emailck(@RequestParam("email")String email,Model model) {
-		//이메일 중복 가입 불가 2022.12.08
 		Member member = memberService.getbyEmail(email);
 		if(member != null) {
 			return "error";

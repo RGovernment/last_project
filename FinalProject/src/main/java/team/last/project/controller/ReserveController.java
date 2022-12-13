@@ -76,8 +76,8 @@ public class ReserveController {
 	}
 
 	@PostMapping("/reserve/{id}")
-	public String reserve(@PathVariable("id") Integer id, Authentication autentication, ReserveDto reserveDto,Model model,HttpServletRequest req) {
-		Member member = memberService.memgetInfo(autentication.getName());
+	public String reserve(@PathVariable("id") Integer id, Authentication authentication, ReserveDto reserveDto,Model model,HttpServletRequest req) {
+		Member member = memberService.memgetInfo(authentication.getName());
 		Reserve reserve = Reserve.createReserve(reserveDto, member, roomService.roomget(id).get());	
 		Room room =roomService.roomget(id).get();
 		String roomname =room.getName();
