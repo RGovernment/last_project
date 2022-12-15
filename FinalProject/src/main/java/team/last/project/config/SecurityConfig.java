@@ -51,12 +51,11 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		
-		 
-		
+	
 		http.authorizeRequests()
 			.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
 			.permitAll()
+			//권한 부여 목록
 			.antMatchers("/review/imglist").permitAll()
 			.antMatchers("/review/imgidlist").permitAll()
 			.antMatchers("/kakao/refund").hasAnyRole("USER","KUSER","ADMIN")
@@ -73,6 +72,7 @@ public class SecurityConfig {
 			.mvcMatchers("/admin/**").hasRole("ADMIN")
 			.antMatchers("/**").permitAll()
 			.and()
+			//권한 미달 접근 처리 핸들러
 			.exceptionHandling().accessDeniedHandler(DeniedHandler())
 			.authenticationEntryPoint(entryPoint());
 		

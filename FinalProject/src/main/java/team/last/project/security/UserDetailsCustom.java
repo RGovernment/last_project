@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import team.last.project.constant.Role;
 import team.last.project.entity.Member;
 
+@SuppressWarnings("serial")
 @AllArgsConstructor
 public class UserDetailsCustom implements UserDetails {
 	private static final String ROLE_PREFIX = "ROLE_";

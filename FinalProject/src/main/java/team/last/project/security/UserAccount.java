@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.User;
 import lombok.Getter;
 import team.last.project.entity.Member;
 
+@SuppressWarnings("serial")
 @Getter
 public class UserAccount extends User {
 	private Member member;

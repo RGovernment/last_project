@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import team.last.project.constant.Role;
 import team.last.project.entity.Member;
 
+@SuppressWarnings("serial")
 public class PrincipalDetails implements UserDetails, OAuth2User {
 	private static final String ROLE_PREFIX = "ROLE_";
 	private Member member;

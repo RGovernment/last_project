@@ -12,7 +12,6 @@ import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -61,16 +60,16 @@ public class KakaoPayController {
 		try {
 			URL address = new URL("https://kapi.kakao.com/v1/payment/ready");
 			HttpURLConnection payconnect = (HttpURLConnection) address.openConnection();
-			// url 을 사용하려면 trycatch가 필요하다
+			
 			payconnect.setRequestMethod("POST");
-			// kakao 에서 포스트형식으로 넘겨달라고햇다
+			// post 타입 요청
 			payconnect.setRequestProperty("Authorization", "KakaoAK e21543cbd75b9b045e2caaaacfd53b9f");
-			// 카카오에서 발급해준 어드민키 를 authorization 형식으로 넘겨달라고 카카오에서 시켯다
+			// admin키 authorization에 주입
 			payconnect.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-			// 컨텍트 타입도 카카오에서 시키는대로 했다
+			// 컨텍트 타입
 			payconnect.setDoInput(true);
 			payconnect.setDoOutput(true);
-			// 요기까지 기본설정
+			//기본설정 end
 			
 			Date date = new Date();
 			
@@ -354,13 +353,6 @@ public String kakaosecession(@PathVariable("email") String email,Model model) th
 			resultData = payconnect.getErrorStream();
 		}
 		
-//		InputStreamReader resultReader = new InputStreamReader(resultData);
-//
-//		@SuppressWarnings("deprecation")
-//		JSONParser jsonParser = new JSONParser();
-//		JSONObject jsonObject = (JSONObject) jsonParser.parse(resultReader);
-//		
-//		String id2 = jsonObject.get("id").toString();
 		
 		model.addAttribute("secessionMsg","탈퇴가 완료되었습니다.");
 		

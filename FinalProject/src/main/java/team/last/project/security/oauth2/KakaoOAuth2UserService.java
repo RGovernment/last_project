@@ -31,10 +31,10 @@ public class KakaoOAuth2UserService extends DefaultOAuth2UserService {
 		String email = "";
 		Map<String, Object> attributes = oAuth2User.getAttributes();
 		Map<String, Object> properties = (Map<String, Object>) attributes.get("properties");
+		@SuppressWarnings("unused")
 		Map<String, Object> account = (Map<String, Object>) attributes.get("kakao_account");
-		Long id = Long.parseLong(attributes.get("id").toString());
 		
-		email = id + "@kakao.com";
+		email = attributes.get("id").toString() + "@kakao.com";
 		
 		String nickname = properties.get("nickname").toString();
 
@@ -47,8 +47,10 @@ public class KakaoOAuth2UserService extends DefaultOAuth2UserService {
 			member.setGender(3);
 			member.setRole(Role.KUSER);
 		}
+		
 		KakaoUserInfo kakao2UserInfo = 
 				new KakaoUserInfo(oAuth2User.getAttributes());
+		
 		Member byMemberEmail = memberRepository.findByEmail(email).orElse(null);
 		if(byMemberEmail == null){
 			byMemberEmail = member;
