@@ -16,6 +16,5 @@ public class PayDto {
 	private String item;
 	private String tid;
 	private String ordercode;
-
 	
 }

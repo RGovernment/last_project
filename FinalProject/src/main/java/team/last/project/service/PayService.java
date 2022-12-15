@@ -28,6 +28,5 @@ public class PayService {
 	public void delete(Pay pay) {
 		payRepository.delete(pay);
 	}
-
 	
 }

@@ -210,7 +210,6 @@ public class KakaoPayController {
 
 	@GetMapping("/fail")
 	public String kakaoPayfail(Model model) {
-		
 		model.addAttribute("message","결제가 실패했습니다.");
 		model.addAttribute("Url","/res");
 		return "/kakao/message";
@@ -218,7 +217,6 @@ public class KakaoPayController {
 
 	@GetMapping("/cancel")
 	public String kakaoPayCancel(Model model) {
-		
 		model.addAttribute("message","결제가 중도 취소되었습니다.");
 		model.addAttribute("Url","/res");
 		return "/kakao/message";
@@ -267,9 +265,6 @@ public class KakaoPayController {
 				resultData = payconnect.getErrorStream();
 			}
 
-//			reserveService. ;
-//			payService.deleteTrade(parameter) ;
-			
 			model.addAttribute("message","환불이 완료되었습니다.");
 			@SuppressWarnings("unchecked")
 			List<GrantedAuthority> authList = (List<GrantedAuthority>) authentication.getAuthorities();
@@ -329,15 +324,7 @@ public String kakaosecession(@PathVariable("email") String email,Model model) th
 		} else {
 			resultData = payconnect.getErrorStream();
 		}
-		
-//		InputStreamReader resultReader = new InputStreamReader(resultData);
-//
-//		@SuppressWarnings("deprecation")
-//		JSONParser jsonParser = new JSONParser();
-//		JSONObject jsonObject = (JSONObject) jsonParser.parse(resultReader);
-//		
-//		String id2 = jsonObject.get("id").toString();
-		
+				
 		model.addAttribute("secessionMsg","탈퇴가 완료되었습니다.");
 		
 		
