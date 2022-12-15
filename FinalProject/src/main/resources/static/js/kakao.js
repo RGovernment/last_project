@@ -17,10 +17,8 @@ $(function(){
 			data:object,
 			success:function(data){
 				if (/Mobi|Android/i.test(navigator.userAgent)) {
-					
 					window.open(data.next_redirect_mobile_url, "모바일");
 				}else{
-					
 				window.open(data.next_redirect_pc_url, "PC");
 				}
 			},

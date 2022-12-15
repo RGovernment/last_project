@@ -31,6 +31,12 @@ public class ReserveService {
 		return reserve;
 	}
 	
+	public Page<Reserve> reserveListPage(Pageable pageable,Long id) {
+		Page<Reserve> reserve = reserveRepository.findALLByMemberId(pageable,id);
+		return reserve;
+	}
+	
+	
 	public Reserve get(Long resid) {
 		return reserveRepository.findById(resid).orElse(null);
 	}

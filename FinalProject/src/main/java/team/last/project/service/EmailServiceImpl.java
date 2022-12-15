@@ -31,7 +31,7 @@ public class EmailServiceImpl implements EmailService {
 		msgg += "<div align='center'>";
 		msgg += "<div style='background-color:#dfdfdf; width:600px;'>";
 		msgg += "<div style='padding:15px; margin:10px;'>";
-		msgg += "<h2 style='font-style:bold; font-size:200%'> Memory Gift </h2>";
+		msgg += "<h1 style='font-style:bold; font-size:200%'> Memory Gift </h1>";
 		msgg += "<br>";
 		msgg += "<h2> Memory Gift 회원가입을 위한 인증번호입니다. </h2>";
 		msgg += "<br>";

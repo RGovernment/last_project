@@ -23,9 +23,12 @@ import team.last.project.dto.AskBoardDto;
 import team.last.project.dto.MemberDto;
 import team.last.project.entity.AskBoard;
 import team.last.project.entity.Member;
+import team.last.project.entity.OptPrice;
 import team.last.project.entity.Reserve;
 import team.last.project.service.AskBoardService;
 import team.last.project.service.MemberService;
+import team.last.project.service.OptPriceService;
+import team.last.project.service.OptionService;
 import team.last.project.service.ReserveService;
 
 @Controller
@@ -35,17 +38,38 @@ public class MypageController {
 	private final AskBoardService askBoardService;
 	private final MemberService memberService;
 	private final ReserveService reserveService;
+	private final OptPriceService optpriceService;
 
 	@RequestMapping(value = "")
-	public String mypage(Authentication authentication, Model model) {
+	public String mypage(Authentication authentication,Model model,
+			@PageableDefault(page = 0, size = 10, sort = "start_time",
+			direction = Sort.Direction.DESC) Pageable pageable) {
+		
+		Page<Reserve> list = null;
 		
 		Member mem = memberService.memgetInfo(authentication.getName());
-		
 		String name = mem.getName();
 		Long id = mem.getId();
-		List<Reserve> reserveList = reserveService.reserveList(id);
+		PageRequest pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
+				Sort.by("start_time").descending());
+
+		list = reserveService.reserveListPage(pageRequest,id);
+		int pagecount = list.getNumberOfElements();
+		List<OptPrice> optionlist = optpriceService.optPriceAllList();
+		int nowPage = list.getPageable().getPageNumber() + 1;
+		int startPage = Math.max(nowPage - 4, 1);
+		int endPage = Math.min(nowPage + 5, list.getTotalPages());
+		if (endPage == 0) {
+			endPage = 1;
+		}
+		model.addAttribute("lastPage",list.getTotalPages());
+		model.addAttribute("pagenumber",pagecount);
+		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("reslist",list);
+		model.addAttribute("oplist",optionlist);
 		model.addAttribute("name", name);
-		model.addAttribute("reslist",reserveList);
 
 		return "/mypage/mymain";
 	}

@@ -119,7 +119,6 @@ public class ReviewController {
 
 	@DeleteMapping("/delete")
 	public String reviewDelete(@RequestParam(value = "del_id") int id) {
-		log.info("{}", id);
 		List<Img> imglist = imgService.getimglist(id);
 		for (Img img : imglist) {
 			String imgPath = File.separator + img.getPath().replace("/", File.separator) + File.separator

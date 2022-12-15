@@ -94,42 +94,33 @@ public class KakaoPayController {
 					+ "cancel_url=http://192.168.0.16:8082/kakao/cancel"; //취소 주소
 
 			OutputStream DataPakage = payconnect.getOutputStream();
-			// outputstream은 서버에서 주고싶은 데이터를 담는다.
+			//서버에 보낼 데이터 Packaging
 
 			DataOutputStream throwData = new DataOutputStream(DataPakage);
-			// 아웃풋 스트림에 담긴 데이터를 카카오로 던져주는아이
+			// 카카오로 전송
 			throwData.writeBytes(parameter);
-			// 카카오에서 바이트형식으로 달라했으니 바이트형식으로 형변환을 해준다.
+			// 바이트로 형변환
 
 			throwData.flush();
-			// 본인한테 담겨있는 데이터를 카카오로 넘김과 동시에 본인을 비운다.
 			throwData.close();
-			// 이제 더이상 데이터 보낼게 없음으로 닫는다 flush 없이 해당 문구만써도 자동으로 flush 해준다.
+			// 전송 close, flush는 close에 자동으로 포함됨
 
 			int resultset = payconnect.getResponseCode();
-			// 결과를 이제 받아온다.
+			// 결과
 
 			InputStream resultData;
-			// 결과를 받아온놈을 이제 자바에서 읽을수있도록 바꿔주는애? 인거같다.
 
-			if (resultset == 200) // 성공코드가 200이라고한다. 나머지는 전부 fail이라고한다.
+			if (resultset == 200) // 성공코드 = 200
 			{
 				resultData = payconnect.getInputStream();
 			} else {
 				resultData = payconnect.getErrorStream();
 			}
 			InputStreamReader resultReader = new InputStreamReader(resultData);
-			// 자바에서 문자열로 읽을수잇게 형변환해준다
-
-			// ("next_redirect_pc_url")
-
-//			 String[] a = changeResult.readLine().split(",");
 
 			@SuppressWarnings("deprecation")
 			JSONParser jsonParser = new JSONParser();
 			JSONObject jsonObject = (JSONObject) jsonParser.parse(resultReader);
-
-			
 
 			kakao.setTid((String) jsonObject.get("tid"));
 
@@ -137,7 +128,6 @@ public class KakaoPayController {
 			return jsonObject;
 
 		} catch (MalformedURLException e) {
-
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -201,23 +191,13 @@ public class KakaoPayController {
 			paydto.setOrdercode(kakao.getPartner_order_id());
 			Pay pay = Pay.Pay_success(paydto,mem);
 			payService.savepay(pay);
-
-			/*
-			KakaoPayApprovalDto kakaoAdto = new KakaoPayApprovalDto();
-			AmountDto amount2 = new AmountDto();
-			kakaoAdto.setAmount(amount2);
-			amount2.setTotal((Integer) jsonObject2.get("total"));
-			kakaoAdto.setApproved_at(date);
-			kakaoAdto.setPartner_order_id(jsonObject.getAsString("partner_user_id"));
-			kakaoAdto.setItem_name(jsonObject.getAsString("item_name"));
-			kakaoAdto.setQuantity((Integer) jsonObject.get("quantity"));
-			kakaoAdto.getAmount().setTotal(amount2.getTotal());
-			kakaoAdto.setPayment_method_type(jsonObject.getAsString("payment_method_type"));
-			*/
+			//결제 성공시 Pay DB 전송 
 			
 			Reserve reserve =(Reserve) req.getSession().getAttribute("reserve");
 			reserve.addPay(pay);
 			reserveService.reserve(reserve);
+			//결제 성공시 Reserve DB 전송 
+			
 			model.addAttribute("message","결제가 완료되었습니다.");
 			model.addAttribute("Url","/res");
 			return "/kakao/message";
@@ -233,7 +213,6 @@ public class KakaoPayController {
 
 	@GetMapping("/fail")
 	public String kakaoPayfail(Model model) {
-		
 		model.addAttribute("message","결제가 실패했습니다.");
 		model.addAttribute("Url","/res");
 		return "/kakao/message";
@@ -241,7 +220,6 @@ public class KakaoPayController {
 
 	@GetMapping("/cancel")
 	public String kakaoPayCancel(Model model) {
-		
 		model.addAttribute("message","결제가 중도 취소되었습니다.");
 		model.addAttribute("Url","/res");
 		return "/kakao/message";
@@ -290,9 +268,6 @@ public class KakaoPayController {
 				resultData = payconnect.getErrorStream();
 			}
 
-//			reserveService. ;
-//			payService.deleteTrade(parameter) ;
-			
 			model.addAttribute("message","환불이 완료되었습니다.");
 			@SuppressWarnings("unchecked")
 			List<GrantedAuthority> authList = (List<GrantedAuthority>) authentication.getAuthorities();
